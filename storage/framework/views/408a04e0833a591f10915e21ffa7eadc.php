@@ -3,45 +3,49 @@
 <?php $__env->startSection('title', 'Home'); ?>
 
 <?php $__env->startSection('content'); ?>
-<section class="hero-grid section-pad">
-    <div class="hero-copy">
-        <p class="eyebrow"><?php echo e($content->get('home.hero')?->metadata['eyebrow'] ?? 'StudyBuddy Galaxy OS'); ?></p>
-        <h1><?php echo e($content->get('home.hero')?->title ?? 'A premium cosmic universe for confident learning'); ?></h1>
-        <p class="lede"><?php echo e($content->get('home.hero')?->body ?? 'StudyBuddy turns learning into luminous mini missions.'); ?></p>
-        <div class="hero-actions">
-            <a class="button" href="<?php echo e(route('apps.index')); ?>">Explore apps</a>
-            <a class="button ghost" href="<?php echo e(route('showcase')); ?>">View showcase</a>
+<section class="landing-stage reveal-on-load">
+    <div class="landing-panel glass-panel">
+        <div class="hero-copy">
+            <div class="pill-row">
+                <span class="cosmic-pill">✺ Interactive Animations</span>
+                <span class="cosmic-pill">✦ Magical Experience</span>
+                <span class="cosmic-pill">● Multi-Role System</span>
+            </div>
+            <h1>Learn. Play. Grow. <span>Your Way.</span></h1>
+            <p>A fun and safe learning universe where students can practice, play, focus, and grow with their personal study buddy.</p>
+            <div class="hero-actions">
+                <a class="button" href="<?php echo e(route('apps.math-quest.play')); ?>">Start Learning</a>
+                <a class="button button-ghost" href="<?php echo e(route('apps.index')); ?>">Explore Apps</a>
+            </div>
+        </div>
+
+        <div class="hero-visual-wrap">
+            <span class="hero-planet mini-planet-a"></span>
+            <span class="hero-planet mini-planet-b"></span>
+            <span class="hero-star hero-star-a">★</span>
+            <span class="hero-star hero-star-b">✦</span>
+            <?php echo $__env->make('partials.image-placeholder', ['label' => 'HERO_MASCOT_IMAGE', 'variant' => 'mascot', 'caption' => 'Dolphin + open book mascot art'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+        </div>
+
+        <div class="shortcut-strip">
+            <?php $__currentLoopData = $featuredApps; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $app): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <a class="shortcut-card tilt-card" href="<?php echo e($app->launch_path ?? route('apps.index')); ?>">
+                    <?php echo $__env->make('partials.image-placeholder', ['label' => $app->image_label, 'variant' => 'shortcut', 'caption' => $app->title], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                    <span><?php echo e($app->title); ?></span>
+                </a>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <a class="shortcut-card tilt-card" href="<?php echo e(route('apps.index')); ?>">
+                <?php echo $__env->make('partials.image-placeholder', ['label' => 'APP_SHORTCUT_MORE_IMAGE', 'variant' => 'shortcut', 'caption' => 'More apps'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+                <span>More Apps</span>
+            </a>
         </div>
     </div>
-    <div class="hero-orbit glass-card">
-        <div class="orbit-ring"></div>
-        <div class="buddy-orb">🐬📖</div>
-        <div class="floating-chip chip-one">+240 XP</div>
-        <div class="floating-chip chip-two">Math streak</div>
-        <div class="floating-chip chip-three">Galaxy badge</div>
-    </div>
-</section>
 
-<section class="section-pad split-section">
-    <?php echo $__env->make('partials.mascot', ['title' => $content->get('home.mascot')?->title ?? 'Meet Buddy'], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-    <div class="glass-card feature-panel">
-        <p class="eyebrow">Premium foundation</p>
-        <h2>No Bootstrap look. No generic template.</h2>
-        <p>This foundation uses custom Blade partials, handcrafted CSS, cosmic UI motion, and reusable cards ready for product-specific growth.</p>
-    </div>
-</section>
-
-<section class="section-pad">
-    <div class="section-heading">
-        <p class="eyebrow">Launch-ready mini apps</p>
-        <h2>Play Store style learning products</h2>
-    </div>
-    <div class="app-grid">
-        <?php $__empty_1 = true; $__currentLoopData = $featuredApps; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $app): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-            <?php echo $__env->make('partials.app-card', ['app' => $app], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-            <p class="empty-state">Run <code>php artisan db:seed</code> to load the demo mini apps.</p>
-        <?php endif; ?>
+    <div class="stats-row glass-panel">
+        <div><strong>50+</strong><span>Mini Apps</span></div>
+        <div><strong>10K+</strong><span>Students</span></div>
+        <div><strong>100K+</strong><span>Lessons Completed</span></div>
+        <div><strong>4.9</strong><span>Parent Rating ★★★★★</span></div>
     </div>
 </section>
 <?php $__env->stopSection(); ?>

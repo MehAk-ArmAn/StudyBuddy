@@ -104,3 +104,4 @@ The seeders create demo users for later authentication work. Each demo account u
 - `resources/views/pages`, `resources/views/apps`, and `resources/views/demo` contain route-specific pages.
 - `public/assets/css/studybuddy.css` contains the custom cosmic UI.
 - `public/assets/js/studybuddy.js` contains lightweight UI motion and prototype interactions.
+- `IMAGE_PLACEHOLDERS.md` lists every future image slot, recommended replacement size, and Blade usage location.

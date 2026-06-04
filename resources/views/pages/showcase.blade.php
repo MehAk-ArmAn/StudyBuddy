@@ -3,26 +3,35 @@
 @section('title', 'Showcase')
 
 @section('content')
-<section class="section-pad showcase-hero">
-    <p class="eyebrow">Design target</p>
-    <h1>Dark navy galaxy, purple/cyan glow, 3D glass, planets, comets, and dashboards.</h1>
-    <p class="lede">The showcase proves the visual language is product-specific: polished learning interfaces, mascot charm, premium motion, and cosmic atmosphere.</p>
-</section>
+<section class="showcase-page reveal-on-load">
+    <div class="showcase-title">
+        <p class="eyebrow">StudyBuddy — The Complete Cosmic Learning Universe</p>
+        <h1>All core product surfaces in one premium visual collage.</h1>
+        <p>Landing, app store, app portal, dashboards, rewards, mobile, and admin previews are composed from real Blade panels with image placeholders.</p>
+    </div>
 
-<section class="section-pad showcase-grid">
-    @forelse($contentBlocks as $block)
-        <article class="glass-card showcase-card">
-            <p class="eyebrow">{{ $block->metadata['theme'] ?? 'StudyBuddy' }}</p>
-            <h2>{{ $block->title }}</h2>
-            <p>{{ $block->body }}</p>
-        </article>
-    @empty
-        <article class="glass-card showcase-card"><h2>Seed showcase content</h2><p>Run the demo seeders to populate this orbit.</p></article>
-    @endforelse
-    <article class="glass-card planet-lab">
-        <span class="planet-preview"></span>
-        <h2>Floating planets and globs</h2>
-        <p>Atmospheric objects are layered in CSS so the brand can evolve without relying on stock templates.</p>
-    </article>
+    <div class="mockup-collage">
+        @php
+            $panels = [
+                ['02', 'Landing preview', 'LANDING_PREVIEW_IMAGE', 'wide', route('home')],
+                ['03', 'App Store preview', 'APP_STORE_PREVIEW_IMAGE', 'large', route('apps.index')],
+                ['04', 'App Portal preview', 'APP_PORTAL_PREVIEW_IMAGE', 'medium', route('apps.math-quest')],
+                ['05', 'Primary dashboard preview', 'PRIMARY_DASHBOARD_PREVIEW_IMAGE', 'medium', route('demo.primary')],
+                ['06', 'Secondary dashboard preview', 'SECONDARY_DASHBOARD_PREVIEW_IMAGE', 'medium', route('demo.secondary')],
+                ['07', 'Parent dashboard preview', 'PARENT_DASHBOARD_PREVIEW_IMAGE', 'medium', route('demo.parent')],
+                ['08', 'Teacher dashboard preview', 'TEACHER_DASHBOARD_PREVIEW_IMAGE', 'medium', route('demo.teacher')],
+                ['09', 'Rewards / Buddy customization preview', 'BUDDY_CUSTOMIZATION_IMAGE', 'medium', route('rewards')],
+                ['10', 'Mobile preview', 'MOBILE_PREVIEW_IMAGE', 'phone', route('apps.math-quest.play')],
+                ['11', 'Admin dashboard preview', 'ADMIN_PREVIEW_IMAGE', 'wide', route('demo.admin')],
+            ];
+        @endphp
+        @foreach($panels as [$number, $title, $label, $size, $url])
+            <a class="preview-panel tilt-card preview-{{ $size }}" href="{{ $url }}">
+                <div class="panel-top"><span>{{ $number }}</span><strong>{{ $title }}</strong></div>
+                @include('partials.image-placeholder', ['label' => $label, 'variant' => $size === 'phone' ? 'phone' : 'preview', 'caption' => $title])
+                <p>{{ $title }} built as a real route preview surface.</p>
+            </a>
+        @endforeach
+    </div>
 </section>
 @endsection

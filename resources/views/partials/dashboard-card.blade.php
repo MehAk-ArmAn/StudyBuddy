@@ -1,6 +1,6 @@
-<article class="dashboard-card" style="--accent: {{ $card->accent_color }}">
-    <span class="panel-glow"></span>
-    <p class="eyebrow">{{ $card->title }}</p>
-    <h3>{{ $card->metric }}</h3>
-    <p>{{ $card->description }}</p>
+<article class="metric-card tilt-card" style="--accent: {{ $card->accent_color }}">
+    <span class="metric-icon">✦</span>
+    <p>{{ $card->title }}</p>
+    <strong>{{ $card->metric }}</strong>
+    <small>{{ $card->description }}</small>
 </article>

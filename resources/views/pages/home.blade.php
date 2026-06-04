@@ -3,45 +3,49 @@
 @section('title', 'Home')
 
 @section('content')
-<section class="hero-grid section-pad">
-    <div class="hero-copy">
-        <p class="eyebrow">{{ $content->get('home.hero')?->metadata['eyebrow'] ?? 'StudyBuddy Galaxy OS' }}</p>
-        <h1>{{ $content->get('home.hero')?->title ?? 'A premium cosmic universe for confident learning' }}</h1>
-        <p class="lede">{{ $content->get('home.hero')?->body ?? 'StudyBuddy turns learning into luminous mini missions.' }}</p>
-        <div class="hero-actions">
-            <a class="button" href="{{ route('apps.index') }}">Explore apps</a>
-            <a class="button ghost" href="{{ route('showcase') }}">View showcase</a>
+<section class="landing-stage reveal-on-load">
+    <div class="landing-panel glass-panel">
+        <div class="hero-copy">
+            <div class="pill-row">
+                <span class="cosmic-pill">✺ Interactive Animations</span>
+                <span class="cosmic-pill">✦ Magical Experience</span>
+                <span class="cosmic-pill">● Multi-Role System</span>
+            </div>
+            <h1>Learn. Play. Grow. <span>Your Way.</span></h1>
+            <p>A fun and safe learning universe where students can practice, play, focus, and grow with their personal study buddy.</p>
+            <div class="hero-actions">
+                <a class="button" href="{{ route('apps.math-quest.play') }}">Start Learning</a>
+                <a class="button button-ghost" href="{{ route('apps.index') }}">Explore Apps</a>
+            </div>
+        </div>
+
+        <div class="hero-visual-wrap">
+            <span class="hero-planet mini-planet-a"></span>
+            <span class="hero-planet mini-planet-b"></span>
+            <span class="hero-star hero-star-a">★</span>
+            <span class="hero-star hero-star-b">✦</span>
+            @include('partials.image-placeholder', ['label' => 'HERO_MASCOT_IMAGE', 'variant' => 'mascot', 'caption' => 'Dolphin + open book mascot art'])
+        </div>
+
+        <div class="shortcut-strip">
+            @foreach($featuredApps as $app)
+                <a class="shortcut-card tilt-card" href="{{ $app->launch_path ?? route('apps.index') }}">
+                    @include('partials.image-placeholder', ['label' => $app->image_label, 'variant' => 'shortcut', 'caption' => $app->title])
+                    <span>{{ $app->title }}</span>
+                </a>
+            @endforeach
+            <a class="shortcut-card tilt-card" href="{{ route('apps.index') }}">
+                @include('partials.image-placeholder', ['label' => 'APP_SHORTCUT_MORE_IMAGE', 'variant' => 'shortcut', 'caption' => 'More apps'])
+                <span>More Apps</span>
+            </a>
         </div>
     </div>
-    <div class="hero-orbit glass-card">
-        <div class="orbit-ring"></div>
-        <div class="buddy-orb">🐬📖</div>
-        <div class="floating-chip chip-one">+240 XP</div>
-        <div class="floating-chip chip-two">Math streak</div>
-        <div class="floating-chip chip-three">Galaxy badge</div>
-    </div>
-</section>
 
-<section class="section-pad split-section">
-    @include('partials.mascot', ['title' => $content->get('home.mascot')?->title ?? 'Meet Buddy'])
-    <div class="glass-card feature-panel">
-        <p class="eyebrow">Premium foundation</p>
-        <h2>No Bootstrap look. No generic template.</h2>
-        <p>This foundation uses custom Blade partials, handcrafted CSS, cosmic UI motion, and reusable cards ready for product-specific growth.</p>
-    </div>
-</section>
-
-<section class="section-pad">
-    <div class="section-heading">
-        <p class="eyebrow">Launch-ready mini apps</p>
-        <h2>Play Store style learning products</h2>
-    </div>
-    <div class="app-grid">
-        @forelse($featuredApps as $app)
-            @include('partials.app-card', ['app' => $app])
-        @empty
-            <p class="empty-state">Run <code>php artisan db:seed</code> to load the demo mini apps.</p>
-        @endforelse
+    <div class="stats-row glass-panel">
+        <div><strong>50+</strong><span>Mini Apps</span></div>
+        <div><strong>10K+</strong><span>Students</span></div>
+        <div><strong>100K+</strong><span>Lessons Completed</span></div>
+        <div><strong>4.9</strong><span>Parent Rating ★★★★★</span></div>
     </div>
 </section>
 @endsection
