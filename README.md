@@ -92,6 +92,10 @@ The seeders create demo users for later authentication work. Each demo account u
 - `teacher@studybuddy.test`
 - `admin@studybuddy.test`
 
+## Visual assets
+
+Generated StudyBuddy artwork should live in `public/assets/studybuddy/`. The Blade image partial automatically uses real assets when present and falls back to neon labeled art only when an image is missing. See `IMAGE_PLACEHOLDERS.md` for the full asset map.
+
 ## Project foundation map
 
 - `routes/web.php` defines all browser routes.

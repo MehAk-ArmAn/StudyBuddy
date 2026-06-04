@@ -15,7 +15,7 @@
         </div>
         <div class="customizer-grid">
             <div class="buddy-preview tilt-card">
-                @include('partials.image-placeholder', ['label' => 'BUDDY_CUSTOMIZATION_IMAGE', 'variant' => 'mascot', 'caption' => 'Large dolphin Buddy customization render'])
+                @include('partials.image-placeholder', ['label' => 'BUDDY_CUSTOMIZATION_IMAGE', 'src' => 'assets/studybuddy/hero-dolphin-book.png', 'variant' => 'shop-buddy', 'caption' => 'Large dolphin Buddy customization render'])
                 <div class="customizer-actions"><button class="button button-ghost">Reset</button><button class="button">Save Changes</button></div>
             </div>
             <div class="costume-grid">

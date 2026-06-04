@@ -1,6 +1,13 @@
+@php($logoExists = file_exists(public_path('assets/studybuddy/logo-icon.png')))
 <footer class="cosmic-footer reveal-on-load">
     <div class="footer-brand">
-        <span class="brand-mark footer-mark">🐬</span>
+        <span class="brand-mark footer-mark">
+            @if($logoExists)
+                <img src="{{ asset('assets/studybuddy/logo-icon.png') }}" alt="StudyBuddy logo">
+            @else
+                🐬
+            @endif
+        </span>
         <div>
             <h2>StudyBuddy</h2>
             <p>A safe and fun learning universe for every student.</p>
@@ -8,8 +15,8 @@
     </div>
     <div class="footer-columns">
         <div><h3>Explore</h3><a href="{{ route('home') }}">Home</a><a href="{{ route('apps.index') }}">Apps</a><a href="{{ route('rewards') }}">Rewards</a></div>
-        <div><h3>Dashboards</h3><a href="{{ route('demo.primary') }}">Primary</a><a href="{{ route('demo.secondary') }}">Secondary</a><a href="{{ route('demo.parent') }}">Parent</a><a href="{{ route('demo.teacher') }}">Teacher</a></div>
-        <div><h3>Preview</h3><a href="{{ route('showcase') }}">Showcase</a><a href="{{ route('demo.admin') }}">Admin</a><a href="{{ route('apps.math-quest') }}">Math Quest</a></div>
+        <div><h3>For Parents</h3><a href="{{ route('demo.parent') }}">Parent Dashboard</a><a href="{{ route('demo.primary') }}">Primary Dashboard</a><a href="{{ route('demo.secondary') }}">Secondary Dashboard</a></div>
+        <div><h3>For Teachers</h3><a href="{{ route('demo.teacher') }}">Teacher Dashboard</a><a href="{{ route('demo.admin') }}">Admin</a><a href="{{ route('showcase') }}">Showcase</a></div>
     </div>
     <div class="footer-apps">
         <p class="eyebrow">Get StudyBuddy Apps</p>

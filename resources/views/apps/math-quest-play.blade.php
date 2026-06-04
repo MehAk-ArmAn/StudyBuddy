@@ -23,7 +23,7 @@
             <p class="answer-feedback" aria-live="polite">Pick an answer to begin.</p>
         </div>
         <aside class="buddy-game-card tilt-card">
-            @include('partials.image-placeholder', ['label' => 'MATH_QUEST_BUDDY_IMAGE', 'variant' => 'mascot', 'caption' => 'Buddy game helper'])
+            @include('partials.image-placeholder', ['label' => 'MATH_QUEST_BUDDY_IMAGE', 'src' => 'assets/studybuddy/hero-dolphin-book.png', 'variant' => 'shop-buddy', 'caption' => 'Buddy game helper'])
             <h2>Buddy Boost</h2>
             <p>Tip: multiplication is repeated groups. Eight groups of seven stars makes fifty-six.</p>
         </aside>

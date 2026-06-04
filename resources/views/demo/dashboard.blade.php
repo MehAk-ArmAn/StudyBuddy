@@ -10,7 +10,7 @@
         <div class="dash-heading"><div><p class="eyebrow">Primary Student Dashboard</p><h1>Hi Zara! 👋</h1><p>Ready for today’s adventure?</p></div><div class="mini-stats">@foreach($cards as $card) @include('partials.dashboard-card', ['card' => $card]) @endforeach</div></div>
         <div class="primary-grid">
             <article class="mission-card tilt-card"><h2>Today’s Mission</h2><ul><li>Complete 2 Math Quest lessons <span>1/2</span></li><li>Read a story in Reading Garden <span>0/1</span></li><li>Play 1 quiz in Quiz Galaxy <span>0/1</span></li></ul><a class="button" href="{{ route('apps.math-quest.play') }}">Start Mission</a></article>
-            <div class="buddy-cloud tilt-card">@include('partials.image-placeholder', ['label' => 'DASHBOARD_BUDDY_IMAGE', 'variant' => 'mascot', 'caption' => 'Primary Buddy cloud art'])</div>
+            <div class="buddy-cloud tilt-card">@include('partials.image-placeholder', ['label' => 'DASHBOARD_BUDDY_IMAGE', 'src' => 'assets/studybuddy/hero-dolphin-book.png', 'variant' => 'dash-buddy', 'caption' => 'Primary Buddy cloud art'])</div>
             <div class="mini-app-row"><span>Math Quest</span><span>Spelling Sprint</span><span>Reading Garden</span><span>Shapes Lab</span></div>
             <article class="progress-card tilt-card"><h3>Your Buddy</h3><p>Baby Buddy · Level 8</p><div class="progress-track"><span style="width: 62%"></span></div></article>
             <article class="badge-card tilt-card"><h3>Recent Badges</h3><div class="badge-row"><span>⭐</span><span>🏆</span><span>💎</span><span>🌙</span></div></article>

@@ -1,31 +1,24 @@
-# StudyBuddy Image Placeholders
+# StudyBuddy Image Assets and Placeholders
 
-Replace these visual placeholders with real art later. Do not use one full-page screenshot as a background; each item should be exported as its own image asset and placed in the same Blade slot.
+The frontend is wired to use real generated assets from `public/assets/studybuddy/` whenever those files exist. If an asset is missing, the reusable Blade partial renders a neon fallback art card instead of a gray box.
 
-| Placeholder label | What should replace it | Recommended size | Used in Blade file |
-| --- | --- | --- | --- |
-| `HERO_MASCOT_IMAGE` | Main dolphin/book mascot hero render with stars and speech bubble | 900×760 PNG/WebP transparent | `resources/views/pages/home.blade.php` |
-| `APP_CARD_IMAGE_MATH` | Math Quest glowing plus/minus planet card art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php`, `resources/views/pages/home.blade.php` |
-| `APP_CARD_IMAGE_SPELLING` | Rocket/spelling mission card art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php`, `resources/views/pages/home.blade.php` |
-| `APP_CARD_IMAGE_READING` | Open book / Reading Garden art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php`, `resources/views/pages/home.blade.php` |
-| `APP_CARD_IMAGE_FOCUS` | Cute Focus Forest character art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php` |
-| `APP_CARD_IMAGE_PLANNER` | Planner City calendar/card art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php` |
-| `APP_CARD_IMAGE_QUIZ` | Trophy / Quiz Galaxy art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php` |
-| `APP_CARD_IMAGE_SHAPES` | Shapes Lab geometry art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php` |
-| `APP_CARD_IMAGE_FLASHCARDS` | Flashcard Castle art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php` |
-| `APP_SHORTCUT_MORE_IMAGE` | Small shortcut tile for more apps | 320×220 PNG/WebP | `resources/views/pages/home.blade.php` |
-| `LANDING_PREVIEW_IMAGE` | Mini screenshot/render of final landing panel | 1200×760 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `APP_STORE_PREVIEW_IMAGE` | Mini screenshot/render of app store page | 1200×760 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `APP_PORTAL_PREVIEW_IMAGE` | Mini screenshot/render of Math Quest portal | 1200×760 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `PRIMARY_DASHBOARD_PREVIEW_IMAGE` | Mini screenshot/render of primary dashboard | 1200×760 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `SECONDARY_DASHBOARD_PREVIEW_IMAGE` | Mini screenshot/render of secondary dashboard | 1200×760 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `PARENT_DASHBOARD_PREVIEW_IMAGE` | Mini screenshot/render of parent dashboard | 1200×760 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `TEACHER_DASHBOARD_PREVIEW_IMAGE` | Mini screenshot/render of teacher dashboard | 1200×760 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `BUDDY_CUSTOMIZATION_IMAGE` | Large Blooket-style Buddy customization render | 900×900 PNG/WebP transparent | `resources/views/pages/showcase.blade.php`, `resources/views/pages/rewards.blade.php` |
-| `MOBILE_PREVIEW_IMAGE` | Tall mobile app preview render | 430×900 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `ADMIN_PREVIEW_IMAGE` | Mini screenshot/render of admin dashboard | 1200×760 PNG/WebP | `resources/views/pages/showcase.blade.php` |
-| `APP_PORTAL_IMAGE_MATH_QUEST` | Large Math Quest app portal hero artwork | 900×620 PNG/WebP | `resources/views/apps/math-quest.blade.php` |
-| `QR_CODE_IMAGE` | QR code for the Math Quest app/download page | 320×320 SVG/PNG | `resources/views/apps/math-quest.blade.php` |
-| `MATH_QUEST_BUDDY_IMAGE` | Buddy helper art for playable Math Quest route | 700×700 PNG/WebP transparent | `resources/views/apps/math-quest-play.blade.php` |
-| `DASHBOARD_BUDDY_IMAGE` | Younger-child Buddy cloud/dashboard mascot art | 700×520 PNG/WebP transparent | `resources/views/demo/dashboard.blade.php` |
-| `FOOTER_QR_IMAGE` | Footer download QR code | 240×240 SVG/PNG | `resources/views/partials/footer.blade.php` |
+| Label / asset slot | Preferred file in `public/assets/studybuddy/` | What should replace it if updated | Recommended size | Used in Blade file |
+| --- | --- | --- | --- | --- |
+| `LOGO_ICON` | `logo-icon.png` | StudyBuddy logo icon | 256×256 PNG/WebP | `resources/views/partials/navigation.blade.php`, `resources/views/partials/footer.blade.php`, `resources/views/apps/index.blade.php` |
+| `HERO_MASCOT_IMAGE` | `hero-dolphin-book.png` | Main dolphin/book mascot render | 900×760 transparent PNG/WebP | `resources/views/pages/home.blade.php`, `resources/views/pages/showcase.blade.php` |
+| `PLANET_RINGED_LG` | `planet-ringed-lg.png` | Ringed purple/blue planet background | 600×600 transparent PNG/WebP | `resources/views/pages/home.blade.php`, CSS background layers |
+| `PLANET_PURPLE_LG` | `planet-purple-lg.png` | Purple planet background | 600×600 transparent PNG/WebP | `resources/views/pages/home.blade.php`, CSS background layers |
+| `SPARKLES_PACK` | `sparkles-pack.png` | Star/sparkle overlay texture | 1400×900 transparent PNG/WebP | `public/assets/css/studybuddy.css` |
+| `APP_CARD_IMAGE_MATH` | `app-math-quest.png` | Math Quest glowing plus/minus planet art | 640×420 PNG/WebP | `resources/views/partials/app-card.blade.php`, `resources/views/pages/home.blade.php`, `resources/views/pages/showcase.blade.php`, `resources/views/apps/math-quest.blade.php` |
+| `APP_CARD_IMAGE_SPELLING` | `app-spelling-sprint.png` | Spelling Sprint rocket art | 640×420 PNG/WebP | App card, home strip, showcase app store |
+| `APP_CARD_IMAGE_READING` | `app-reading-garden.png` | Reading Garden book art | 640×420 PNG/WebP | App card, home strip, showcase app store |
+| `APP_CARD_IMAGE_FOCUS` | `app-focus-forest.png` | Focus Forest character art | 640×420 PNG/WebP | App card, home strip, showcase app store |
+| `APP_CARD_IMAGE_PLANNER` | `app-planner-city.png` | Planner City calendar art | 640×420 PNG/WebP | App card, home strip, showcase app store |
+| `APP_CARD_IMAGE_QUIZ` | `app-quiz-galaxy.png` | Quiz Galaxy trophy art | 640×420 PNG/WebP | App card, home strip, showcase app store |
+| `APP_CARD_IMAGE_SHAPES` | `app-shapes-lab.png` | Shapes Lab geometry art | 640×420 PNG/WebP | App card, home strip, showcase app store |
+| `APP_CARD_IMAGE_FLASHCARDS` | `app-flashcard-castle.png` | Flashcard Castle art | 640×420 PNG/WebP | App card, home strip, showcase app store |
+| `QR_CODE_IMAGE` | pending | QR code for Math Quest downloads | 320×320 SVG/PNG | `resources/views/apps/math-quest.blade.php` |
+| `DASHBOARD_BUDDY_IMAGE` | `hero-dolphin-book.png` until a dashboard-specific mascot exists | Younger-child Buddy cloud/dashboard mascot | 700×520 transparent PNG/WebP | `resources/views/demo/dashboard.blade.php`, `resources/views/pages/showcase.blade.php` |
+| `BUDDY_CUSTOMIZATION_IMAGE` | `hero-dolphin-book.png` until shop render exists | Blooket-style Buddy customization render | 900×900 transparent PNG/WebP | `resources/views/pages/rewards.blade.php`, `resources/views/pages/showcase.blade.php` |
+| `MATH_QUEST_BUDDY_IMAGE` | `hero-dolphin-book.png` until game helper render exists | Buddy helper for playable Math Quest screen | 700×700 transparent PNG/WebP | `resources/views/apps/math-quest-play.blade.php` |
+| `FOOTER_QR_IMAGE` | pending | Footer download QR code | 240×240 SVG/PNG | `resources/views/partials/footer.blade.php` |

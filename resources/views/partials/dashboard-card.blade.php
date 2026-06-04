@@ -1,6 +1,6 @@
-<article class="metric-card tilt-card" style="--accent: {{ $card->accent_color }}">
-    <span class="metric-icon">✦</span>
-    <p>{{ $card->title }}</p>
+<article class="dash-stat tilt-card" style="--accent: {{ $card->accent_color }}">
+    <span class="dash-stat-icon">✦</span>
+    <small>{{ $card->title }}</small>
     <strong>{{ $card->metric }}</strong>
-    <small>{{ $card->description }}</small>
+    <em>{{ $card->description }}</em>
 </article>
