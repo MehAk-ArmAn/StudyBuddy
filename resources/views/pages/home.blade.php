@@ -1,67 +1,179 @@
 @extends('layouts.app')
 
 @section('title', 'Home')
+@section('body_class', 'page-shell page-home')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/home-cosmic.css') }}">
+@endpush
+
+@push('scripts')
+    <script src="{{ asset('assets/js/home-cosmic.js') }}" defer></script>
+@endpush
 
 @section('content')
-<section class="universe-heading reveal-on-load">
-    <h1><span>StudyBuddy</span> – The Complete Cosmic Learning Universe</h1>
-    <p>Learn. Play. Grow. Your Way.</p>
-    <div class="badge-cloud">
-        <span>✺ Interactive Animations</span>
-        <span>✦ Magical Experience</span>
-        <span>● Multi-Role System</span>
-        <span>◈ Web + Mobile Apps</span>
-        <span>☻ Fully Customizable (Admin)</span>
-    </div>
-</section>
+@php
+    $asset = function (string $file): string {
+        $clean = 'assets/studybuddy/clean/' . $file;
+        return asset(file_exists(public_path($clean)) ? $clean : 'assets/studybuddy/' . $file);
+    };
 
-<section class="landing-panel exact-panel reveal-on-load">
-    @if(file_exists(public_path('assets/studybuddy/planet-ringed-lg.png')))
-        <img class="bg-planet bg-planet-ringed" src="{{ asset('assets/studybuddy/planet-ringed-lg.png') }}" alt="" aria-hidden="true">
-    @else
-        <span class="bg-planet bg-planet-ringed css-planet" aria-hidden="true"></span>
-    @endif
-    @if(file_exists(public_path('assets/studybuddy/planet-purple-lg.png')))
-        <img class="bg-planet bg-planet-purple" src="{{ asset('assets/studybuddy/planet-purple-lg.png') }}" alt="" aria-hidden="true">
-    @else
-        <span class="bg-planet bg-planet-purple css-planet purple" aria-hidden="true"></span>
-    @endif
+    $homeApps = [
+        ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'url' => route('apps.math-quest')],
+        ['title' => 'Spelling Sprint', 'img' => 'app-spelling-sprint.png', 'url' => route('apps.index')],
+        ['title' => 'Reading Garden', 'img' => 'app-reading-garden.png', 'url' => route('apps.index')],
+        ['title' => 'Focus Forest', 'img' => 'app-focus-forest.png', 'url' => route('apps.index')],
+        ['title' => 'Planner City', 'img' => 'app-planner-city.png', 'url' => route('apps.index')],
+        ['title' => 'Quiz Galaxy', 'img' => 'app-quiz-galaxy.png', 'url' => route('apps.index')],
+        ['title' => 'Shapes Lab', 'img' => 'app-shapes-lab.png', 'url' => route('apps.index')],
+        ['title' => 'Flashcard Castle', 'img' => 'app-flashcard-castle.png', 'url' => route('apps.index')],
+    ];
+@endphp
 
-    <div class="hero-copy">
-        <p class="eyebrow">01 Landing Page</p>
-        <h2>Learn. Play.<br>Grow.<br><span>Your Way.</span></h2>
-        <p>A fun and safe learning universe where students can practice, play, focus, and grow with their personal study buddy.</p>
-        <div class="hero-actions">
-            <a class="button" href="{{ route('apps.math-quest.play') }}">Start Learning</a>
-            <a class="button button-ghost" href="{{ route('apps.index') }}">Explore Apps</a>
+<div class="home-cosmic-page reveal-on-load" data-home-cosmic>
+    <div class="home-bg" aria-hidden="true">
+        <div class="home-bg-base"></div>
+        <div class="home-bg-nebula home-bg-nebula-a"></div>
+        <div class="home-bg-nebula home-bg-nebula-b"></div>
+        <div class="home-bg-glow home-bg-glow-center"></div>
+        <div class="home-starfield" data-home-stars></div>
+
+        <span class="home-orb home-orb-1" data-parallax="0.035"></span>
+        <span class="home-orb home-orb-2" data-parallax="0.05"></span>
+        <span class="home-orb home-orb-3" data-parallax="0.028"></span>
+
+        <div class="home-planet-wrap home-planet-wrap-ringed" data-parallax="0.012">
+            <div class="home-planet-halo"></div>
+            <img class="home-blend-img home-planet home-planet-ringed" data-clean-alpha src="{{ $asset('planet-ringed-lg.png') }}" alt="">
         </div>
+        <div class="home-planet-wrap home-planet-wrap-purple" data-parallax="0.015">
+            <div class="home-planet-halo"></div>
+            <img class="home-blend-img home-planet home-planet-purple" data-clean-alpha src="{{ $asset('planet-purple-lg.png') }}" alt="">
+        </div>
+
+        <span class="home-comet home-comet-a" aria-hidden="true"><i></i></span>
+        <span class="home-comet home-comet-b" aria-hidden="true"><i></i></span>
     </div>
 
-    <div class="hero-mascot-zone">
-        <span class="hero-chat">•••</span>
-        @include('partials.image-placeholder', ['label' => 'HERO_MASCOT_IMAGE', 'src' => 'assets/studybuddy/hero-dolphin-book.png', 'variant' => 'hero', 'caption' => 'StudyBuddy dolphin and book mascot'])
-    </div>
+    <div class="home-mouse-glow" data-mouse-glow aria-hidden="true"></div>
 
-    <div class="home-app-strip">
-        @foreach($featuredApps as $app)
-            <a class="home-app-icon tilt-card" href="{{ $app->launch_path ?? route('apps.index') }}">
-                @include('partials.image-placeholder', ['label' => $app->image_label, 'src' => $app->image_path, 'variant' => 'icon', 'caption' => $app->title])
-                <span>{{ $app->title }}</span>
+    <div class="home-shell">
+        <header class="home-nav">
+            <a class="home-brand" href="{{ route('home') }}" aria-label="StudyBuddy home">
+                <span class="home-brand-icon">
+                    <img class="home-blend-img" data-clean-alpha src="{{ $asset('logo-icon.png') }}" alt="">
+                </span>
+                <span class="home-brand-text"><em>Study</em>Buddy</span>
             </a>
-        @endforeach
-        @foreach(\App\Support\DemoContent::miniApps()->skip(3)->take(5) as $app)
-            <a class="home-app-icon tilt-card" href="{{ route('apps.index') }}">
-                @include('partials.image-placeholder', ['label' => $app->image_label, 'src' => $app->image_path, 'variant' => 'icon', 'caption' => $app->title])
-                <span>{{ $app->title }}</span>
-            </a>
-        @endforeach
-    </div>
-</section>
+            <nav class="home-nav-links" aria-label="Main navigation">
+                <a href="{{ route('home') }}" class="is-active">Home</a>
+                <a href="{{ route('apps.index') }}">Apps</a>
+                <a href="{{ route('for-parents') }}">For Parents</a>
+                <a href="{{ route('for-teachers') }}">For Teachers</a>
+                <a href="{{ route('pricing') }}">Pricing</a>
+                <a href="{{ route('support') }}">Support</a>
+            </nav>
+            <a class="home-signup" href="{{ route('apps.index') }}">Sign Up</a>
+        </header>
 
-<section class="stats-ribbon reveal-on-load">
-    <div><strong>50+</strong><span>Mini Apps</span></div>
-    <div><strong>10K+</strong><span>Students</span></div>
-    <div><strong>100K+</strong><span>Lessons Completed</span></div>
-    <div><strong>4.9</strong><span>Parent Rating ★★★★★</span></div>
-</section>
+        <section class="home-hero">
+            <div class="home-copy">
+                <h1 class="home-headline">
+                    <span class="home-headline-main">Learn. Play. Grow.</span>
+                    <span class="home-gradient">Your Way.</span>
+                </h1>
+                <p>A fun and safe learning universe where students can practice, play, focus, and grow with their personal study buddy.</p>
+                <div class="home-actions">
+                    <a class="home-btn home-btn-primary" href="{{ route('apps.index') }}">
+                        <span>Start Learning</span>
+                    </a>
+                    <a class="home-btn home-btn-ghost" href="{{ route('apps.index') }}">Explore Apps</a>
+                </div>
+            </div>
+
+            <div class="home-visual" data-parallax="0.012">
+                <div class="home-visual-stage">
+                    <div class="home-visual-glow"></div>
+                    <div class="home-visual-glow home-visual-glow-secondary"></div>
+                    <span class="home-orbit-star home-orbit-star-a"></span>
+                    <span class="home-orbit-star home-orbit-star-b"></span>
+                    <span class="home-orbit-star home-orbit-star-c"></span>
+                    <span class="home-orbit-ring" aria-hidden="true"></span>
+                    <span class="home-speech" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <img
+                        class="home-blend-img home-mascot"
+                        data-clean-alpha
+                        src="{{ $asset('hero-dolphin-book.png') }}"
+                        alt="StudyBuddy dolphin mascot jumping from a glowing book"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <section class="home-app-strip" aria-label="Featured mini apps">
+            <div class="home-app-strip-inner">
+                @foreach($homeApps as $app)
+                    <a class="home-app-card" href="{{ $app['url'] }}" data-tilt-card>
+                        <span class="home-app-card-shine"></span>
+                        <span class="home-app-icon-stage">
+                            <span class="home-app-icon-halo"></span>
+                            <img class="home-blend-img" data-clean-alpha src="{{ $asset($app['img']) }}" alt="{{ $app['title'] }}">
+                        </span>
+                        <span class="home-app-label">{{ $app['title'] }}</span>
+                    </a>
+                @endforeach
+            </div>
+        </section>
+
+        <section class="home-stats" aria-label="Platform statistics">
+            <div class="home-stat">
+                <span class="home-stat-icon home-stat-icon-apps" aria-hidden="true"></span>
+                <div>
+                    <strong>50+</strong>
+                    <span>Mini Apps</span>
+                </div>
+            </div>
+            <div class="home-stat">
+                <span class="home-stat-icon home-stat-icon-students" aria-hidden="true"></span>
+                <div>
+                    <strong>10K+</strong>
+                    <span>Students</span>
+                </div>
+            </div>
+            <div class="home-stat">
+                <span class="home-stat-icon home-stat-icon-lessons" aria-hidden="true"></span>
+                <div>
+                    <strong>100K+</strong>
+                    <span>Lessons Completed</span>
+                </div>
+            </div>
+            <div class="home-stat">
+                <span class="home-stat-icon home-stat-icon-rating" aria-hidden="true"></span>
+                <div>
+                    <strong>4.9</strong>
+                    <span>Parent Rating</span>
+                    <em class="home-stars" aria-hidden="true">★★★★★</em>
+                </div>
+            </div>
+        </section>
+
+        <footer class="home-footer">
+            <div class="home-footer-brand">
+                <img class="home-blend-img" data-clean-alpha src="{{ $asset('logo-icon.png') }}" alt="">
+                <div>
+                    <strong>StudyBuddy</strong>
+                    <p>A safe and fun learning universe for every student.</p>
+                </div>
+            </div>
+            <div class="home-footer-links">
+                <a href="{{ route('home') }}">Home</a>
+                <a href="{{ route('apps.index') }}">Apps</a>
+                <a href="{{ route('for-parents') }}">For Parents</a>
+                <a href="{{ route('for-teachers') }}">For Teachers</a>
+                <a href="{{ route('pricing') }}">Pricing</a>
+                <a href="{{ route('support') }}">Support</a>
+            </div>
+        </footer>
+    </div>
+</div>
 @endsection

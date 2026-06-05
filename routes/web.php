@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/showcase', [HomeController::class, 'showcase'])->name('showcase');
+Route::redirect('/for-parents', '/demo/parent')->name('for-parents');
+Route::redirect('/for-teachers', '/demo/teacher')->name('for-teachers');
+Route::redirect('/pricing', '/rewards')->name('pricing');
+Route::redirect('/support', '/showcase')->name('support');
 Route::get('/apps', [AppController::class, 'index'])->name('apps.index');
 Route::get('/apps/math-quest', [AppController::class, 'mathQuest'])->name('apps.math-quest');
 Route::get('/apps/math-quest/play', [AppController::class, 'playMathQuest'])->name('apps.math-quest.play');
