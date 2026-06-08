@@ -9,11 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.12 });
+        }, { rootMargin: '0px 0px -12% 0px' });
 
         revealItems.forEach((item) => observer.observe(item));
     } else {
         revealItems.forEach((item) => item.classList.add('is-visible'));
+    }
+
+    const nav = document.querySelector('[data-studybuddy-navbar]');
+    const navToggle = document.querySelector('[data-studybuddy-nav-toggle]');
+
+    if (nav && navToggle) {
+        navToggle.addEventListener('click', () => {
+            const isOpen = nav.classList.toggle('is-open');
+            navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
     }
 
     document.querySelectorAll('.tilt-card').forEach((card) => {

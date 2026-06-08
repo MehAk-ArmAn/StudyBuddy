@@ -24,13 +24,13 @@
         <span class="comet comet-b"></span>
     </div>
 
-    @include('partials.navigation')
+    @include('partials.studybuddy-navbar')
 
     <main class="site-main">
         @yield('content')
     </main>
 
-    @include('partials.footer')
+    @include('partials.studybuddy-footer')
 
     <script src="{{ asset('assets/js/studybuddy.js') }}" defer></script>
     @stack('scripts')
