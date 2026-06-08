@@ -16,14 +16,14 @@
     $asset = fn (string $file): string => asset('assets/studybuddy/' . $file);
 
     $homeApps = [
-        ['title' => 'Math Quest', 'subtitle' => 'Number adventures', 'img' => 'app-math-quest.png', 'url' => route('apps.math-quest')],
-        ['title' => 'Spelling Sprint', 'subtitle' => 'Word power races', 'img' => 'app-spelling-sprint.png', 'url' => route('apps.index')],
-        ['title' => 'Reading Garden', 'subtitle' => 'Storytime blooms', 'img' => 'app-reading-garden.png', 'url' => route('apps.index')],
-        ['title' => 'Focus Forest', 'subtitle' => 'Calm study quests', 'img' => 'app-focus-forest.png', 'url' => route('apps.index')],
-        ['title' => 'Planner City', 'subtitle' => 'Organized days', 'img' => 'app-planner-city.png', 'url' => route('apps.index')],
-        ['title' => 'Quiz Galaxy', 'subtitle' => 'Knowledge stars', 'img' => 'app-quiz-galaxy.png', 'url' => route('apps.index')],
-        ['title' => 'Shapes Lab', 'subtitle' => 'Creative geometry', 'img' => 'app-shapes-lab.png', 'url' => route('apps.index')],
-        ['title' => 'Flashcard Castle', 'subtitle' => 'Memory magic', 'img' => 'app-flashcard-castle.png', 'url' => route('apps.index')],
+        ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'url' => route('apps.math-quest')],
+        ['title' => 'Spelling Sprint', 'img' => 'app-spelling-sprint.png', 'url' => route('apps.index')],
+        ['title' => 'Reading Garden', 'img' => 'app-reading-garden.png', 'url' => route('apps.index')],
+        ['title' => 'Focus Forest', 'img' => 'app-focus-forest.png', 'url' => route('apps.index')],
+        ['title' => 'Planner City', 'img' => 'app-planner-city.png', 'url' => route('apps.index')],
+        ['title' => 'Quiz Galaxy', 'img' => 'app-quiz-galaxy.png', 'url' => route('apps.index')],
+        ['title' => 'Shapes Lab', 'img' => 'app-shapes-lab.png', 'url' => route('apps.index')],
+        ['title' => 'Flashcard Castle', 'img' => 'app-flashcard-castle.png', 'url' => route('apps.index')],
     ];
 @endphp
 
@@ -33,10 +33,7 @@
         <div class="home-bg-nebula home-bg-nebula-a"></div>
         <div class="home-bg-nebula home-bg-nebula-b"></div>
         <div class="home-bg-glow home-bg-glow-center"></div>
-        <div class="home-bg-glow home-bg-glow-left"></div>
         <div class="home-starfield" data-home-stars></div>
-        <img class="home-sparkle-pack home-sparkle-pack-a" src="{{ $asset('sparkles-pack.png') }}" alt="">
-        <img class="home-sparkle-pack home-sparkle-pack-b" src="{{ $asset('sparkles-pack.png') }}" alt="">
 
         <span class="home-orb home-orb-1" data-parallax="0.035"></span>
         <span class="home-orb home-orb-2" data-parallax="0.05"></span>
@@ -78,17 +75,11 @@
 
         <section class="home-hero">
             <div class="home-copy">
-                <div class="home-kicker"><span></span>Cosmic learning made playful</div>
                 <h1 class="home-headline">
                     <span class="home-headline-main">Learn. Play. Grow.</span>
                     <span class="home-gradient">Your Way.</span>
                 </h1>
                 <p>A fun and safe learning universe where students can practice, play, focus, and grow with their personal study buddy.</p>
-                <div class="home-trust-row" aria-label="StudyBuddy highlights">
-                    <span>Safe for kids</span>
-                    <span>Parent friendly</span>
-                    <span>Game-based practice</span>
-                </div>
                 <div class="home-actions">
                     <a class="home-btn home-btn-primary" href="{{ route('apps.index') }}">
                         <span>Start Learning</span>
@@ -105,10 +96,7 @@
                     <span class="home-orbit-star home-orbit-star-b"></span>
                     <span class="home-orbit-star home-orbit-star-c"></span>
                     <span class="home-orbit-ring" aria-hidden="true"></span>
-                    <span class="home-orbit-ring home-orbit-ring-soft" aria-hidden="true"></span>
                     <span class="home-speech" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="home-floating-badge home-floating-badge-top">+12 ⭐</span>
-                    <span class="home-floating-badge home-floating-badge-bottom">Daily Quest</span>
                     <img
                         class="home-blend-img home-mascot"
                        
@@ -129,23 +117,8 @@
                             <img class="home-blend-img" src="{{ $asset($app['img']) }}" alt="{{ $app['title'] }}">
                         </span>
                         <span class="home-app-label">{{ $app['title'] }}</span>
-                        <span class="home-app-subtitle">{{ $app['subtitle'] }}</span>
                     </a>
                 @endforeach
-            </div>
-        </section>
-
-        <section class="home-magic-panel" aria-label="StudyBuddy features">
-            <div class="home-panel-copy">
-                <span class="home-section-kicker">Inside the universe</span>
-                <h2>Every lesson feels like a tiny magical mission.</h2>
-                <p>Soft visuals, rewarding feedback, and friendly mini apps help kids build confidence without leaving the cozy StudyBuddy galaxy.</p>
-            </div>
-            <div class="home-feature-cloud">
-                <span>✨ Sparkly rewards</span>
-                <span>📚 Reading worlds</span>
-                <span>🧠 Focus boosts</span>
-                <span>🎮 Practice games</span>
             </div>
         </section>
 
