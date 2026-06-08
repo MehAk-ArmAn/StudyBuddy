@@ -13,10 +13,7 @@
 
 @section('content')
 @php
-    $asset = function (string $file): string {
-        $clean = 'assets/studybuddy/clean/' . $file;
-        return asset(file_exists(public_path($clean)) ? $clean : 'assets/studybuddy/' . $file);
-    };
+    $asset = fn (string $file): string => asset('assets/studybuddy/' . $file);
 
     $homeApps = [
         ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'url' => route('apps.math-quest')],
@@ -44,11 +41,11 @@
 
         <div class="home-planet-wrap home-planet-wrap-ringed" data-parallax="0.012">
             <div class="home-planet-halo"></div>
-            <img class="home-blend-img home-planet home-planet-ringed" data-clean-alpha src="{{ $asset('planet-ringed-lg.png') }}" alt="">
+            <img class="home-planet home-planet-ringed" src="{{ $asset('planet-ringed-lg.png') }}" alt="">
         </div>
         <div class="home-planet-wrap home-planet-wrap-purple" data-parallax="0.015">
             <div class="home-planet-halo"></div>
-            <img class="home-blend-img home-planet home-planet-purple" data-clean-alpha src="{{ $asset('planet-purple-lg.png') }}" alt="">
+            <img class="home-planet home-planet-purple" src="{{ $asset('planet-purple-lg.png') }}" alt="">
         </div>
 
         <span class="home-comet home-comet-a" aria-hidden="true"><i></i></span>
@@ -61,7 +58,7 @@
         <header class="home-nav">
             <a class="home-brand" href="{{ route('home') }}" aria-label="StudyBuddy home">
                 <span class="home-brand-icon">
-                    <img class="home-blend-img" data-clean-alpha src="{{ $asset('logo-icon.png') }}" alt="">
+                    <img src="{{ $asset('logo-icon.png') }}" alt="">
                 </span>
                 <span class="home-brand-text"><em>Study</em>Buddy</span>
             </a>
@@ -101,8 +98,7 @@
                     <span class="home-orbit-ring" aria-hidden="true"></span>
                     <span class="home-speech" aria-hidden="true"><i></i><i></i><i></i></span>
                     <img
-                        class="home-blend-img home-mascot"
-                        data-clean-alpha
+                        class="home-mascot"
                         src="{{ $asset('hero-dolphin-book.png') }}"
                         alt="StudyBuddy dolphin mascot jumping from a glowing book"
                     >
@@ -117,7 +113,7 @@
                         <span class="home-app-card-shine"></span>
                         <span class="home-app-icon-stage">
                             <span class="home-app-icon-halo"></span>
-                            <img class="home-blend-img" data-clean-alpha src="{{ $asset($app['img']) }}" alt="{{ $app['title'] }}">
+                            <img src="{{ $asset($app['img']) }}" alt="{{ $app['title'] }}">
                         </span>
                         <span class="home-app-label">{{ $app['title'] }}</span>
                     </a>
@@ -159,7 +155,7 @@
 
         <footer class="home-footer">
             <div class="home-footer-brand">
-                <img class="home-blend-img" data-clean-alpha src="{{ $asset('logo-icon.png') }}" alt="">
+                <img src="{{ $asset('logo-icon.png') }}" alt="">
                 <div>
                     <strong>StudyBuddy</strong>
                     <p>A safe and fun learning universe for every student.</p>
