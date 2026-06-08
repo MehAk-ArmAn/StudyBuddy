@@ -15,76 +15,6 @@
   var mouseGlow = root.querySelector('[data-mouse-glow]');
   var parallaxNodes = root.querySelectorAll('[data-parallax]');
   var tiltCards = root.querySelectorAll('[data-tilt-card]');
-  var cleanImages = root.querySelectorAll('[data-clean-alpha]');
-
-  function isCheckerboardPixel(r, g, b, a) {
-    if (a < 16) {
-      return true;
-    }
-
-    var spread = Math.max(r, g, b) - Math.min(r, g, b);
-
-    if (r > 245 && g > 245 && b > 245) {
-      return true;
-    }
-
-    if (spread < 14 && r > 158 && r < 228 && g > 158 && g < 228 && b > 158 && b < 228) {
-      return true;
-    }
-
-    return false;
-  }
-
-  function cleanImageTransparency(img) {
-    if (!img.complete || !img.naturalWidth) {
-      return;
-    }
-
-    if (img.dataset.cleaned === 'true') {
-      return;
-    }
-
-    try {
-      var canvas = document.createElement('canvas');
-      var ctx = canvas.getContext('2d');
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
-      ctx.drawImage(img, 0, 0);
-
-      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      var data = imageData.data;
-      var changed = 0;
-
-      for (var i = 0; i < data.length; i += 4) {
-        if (isCheckerboardPixel(data[i], data[i + 1], data[i + 2], data[i + 3])) {
-          data[i + 3] = 0;
-          changed += 1;
-        }
-      }
-
-      if (changed > 0) {
-        ctx.putImageData(imageData, 0, 0);
-        img.src = canvas.toDataURL('image/png');
-      }
-
-      img.dataset.cleaned = 'true';
-      img.classList.add('is-cleaned');
-    } catch (error) {
-      img.classList.add('is-cleaned');
-    }
-  }
-
-  function bindImageCleaning() {
-    cleanImages.forEach(function (img) {
-      if (img.complete) {
-        cleanImageTransparency(img);
-      } else {
-        img.addEventListener('load', function () {
-          cleanImageTransparency(img);
-        }, { once: true });
-      }
-    });
-  }
 
   function createStars() {
     if (!starfield) {
@@ -193,7 +123,6 @@
   }
 
   createStars();
-  bindImageCleaning();
   bindParallax();
   bindTiltCards();
   bindReveal();

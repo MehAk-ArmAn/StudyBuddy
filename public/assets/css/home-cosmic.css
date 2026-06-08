@@ -90,6 +90,8 @@
   height: 2px !important;
   background: transparent;
   box-shadow: none;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .page-home .home-star.is-cross::before,
@@ -230,16 +232,10 @@
   background: transparent !important;
   border: 0;
   box-shadow: none;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.page-home .home-blend-img:not(.is-cleaned) {
-  opacity: 0;
-  transition: opacity 0.35s ease;
-}
-
-.page-home .home-blend-img.is-cleaned {
-  opacity: 1;
-}
 
 /* ── Shell ── */
 .page-home .home-shell {
