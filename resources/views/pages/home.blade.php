@@ -73,7 +73,7 @@
             <a class="home-signup" href="{{ route('apps.index') }}">Sign Up</a>
         </header>
 
-        <section class="home-hero">
+        <section class="home-hero" data-home-reveal>
             <div class="home-copy">
                 <h1 class="home-headline">
                     <span class="home-headline-main">Learn. Play. Grow.</span>
@@ -95,7 +95,10 @@
                     <span class="home-orbit-star home-orbit-star-a"></span>
                     <span class="home-orbit-star home-orbit-star-b"></span>
                     <span class="home-orbit-star home-orbit-star-c"></span>
+                    <span class="home-orbit-star home-orbit-star-d"></span>
+                    <span class="home-orbit-star home-orbit-star-e"></span>
                     <span class="home-orbit-ring" aria-hidden="true"></span>
+                    <span class="home-orbit-ring home-orbit-ring-soft" aria-hidden="true"></span>
                     <span class="home-speech" aria-hidden="true"><i></i><i></i><i></i></span>
                     <img
                         class="home-mascot"
@@ -106,8 +109,10 @@
             </div>
         </section>
 
-        <section class="home-app-strip" aria-label="Featured mini apps">
+        <section class="home-app-strip" aria-label="Featured mini apps" data-home-reveal>
             <div class="home-app-strip-inner">
+                <span class="home-app-strip-spark home-app-strip-spark-a" aria-hidden="true"></span>
+                <span class="home-app-strip-spark home-app-strip-spark-b" aria-hidden="true"></span>
                 @foreach($homeApps as $app)
                     <a class="home-app-card" href="{{ $app['url'] }}" data-tilt-card>
                         <span class="home-app-card-shine"></span>
@@ -121,7 +126,7 @@
             </div>
         </section>
 
-        <section class="home-stats" aria-label="Platform statistics">
+        <section class="home-stats" aria-label="Platform statistics" data-home-reveal>
             <div class="home-stat">
                 <span class="home-stat-icon home-stat-icon-apps" aria-hidden="true"></span>
                 <div>
@@ -153,7 +158,7 @@
             </div>
         </section>
 
-        <footer class="home-footer">
+        <footer class="home-footer" data-home-reveal>
             <div class="home-footer-brand">
                 <img src="{{ $asset('logo-icon.png') }}" alt="">
                 <div>
@@ -161,13 +166,19 @@
                     <p>A safe and fun learning universe for every student.</p>
                 </div>
             </div>
-            <div class="home-footer-links">
-                <a href="{{ route('home') }}">Home</a>
-                <a href="{{ route('apps.index') }}">Apps</a>
-                <a href="{{ route('for-parents') }}">For Parents</a>
-                <a href="{{ route('for-teachers') }}">For Teachers</a>
-                <a href="{{ route('pricing') }}">Pricing</a>
-                <a href="{{ route('support') }}">Support</a>
+            <div class="home-footer-content">
+                <nav class="home-footer-links" aria-label="Footer navigation">
+                    <a href="{{ route('home') }}">Home</a>
+                    <a href="{{ route('apps.index') }}">Apps</a>
+                    <a href="{{ route('for-parents') }}">For Parents</a>
+                    <a href="{{ route('for-teachers') }}">For Teachers</a>
+                    <a href="{{ route('pricing') }}">Pricing</a>
+                    <a href="{{ route('support') }}">Support</a>
+                </nav>
+                <div class="home-footer-cta">
+                    <span>Ready for today's learning adventure?</span>
+                    <a href="{{ route('apps.index') }}">Start Learning</a>
+                </div>
             </div>
         </footer>
     </div>

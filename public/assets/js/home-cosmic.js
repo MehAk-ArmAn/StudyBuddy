@@ -15,12 +15,13 @@
   var mouseGlow = root.querySelector('[data-mouse-glow]');
   var parallaxNodes = root.querySelectorAll('[data-parallax]');
   var tiltCards = root.querySelectorAll('[data-tilt-card]');
+  var revealNodes = root.querySelectorAll('[data-home-reveal]');
   function createStars() {
     if (!starfield) {
       return;
     }
 
-    var count = window.innerWidth < 768 ? 90 : 160;
+    var count = window.innerWidth < 768 ? 130 : 240;
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < count; i += 1) {
@@ -34,8 +35,8 @@
       star.style.top = Math.random() * 100 + '%';
       star.style.width = size + 'px';
       star.style.height = size + 'px';
-      star.style.setProperty('--twinkle-dur', (2.5 + Math.random() * 4.5).toFixed(2) + 's');
-      star.style.setProperty('--twinkle-delay', (Math.random() * 6).toFixed(2) + 's');
+      star.style.setProperty('--twinkle-dur', (2.8 + Math.random() * 6).toFixed(2) + 's');
+      star.style.setProperty('--twinkle-delay', (Math.random() * 8).toFixed(2) + 's');
       fragment.appendChild(star);
     }
 
@@ -119,6 +120,30 @@
 
   function bindReveal() {
     root.classList.add('is-visible');
+
+    if (!revealNodes.length) {
+      return;
+    }
+
+    if (!('IntersectionObserver' in window) || prefersReducedMotion) {
+      revealNodes.forEach(function (node) {
+        node.classList.add('is-revealed');
+      });
+      return;
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+
+    revealNodes.forEach(function (node) {
+      observer.observe(node);
+    });
   }
 
   createStars();
