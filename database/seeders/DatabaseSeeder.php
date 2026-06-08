@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
             RewardSeeder::class,
             DashboardSeeder::class,
             SiteContentSeeder::class,
+            AdminCmsSeeder::class,
         ]);
     }
 }

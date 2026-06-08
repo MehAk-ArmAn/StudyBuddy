@@ -10,7 +10,7 @@ class MiniApp extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'slug', 'subject', 'age_band', 'description', 'card_tone', 'status', 'launch_path', 'hero_metric', 'sort_order',
+        'title', 'slug', 'subject', 'age_band', 'description', 'card_tone', 'status', 'launch_path', 'hero_metric', 'image_path', 'cta_text', 'sort_order',
     ];
 
     protected function casts(): array
