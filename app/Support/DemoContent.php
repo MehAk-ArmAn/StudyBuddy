@@ -23,10 +23,10 @@ class DemoContent
     public static function rewards(): Collection
     {
         return collect([
-            (object) ['name' => 'Star Cape', 'slug' => 'star-cape', 'description' => 'A sparkling cape for Buddy after your first week streak.', 'points_required' => 100, 'rarity' => 'unlocked', 'icon' => '★', 'glow_color' => '#8b5cf6'],
-            (object) ['name' => 'Gold Crown', 'slug' => 'gold-crown', 'description' => 'A legendary crown for quiz champions.', 'points_required' => 150, 'rarity' => 'unlocked', 'icon' => '♛', 'glow_color' => '#f59e0b'],
-            (object) ['name' => 'Rocket Pack', 'slug' => 'rocket-pack', 'description' => 'Zoom between lessons with a rocket boost.', 'points_required' => 250, 'rarity' => 'locked', 'icon' => '🚀', 'glow_color' => '#38bdf8'],
-            (object) ['name' => 'Wizard Hat', 'slug' => 'wizard-hat', 'description' => 'Unlock when spelling streaks reach level ten.', 'points_required' => 300, 'rarity' => 'locked', 'icon' => '✦', 'glow_color' => '#ec4899'],
+            (object) ['name' => 'Star Cape', 'slug' => 'star-cape', 'description' => 'A sparkling cape for Buddy after your first week streak.', 'points_required' => 100, 'rarity' => 'unlocked', 'icon' => '', 'glow_color' => '#8b5cf6'],
+            (object) ['name' => 'Gold Crown', 'slug' => 'gold-crown', 'description' => 'A legendary crown for quiz champions.', 'points_required' => 150, 'rarity' => 'unlocked', 'icon' => '', 'glow_color' => '#f59e0b'],
+            (object) ['name' => 'Rocket Pack', 'slug' => 'rocket-pack', 'description' => 'Zoom between lessons with a rocket boost.', 'points_required' => 250, 'rarity' => 'locked', 'icon' => '', 'glow_color' => '#38bdf8'],
+            (object) ['name' => 'Wizard Hat', 'slug' => 'wizard-hat', 'description' => 'Unlock when spelling streaks reach level ten.', 'points_required' => 300, 'rarity' => 'locked', 'icon' => '', 'glow_color' => '#ec4899'],
             (object) ['name' => 'Neon Hoodie', 'slug' => 'neon-hoodie', 'description' => 'A cozy cosmic hoodie for focused learners.', 'points_required' => 350, 'rarity' => 'locked', 'icon' => '◆', 'glow_color' => '#22c55e'],
             (object) ['name' => 'Planet Trail', 'slug' => 'planet-trail', 'description' => 'A tiny solar system that follows Buddy.', 'points_required' => 500, 'rarity' => 'locked', 'icon' => '●', 'glow_color' => '#a855f7'],
         ]);

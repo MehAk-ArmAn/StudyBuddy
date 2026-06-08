@@ -5,7 +5,7 @@
             @if($logoExists)
                 <img src="{{ asset('assets/studybuddy/logo-icon.png') }}" alt="StudyBuddy logo">
             @else
-                🐬
+
             @endif
         </span>
         <span class="brand-copy"><strong>StudyBuddy</strong></span>

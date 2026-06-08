@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\DemoContent;
+use App\Support\Cms;
 use Illuminate\View\View;
 
 class AppController extends Controller
 {
     public function index(): View
     {
-        return view('apps.index', ['apps' => DemoContent::miniApps()]);
+        return view('apps.index', ['apps' => Cms::apps()]);
     }
 
     public function mathQuest(): View
     {
         return view('apps.math-quest', [
-            'app' => DemoContent::miniApps()->firstWhere('slug', 'math-quest'),
+            'app' => Cms::apps()->firstWhere('slug', 'math-quest'),
         ]);
     }
 

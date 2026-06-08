@@ -792,7 +792,7 @@
 }
 
 .page-home .home-stat-icon-rating::before {
-  content: "★";
+  content: "";
   position: absolute;
   inset: 0;
   display: grid;
@@ -1243,7 +1243,7 @@
 }
 
 .page-home .home-trust-row span::before {
-  content: "✦";
+  content: "";
   color: #93c5fd;
   text-shadow: 0 0 14px rgba(147, 197, 253, .75);
 }

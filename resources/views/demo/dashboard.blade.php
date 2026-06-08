@@ -16,12 +16,12 @@
     ];
 
     $primaryBadges = [
-        ['icon' => '📖', 'label' => 'Star Reader'],
-        ['icon' => '➕', 'label' => 'Math Whiz'],
-        ['icon' => '🏆', 'label' => 'Quiz Champ'],
-        ['icon' => '💗', 'label' => 'Helper'],
-        ['icon' => '🎯', 'label' => 'Focus Master'],
-        ['icon' => '🪐', 'label' => 'Story Explorer'],
+        ['icon' => '', 'label' => 'Star Reader'],
+        ['icon' => '+', 'label' => 'Math Whiz'],
+        ['icon' => '', 'label' => 'Quiz Champ'],
+        ['icon' => '', 'label' => 'Helper'],
+        ['icon' => '', 'label' => 'Focus Master'],
+        ['icon' => '', 'label' => 'Story Explorer'],
     ];
 @endphp
 <section class="kid-dashboard primary-student-dashboard reveal-on-load" aria-labelledby="primary-dashboard-title">
@@ -32,15 +32,15 @@
         </a>
         <nav class="kid-side-nav">
             <a class="is-active" href="#"><span>▦</span>Dashboard</a>
-            <a href="{{ route('apps.index') }}"><span>✾</span>Apps</a>
-            <a href="#"><span>☑</span>Missions</a>
-            <a href="{{ route('rewards') }}"><span>⚙</span>Rewards</a>
-            <a href="#"><span>♡</span>My Buddy</a>
+            <a href="{{ route('apps.index') }}"><span></span>Apps</a>
+            <a href="#"><span></span>Missions</a>
+            <a href="{{ route('rewards') }}"><span></span>Rewards</a>
+            <a href="#"><span></span>My Buddy</a>
             <a href="#"><span>↺</span>Progress</a>
-            <a href="#"><span>⚙</span>Settings</a>
+            <a href="#"><span></span>Settings</a>
         </nav>
         <div class="kid-weekly-goal">
-            <h2>Weekly Goal! 🔥</h2>
+            <h2>Weekly Goal! </h2>
             <p>Keep learning every day to earn big rewards!</p>
             <div class="kid-progress-line"><span style="width: 68%"></span></div>
             <small>4 / 7 Days</small>
@@ -56,43 +56,43 @@
         <div class="kid-topbar">
             <span></span>
             <div class="kid-user-actions">
-                <button type="button" aria-label="Notifications">🔔<em>3</em></button>
-                <button class="kid-profile-chip" type="button"><span>👧🏽</span><strong>Zara<small>Age 8</small></strong><i>⌄</i></button>
+                <button type="button" aria-label="Notifications"><em>3</em></button>
+                <button class="kid-profile-chip" type="button"><span></span><strong>Zara<small>Age 8</small></strong><i>⌄</i></button>
             </div>
         </div>
 
         <section class="kid-hero-panel">
             <div class="kid-hero-stars" aria-hidden="true"></div>
             <header class="kid-welcome">
-                <h1 id="primary-dashboard-title">Hi <span>Zara!</span> 👋</h1>
+                <h1 id="primary-dashboard-title">Hi <span>Zara!</span> </h1>
                 <p>Ready for today’s adventure?</p>
             </header>
 
             <div class="kid-top-stats" aria-label="Primary stats">
-                <article><span>⭐</span><strong>120</strong><small>Stars</small></article>
-                <article><span>🪙</span><strong>340</strong><small>Buddy Coins</small></article>
-                <article><span>🔥</span><strong>5 days</strong><small>Streak</small></article>
+                <article><span></span><strong>120</strong><small>Stars</small></article>
+                <article><span></span><strong>340</strong><small>Buddy Coins</small></article>
+                <article><span></span><strong>5 days</strong><small>Streak</small></article>
             </div>
 
             <article class="kid-mission-card">
-                <h2><span>🎯</span>Today’s Mission</h2>
+                <h2><span></span>Today’s Mission</h2>
                 <ul>
-                    <li><span>🎮</span>Complete 2 Math Quest lessons <strong>1 / 2</strong><i>★</i></li>
-                    <li><span>📚</span>Read a story in Reading Garden <strong>0 / 1</strong><i>★</i></li>
-                    <li><span>🏆</span>Play 1 Quiz in Quiz Galaxy <strong>0 / 1</strong><i>★</i></li>
+                    <li><span></span>Complete 2 Math Quest lessons <strong>1 / 2</strong><i></i></li>
+                    <li><span></span>Read a story in Reading Garden <strong>0 / 1</strong><i></i></li>
+                    <li><span></span>Play 1 Quiz in Quiz Galaxy <strong>0 / 1</strong><i></i></li>
                 </ul>
             </article>
 
             <div class="kid-buddy-zone" aria-label="StudyBuddy mascot">
-                <span class="kid-buddy-star kid-buddy-star-a">★</span>
-                <span class="kid-buddy-star kid-buddy-star-b">★</span>
+                <span class="kid-buddy-star kid-buddy-star-a"></span>
+                <span class="kid-buddy-star kid-buddy-star-b"></span>
                 <img src="{{ $asset('hero-dolphin-book.png') }}" alt="StudyBuddy dolphin mascot floating on a cloud">
                 <div class="kid-buddy-cloud"><span></span><span></span><span></span></div>
-                <div class="kid-chat-bubble"><strong>Hi Zara! 🌟</strong><p>Let's learn, play and grow together!</p><small>Zappy 💜</small></div>
+                <div class="kid-chat-bubble"><strong>Hi Zara! </strong><p>Let's learn, play and grow together!</p><small>Zappy </small></div>
             </div>
 
             <aside class="kid-level-card">
-                <div><span>⭐</span><strong>Level<br>12</strong><em>Star Learner</em></div>
+                <div><span></span><strong>Level<br>12</strong><em>Star Learner</em></div>
                 <p>XP Progress <b>2,350 <small>/ 2,800</small></b></p>
                 <div class="kid-xp-track"><span style="width: 84%"></span></div>
             </aside>
@@ -122,17 +122,17 @@
             <section class="kid-daily-card" aria-labelledby="kid-daily-title">
                 <h2 id="kid-daily-title">Daily Progress</h2>
                 <div class="kid-daily-grid">
-                    <article><span>📖</span><strong>3</strong><small>Lessons Completed<br><em>+1 today</em></small></article>
-                    <article><span>🏆</span><strong>85%</strong><small>Quiz Score<br><em>Great job!</em></small></article>
-                    <article><span>⏱</span><strong>45 min</strong><small>Focus Time<br><em>+10 min</em></small></article>
-                    <article><span>📋</span><strong>6 / 10</strong><small>Activities Done<br><em>Keep going!</em></small></article>
+                    <article><span></span><strong>3</strong><small>Lessons Completed<br><em>+1 today</em></small></article>
+                    <article><span></span><strong>85%</strong><small>Quiz Score<br><em>Great job!</em></small></article>
+                    <article><span></span><strong>45 min</strong><small>Focus Time<br><em>+10 min</em></small></article>
+                    <article><span></span><strong>6 / 10</strong><small>Activities Done<br><em>Keep going!</em></small></article>
                 </div>
             </section>
 
-            <article class="kid-encourage-card"><span>⭐</span><div><h2>You’re doing amazing, Zara!</h2><p>Every small step makes big dreams come true! ✨</p></div></article>
-            <article class="kid-progress-card"><h2>Your Learning Progress <span>250 / 500 XP</span></h2><div><span style="width: 62%"></span></div><p>Keep it up! You're on your way to the next level! 🚀</p></article>
-            <article class="kid-streak-card"><h2>🔥 Learning Streak <span>5 days</span></h2><p>Fantastic! Keep your streak alive!</p><div><span>✓<small>Mon</small></span><span>✓<small>Tue</small></span><span>✓<small>Wed</small></span><span>✓<small>Thu</small></span><span>✓<small>Fri</small></span><span>✓<small>Sat</small></span><span>✓<small>Sun</small></span></div><img src="{{ $asset('app-spelling-sprint.png') }}" alt="Rocket app icon"></article>
-            <article class="kid-fact-card"><h2>💡 Fun Fact of the Day</h2><p>Dolphins have names for each other!</p><a href="#">Cool!</a><img src="{{ $asset('hero-dolphin-book.png') }}" alt="StudyBuddy dolphin mascot"></article>
+            <article class="kid-encourage-card"><span></span><div><h2>You’re doing amazing, Zara!</h2><p>Every small step makes big dreams come true! </p></div></article>
+            <article class="kid-progress-card"><h2>Your Learning Progress <span>250 / 500 XP</span></h2><div><span style="width: 62%"></span></div><p>Keep it up! You're on your way to the next level! </p></article>
+            <article class="kid-streak-card"><h2> Learning Streak <span>5 days</span></h2><p>Fantastic! Keep your streak alive!</p><div><span><small>Mon</small></span><span><small>Tue</small></span><span><small>Wed</small></span><span><small>Thu</small></span><span><small>Fri</small></span><span><small>Sat</small></span><span><small>Sun</small></span></div><img src="{{ $asset('app-spelling-sprint.png') }}" alt="Rocket app icon"></article>
+            <article class="kid-fact-card"><h2> Fun Fact of the Day</h2><p>Dolphins have names for each other!</p><a href="#">Cool!</a><img src="{{ $asset('hero-dolphin-book.png') }}" alt="StudyBuddy dolphin mascot"></article>
         </section>
     </main>
 </section>
@@ -157,31 +157,31 @@
             <a class="is-active" href="#"><span>⌂</span>Dashboard</a>
             <a href="{{ route('apps.index') }}"><span>▦</span>My Apps</a>
             <a href="#"><span>▱</span>Homework</a>
-            <a href="#"><span>⏱</span>Focus Timer</a>
+            <a href="#"><span></span>Focus Timer</a>
             <a href="#"><span>?</span>Quizzes</a>
             <a href="#"><span>□</span>Flashcards</a>
             <a href="#"><span>▥</span>Progress</a>
-            <a href="{{ route('rewards') }}"><span>♕</span>Rewards</a>
-            <a href="#"><span>✉</span>Messages</a>
-            <a href="#"><span>⚙</span>Settings</a>
+            <a href="{{ route('rewards') }}"><span></span>Rewards</a>
+            <a href="#"><span></span>Messages</a>
+            <a href="#"><span></span>Settings</a>
         </nav>
-        <div class="teen-profile-card"><span>👩🏽</span><div><strong>Mehak</strong><small>Edit Profile ↗</small></div><em>Level 12</em></div>
-        <div class="teen-streak-card"><span>🔥</span><strong>7</strong><small>Day Streak</small></div>
+        <div class="teen-profile-card"><span></span><div><strong>Mehak</strong><small>Edit Profile ↗</small></div><em>Level 12</em></div>
+        <div class="teen-streak-card"><span></span><strong>7</strong><small>Day Streak</small></div>
     </aside>
 
     <main class="teen-main">
         <header class="teen-header">
-            <div><h1 id="secondary-dashboard-title">Welcome back, Mehak! 🚀</h1><p>Let’s crush your goals today.</p></div>
-            <div class="teen-header-actions"><button aria-label="Search">⌕</button><button aria-label="Notifications">♧<em></em></button><button><span>👩🏽</span><strong>Mehak</strong><i>⌄</i></button></div>
+            <div><h1 id="secondary-dashboard-title">Welcome back, Mehak! </h1><p>Let’s crush your goals today.</p></div>
+            <div class="teen-header-actions"><button aria-label="Search">⌕</button><button aria-label="Notifications"><em></em></button><button><span></span><strong>Mehak</strong><i>⌄</i></button></div>
         </header>
 
         <section class="teen-layout-grid">
             <div class="teen-left-column">
                 <div class="teen-metric-grid" aria-label="Secondary dashboard stats">
-                    <article><span class="teen-icon-badge">⭐</span><div><small>Level</small><strong>12</strong><em>Star Learner</em></div></article>
-                    <article><span class="teen-icon-badge">🧪</span><div><small>XP</small><strong>2,350</strong><div class="teen-mini-track"><span style="width: 56%"></span></div><em>2,350 / 4,200</em></div></article>
-                    <article><span class="teen-icon-badge">🪙</span><div><small>Buddy Coins</small><strong>320</strong></div></article>
-                    <article><span class="teen-icon-badge">🔥</span><div><small>Streak</small><strong>7</strong><em>days</em></div></article>
+                    <article><span class="teen-icon-badge"></span><div><small>Level</small><strong>12</strong><em>Star Learner</em></div></article>
+                    <article><span class="teen-icon-badge"></span><div><small>XP</small><strong>2,350</strong><div class="teen-mini-track"><span style="width: 56%"></span></div><em>2,350 / 4,200</em></div></article>
+                    <article><span class="teen-icon-badge"></span><div><small>Buddy Coins</small><strong>320</strong></div></article>
+                    <article><span class="teen-icon-badge"></span><div><small>Streak</small><strong>7</strong><em>days</em></div></article>
                 </div>
 
                 <div class="teen-plan-timer-grid">
@@ -191,7 +191,7 @@
                             <li><span class="ring red"></span>Math: Quadratic Equations <strong>0 / 1</strong></li>
                             <li><span class="ring amber"></span>Science: Photosynthesis <strong>0 / 1</strong></li>
                             <li><span class="ring cyan"></span>English: Essay Writing <strong>0 / 1</strong></li>
-                            <li><span class="ring done">✓</span>Focus Time — 30 min <strong>0 / 30 min</strong></li>
+                            <li><span class="ring done"></span>Focus Time — 30 min <strong>0 / 30 min</strong></li>
                         </ul>
                         <a href="#">View All Tasks <span>›</span></a>
                     </article>
@@ -199,7 +199,7 @@
                     <article class="teen-timer-card">
                         <h2>Focus Timer</h2>
                         <div class="teen-timer-ring"><strong>25:00</strong><button type="button">Start</button></div>
-                        <div class="teen-timer-pills"><button class="is-active">25 min</button><button>15 min</button><button>30 min</button><button>45 min</button><button>⚙</button></div>
+                        <div class="teen-timer-pills"><button class="is-active">25 min</button><button>15 min</button><button>30 min</button><button>45 min</button><button></button></div>
                     </article>
                 </div>
 
@@ -222,8 +222,8 @@
                     <div class="teen-quick-row">
                         <a href="#"><span>?</span><strong>Take Quiz</strong><small>Test your knowledge</small></a>
                         <a href="#"><span>▤</span><strong>Use Flashcards</strong><small>Review & memorize</small></a>
-                        <a href="#"><span>☰</span><strong>Start Homework</strong><small>View assignments</small></a>
-                        <a href="#"><span>🤖</span><strong>Ask Buddy AI</strong><small>Get help instantly</small></a>
+                        <a href="#"><span></span><strong>Start Homework</strong><small>View assignments</small></a>
+                        <a href="#"><span></span><strong>Ask Buddy AI</strong><small>Get help instantly</small></a>
                         <img src="{{ $asset('hero-dolphin-book.png') }}" alt="StudyBuddy dolphin mascot">
                     </div>
                 </section>
@@ -234,16 +234,16 @@
                     <div><h2 id="teen-weekly-title">Weekly Progress</h2><button>This Week⌄</button></div>
                     <div class="teen-line-chart"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><b></b><i></i></div>
                     <div class="teen-chart-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
-                    <div class="teen-weekly-stats"><span>⏱<strong>6h 45m</strong><small>+1h 20m</small></span><span>📘<strong>28</strong><small>+ 8</small></span><span>❔<strong>18</strong><small>+ 5</small></span><span>🎯<strong>85%</strong><small>+12%</small></span></div>
+                    <div class="teen-weekly-stats"><span><strong>6h 45m</strong><small>+1h 20m</small></span><span><strong>28</strong><small>+ 8</small></span><span>?<strong>18</strong><small>+ 5</small></span><span><strong>85%</strong><small>+12%</small></span></div>
                 </section>
 
                 <section class="teen-strength-card" aria-labelledby="teen-strength-title">
                     <div><h2 id="teen-strength-title">Subject Strength</h2><a href="#">View Details ›</a></div>
                     <ul>
-                        <li><span>✥</span>Math <b><i style="width: 90%"></i></b><strong>90%</strong><em>Excellent</em></li>
-                        <li><span>⚗</span>Science <b><i style="width: 80%"></i></b><strong>80%</strong><em>Good</em></li>
-                        <li><span>📖</span>English <b><i style="width: 75%"></i></b><strong>75%</strong><em>Good</em></li>
-                        <li><span>🌎</span>Social Studies <b><i style="width: 65%"></i></b><strong>65%</strong><em>Keep Going</em></li>
+                        <li><span></span>Math <b><i style="width: 90%"></i></b><strong>90%</strong><em>Excellent</em></li>
+                        <li><span></span>Science <b><i style="width: 80%"></i></b><strong>80%</strong><em>Good</em></li>
+                        <li><span></span>English <b><i style="width: 75%"></i></b><strong>75%</strong><em>Good</em></li>
+                        <li><span></span>Social Studies <b><i style="width: 65%"></i></b><strong>65%</strong><em>Keep Going</em></li>
                         <li><span>▣</span>Computer <b><i style="width: 70%"></i></b><strong>70%</strong><em>Good</em></li>
                     </ul>
                 </section>
@@ -251,16 +251,16 @@
                 <section class="teen-activity-card" aria-labelledby="teen-activity-title">
                     <div><h2 id="teen-activity-title">Recent Activity</h2><a href="#">View All ›</a></div>
                     <ul>
-                        <li><span>✓</span><div><strong>Completed Math: Quadratic Equations</strong><small>Today, 10:30 AM</small></div><em>+ 50 XP</em></li>
-                        <li><span>★</span><div><strong>Scored 90% in Science Quiz</strong><small>Today, 9:15 AM</small></div><em>+ 30 XP</em></li>
-                        <li><span>⏱</span><div><strong>Focus session completed (25 min)</strong><small>Yesterday, 8:45 PM</small></div><em>+ 25 XP</em></li>
+                        <li><span></span><div><strong>Completed Math: Quadratic Equations</strong><small>Today, 10:30 AM</small></div><em>+ 50 XP</em></li>
+                        <li><span></span><div><strong>Scored 90% in Science Quiz</strong><small>Today, 9:15 AM</small></div><em>+ 30 XP</em></li>
+                        <li><span></span><div><strong>Focus session completed (25 min)</strong><small>Yesterday, 8:45 PM</small></div><em>+ 25 XP</em></li>
                     </ul>
                 </section>
             </aside>
         </section>
 
         <section class="teen-reward-banner">
-            <span>🏆</span><div><h2>Keep it up, Mehak! 🌟</h2><p>Consistency today, success tomorrow.</p></div><a href="{{ route('rewards') }}">View Rewards</a>
+            <span></span><div><h2>Keep it up, Mehak! </h2><p>Consistency today, success tomorrow.</p></div><a href="{{ route('rewards') }}">View Rewards</a>
         </section>
     </main>
 </section>
@@ -269,9 +269,9 @@
     $asset = fn (string $file): string => asset('assets/studybuddy/' . $file);
 
     $parentLessons = [
-        ['icon' => '👩🏽', 'title' => 'How to help your child stay focused', 'action' => 'Read Article'],
-        ['icon' => '👩🏽', 'title' => 'Fun ways to improve math at home', 'action' => 'Read Article'],
-        ['icon' => '👩🏽', 'title' => 'Build a better study routine', 'action' => 'Read Article'],
+        ['icon' => '', 'title' => 'How to help your child stay focused', 'action' => 'Read Article'],
+        ['icon' => '', 'title' => 'Fun ways to improve math at home', 'action' => 'Read Article'],
+        ['icon' => '', 'title' => 'Build a better study routine', 'action' => 'Read Article'],
     ];
 @endphp
 <section class="parent-pro-dashboard reveal-on-load" aria-labelledby="parent-dashboard-title">
@@ -282,19 +282,19 @@
         </a>
         <nav class="parent-pro-nav">
             <a class="is-active" href="#"><span>⌂</span>Dashboard</a>
-            <a href="#"><span>👥</span>My Children</a>
+            <a href="#"><span></span>My Children</a>
             <a href="#"><span>▥</span>Progress Reports</a>
-            <a href="#"><span>📖</span>Learning Tools</a>
+            <a href="#"><span></span>Learning Tools</a>
             <a href="#"><span>▱</span>Parent Learning</a>
-            <a href="#"><span>⚙</span>Settings</a>
+            <a href="#"><span></span>Settings</a>
             <a href="#"><span>↪</span>Logout</a>
         </nav>
         <div class="parent-profile-card">
-            <span>👩🏽</span>
+            <span></span>
             <div><strong>Mehak’s Parent</strong><small>mom@example.com</small></div>
             <i>⌄</i>
         </div>
-        <a class="parent-help-card" href="#"><span>🎧</span>Need Help?</a>
+        <a class="parent-help-card" href="#"><span></span>Need Help?</a>
         <div class="parent-book-decor" aria-hidden="true">
             <span class="parent-mini-planet"></span>
             <span class="parent-mini-star parent-mini-star-a"></span>
@@ -306,7 +306,7 @@
     <main class="parent-pro-main">
         <section class="parent-pro-shell">
             <header class="parent-pro-header">
-                <div><h1 id="parent-dashboard-title">Welcome, Mom! ❤</h1><p>Here’s how Mehak is doing this week.</p></div>
+                <div><h1 id="parent-dashboard-title">Welcome, Mom! </h1><p>Here’s how Mehak is doing this week.</p></div>
                 <button type="button"><span>▣</span>This Week <i>⌄</i></button>
             </header>
 
@@ -320,36 +320,36 @@
                 <h2 id="parent-progress-title"><span>▥</span>Mehak’s Progress</h2>
                 <div class="parent-summary-grid">
                     <article><span class="parent-summary-icon">◷</span><small>Total Study Time</small><strong>6h 45m</strong><em>+ 1h 20m</em></article>
-                    <article><span class="parent-summary-icon blue">☑</span><small>Lessons Completed</small><strong>28</strong><em>+ 8 ↑</em></article>
-                    <article><span class="parent-summary-icon gold">🏆</span><small>Quiz Score</small><strong>85%</strong><em>+12% ↑</em></article>
+                    <article><span class="parent-summary-icon blue"></span><small>Lessons Completed</small><strong>28</strong><em>+ 8 ↑</em></article>
+                    <article><span class="parent-summary-icon gold"></span><small>Quiz Score</small><strong>85%</strong><em>+12% ↑</em></article>
                     <article><span class="parent-summary-icon violet">◎</span><small>Focus Time</small><strong>3h 20m</strong><em>+ 45m ↑</em></article>
                 </div>
             </section>
 
             <section class="parent-strength-panel" aria-labelledby="parent-strength-title">
-                <h2 id="parent-strength-title">⭐ Subject Strength</h2>
+                <h2 id="parent-strength-title"> Subject Strength</h2>
                 <ul>
                     <li><span>▦</span><strong>Math</strong><b><i style="width: 90%"></i></b><em>90%</em></li>
-                    <li><span>📗</span><strong>Reading</strong><b><i style="width: 80%"></i></b><em>80%</em></li>
-                    <li><span>⚗</span><strong>Science</strong><b><i style="width: 70%"></i></b><em>70%</em></li>
-                    <li><span>🔤</span><strong>Spelling</strong><b><i style="width: 65%"></i></b><em>65%</em></li>
+                    <li><span></span><strong>Reading</strong><b><i style="width: 80%"></i></b><em>80%</em></li>
+                    <li><span></span><strong>Science</strong><b><i style="width: 70%"></i></b><em>70%</em></li>
+                    <li><span></span><strong>Spelling</strong><b><i style="width: 65%"></i></b><em>65%</em></li>
                 </ul>
-                <div class="parent-praise-card"><span>⭐</span><p><strong>Great job!</strong> Mehak is showing consistent progress.<br>Keep encouraging!</p><i>💜</i></div>
+                <div class="parent-praise-card"><span></span><p><strong>Great job!</strong> Mehak is showing consistent progress.<br>Keep encouraging!</p><i></i></div>
             </section>
 
             <section class="parent-activity-panel" aria-labelledby="parent-activity-title">
                 <h2 id="parent-activity-title">◷ Recent Activity</h2>
                 <ul>
-                    <li><span>✓</span><div><strong>Completed Math Quest Lessons</strong><small>Math</small></div><time>15m ago</time><i>›</i></li>
-                    <li><span>✓</span><div><strong>Read a story in Reading Garden</strong><small>Reading</small></div><time>2h ago</time><i>›</i></li>
-                    <li><span>★</span><div><strong>Scored 90% in Quiz Galaxy</strong><small>Science</small></div><time>Yesterday</time><i>›</i></li>
+                    <li><span></span><div><strong>Completed Math Quest Lessons</strong><small>Math</small></div><time>15m ago</time><i>›</i></li>
+                    <li><span></span><div><strong>Read a story in Reading Garden</strong><small>Reading</small></div><time>2h ago</time><i>›</i></li>
+                    <li><span></span><div><strong>Scored 90% in Quiz Galaxy</strong><small>Science</small></div><time>Yesterday</time><i>›</i></li>
                     <li><span>◷</span><div><strong>Focus session completed</strong><small>Focus Forest</small></div><time>Yesterday</time><i>›</i></li>
                 </ul>
                 <a href="#">View All Activity <span>›</span></a>
             </section>
 
             <aside class="parent-learning-panel" aria-labelledby="parent-learning-title">
-                <h2 id="parent-learning-title">💜 Parent Learning Corner</h2>
+                <h2 id="parent-learning-title"> Parent Learning Corner</h2>
                 <div class="parent-learning-list">
                     @foreach($parentLessons as $lesson)
                         <article><div><h3>{{ $lesson['title'] }}</h3><a href="#">{{ $lesson['action'] }}</a></div><span>{{ $lesson['icon'] }}</span></article>
@@ -358,8 +358,8 @@
                 <a class="parent-all-resources" href="#">View all resources <span>›</span></a>
             </aside>
 
-            <aside class="parent-tip-card"><h2>🪐 Tip of the Week</h2><p>Short breaks help boost focus and long-term retention.</p><span></span></aside>
-            <article class="parent-quote-banner"><span>“</span><p>Every small step today builds a brighter tomorrow.<br><small>Keep believing, keep encouraging! 🌟</small></p><span>”</span><i></i></article>
+            <aside class="parent-tip-card"><h2> Tip of the Week</h2><p>Short breaks help boost focus and long-term retention.</p><span></span></aside>
+            <article class="parent-quote-banner"><span>“</span><p>Every small step today builds a brighter tomorrow.<br><small>Keep believing, keep encouraging! </small></p><span>”</span><i></i></article>
         </section>
     </main>
 </section>
@@ -368,10 +368,10 @@
     $asset = fn (string $file): string => asset('assets/studybuddy/' . $file);
 
     $teacherAssignments = [
-        ['icon' => '➗', 'title' => 'Math Quiz – Fractions', 'class' => 'Class 7A', 'due' => 'Due in 2 days', 'count' => '10 Students', 'tone' => 'purple'],
-        ['icon' => '🚀', 'title' => 'Science Worksheet', 'class' => 'Class 8A', 'due' => 'Due in 3 days', 'count' => '23 Students', 'tone' => 'blue'],
-        ['icon' => '📖', 'title' => 'Reading Comprehension', 'class' => 'Class 9A', 'due' => 'Due in 3 days', 'count' => '28 Students', 'tone' => 'green'],
-        ['icon' => '✏️', 'title' => 'Grammar Practice', 'class' => 'Class 10A', 'due' => 'Due in 5 days', 'count' => '19 Students', 'tone' => 'orange'],
+        ['icon' => '', 'title' => 'Math Quiz – Fractions', 'class' => 'Class 7A', 'due' => 'Due in 2 days', 'count' => '10 Students', 'tone' => 'purple'],
+        ['icon' => '', 'title' => 'Science Worksheet', 'class' => 'Class 8A', 'due' => 'Due in 3 days', 'count' => '23 Students', 'tone' => 'blue'],
+        ['icon' => '', 'title' => 'Reading Comprehension', 'class' => 'Class 9A', 'due' => 'Due in 3 days', 'count' => '28 Students', 'tone' => 'green'],
+        ['icon' => '', 'title' => 'Grammar Practice', 'class' => 'Class 10A', 'due' => 'Due in 5 days', 'count' => '19 Students', 'tone' => 'orange'],
     ];
 @endphp
 <section class="teacher-pro-dashboard reveal-on-load" aria-labelledby="teacher-dashboard-title">
@@ -379,22 +379,22 @@
         <a class="teacher-pro-brand" href="{{ route('home') }}"><img src="{{ $asset('logo-icon.png') }}" alt="StudyBuddy logo"><strong>Study<span>Buddy</span></strong></a>
         <nav class="teacher-pro-nav">
             <a class="is-active" href="#"><span>⌂</span>Dashboard</a>
-            <a href="#"><span>👥</span>Classes</a>
-            <a href="#"><span>♙</span>Students</a>
+            <a href="#"><span></span>Classes</a>
+            <a href="#"><span></span>Students</a>
             <a href="#"><span>▣</span>Assignments</a>
             <a href="#"><span>?</span>Quizzes</a>
             <a href="#"><span>▥</span>Reports</a>
-            <a href="#"><span>📖</span>Resources</a>
-            <a href="#"><span>⚙</span>Settings</a>
+            <a href="#"><span></span>Resources</a>
+            <a href="#"><span></span>Settings</a>
         </nav>
-        <div class="teacher-tip-card"><img src="{{ $asset('hero-dolphin-book.png') }}" alt="StudyBuddy dolphin mascot"><h2>Teaching Tips ⭐</h2><p>Explore tips and best practices to engage students.</p><a href="#">Explore Now</a></div>
+        <div class="teacher-tip-card"><img src="{{ $asset('hero-dolphin-book.png') }}" alt="StudyBuddy dolphin mascot"><h2>Teaching Tips </h2><p>Explore tips and best practices to engage students.</p><a href="#">Explore Now</a></div>
     </aside>
 
     <main class="teacher-pro-main">
         <section class="teacher-pro-shell">
             <header class="teacher-pro-header">
-                <div><h1 id="teacher-dashboard-title">Good morning, Teacher! 👩🏽‍🏫</h1><p>Here’s what’s happening in your classes today.</p></div>
-                <div class="teacher-top-actions"><button aria-label="Notifications">♧<em></em></button><button><span>👩🏽</span>Mrs. Arman <i>⌄</i></button></div>
+                <div><h1 id="teacher-dashboard-title">Good morning, Teacher! </h1><p>Here’s what’s happening in your classes today.</p></div>
+                <div class="teacher-top-actions"><button aria-label="Notifications"><em></em></button><button><span></span>Mrs. Arman <i>⌄</i></button></div>
             </header>
 
             <div class="teacher-hero-decor" aria-hidden="true">
@@ -404,14 +404,14 @@
             </div>
 
             <section class="teacher-stat-row" aria-label="Teacher stats">
-                <article><span>👥</span><div><small>Classes</small><strong>5</strong><em>Active Classes</em></div></article>
-                <article><span>👥</span><div><small>Students</small><strong>120</strong><em>Total Students</em></div></article>
-                <article><span>📋</span><div><small>Assignments</small><strong>12</strong><em>Active Assignments</em></div></article>
+                <article><span></span><div><small>Classes</small><strong>5</strong><em>Active Classes</em></div></article>
+                <article><span></span><div><small>Students</small><strong>120</strong><em>Total Students</em></div></article>
+                <article><span></span><div><small>Assignments</small><strong>12</strong><em>Active Assignments</em></div></article>
                 <article><span>?</span><div><small>Quizzes</small><strong>8</strong><em>Upcoming Quizzes</em></div></article>
             </section>
 
             <section class="teacher-class-panel" aria-labelledby="teacher-class-title">
-                <h2 id="teacher-class-title">🎓 Class Overview</h2>
+                <h2 id="teacher-class-title"> Class Overview</h2>
                 <div class="teacher-table-wrap">
                     <table>
                         <thead><tr><th>Class</th><th>Students</th><th>Avg. Score</th><th>Progress</th><th>Quizzes</th></tr></thead>
@@ -428,7 +428,7 @@
             </section>
 
             <section class="teacher-assign-panel" aria-labelledby="teacher-assign-title">
-                <div><h2 id="teacher-assign-title">📋 Recent Assignments</h2><a href="#">View All</a></div>
+                <div><h2 id="teacher-assign-title"> Recent Assignments</h2><a href="#">View All</a></div>
                 <div class="teacher-assignment-list">
                     @foreach($teacherAssignments as $assignment)
                         <article class="assignment-{{ $assignment['tone'] }}"><span>{{ $assignment['icon'] }}</span><div><h3>{{ $assignment['title'] }}</h3><small>{{ $assignment['class'] }}</small></div><time>{{ $assignment['due'] }}</time><em>{{ $assignment['count'] }}</em></article>
@@ -456,24 +456,24 @@
 <section class="admin-pro-dashboard reveal-on-load" aria-labelledby="admin-dashboard-title">
     <aside class="admin-pro-sidebar" aria-label="Admin navigation">
         <a class="admin-pro-brand" href="{{ route('home') }}"><img src="{{ $asset('logo-icon.png') }}" alt="StudyBuddy logo"><strong>Study<span>Buddy</span></strong></a>
-        <nav><a class="is-active" href="#"><span>▣</span>Admin Dashboard</a><a href="#"><span>👥</span>Users</a><a href="{{ route('apps.index') }}"><span>▦</span>Apps</a><a href="#"><span>▤</span>Content</a><a href="#"><span>▧</span>Banners</a><a href="#"><span>▱</span>Pages</a><a href="#"><span>▧</span>Media Library</a><a href="#"><span>↶</span>Activity Logs</a><a href="#"><span>▥</span>Reports</a><a href="#"><span>⚙</span>System Settings</a></nav>
-        <div class="admin-profile-panel"><span>🛸</span><div><strong>Admin</strong><small>Super Administrator</small><em>● Online</em></div><i>⌄</i></div>
+        <nav><a class="is-active" href="#"><span>▣</span>Admin Dashboard</a><a href="#"><span></span>Users</a><a href="{{ route('apps.index') }}"><span>▦</span>Apps</a><a href="#"><span>▤</span>Content</a><a href="#"><span>▧</span>Banners</a><a href="#"><span>▱</span>Pages</a><a href="#"><span>▧</span>Media Library</a><a href="#"><span>↶</span>Activity Logs</a><a href="#"><span>▥</span>Reports</a><a href="#"><span></span>System Settings</a></nav>
+        <div class="admin-profile-panel"><span></span><div><strong>Admin</strong><small>Super Administrator</small><em>● Online</em></div><i>⌄</i></div>
         <div class="admin-sidebar-art"><img src="{{ $asset('hero-dolphin-book.png') }}" alt="StudyBuddy dolphin mascot"><span></span></div>
     </aside>
 
     <main class="admin-pro-main">
         <section class="admin-pro-shell">
             <header class="admin-pro-header">
-                <div><h1 id="admin-dashboard-title"><span>10</span> ADMIN DASHBOARD (CONTROL EVERYTHING) 👑</h1><p>Monitor, manage and scale your learning universe with full control.</p></div>
-                <div class="admin-header-actions"><button>⌕</button><button>♧<em></em></button><button>⚙</button><button class="admin-week">▣ This Week⌄</button></div>
+                <div><h1 id="admin-dashboard-title"><span>10</span> ADMIN DASHBOARD (CONTROL EVERYTHING) </h1><p>Monitor, manage and scale your learning universe with full control.</p></div>
+                <div class="admin-header-actions"><button>⌕</button><button><em></em></button><button></button><button class="admin-week">▣ This Week⌄</button></div>
                 <span class="admin-header-planet" aria-hidden="true"></span>
             </header>
 
             <section class="admin-stat-grid" aria-label="Admin statistics">
-                <article><span>👥</span><div><small>Total Users</small><strong>12,450</strong><em>↑ 16% this week</em></div></article>
-                <article><span>🎓</span><div><small>Active Students</small><strong>9,230</strong><em>↑ 18% this week</em></div></article>
-                <article><span>🏅</span><div><small>Teachers</small><strong>320</strong><em>↑ 15% this week</em></div></article>
-                <article><span>👥</span><div><small>Parents</small><strong>2,900</strong><em>↑ 10% this week</em></div></article>
+                <article><span></span><div><small>Total Users</small><strong>12,450</strong><em>↑ 16% this week</em></div></article>
+                <article><span></span><div><small>Active Students</small><strong>9,230</strong><em>↑ 18% this week</em></div></article>
+                <article><span></span><div><small>Teachers</small><strong>320</strong><em>↑ 15% this week</em></div></article>
+                <article><span></span><div><small>Parents</small><strong>2,900</strong><em>↑ 10% this week</em></div></article>
             </section>
 
             <section class="admin-apps-panel" aria-labelledby="admin-apps-title">
@@ -483,7 +483,7 @@
                         <thead><tr><th>App Name</th><th>Category</th><th>Total Users</th><th>Lessons</th><th>Status</th><th>Actions</th></tr></thead>
                         <tbody>
                             @foreach($adminApps as $app)
-                                <tr><td><img src="{{ $asset($app['img']) }}" alt="{{ $app['name'] }} icon">{{ $app['name'] }}</td><td><span>{{ $app['category'] }}</span></td><td>{{ $app['users'] }}</td><td>{{ $app['lessons'] }}</td><td><em class="{{ $app['status'] === 'Maintenance' ? 'status-maintenance' : 'status-live' }}">{{ $app['status'] }}</em></td><td><button>⊙</button><button>✎</button><button>🗑</button></td></tr>
+                                <tr><td><img src="{{ $asset($app['img']) }}" alt="{{ $app['name'] }} icon">{{ $app['name'] }}</td><td><span>{{ $app['category'] }}</span></td><td>{{ $app['users'] }}</td><td>{{ $app['lessons'] }}</td><td><em class="{{ $app['status'] === 'Maintenance' ? 'status-maintenance' : 'status-live' }}">{{ $app['status'] }}</em></td><td><button>⊙</button><button></button><button></button></td></tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -492,12 +492,12 @@
             </section>
 
             <aside class="admin-quick-panel" aria-labelledby="admin-quick-title">
-                <h2 id="admin-quick-title">🪄 Quick Controls</h2><p>Powerful tools to manage your platform</p>
-                <div class="admin-quick-list"><a href="#"><span>✎</span><div><strong>Edit Homepage Content</strong><small>Update hero section, features and highlights</small></div><i>›</i></a><a href="#"><span>▧</span><div><strong>Manage Banners</strong><small>Add, edit and organize banners</small></div><em>NEW</em><i>›</i></a><a href="#"><span>▤</span><div><strong>Manage Text & Pages</strong><small>Edit content, terms and static pages</small></div><i>›</i></a><a href="#"><span>▧</span><div><strong>Manage Images & Media</strong><small>Upload, organize and manage media files</small></div><i>›</i></a><a href="#"><span>⚙</span><div><strong>System Settings</strong><small>Configure general settings and preferences</small></div><i>›</i></a></div>
+                <h2 id="admin-quick-title"> Quick Controls</h2><p>Powerful tools to manage your platform</p>
+                <div class="admin-quick-list"><a href="#"><span></span><div><strong>Edit Homepage Content</strong><small>Update hero section, features and highlights</small></div><i>›</i></a><a href="#"><span>▧</span><div><strong>Manage Banners</strong><small>Add, edit and organize banners</small></div><em>NEW</em><i>›</i></a><a href="#"><span>▤</span><div><strong>Manage Text & Pages</strong><small>Edit content, terms and static pages</small></div><i>›</i></a><a href="#"><span>▧</span><div><strong>Manage Images & Media</strong><small>Upload, organize and manage media files</small></div><i>›</i></a><a href="#"><span></span><div><strong>System Settings</strong><small>Configure general settings and preferences</small></div><i>›</i></a></div>
             </aside>
 
-            <section class="admin-bottom-metrics" aria-label="Platform metrics"><article><small>User Growth</small><strong>+16%</strong><span></span><em>vs last week</em></article><article><small>Engagement Rate</small><strong>85%</strong><span></span><em>Active sessions</em></article><article><small>Lessons Completed</small><strong>2,430</strong><span>🎓</span><em>This week</em></article><article><small>Platform Uptime</small><strong>99.9%</strong><span>🛡</span><em>All systems go</em></article></section>
-            <aside class="admin-system-card"><span>🛡</span><div><h2>Your platform is running smoothly!</h2><p>All systems operational</p></div><i></i></aside>
+            <section class="admin-bottom-metrics" aria-label="Platform metrics"><article><small>User Growth</small><strong>+16%</strong><span></span><em>vs last week</em></article><article><small>Engagement Rate</small><strong>85%</strong><span></span><em>Active sessions</em></article><article><small>Lessons Completed</small><strong>2,430</strong><span></span><em>This week</em></article><article><small>Platform Uptime</small><strong>99.9%</strong><span></span><em>All systems go</em></article></section>
+            <aside class="admin-system-card"><span></span><div><h2>Your platform is running smoothly!</h2><p>All systems operational</p></div><i></i></aside>
         </section>
     </main>
 </section>

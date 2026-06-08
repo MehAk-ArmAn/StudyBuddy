@@ -107,7 +107,7 @@
                     <span class="home-orbit-ring" aria-hidden="true"></span>
                     <span class="home-orbit-ring home-orbit-ring-soft" aria-hidden="true"></span>
                     <span class="home-speech" aria-hidden="true"><i></i><i></i><i></i></span>
-                    <span class="home-floating-badge home-floating-badge-top">+12 ⭐</span>
+                    <span class="home-floating-badge home-floating-badge-top">+12 </span>
                     <span class="home-floating-badge home-floating-badge-bottom">Daily Quest</span>
                     <img
                         class="home-blend-img home-mascot"
@@ -142,10 +142,10 @@
                 <p>Soft visuals, rewarding feedback, and friendly mini apps help kids build confidence without leaving the cozy StudyBuddy galaxy.</p>
             </div>
             <div class="home-feature-cloud">
-                <span>✨ Sparkly rewards</span>
-                <span>📚 Reading worlds</span>
-                <span>🧠 Focus boosts</span>
-                <span>🎮 Practice games</span>
+                <span> Sparkly rewards</span>
+                <span> Reading worlds</span>
+                <span> Focus boosts</span>
+                <span> Practice games</span>
             </div>
         </section>
 
@@ -176,7 +176,7 @@
                 <div>
                     <strong>4.9</strong>
                     <span>Parent Rating</span>
-                    <em class="home-stars" aria-hidden="true">★★★★★</em>
+                    <em class="home-stars" aria-hidden="true"></em>
                 </div>
             </div>
         </section>

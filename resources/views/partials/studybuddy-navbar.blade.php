@@ -1,13 +1,8 @@
 @php
-    $logo = asset('assets/studybuddy/logo-icon.png');
-    $navLinks = [
-        ['label' => 'Home', 'url' => route('home'), 'active' => request()->routeIs('home')],
-        ['label' => 'Apps', 'url' => route('apps.index'), 'active' => request()->routeIs('apps.index')],
-        ['label' => 'Math Quest', 'url' => route('apps.math-quest'), 'active' => request()->routeIs('apps.math-quest') || request()->routeIs('apps.math-quest.play')],
-        ['label' => 'Rewards', 'url' => route('rewards'), 'active' => request()->routeIs('rewards')],
-        ['label' => 'Dashboards', 'url' => route('demo.primary'), 'active' => request()->routeIs('demo.*')],
-        ['label' => 'Showcase', 'url' => route('showcase'), 'active' => request()->routeIs('showcase')],
-    ];
+    $logo = asset(\App\Support\Cms::setting('favicon_path', 'assets/studybuddy/logo-icon.png'));
+    $navItems = \App\Support\Cms::navigation();
+    $navLinks = $navItems->where('is_cta', false);
+    $cta = $navItems->firstWhere('is_cta', true);
 @endphp
 <header class="studybuddy-navbar reveal-on-load" data-studybuddy-navbar>
     <a class="studybuddy-navbar__brand" href="{{ route('home') }}" aria-label="StudyBuddy home">
@@ -22,9 +17,9 @@
 
     <nav class="studybuddy-navbar__links" id="studybuddy-main-nav" aria-label="Main navigation" data-studybuddy-nav-links>
         @foreach($navLinks as $link)
-            <a href="{{ $link['url'] }}" @class(['is-active' => $link['active']])>{{ $link['label'] }}</a>
+            <a href="{{ $link['url'] }}" @class(['is-active' => $link['route_name'] ? request()->routeIs($link['route_name']) : false])>{{ $link['label'] }}</a>
         @endforeach
     </nav>
 
-    <a class="studybuddy-navbar__cta" href="{{ route('apps.math-quest.play') }}">Start Learning</a>
+    <a class="studybuddy-navbar__cta" href="{{ $cta['url'] ?? route('apps.math-quest.play') }}">{{ $cta['label'] ?? 'Start Learning' }}</a>
 </header>

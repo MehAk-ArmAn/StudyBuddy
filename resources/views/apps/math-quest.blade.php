@@ -25,8 +25,8 @@
         <div class="math-top-row">
             <a class="math-back-link" href="{{ route('apps.index') }}"><span aria-hidden="true">←</span> Back to All Apps</a>
             <div class="math-user-actions" aria-label="User shortcuts">
-                <button type="button" aria-label="Notifications">🔔</button>
-                <button class="math-user-chip" type="button"><span>👩🏽</span> Mehak⌄</button>
+                <button type="button" aria-label="Notifications"></button>
+                <button class="math-user-chip" type="button"><span></span> Mehak⌄</button>
             </div>
         </div>
 

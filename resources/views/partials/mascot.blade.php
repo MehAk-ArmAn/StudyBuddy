@@ -1,7 +1,7 @@
 <div class="mascot-card">
     <div class="mascot-figure" aria-hidden="true">
-        <span class="book-wing">📖</span>
-        <span class="dolphin">🐬</span>
+        <span class="book-wing"></span>
+        <span class="dolphin"></span>
     </div>
     <div>
         <p class="eyebrow">Buddy mascot signal</p>

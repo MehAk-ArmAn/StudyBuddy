@@ -3,7 +3,7 @@
     <div class="store-app-copy">
         <h3>{{ $app->title }}</h3>
         <p>{{ $app->description }}</p>
-        <div class="rating-line"><span>⭐ {{ $app->hero_metric }}</span><span>{{ $app->age_band }}</span></div>
+        <div class="rating-line"><span>{{ $app->hero_metric }}</span><span>{{ $app->age_band }}</span></div>
         @if($app->launch_path)
             <a class="mini-button" href="{{ $app->launch_path }}">Start</a>
         @else
