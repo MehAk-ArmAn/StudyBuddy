@@ -95,7 +95,7 @@ class AdminController extends Controller
     public function apps(): View { return view('admin.apps.index', ['apps' => MiniApp::query()->orderBy('sort_order')->get()]); }
     public function saveApps(Request $request): RedirectResponse
     {
-        $data = $request->validate(['apps' => ['array'], 'apps.*.title' => ['required', 'string', 'max:160'], 'apps.*.description' => ['nullable', 'string', 'max:1000'], 'apps.*.image_path' => ['nullable', 'string', 'max:255'], 'apps.*.cta_text' => ['nullable', 'string', 'max:80'], 'apps.*.status' => ['nullable', Rule::in(['live','preview','concept'])], 'apps.*.sort_order' => ['nullable', 'integer', 'min:0']]);
+        $data = $request->validate(['apps' => ['array'], 'apps.*.title' => ['required', 'string', 'max:160'], 'apps.*.description' => ['nullable', 'string', 'max:1000'], 'apps.*.image_path' => ['nullable', 'string', 'max:2048'], 'apps.*.cta_text' => ['nullable', 'string', 'max:80'], 'apps.*.status' => ['nullable', Rule::in(['live','preview','concept'])], 'apps.*.sort_order' => ['nullable', 'integer', 'min:0']]);
         foreach ($data['apps'] ?? [] as $id => $app) { MiniApp::query()->whereKey($id)->update($app); }
         return back()->with('status', 'Apps saved.');
     }
@@ -103,7 +103,7 @@ class AdminController extends Controller
     public function rewards(): View { return view('admin.rewards.index', ['rewards' => Reward::query()->orderBy('sort_order')->get()]); }
     public function saveRewards(Request $request): RedirectResponse
     {
-        $data = $request->validate(['rewards' => ['array'], 'rewards.*.name' => ['required', 'string', 'max:160'], 'rewards.*.category' => ['nullable', 'string', 'max:100'], 'rewards.*.points_required' => ['nullable', 'integer', 'min:0'], 'rewards.*.image_path' => ['nullable', 'string', 'max:255'], 'rewards.*.rarity' => ['nullable', 'string', 'max:60'], 'rewards.*.is_active' => ['nullable']]);
+        $data = $request->validate(['rewards' => ['array'], 'rewards.*.name' => ['required', 'string', 'max:160'], 'rewards.*.category' => ['nullable', 'string', 'max:100'], 'rewards.*.points_required' => ['nullable', 'integer', 'min:0'], 'rewards.*.image_path' => ['nullable', 'string', 'max:2048'], 'rewards.*.rarity' => ['nullable', 'string', 'max:60'], 'rewards.*.is_active' => ['nullable']]);
         foreach ($data['rewards'] ?? [] as $id => $reward) { Reward::query()->whereKey($id)->update($reward + ['is_active' => array_key_exists('is_active', $reward)]); }
         return back()->with('status', 'Rewards saved.');
     }
@@ -111,7 +111,7 @@ class AdminController extends Controller
     public function badges(): View { return view('admin.badges.index', ['badges' => Badge::query()->orderBy('sort_order')->get()]); }
     public function saveBadges(Request $request): RedirectResponse
     {
-        $data = $request->validate(['badges' => ['array'], 'badges.*.name' => ['required', 'string', 'max:160'], 'badges.*.description' => ['nullable', 'string', 'max:1000'], 'badges.*.image_path' => ['nullable', 'string', 'max:255'], 'badges.*.requirement_text' => ['nullable', 'string', 'max:255'], 'badges.*.is_active' => ['nullable']]);
+        $data = $request->validate(['badges' => ['array'], 'badges.*.name' => ['required', 'string', 'max:160'], 'badges.*.description' => ['nullable', 'string', 'max:1000'], 'badges.*.image_path' => ['nullable', 'string', 'max:2048'], 'badges.*.requirement_text' => ['nullable', 'string', 'max:255'], 'badges.*.is_active' => ['nullable']]);
         foreach ($data['badges'] ?? [] as $id => $badge) { Badge::query()->whereKey($id)->update($badge + ['is_active' => array_key_exists('is_active', $badge)]); }
         return back()->with('status', 'Badges saved.');
     }

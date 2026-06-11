@@ -112,13 +112,38 @@ class Cms
         return Badge::query()->where('is_active', true)->orderBy('sort_order')->get();
     }
 
-    public static function assetExists(?string $path): bool
+    public static function isExternalAsset(?string $path): bool
     {
-        if (! $path) {
-            return false;
+        return is_string($path)
+            && preg_match('/^https?:\/\//i', trim($path)) === 1
+            && filter_var(trim($path), FILTER_VALIDATE_URL) !== false;
+    }
+
+    public static function imageUrl(?string $path): ?string
+    {
+        if (! is_string($path) || trim($path) === '') {
+            return null;
         }
 
-        return file_exists(public_path($path));
+        $path = trim($path);
+
+        if (self::isExternalAsset($path)) {
+            return $path;
+        }
+
+        $localPath = ltrim($path, '/');
+
+        return file_exists(public_path($localPath)) ? asset($localPath) : null;
+    }
+
+    public static function assetExists(?string $path): bool
+    {
+        return self::imageUrl($path) !== null;
+    }
+
+    public static function imagePathHelp(): string
+    {
+        return 'Use a local path like assets/studybuddy/logo-icon.png or a raw GitHub URL like https://raw.githubusercontent.com/MehAk-ArmAn/Study_Buddy_IMGS/main/folder/file.png. Do not use GitHub blob URLs.';
     }
 
     public static function missingAssetCount(): int
