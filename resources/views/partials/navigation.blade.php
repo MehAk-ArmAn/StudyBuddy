@@ -19,6 +19,6 @@
         <a href="{{ route('showcase') }}">Support</a>
     </nav>
     <div class="nav-actions">
-        <a class="button button-compact" href="{{ route('apps.math-quest.play') }}">Sign Up</a>
+        <a class="button button-compact" href="{{ route('register') }}">Sign Up</a>
     </div>
 </header>
