@@ -6,12 +6,12 @@
 @section('content')
 @php
     $miniApps = [
-        ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'rating' => '4.9'],
+        ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'rating' => ''],
         ['title' => 'Spelling Sprint', 'img' => 'app-spelling-sprint.png', 'rating' => '4.8'],
-        ['title' => 'Reading Garden', 'img' => 'app-reading-garden.png', 'rating' => '4.9'],
+        ['title' => 'Reading Garden', 'img' => 'app-reading-garden.png', 'rating' => ''],
         ['title' => 'Focus Forest', 'img' => 'app-focus-forest.png', 'rating' => '4.7'],
         ['title' => 'Planner City', 'img' => 'app-planner-city.png', 'rating' => '4.8'],
-        ['title' => 'Quiz Galaxy', 'img' => 'app-quiz-galaxy.png', 'rating' => '4.9'],
+        ['title' => 'Quiz Galaxy', 'img' => 'app-quiz-galaxy.png', 'rating' => ''],
         ['title' => 'Shapes Lab', 'img' => 'app-shapes-lab.png', 'rating' => '4.8'],
         ['title' => 'Flashcard Castle', 'img' => 'app-flashcard-castle.png', 'rating' => '4.7'],
     ];
@@ -52,8 +52,8 @@
                         <button type="button" class="ghost">Explore Apps</button>
                     </div>
                     <div class="mini-proof">
-                        <span><b>50+</b> Mini Apps</span>
-                        <span><b>4.9</b> Parent Rating</span>
+                        <span><b></b> </span>
+                        <span><b></b> </span>
                     </div>
                 </div>
                 <div class="sc-hero-wrap">
@@ -254,7 +254,7 @@
                 <span>Users<br><b>12,450</b></span>
                 <span>Active<br><b>9,230</b></span>
                 <span>Revenue<br><b>$48k</b></span>
-                <span>Apps<br><b>50+</b></span>
+                <span>Apps<br><b></b></span>
             </div>
             <table class="admin-table">
                 <tr><th>App</th><th>Status</th><th>Users</th></tr>

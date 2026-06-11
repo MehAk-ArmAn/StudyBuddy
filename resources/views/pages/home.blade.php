@@ -126,29 +126,29 @@
             <div class="home-stat">
                 <span class="home-stat-icon home-stat-icon-apps" aria-hidden="true"></span>
                 <div>
-                    <strong>50+</strong>
-                    <span>Mini Apps</span>
+                    <strong></strong>
+                    <span></span>
                 </div>
             </div>
             <div class="home-stat">
                 <span class="home-stat-icon home-stat-icon-students" aria-hidden="true"></span>
                 <div>
-                    <strong>10K+</strong>
+                    <strong></strong>
                     <span>Students</span>
                 </div>
             </div>
             <div class="home-stat">
                 <span class="home-stat-icon home-stat-icon-lessons" aria-hidden="true"></span>
                 <div>
-                    <strong>100K+</strong>
-                    <span>Lessons Completed</span>
+                    <strong></strong>
+                    <span></span>
                 </div>
             </div>
             <div class="home-stat">
                 <span class="home-stat-icon home-stat-icon-rating" aria-hidden="true"></span>
                 <div>
-                    <strong>4.9</strong>
-                    <span>Parent Rating</span>
+                    <strong></strong>
+                    <span></span>
                     <em class="home-stars" aria-hidden="true">★★★★★</em>
                 </div>
             </div>

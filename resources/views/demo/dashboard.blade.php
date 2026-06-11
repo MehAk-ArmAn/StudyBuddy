@@ -122,7 +122,7 @@
             <section class="kid-daily-card" aria-labelledby="kid-daily-title">
                 <h2 id="kid-daily-title">Daily Progress</h2>
                 <div class="kid-daily-grid">
-                    <article><span>📖</span><strong>3</strong><small>Lessons Completed<br><em>+1 today</em></small></article>
+                    <article><span>📖</span><strong>3</strong><small><br><em>+1 today</em></small></article>
                     <article><span>🏆</span><strong>85%</strong><small>Quiz Score<br><em>Great job!</em></small></article>
                     <article><span>⏱</span><strong>45 min</strong><small>Focus Time<br><em>+10 min</em></small></article>
                     <article><span>📋</span><strong>6 / 10</strong><small>Activities Done<br><em>Keep going!</em></small></article>
@@ -320,7 +320,7 @@
                 <h2 id="parent-progress-title"><span>▥</span>Mehak’s Progress</h2>
                 <div class="parent-summary-grid">
                     <article><span class="parent-summary-icon">◷</span><small>Total Study Time</small><strong>6h 45m</strong><em>+ 1h 20m</em></article>
-                    <article><span class="parent-summary-icon blue">☑</span><small>Lessons Completed</small><strong>28</strong><em>+ 8 ↑</em></article>
+                    <article><span class="parent-summary-icon blue">☑</span><small></small><strong>28</strong><em>+ 8 ↑</em></article>
                     <article><span class="parent-summary-icon gold">🏆</span><small>Quiz Score</small><strong>85%</strong><em>+12% ↑</em></article>
                     <article><span class="parent-summary-icon violet">◎</span><small>Focus Time</small><strong>3h 20m</strong><em>+ 45m ↑</em></article>
                 </div>

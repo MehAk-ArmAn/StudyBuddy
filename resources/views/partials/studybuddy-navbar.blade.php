@@ -1,6 +1,9 @@
 @php($brandName = \App\Support\Cms::setting('brand.name'))
 @php($brandLogo = \App\Support\Cms::setting('brand.logo_path'))
 @php($menuItems = \App\Support\Cms::menu('primary'))
+@php($ctaLabel = \App\Support\Cms::setting('navbar.cta.label'))
+@php($ctaRoute = \App\Support\Cms::setting('navbar.cta.route'))
+@php($ctaUrl = \App\Support\Cms::setting('navbar.cta.url'))
 <header class="nav-shell reveal-on-load">
     <a class="brand" href="{{ route('home') }}" aria-label="{{ $brandName }}">
         <span class="brand-mark">
@@ -19,5 +22,10 @@
                 @endif
             @endforeach
         </nav>
+    @endif
+    @if($ctaLabel !== '')
+        <div class="nav-actions">
+            <a class="button button-compact" href="{{ \App\Support\CmsRoutes::url($ctaRoute, $ctaUrl) }}">{{ $ctaLabel }}</a>
+        </div>
     @endif
 </header>

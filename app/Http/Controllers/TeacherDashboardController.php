@@ -16,6 +16,12 @@ class TeacherDashboardController extends Controller
 
     private function view(string $key): View
     {
-        return view('dashboards.shell', ['page' => DashboardPage::query()->where('key', $key)->first(), 'role' => 'teacher']);
+        $page = DashboardPage::query()->where('key', $key)->first();
+
+        return view('dashboards.shell', [
+            'page' => $page,
+            'role' => 'teacher',
+            'widgets' => $page?->hasMany(\App\Models\DashboardWidget::class)->where('is_enabled', true)->orderBy('sort_order')->get() ?? collect(),
+        ]);
     }
 }

@@ -10,6 +10,7 @@ use App\Models\CmsSection;
 use App\Models\CmsStat;
 use App\Models\DashboardPage;
 use App\Models\LegalPage;
+use App\Models\MiniApp;
 use App\Models\SiteSetting;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,27 @@ class CmsFoundationSeeder extends Seeder
             ['key' => 'brand.name', 'value' => '', 'type' => 'text'],
             ['key' => 'brand.logo_path', 'value' => 'assets/studybuddy/logo-icon.png', 'type' => 'image'],
             ['key' => 'footer.text', 'value' => '', 'type' => 'text'],
+            ['key' => 'footer.copyright', 'value' => '', 'type' => 'text'],
+            ['key' => 'footer.google_play_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'footer.google_play_url', 'value' => '', 'type' => 'url'],
+            ['key' => 'footer.app_store_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'footer.app_store_url', 'value' => '', 'type' => 'url'],
+            ['key' => 'navbar.cta.label', 'value' => '', 'type' => 'text'],
+            ['key' => 'navbar.cta.route', 'value' => '', 'type' => 'text'],
+            ['key' => 'navbar.cta.url', 'value' => '', 'type' => 'url'],
+            ['key' => 'site.tagline', 'value' => '', 'type' => 'text'],
+            ['key' => 'site.favicon_path', 'value' => '', 'type' => 'image'],
+            ['key' => 'site.meta_title', 'value' => '', 'type' => 'text'],
+            ['key' => 'site.meta_description', 'value' => '', 'type' => 'text'],
+            ['key' => 'site.contact_email', 'value' => '', 'type' => 'email'],
+            ['key' => 'site.social_links', 'value' => '', 'type' => 'json'],
+            ['key' => 'admin.create_label', 'value' => 'Create', 'type' => 'text'],
+            ['key' => 'admin.search_label', 'value' => 'Search', 'type' => 'text'],
+            ['key' => 'admin.actions_label', 'value' => 'Actions', 'type' => 'text'],
+            ['key' => 'admin.edit_label', 'value' => 'Edit', 'type' => 'text'],
+            ['key' => 'admin.delete_label', 'value' => 'Delete', 'type' => 'text'],
+            ['key' => 'admin.save_label', 'value' => 'Save', 'type' => 'text'],
+            ['key' => 'admin.manage_label', 'value' => 'Manage', 'type' => 'text'],
         ] as $setting) {
             SiteSetting::query()->updateOrCreate(['key' => $setting['key']], $setting);
         }
@@ -69,8 +91,19 @@ class CmsFoundationSeeder extends Seeder
             ['key' => 'terms-and-conditions', 'path' => '/terms-and-conditions'],
             ['key' => 'cookie-policy', 'path' => '/cookie-policy'],
             ['key' => 'data-deletion', 'path' => '/data-deletion'],
+            ['key' => 'contact', 'path' => '/contact'],
+            ['key' => 'about', 'path' => '/about'],
         ] as $legal) {
-            LegalPage::query()->updateOrCreate(['key' => $legal['key']], $legal + ['title' => '', 'body' => '']);
+            LegalPage::query()->updateOrCreate(['key' => $legal['key']], $legal + ['slug' => $legal['key'], 'title' => '', 'body' => '', 'meta_title' => '', 'meta_description' => '', 'is_published' => true]);
+        }
+
+
+
+        foreach (['math-quest', 'spelling-sprint', 'reading-garden', 'focus-forest', 'planner-city', 'quiz-galaxy', 'shapes-lab', 'flashcard-castle'] as $index => $slug) {
+            MiniApp::query()->updateOrCreate(
+                ['slug' => $slug],
+                ['title' => '', 'short_description' => '', 'description' => '', 'subject' => '', 'age_band' => '', 'category' => '', 'grade_level' => '', 'status' => 'concept', 'sort_order' => $index, 'is_enabled' => true]
+            );
         }
 
         foreach (['student', 'parent', 'teacher'] as $role) {

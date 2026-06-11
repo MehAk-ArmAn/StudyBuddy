@@ -8,7 +8,7 @@
     @if($apps->isNotEmpty())
         <section class="app-grid reveal-on-load">
             @foreach($apps as $app)
-                @include('partials.cms-card', ['card' => (object) ['is_enabled' => true, 'title' => $app->title, 'body' => $app->description, 'media_path' => $app->image_path]])
+                @include('partials.cms-card', ['card' => (object) ['is_enabled' => true, 'title' => $app->title, 'body' => $app->short_description ?: $app->description, 'media_path' => $app->icon_path ?: $app->image_path]])
             @endforeach
         </section>
     @endif

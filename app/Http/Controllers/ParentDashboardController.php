@@ -15,6 +15,12 @@ class ParentDashboardController extends Controller
 
     private function view(string $key): View
     {
-        return view('dashboards.shell', ['page' => DashboardPage::query()->where('key', $key)->first(), 'role' => 'parent']);
+        $page = DashboardPage::query()->where('key', $key)->first();
+
+        return view('dashboards.shell', [
+            'page' => $page,
+            'role' => 'parent',
+            'widgets' => $page?->hasMany(\App\Models\DashboardWidget::class)->where('is_enabled', true)->orderBy('sort_order')->get() ?? collect(),
+        ]);
     }
 }

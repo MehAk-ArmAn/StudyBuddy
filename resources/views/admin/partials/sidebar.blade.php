@@ -5,6 +5,7 @@
         <a href="{{ route('admin.navigation') }}">Navigation</a>
         <a href="{{ route('admin.footer') }}">Footer</a>
         <a href="{{ route('admin.apps') }}">Apps</a>
+        <a href="{{ route('admin.app-features') }}">App Features</a>
         <a href="{{ route('admin.rewards') }}">Rewards</a>
         <a href="{{ route('admin.dashboards') }}">Dashboards</a>
         <a href="{{ route('admin.legal') }}">Legal</a>

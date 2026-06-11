@@ -4,8 +4,11 @@
     @if($app)
         <section class="hero-section reveal-on-load">
             @if($app->title !== '')<h1>{{ $app->title }}</h1>@endif
-            @if($app->description !== '')<p>{{ $app->description }}</p>@endif
+            @if(filled($app->description))<p>{{ $app->description }}</p>@endif
             @include('partials.cms-image', ['path' => $app->image_path, 'alt' => $app->title])
+            @if($app->start_button_label !== '')
+                <a class="button" href="{{ route('apps.play', $app->slug) }}">{{ $app->start_button_label }}</a>
+            @endif
         </section>
     @endif
 @endsection

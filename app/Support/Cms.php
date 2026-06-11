@@ -4,6 +4,7 @@ namespace App\Support;
 
 use App\Models\CmsFooterColumn;
 use App\Models\CmsMenu;
+use App\Models\CmsButton;
 use App\Models\CmsPage;
 use App\Models\CmsSection;
 use App\Models\CmsStat;
@@ -32,7 +33,7 @@ class Cms
 
     public static function legal(string $key): ?LegalPage
     {
-        return self::safeFirst('legal_pages', fn () => LegalPage::query()->where('key', $key)->where('is_enabled', true)->first());
+        return self::safeFirst('legal_pages', fn () => LegalPage::query()->where('key', $key)->where('is_enabled', true)->where('is_published', true)->first());
     }
 
     public static function sections(?CmsPage $page): Collection
@@ -43,6 +44,15 @@ class Cms
 
         return self::safeCollection('cms_sections', fn () => CmsSection::query()
             ->where('cms_page_id', $page->id)
+            ->where('is_enabled', true)
+            ->orderBy('sort_order')
+            ->get());
+    }
+
+    public static function buttons(?int $sectionId = null): Collection
+    {
+        return self::safeCollection('cms_buttons', fn () => CmsButton::query()
+            ->when($sectionId, fn ($query) => $query->where('cms_section_id', $sectionId))
             ->where('is_enabled', true)
             ->orderBy('sort_order')
             ->get());
