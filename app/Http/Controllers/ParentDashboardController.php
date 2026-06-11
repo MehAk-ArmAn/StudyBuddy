@@ -17,10 +17,15 @@ class ParentDashboardController extends Controller
     {
         $page = DashboardPage::query()->where('key', $key)->first();
 
-        return view('dashboards.shell', [
+        return view('dashboards.parent.shell', [
             'page' => $page,
+            'sections' => collect(),
+            'blocks' => collect(),
+            'buttons' => collect(),
+            'stats' => collect(),
+            'cards' => collect(),
             'role' => 'parent',
-            'widgets' => $page?->hasMany(\App\Models\DashboardWidget::class)->where('is_enabled', true)->orderBy('sort_order')->get() ?? collect(),
+            'dashboardWidgets' => $page?->hasMany(\App\Models\DashboardWidget::class)->where('is_enabled', true)->orderBy('sort_order')->get() ?? collect(),
         ]);
     }
 }

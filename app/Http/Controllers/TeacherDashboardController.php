@@ -18,10 +18,15 @@ class TeacherDashboardController extends Controller
     {
         $page = DashboardPage::query()->where('key', $key)->first();
 
-        return view('dashboards.shell', [
+        return view('dashboards.teacher.shell', [
             'page' => $page,
+            'sections' => collect(),
+            'blocks' => collect(),
+            'buttons' => collect(),
+            'stats' => collect(),
+            'cards' => collect(),
             'role' => 'teacher',
-            'widgets' => $page?->hasMany(\App\Models\DashboardWidget::class)->where('is_enabled', true)->orderBy('sort_order')->get() ?? collect(),
+            'dashboardWidgets' => $page?->hasMany(\App\Models\DashboardWidget::class)->where('is_enabled', true)->orderBy('sort_order')->get() ?? collect(),
         ]);
     }
 }

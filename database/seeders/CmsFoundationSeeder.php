@@ -43,6 +43,15 @@ class CmsFoundationSeeder extends Seeder
             ['key' => 'admin.delete_label', 'value' => 'Delete', 'type' => 'text'],
             ['key' => 'admin.save_label', 'value' => 'Save', 'type' => 'text'],
             ['key' => 'admin.manage_label', 'value' => 'Manage', 'type' => 'text'],
+            ['key' => 'auth.email_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'auth.password_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'auth.name_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'auth.role_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'auth.role_student_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'auth.role_parent_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'auth.role_teacher_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'auth.login_button_label', 'value' => '', 'type' => 'text'],
+            ['key' => 'auth.register_button_label', 'value' => '', 'type' => 'text'],
         ] as $setting) {
             SiteSetting::query()->updateOrCreate(['key' => $setting['key']], $setting);
         }

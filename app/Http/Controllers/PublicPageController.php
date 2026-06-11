@@ -12,21 +12,18 @@ class PublicPageController extends Controller
         return $this->show('home');
     }
 
-    public function about(): View
-    {
-        return $this->show('about');
-    }
-
-    public function contact(): View
-    {
-        return $this->show('contact');
-    }
-
     public function rewards(): View
     {
+        $page = Cms::page('rewards');
+        $sections = Cms::sections($page);
+
         return view('public.rewards', [
-            'page' => Cms::page('rewards'),
-            'sections' => Cms::sections(Cms::page('rewards')),
+            'page' => $page,
+            'sections' => $sections,
+            'blocks' => collect(),
+            'buttons' => collect(),
+            'stats' => Cms::stats($page),
+            'cards' => collect(),
             'rewards' => Cms::rewards(),
         ]);
     }
@@ -34,11 +31,15 @@ class PublicPageController extends Controller
     private function show(string $key): View
     {
         $page = Cms::page($key);
+        $sections = Cms::sections($page);
 
         return view('public.page', [
             'page' => $page,
-            'sections' => Cms::sections($page),
+            'sections' => $sections,
+            'blocks' => collect(),
+            'buttons' => collect(),
             'stats' => Cms::stats($page),
+            'cards' => collect(),
         ]);
     }
 }

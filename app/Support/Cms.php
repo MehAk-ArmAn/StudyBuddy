@@ -6,10 +6,13 @@ use App\Models\CmsFooterColumn;
 use App\Models\CmsMenu;
 use App\Models\CmsButton;
 use App\Models\CmsPage;
+use App\Models\CmsBlock;
+use App\Models\CmsCard;
 use App\Models\CmsSection;
 use App\Models\CmsStat;
 use App\Models\LegalPage;
 use App\Models\MiniApp;
+use App\Models\MiniAppFeature;
 use App\Models\RewardItem;
 use App\Models\SiteSetting;
 use Illuminate\Database\QueryException;
@@ -44,6 +47,24 @@ class Cms
 
         return self::safeCollection('cms_sections', fn () => CmsSection::query()
             ->where('cms_page_id', $page->id)
+            ->where('is_enabled', true)
+            ->orderBy('sort_order')
+            ->get());
+    }
+
+    public static function blocks(?int $sectionId = null): Collection
+    {
+        return self::safeCollection('cms_blocks', fn () => CmsBlock::query()
+            ->when($sectionId, fn ($query) => $query->where('cms_section_id', $sectionId))
+            ->where('is_enabled', true)
+            ->orderBy('sort_order')
+            ->get());
+    }
+
+    public static function cards(?int $sectionId = null): Collection
+    {
+        return self::safeCollection('cms_cards', fn () => CmsCard::query()
+            ->when($sectionId, fn ($query) => $query->where('cms_section_id', $sectionId))
             ->where('is_enabled', true)
             ->orderBy('sort_order')
             ->get());
@@ -101,6 +122,19 @@ class Cms
     public static function miniApp(string $slug): ?MiniApp
     {
         return self::safeFirst('mini_apps', fn () => MiniApp::query()->where('slug', $slug)->where('is_enabled', true)->first());
+    }
+
+    public static function appFeatures(?MiniApp $app): Collection
+    {
+        if (! $app) {
+            return collect();
+        }
+
+        return self::safeCollection('mini_app_features', fn () => MiniAppFeature::query()
+            ->where('mini_app_id', $app->id)
+            ->where('is_enabled', true)
+            ->orderBy('sort_order')
+            ->get());
     }
 
     public static function rewards(): Collection

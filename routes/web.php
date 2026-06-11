@@ -31,8 +31,9 @@ Route::get('/privacy-policy', [LegalPageController::class, 'privacy'])->name('le
 Route::get('/terms-and-conditions', [LegalPageController::class, 'terms'])->name('legal.terms');
 Route::get('/cookie-policy', [LegalPageController::class, 'cookies'])->name('legal.cookies');
 Route::get('/data-deletion', [LegalPageController::class, 'dataDeletion'])->name('legal.data-deletion');
-Route::get('/contact', [PublicPageController::class, 'contact'])->name('contact');
-Route::get('/about', [PublicPageController::class, 'about'])->name('about');
+Route::get('/contact', [LegalPageController::class, 'contact'])->name('contact');
+Route::get('/about', [LegalPageController::class, 'about'])->name('about');
+Route::redirect('/showcase', '/')->name('showcase');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.attempt');

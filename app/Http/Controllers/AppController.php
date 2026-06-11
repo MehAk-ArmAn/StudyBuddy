@@ -2,25 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\DemoContent;
-use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class AppController extends Controller
 {
-    public function index(): View
+    public function index(): RedirectResponse
     {
-        return view('apps.index', ['apps' => DemoContent::miniApps()]);
+        return redirect()->route('apps.index');
     }
 
-    public function mathQuest(): View
+    public function mathQuest(): RedirectResponse
     {
-        return view('apps.math-quest', [
-            'app' => DemoContent::miniApps()->firstWhere('slug', 'math-quest'),
-        ]);
+        return redirect()->route('apps.show', 'math-quest');
     }
 
-    public function playMathQuest(): View
+    public function playMathQuest(): RedirectResponse
     {
-        return view('apps.math-quest-play');
+        return redirect()->route('apps.play', 'math-quest');
     }
 }

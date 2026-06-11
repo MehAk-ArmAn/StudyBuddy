@@ -9,6 +9,12 @@
             @elseif(filled($app->web_embed_empty_message))
                 <p>{{ $app->web_embed_empty_message }}</p>
             @endif
+            @if($app->google_play_url && $app->download_button_label !== '')
+                <a class="button" href="{{ $app->google_play_url }}">{{ $app->download_button_label }}</a>
+            @endif
+            @if($app->app_store_url && $app->download_button_label !== '')
+                <a class="button" href="{{ $app->app_store_url }}">{{ $app->download_button_label }}</a>
+            @endif
         </section>
     @endif
 @endsection
