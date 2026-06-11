@@ -9,7 +9,7 @@
     $asset = fn (string $file): string => asset('assets/studybuddy/' . $file);
 
     $primaryApps = [
-        ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'url' => route('apps.math-quest')],
+        ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'url' => route('apps.show', 'math-quest')],
         ['title' => 'Spelling Sprint', 'img' => 'app-spelling-sprint.png', 'url' => route('apps.index')],
         ['title' => 'Reading Garden', 'img' => 'app-reading-garden.png', 'url' => route('apps.index')],
         ['title' => 'Shapes Lab', 'img' => 'app-shapes-lab.png', 'url' => route('apps.index')],

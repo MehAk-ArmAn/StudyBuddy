@@ -5,25 +5,24 @@
 
 @section('content')
 @php
-    $asset = fn (string $file): string => asset('assets/studybuddy/' . $file);
-
-    $storeApps = [
-        ['title' => 'Math Quest', 'description' => 'Practice math in a fun way.', 'rating' => '4.8', 'img' => 'app-math-quest.png', 'tone' => 'violet', 'url' => route('apps.math-quest')],
-        ['title' => 'Spelling Sprint', 'description' => 'Improve spelling and vocabulary.', 'rating' => '4.7', 'img' => 'app-spelling-sprint.png', 'tone' => 'blue', 'url' => route('apps.index')],
-        ['title' => 'Reading Garden', 'description' => 'Read stories and build reading skills.', 'rating' => '4.8', 'img' => 'app-reading-garden.png', 'tone' => 'green', 'url' => route('apps.index')],
-        ['title' => 'Focus Forest', 'description' => 'Stay focused and calm.', 'rating' => '4.8', 'img' => 'app-focus-forest.png', 'tone' => 'teal', 'url' => route('apps.index')],
-        ['title' => 'Planner City', 'description' => 'Organize tasks and homework.', 'rating' => '4.6', 'img' => 'app-planner-city.png', 'tone' => 'indigo', 'url' => route('apps.index')],
-        ['title' => 'Quiz Galaxy', 'description' => 'Test knowledge and earn stars.', 'rating' => '4.7', 'img' => 'app-quiz-galaxy.png', 'tone' => 'gold', 'url' => route('apps.index')],
-        ['title' => 'Shapes Lab', 'description' => 'Learn shapes and their world.', 'rating' => '4.6', 'img' => 'app-shapes-lab.png', 'tone' => 'orange', 'url' => route('apps.index')],
-        ['title' => 'Flashcard Castle', 'description' => 'Study anywhere with flashcards.', 'rating' => '4.8', 'img' => 'app-flashcard-castle.png', 'tone' => 'pink', 'url' => route('apps.index')],
+    $asset = fn (string $path): string => str_starts_with($path, 'assets/') ? asset($path) : asset('assets/studybuddy/' . $path);
+    $fallbackImages = [
+        'math-quest' => 'assets/studybuddy/app-math-quest.png',
+        'spelling-sprint' => 'assets/studybuddy/app-spelling-sprint.png',
+        'reading-garden' => 'assets/studybuddy/app-reading-garden.png',
+        'focus-forest' => 'assets/studybuddy/app-focus-forest.png',
+        'planner-city' => 'assets/studybuddy/app-planner-city.png',
+        'quiz-galaxy' => 'assets/studybuddy/app-quiz-galaxy.png',
+        'shapes-lab' => 'assets/studybuddy/app-shapes-lab.png',
+        'flashcard-castle' => 'assets/studybuddy/app-flashcard-castle.png',
     ];
 @endphp
 
 <section class="apps-store-page reveal-on-load" aria-labelledby="apps-store-title">
     <div class="apps-scene" aria-hidden="true">
-        <img class="apps-scene-planet apps-scene-planet-left" src="{{ $asset('planet-ringed-lg.png') }}" alt="">
-        <img class="apps-scene-planet apps-scene-planet-right" src="{{ $asset('planet-purple-lg.png') }}" alt="">
-        <img class="apps-scene-sparkles apps-scene-sparkles-a" src="{{ $asset('sparkles-pack.png') }}" alt="">
+        <img class="apps-scene-planet apps-scene-planet-left" src="{{ asset('assets/studybuddy/planet-ringed-lg.png') }}" alt="">
+        <img class="apps-scene-planet apps-scene-planet-right" src="{{ asset('assets/studybuddy/planet-purple-lg.png') }}" alt="">
+        <img class="apps-scene-sparkles apps-scene-sparkles-a" src="{{ asset('assets/studybuddy/sparkles-pack.png') }}" alt="">
         <span class="apps-scene-comet apps-scene-comet-a"></span>
         <span class="apps-scene-comet apps-scene-comet-b"></span>
         <span class="apps-scene-orb apps-scene-orb-a"></span>
@@ -40,7 +39,7 @@
                     </span>
                     <div>
                         <h1 id="apps-store-title">Apps Store</h1>
-                        <p>Discover fun learning apps to play, practice and grow.</p>
+                        <p>Discover playable missions and upcoming StudyBuddy learning apps.</p>
                     </div>
                 </div>
 
@@ -52,26 +51,34 @@
 
             <nav class="apps-filter-pills" aria-label="App filters">
                 <button class="is-active" type="button">All</button>
-                <button type="button">Popular</button>
-                <button type="button">Primary (1–6)</button>
-                <button type="button">Secondary (7–11)</button>
-                <button type="button">New</button>
+                <button type="button">Playable</button>
+                <button type="button">Primary</button>
+                <button type="button">Secondary</button>
+                <button type="button">Coming Soon</button>
             </nav>
 
             <div class="apps-card-grid">
-                @foreach($storeApps as $storeApp)
-                    <article class="apps-premium-card apps-card-{{ $storeApp['tone'] }}" data-tilt-card>
+                @foreach($apps as $app)
+                    @php
+                        $imagePath = $app->image_path ?? $fallbackImages[$app->slug] ?? 'assets/studybuddy/app-math-quest.png';
+                        $canPlay = !empty($app->launch_path);
+                    @endphp
+                    <article class="apps-premium-card apps-card-{{ $app->card_tone ?? 'violet' }}" data-tilt-card>
                         <span class="apps-card-shine"></span>
-                        <a class="apps-card-art" href="{{ $storeApp['url'] }}" aria-label="Open {{ $storeApp['title'] }}">
+                        <a class="apps-card-art" href="{{ route('apps.show', $app->slug) }}" aria-label="Open {{ $app->title }}">
                             <span class="apps-card-halo"></span>
-                            <img src="{{ $asset($storeApp['img']) }}" alt="{{ $storeApp['title'] }} app icon">
+                            <img src="{{ $asset($imagePath) }}" alt="{{ $app->title }} app icon">
                         </a>
                         <div class="apps-card-copy">
-                            <h2>{{ $storeApp['title'] }}</h2>
-                            <p>{{ $storeApp['description'] }}</p>
+                            <h2>{{ $app->title }}</h2>
+                            <p>{{ $app->description }}</p>
                             <div class="apps-card-bottom">
-                                <span class="apps-rating">⭐ {{ $storeApp['rating'] }}</span>
-                                <a class="apps-start-button" href="{{ $storeApp['url'] }}">Start</a>
+                                <span class="apps-rating">{{ $canPlay ? '⭐ ' . ($app->hero_metric ?? 'Live') : 'Coming Soon' }}</span>
+                                @if($canPlay)
+                                    <a class="apps-start-button" href="{{ route('apps.play', $app->slug) }}">Play</a>
+                                @else
+                                    <button class="apps-start-button is-disabled" type="button" disabled aria-disabled="true">Soon</button>
+                                @endif
                             </div>
                         </div>
                     </article>

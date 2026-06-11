@@ -16,7 +16,7 @@
     $asset = fn (string $file): string => asset('assets/studybuddy/' . $file);
 
     $homeApps = [
-        ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'url' => route('apps.math-quest')],
+        ['title' => 'Math Quest', 'img' => 'app-math-quest.png', 'url' => route('apps.show', 'math-quest')],
         ['title' => 'Spelling Sprint', 'img' => 'app-spelling-sprint.png', 'url' => route('apps.index')],
         ['title' => 'Reading Garden', 'img' => 'app-reading-garden.png', 'url' => route('apps.index')],
         ['title' => 'Focus Forest', 'img' => 'app-focus-forest.png', 'url' => route('apps.index')],
@@ -70,7 +70,7 @@
                 <a href="{{ route('pricing') }}">Pricing</a>
                 <a href="{{ route('support') }}">Support</a>
             </nav>
-            <a class="home-signup" href="{{ route('apps.index') }}">Sign Up</a>
+            <a class="home-signup" href="{{ route('register') }}">Sign Up</a>
         </header>
 
         <section class="home-hero">

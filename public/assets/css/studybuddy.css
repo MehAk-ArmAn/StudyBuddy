@@ -2794,3 +2794,6 @@
   .teacher-assignment-list time,
   .teacher-assignment-list em { grid-column: 2; justify-self: start; }
 }
+
+/* Platform route and frontend foundation support */
+.auth-shell{min-height:calc(100vh - 220px);display:grid;place-items:center;padding:64px 0}.auth-panel{width:min(640px,100%);padding:32px;border-radius:28px}.auth-panel h1{margin:6px 0 10px;font-size:clamp(34px,5vw,58px);line-height:.95}.auth-panel p{color:var(--muted)}.auth-form{display:grid;gap:16px;margin-top:24px}.auth-form label{display:grid;gap:8px;color:#dbe6ff;font-weight:800}.auth-form input{width:100%;border:1px solid rgba(126,99,255,.38);border-radius:16px;background:rgba(255,255,255,.08);color:var(--text);padding:14px 16px;outline:none}.auth-form input:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(53,228,255,.12)}.auth-switch a{color:var(--cyan);font-weight:900}.apps-start-button.is-disabled,.math-primary-button.is-disabled,.reward-action:disabled{cursor:not-allowed;opacity:.58;filter:saturate(.75);box-shadow:none}.reward-action{margin-top:10px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.08);color:var(--text);padding:8px 13px;font-weight:900}.page-admin-resource .costume-card p{min-height:42px}@media(max-width:760px){.auth-panel{padding:24px}.auth-shell{padding:32px 0}}

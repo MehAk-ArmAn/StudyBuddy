@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="math-action-row">
-                    <a class="math-primary-button" href="{{ route('apps.math-quest.play') }}">Continue in Browser</a>
+                    <a class="math-primary-button" href="{{ route('apps.play', 'math-quest') }}">Continue in Browser</a>
                     <button class="math-download-button" type="button"><span aria-hidden="true">⇩</span> Download App <span aria-hidden="true">⌄</span></button>
                 </div>
 
@@ -60,7 +60,7 @@
                             <div class="math-store-badges">
                                 <a href="#"><span class="math-play-icon"></span><strong><small>GET IT ON</small>Google Play</strong></a>
                                 <a href="#"><span class="math-apple-icon"></span><strong><small>Download on the</small>App Store</strong></a>
-                                <a href="{{ route('apps.math-quest.play') }}"><span class="math-web-icon">◎</span><strong><small>Launch in</small>Web App</strong></a>
+                                <a href="{{ route('apps.play', 'math-quest') }}"><span class="math-web-icon">◎</span><strong><small>Launch in</small>Web App</strong></a>
                             </div>
                         </div>
                         <div class="math-qr-placeholder" aria-label="QR code placeholder">
@@ -92,7 +92,7 @@
                 <a class="math-download-store math-download-google" href="#"><span class="math-play-icon"></span> Google Play</a>
                 <a class="math-download-store" href="#"><span class="math-apple-icon"></span> App Store</a>
                 <div class="math-divider"><span></span>or<span></span></div>
-                <a class="math-download-store math-download-web" href="{{ route('apps.math-quest.play') }}"><span class="math-web-icon">◎</span> Launch Web App</a>
+                <a class="math-download-store math-download-web" href="{{ route('apps.play', 'math-quest') }}"><span class="math-web-icon">◎</span> Launch Web App</a>
                 <div class="math-promo-mascot">
                     <span class="math-promo-star"></span>
                     <img src="{{ $asset('hero-dolphin-book.png') }}" alt="StudyBuddy dolphin mascot">
