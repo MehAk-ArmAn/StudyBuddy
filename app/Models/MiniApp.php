@@ -9,9 +9,7 @@ class MiniApp extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title', 'slug', 'subject', 'age_band', 'description', 'card_tone', 'status', 'launch_path', 'hero_metric', 'sort_order',
-    ];
+    protected $guarded = ['id'];
 
     protected function casts(): array
     {

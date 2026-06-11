@@ -9,11 +9,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            DemoUserSeeder::class,
-            MiniAppSeeder::class,
-            RewardSeeder::class,
-            DashboardSeeder::class,
-            SiteContentSeeder::class,
+            CmsFoundationSeeder::class,
         ]);
     }
 }

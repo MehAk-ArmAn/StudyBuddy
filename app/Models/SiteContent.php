@@ -9,7 +9,7 @@ class SiteContent extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['key', 'section', 'title', 'body', 'metadata'];
+    protected $guarded = ['id'];
 
     protected function casts(): array
     {

@@ -9,7 +9,7 @@ class DashboardCard extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['audience', 'title', 'metric', 'description', 'accent_color', 'sort_order'];
+    protected $guarded = ['id'];
 
     protected function casts(): array
     {

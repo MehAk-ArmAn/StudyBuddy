@@ -14,9 +14,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['primary', 'secondary', 'parent', 'teacher', 'admin'])->default('primary');
+            $table->enum('role', ['student', 'parent', 'teacher'])->default('student');
             $table->string('avatar_style')->default('dolphin-cadet');
             $table->string('learning_stage')->nullable();
+            $table->timestamp('last_login_at')->nullable();
             $table->unsignedInteger('cosmic_points')->default(0);
             $table->rememberToken();
             $table->timestamps();

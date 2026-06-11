@@ -9,7 +9,7 @@ class Reward extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'description', 'points_required', 'rarity', 'icon', 'glow_color'];
+    protected $guarded = ['id'];
 
     protected function casts(): array
     {

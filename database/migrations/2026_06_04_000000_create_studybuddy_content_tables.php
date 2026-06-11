@@ -37,7 +37,7 @@ return new class extends Migration
 
         Schema::create('dashboard_cards', function (Blueprint $table) {
             $table->id();
-            $table->enum('audience', ['primary', 'secondary', 'parent', 'teacher', 'admin']);
+            $table->enum('audience', ['student', 'parent', 'teacher']);
             $table->string('title');
             $table->string('metric');
             $table->text('description');
