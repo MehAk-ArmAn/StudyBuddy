@@ -1,111 +1,67 @@
 # StudyBuddy
 
-StudyBuddy is a Laravel 11 foundation for a premium cosmic learning universe. It uses Blade views, custom CSS/JS assets, MySQL-ready migrations, demo seeders, and a dark navy galaxy interface with purple/cyan glow, 3D glass panels, floating planets, comet motion, Play Store style mini app cards, and a dolphin/book mascot direction.
+## Clean Main CMS Build
 
-## Stack
+This branch is the cleaned main StudyBuddy website build: one public homepage, one frontend layout, one navbar, one footer, and one admin CMS that controls homepage content.
 
-- Laravel 11
-- PHP 8.2+
-- MySQL 8+ or compatible MariaDB
-- Blade views
-- Public CSS and JavaScript assets in `public/assets`
-- Database-backed sessions, cache, and queues for local parity with MySQL
+### Removed prototype/demo systems
 
-## Required routes
+Old public prototype routes and their route entries were removed for app-store pages, app play pages, rewards, student dashboards, parent dashboards, teacher dashboards, showcase pages, demo pages, fake pricing/support redirects, and old portal-style authentication pages. Prototype-only controllers, models, seeders, views, and the prototype content migration were removed so `migrate:fresh --seed` creates only the final CMS-focused data model.
 
-All required routes are registered in `routes/web.php`:
+### Final public route
 
-| Path | Purpose |
-| --- | --- |
-| `/` | Cosmic landing page |
-| `/showcase` | Design showcase |
-| `/apps` | Mini app constellation |
-| `/apps/math-quest` | Math Quest product page |
-| `/apps/math-quest/play` | Math Quest playable prototype route |
-| `/demo/primary` | Primary learner dashboard demo |
-| `/demo/secondary` | Secondary learner dashboard demo |
-| `/demo/parent` | Parent dashboard demo |
-| `/demo/teacher` | Teacher dashboard demo |
-| `/rewards` | Cosmic rewards catalogue |
-| `/demo/admin` | Admin console demo |
+- `GET /` named `home` renders the database-driven homepage.
 
-## MySQL setup
+### Final admin routes
 
-StudyBuddy is configured for MySQL in `.env.example`:
+- `GET /admin/login`
+- `POST /admin/login`
+- `POST /admin/logout`
+- `GET /admin/dashboard`
+- CRUD resources for site settings, media assets, navigation items, footer items, homepage sections, and homepage section items.
 
-```dotenv
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=studybuddy
-DB_USERNAME=root
-DB_PASSWORD=
-```
+### Database tables used
 
-Create a local database before running migrations:
+- `users` with `is_admin` for admin access
+- `site_settings`
+- `media_assets`
+- `navigation_items`
+- `footer_items`
+- `homepage_sections`
+- `homepage_section_items`
+- Laravel framework tables: `cache`, `jobs`, `sessions`, `password_reset_tokens`
 
-```sql
-CREATE DATABASE studybuddy CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-```
+### Admin login details
 
-If you use a dedicated MySQL user, create one and grant access:
+- Email: `admin@studybuddy.local`
+- Password: `ChangeMe12345!`
 
-```sql
-CREATE USER 'studybuddy'@'localhost' IDENTIFIED BY 'secret-password';
-GRANT ALL PRIVILEGES ON studybuddy.* TO 'studybuddy'@'localhost';
-FLUSH PRIVILEGES;
-```
-
-Then update your copied `.env` file:
-
-```dotenv
-DB_CONNECTION=mysql
-DB_DATABASE=studybuddy
-DB_USERNAME=studybuddy
-DB_PASSWORD=secret-password
-```
-
-The database foundation is intentionally MySQL-first with no file-database fallback configured.
-
-## Install and preview
-
-From the repository root:
+### Migration and seed commands
 
 ```bash
-composer install
-cp .env.example .env
-php artisan key:generate
-php artisan migrate --seed
-php artisan route:list
-php artisan serve
+composer dump-autoload
+php artisan optimize:clear
+php artisan migrate:fresh --seed
 ```
 
-Open the app at [http://localhost:8000](http://localhost:8000).
+### CMS editing locations
 
-## Demo login data
+- Homepage sections: `/admin/homepage-sections`
+- Cards/items inside sections: `/admin/homepage-sections/{section}/items`
+- Navbar links: `/admin/navigation-items`
+- Footer links, legal groups, and social links: `/admin/footer-items`
+- Media/image records: `/admin/media-assets`
+- SEO, brand, logo, favicon, CTA, and legal text settings: `/admin/site-settings`
 
-The seeders create demo users for later authentication work. Each demo account uses the password `password`:
+### Backup before future changes
 
-- `primary@studybuddy.test`
-- `secondary@studybuddy.test`
-- `parent@studybuddy.test`
-- `teacher@studybuddy.test`
-- `admin@studybuddy.test`
+Create a safety branch before future major edits:
 
-## Visual assets
+```bash
+git checkout main
+git pull
+git checkout -b backup-before-next-studybuddy-change
+git push origin backup-before-next-studybuddy-change
+```
 
-Generated StudyBuddy artwork should live in `public/assets/studybuddy/`. The Blade image partial automatically uses real assets when present and falls back to neon labeled art only when an image is missing. See `IMAGE_PLACEHOLDERS.md` for the full asset map.
-
-## Project foundation map
-
-- `routes/web.php` defines all browser routes.
-- `app/Http/Controllers` contains page controllers for home, apps, dashboards, and rewards.
-- `app/Models` contains Eloquent models for users, mini apps, rewards, dashboard cards, and site content.
-- `database/migrations` contains MySQL-compatible schema migrations.
-- `database/seeders` contains demo seeders for users, mini apps, rewards, dashboards, and site content.
-- `resources/views/layouts` contains the main Blade layout.
-- `resources/views/partials` contains reusable navigation, footer, mascot, app card, and dashboard card partials.
-- `resources/views/pages`, `resources/views/apps`, and `resources/views/demo` contain route-specific pages.
-- `public/assets/css/studybuddy.css` contains the custom cosmic UI.
-- `public/assets/js/studybuddy.js` contains lightweight UI motion and prototype interactions.
-- `IMAGE_PLACEHOLDERS.md` lists every future image slot, recommended replacement size, and Blade usage location.
+Emergency backup branch note: `backup-main-safe` exists only as an emergency backup and should not be modified.
