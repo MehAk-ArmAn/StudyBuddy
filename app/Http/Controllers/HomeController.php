@@ -13,10 +13,22 @@ class HomeController extends Controller
     public function index(): View
     {
         return view('home', [
-            'settings' => SiteSetting::query()->pluck('value', 'key'),
-            'navigationItems' => NavigationItem::query()->where('is_enabled', true)->orderBy('sort_order')->get(),
-            'footerItems' => FooterItem::query()->where('is_enabled', true)->orderBy('group')->orderBy('sort_order')->get()->groupBy('group'),
-            'sections' => HomepageSection::query()->with(['items' => fn ($q) => $q->where('is_enabled', true)->orderBy('sort_order')])->where('is_enabled', true)->orderBy('sort_order')->get(),
+            'settings' => SiteSetting::query()->pluck('value', 'key')->toArray(),
+            'navigationItems' => NavigationItem::query()
+                ->where('is_enabled', true)
+                ->orderBy('sort_order')
+                ->get(),
+            'footerGroups' => FooterItem::query()
+                ->where('is_enabled', true)
+                ->orderBy('group')
+                ->orderBy('sort_order')
+                ->get()
+                ->groupBy('group'),
+            'sections' => HomepageSection::query()
+                ->with(['items' => fn ($query) => $query->where('is_enabled', true)->orderBy('sort_order')])
+                ->where('is_enabled', true)
+                ->orderBy('sort_order')
+                ->get(),
         ]);
     }
 }
