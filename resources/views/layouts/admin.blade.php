@@ -41,6 +41,10 @@
                 <a class="nav-link {{ request()->routeIs('admin.homepage-sections.*') || request()->routeIs('admin.homepage-section-items.*') ? 'active' : '' }}" href="{{ route('admin.homepage-sections.index') }}">
                     <span>Homepage</span>
                 </a>
+
+                <a class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}" href="{{ route('admin.pages.index') }}">
+                    <span>Pages</span>
+                </a>
             </nav>
 
             <div class="admin-sidebar-footer">
