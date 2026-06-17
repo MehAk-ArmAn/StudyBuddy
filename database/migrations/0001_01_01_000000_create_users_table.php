@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('avatar_style')->default('dolphin-cadet');
             $table->string('learning_stage')->nullable();
             $table->unsignedInteger('cosmic_points')->default(0);
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

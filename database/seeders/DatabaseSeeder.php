@@ -8,12 +8,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->call([
-            DemoUserSeeder::class,
-            MiniAppSeeder::class,
-            RewardSeeder::class,
-            DashboardSeeder::class,
-            SiteContentSeeder::class,
-        ]);
+        // Temporary valid seeder. CMS seed content will be restored in the next fix commit.
     }
 }
