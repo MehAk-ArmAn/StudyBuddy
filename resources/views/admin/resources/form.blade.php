@@ -34,7 +34,7 @@
                 @elseif(str_contains($field, 'body') || str_contains($field, 'subtitle') || str_contains($field, 'description') || $field === 'value' || $field === 'settings')
                     <textarea name="{{ $field }}">{{ old($field, is_array($item->$field) ? json_encode($item->$field) : $item->$field) }}</textarea>
                 @else
-                    <input name="{{ $field }}" value="{{ old($field, $item->$field) }}" @if(str_contains($field, 'url')) type="url" @else type="text" @endif>
+                    <input name="{{ $field }}" value="{{ old($field, $item->$field) }}" type="text" @if(str_contains($field, 'url')) placeholder="Use /apps, #section, mailto:hello@example.com, or https://..." @endif>
                 @endif
             </label>
         @endforeach
