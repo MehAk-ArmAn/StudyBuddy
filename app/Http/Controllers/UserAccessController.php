@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -106,6 +107,23 @@ class UserAccessController extends Controller
         $request->session()->regenerate();
 
         return redirect()->route('dashboard')->with('status', 'Account created. Verify your email next; powerful controls stay locked until trust checks finish.');
+    }
+
+    public function verificationNotice(): View
+    {
+        return view('auth.verify-email');
+    }
+
+    public function verifyEmail(EmailVerificationRequest $request): RedirectResponse
+    {
+        $request->fulfill();
+        return redirect()->route('dashboard')->with('status', 'Email verified. Thank you for keeping StudyBuddy trustworthy.');
+    }
+
+    public function resendVerification(Request $request): RedirectResponse
+    {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('status', 'Verification email sent again.');
     }
 
     public function logout(Request $request): RedirectResponse
