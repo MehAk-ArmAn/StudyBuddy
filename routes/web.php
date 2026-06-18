@@ -12,23 +12,23 @@ use App\Http\Controllers\Admin\PageSectionController as AdminPageSectionControll
 use App\Http\Controllers\Admin\PageSectionItemController as AdminPageSectionItemController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserAccessController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('guest')->group(function (): void {
-    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login'])->name('login.store');
-    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'register'])->name('register.store');
+    Route::get('/login', [UserAccessController::class, 'showLogin'])->name('login');
+    Route::post('/login', [UserAccessController::class, 'login'])->name('login.store');
+    Route::get('/register', [UserAccessController::class, 'showRegister'])->name('register');
+    Route::post('/register', [UserAccessController::class, 'register'])->name('register.store');
 });
 
 Route::middleware('auth')->group(function (): void {
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [UserAccessController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::put('/dashboard/profile', [DashboardController::class, 'updateProfile'])->name('dashboard.profile.update');
     Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->name('dashboard.password.update');
