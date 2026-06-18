@@ -17,6 +17,7 @@ class DashboardController extends Controller
     {
         $user = $request->user();
         $role = $this->displayRole((string) $user->role);
+        $profile = $this->roleProfile($role);
 
         return view('dashboard.index', [
             'settings' => SiteSetting::query()->pluck('value', 'key')->toArray(),
@@ -24,11 +25,16 @@ class DashboardController extends Controller
             'footerGroups' => FooterItem::query()->where('is_enabled', true)->orderBy('group')->orderBy('sort_order')->get()->groupBy('group'),
             'user' => $user,
             'role' => $role,
-            'roleLabel' => $this->roleLabel($role),
-            'metrics' => $this->metrics($role),
-            'missions' => $this->missions($role),
-            'quickActions' => $this->quickActions($role),
-            'learningCards' => $this->learningCards($role),
+            'roleLabel' => $profile['label'],
+            'roleEyebrow' => $profile['eyebrow'],
+            'dashboardIntro' => $profile['intro'],
+            'heroImage' => $profile['hero_image'],
+            'metrics' => $profile['metrics'],
+            'missions' => $profile['missions'],
+            'quickActions' => $profile['quick_actions'],
+            'controlPanels' => $profile['control_panels'],
+            'focusZones' => $profile['focus_zones'],
+            'resourceShelf' => $profile['resource_shelf'],
         ]);
     }
 
@@ -42,7 +48,8 @@ class DashboardController extends Controller
         ]);
 
         $request->user()->update($data);
-        return back()->with('status', 'Profile updated.');
+
+        return back()->with('status', 'Profile updated. Your dashboard has been reshaped for your role.');
     }
 
     public function updatePassword(Request $request): RedirectResponse
@@ -57,6 +64,7 @@ class DashboardController extends Controller
         }
 
         $request->user()->update(['password' => Hash::make($data['password'])]);
+
         return back()->with('status', 'Access key updated safely.');
     }
 
@@ -71,53 +79,91 @@ class DashboardController extends Controller
         };
     }
 
-    private function roleLabel(string $role): string
+    private function roleProfile(string $role): array
     {
-        return match ($role) {
-            'parent' => 'Parent Dashboard',
-            'teacher' => 'Teacher Dashboard',
-            'professional' => 'Professional Dashboard',
-            default => 'Student Dashboard',
-        };
-    }
+        $base = 'assets/studybuddy-imgs/';
 
-    private function metrics(string $role): array
-    {
         return match ($role) {
-            'parent' => [['Weekly Focus','3h 20m','🎯','Calm practice time'],['Lessons Completed','28','📚','Across all apps'],['Confidence Score','85%','💜','Growing steadily']],
-            'teacher' => [['Active Classes','5','🏫','Ready to guide'],['Students','120','👥','Connected learners'],['Assignments','12','✅','This week']],
-            'professional' => [['Learning Paths','8','🧭','Explore product areas'],['Saved Resources','16','⭐','For later review'],['Progress Health','92%','📈','Strong momentum']],
-            default => [['Level','12','⭐','Star Learner'],['Buddy Coins','320','🪙','Spend in your world'],['Study Streak','7 days','🔥','Keep it going']],
-        };
-    }
-
-    private function missions(string $role): array
-    {
-        return match ($role) {
-            'parent' => ['Review weekly progress','Choose a calm routine','Read one support tip'],
-            'teacher' => ['Plan one practice block','Review class strengths','Share an app with learners'],
-            'professional' => ['Explore the apps library','Review safety and privacy pages','Save useful support info'],
-            default => ['Complete 2 Math Quest lessons','Read a Reading Garden story','Try one Focus Forest session'],
-        };
-    }
-
-    private function quickActions(string $role): array
-    {
-        return match ($role) {
-            'parent' => [['Parents Guide','/for-parents'],['Support','/support'],['Privacy','/privacy-policy']],
-            'teacher' => [['Teacher Page','/for-teachers'],['Apps','/apps'],['Contact','/contact-us']],
-            'professional' => [['About','/about-us'],['Apps','/apps'],['Support','/support']],
-            default => [['Explore Apps','/apps'],['Get Support','/support'],['Contact Us','/contact-us']],
-        };
-    }
-
-    private function learningCards(string $role): array
-    {
-        return match ($role) {
-            'parent' => [['Routine check','Make a gentle weekly routine for your learner.','💜'],['Progress glance','Spot strengths without overwhelming details.','📈'],['Safety center','Review privacy, support, and data choices.','🛡️']],
-            'teacher' => [['Class energy','Plan a focused, friendly learning flow.','🏫'],['Assignments','Prepare practice tasks learners can finish.','✅'],['Resources','Keep apps and pages ready for classroom use.','📚']],
-            'professional' => [['Product tour','Understand the StudyBuddy learning story.','🧭'],['Trust pages','Review privacy, data deletion, and support.','🛡️'],['Growth map','Use the pages to explore what comes next.','🚀']],
-            default => [['Start small','Pick one mini app and complete a tiny win.','🎮'],['Stay calm','Use Focus Forest before a hard task.','🌿'],['Celebrate','Track your streak and collect buddy points.','⭐']],
+            'parent' => [
+                'label' => 'Parent Command Center',
+                'eyebrow' => 'Family guidance',
+                'intro' => 'A calm parent space for routines, learner confidence, safety, and progress checks without overwhelming detail.',
+                'hero_image' => $base.'dashboard/role-parent.svg',
+                'metrics' => [
+                    ['Weekly routine', '3h 20m', 'Calm practice time planned for this week.'],
+                    ['Growth notes', '28', 'Small wins recorded across apps.'],
+                    ['Confidence trend', '85%', 'A gentle signal that learning is moving well.'],
+                ],
+                'missions' => ['Review this week\'s calm routine', 'Choose one mini app to support at home', 'Open privacy and data controls'],
+                'quick_actions' => [['Family Guide', '/for-parents'], ['Safety & Support', '/support'], ['Privacy Policy', '/privacy-policy'], ['Data Deletion', '/data-deletion']],
+                'control_panels' => [
+                    ['Routine Builder', 'Create simple home practice rhythms for school nights, weekends, or revision weeks.', $base.'homepage-paths/path-parents.png', '/for-parents', 'Open family guide'],
+                    ['Progress Glance', 'View strengths, practice consistency, and confidence without turning learning into pressure.', $base.'apps/app-reading-garden.png', '/dashboard', 'Review progress'],
+                    ['Safety Center', 'Access privacy, support, contact, and data deletion pages from one clear place.', $base.'homepage-paths/path-support.png', '/support', 'Open support'],
+                ],
+                'focus_zones' => ['Home routine', 'Confidence signals', 'Safe account choices', 'Reading growth'],
+                'resource_shelf' => [['Parent page', '/for-parents'], ['Contact us', '/contact-us'], ['Support', '/support']],
+            ],
+            'teacher' => [
+                'label' => 'Teacher Studio',
+                'eyebrow' => 'Classroom ready',
+                'intro' => 'A clearer teaching dashboard for lesson energy, class-friendly activities, assignments, and quick learning resources.',
+                'hero_image' => $base.'dashboard/role-teacher.svg',
+                'metrics' => [
+                    ['Class groups', '5', 'Learning groups ready to organize.'],
+                    ['Learners', '120', 'Students supported across classroom paths.'],
+                    ['Tasks ready', '12', 'Practice activities prepared for this week.'],
+                ],
+                'missions' => ['Plan one focused practice block', 'Pick a mini app for today\'s class', 'Save a support page for families'],
+                'quick_actions' => [['Teacher Guide', '/for-teachers'], ['Apps Library', '/apps'], ['Contact', '/contact-us'], ['Support', '/support']],
+                'control_panels' => [
+                    ['Lesson Launcher', 'Choose a mini app and turn it into a short classroom-friendly learning moment.', $base.'homepage-paths/path-teachers.png', '/for-teachers', 'Open teacher guide'],
+                    ['Assignment Board', 'Shape simple practice tasks learners can finish with confidence.', $base.'apps/app-planner-city.png', '/apps', 'Browse apps'],
+                    ['Resource Shelf', 'Keep classroom pages, support, privacy, and contact links easy to share.', $base.'apps/app-quiz-galaxy.png', '/support', 'Open resources'],
+                ],
+                'focus_zones' => ['Lesson flow', 'Practice tasks', 'Classroom clarity', 'Shareable resources'],
+                'resource_shelf' => [['Teacher page', '/for-teachers'], ['Apps', '/apps'], ['Privacy', '/privacy-policy']],
+            ],
+            'professional' => [
+                'label' => 'Product Workspace',
+                'eyebrow' => 'Professional view',
+                'intro' => 'A product-focused dashboard for exploring StudyBuddy pages, learning flows, trust content, and support information.',
+                'hero_image' => $base.'brand/logo-icon.png',
+                'metrics' => [
+                    ['Product paths', '8', 'Core public pages available to review.'],
+                    ['Saved resources', '16', 'Useful pages and references ready.'],
+                    ['Readiness', '92%', 'Brand and learning story aligned.'],
+                ],
+                'missions' => ['Review the product story', 'Check privacy and data pages', 'Explore mini app positioning'],
+                'quick_actions' => [['About StudyBuddy', '/about-us'], ['Apps Library', '/apps'], ['Support', '/support'], ['Contact', '/contact-us']],
+                'control_panels' => [
+                    ['Product Story', 'Understand the homepage, apps, family, teacher, and support journey as one product ecosystem.', $base.'homepage-paths/path-apps.png', '/about-us', 'Review story'],
+                    ['Trust Review', 'Open privacy, data deletion, and support pages for operational clarity.', $base.'homepage-paths/path-support.png', '/privacy-policy', 'Review trust pages'],
+                    ['Growth Map', 'Use mini apps and page insights to plan what gets improved next.', $base.'decor/planets/planet-purple-lg.png', '/apps', 'Explore apps'],
+                ],
+                'focus_zones' => ['Product story', 'Trust pages', 'Support flow', 'Growth roadmap'],
+                'resource_shelf' => [['About us', '/about-us'], ['Data deletion', '/data-deletion'], ['Contact', '/contact-us']],
+            ],
+            default => [
+                'label' => 'Student Learning Space',
+                'eyebrow' => 'Learner dashboard',
+                'intro' => 'A friendly student space for tiny wins, focus, practice, rewards, and choosing what to learn next.',
+                'hero_image' => $base.'dashboard/role-student.svg',
+                'metrics' => [
+                    ['Level', '12', 'Star learner progress unlocked.'],
+                    ['Buddy coins', '320', 'Collected from practice and focus wins.'],
+                    ['Study streak', '7 days', 'Keep the learning sparkle alive.'],
+                ],
+                'missions' => ['Start one Math Quest challenge', 'Read a Reading Garden story', 'Try one calm Focus Forest session'],
+                'quick_actions' => [['Start Apps', '/apps'], ['Get Help', '/support'], ['Contact Team', '/contact-us'], ['About StudyBuddy', '/about-us']],
+                'control_panels' => [
+                    ['Start Practice', 'Jump into mini apps made for quick confidence-building wins.', $base.'apps/app-math-quest.png', '/apps', 'Explore apps'],
+                    ['Focus Mode', 'Use calm routines before tricky tasks so learning feels lighter.', $base.'apps/app-focus-forest.png', '/apps', 'Find focus tools'],
+                    ['Rewards Path', 'Track your progress, celebrate streaks, and keep learning playful.', $base.'apps/app-flashcard-castle.png', '/dashboard', 'View progress'],
+                ],
+                'focus_zones' => ['Math practice', 'Reading growth', 'Calm focus', 'Quiz confidence'],
+                'resource_shelf' => [['Apps', '/apps'], ['Support', '/support'], ['Privacy', '/privacy-policy']],
+            ],
         };
     }
 }
