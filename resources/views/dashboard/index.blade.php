@@ -5,65 +5,12 @@
 @endpush
 
 @section('content')
-<section class="dash-wrap">
-    <div class="dash-hero auth-panel">
-        <div>
-            <p class="eyebrow">{{ ucfirst($role) }} dashboard</p>
-            <h1>Welcome back, {{ $user->name }} ✨</h1>
-            <p>Your StudyBuddy space is calm, readable, and built around what you need next.</p>
-        </div>
-        <div class="dash-avatar">🐬</div>
-    </div>
-
-    @if(session('status'))
-        <div class="notice auth-notice">{{ session('status') }}</div>
-    @endif
-
-    <div class="dash-grid">
-        @foreach($metrics as [$label, $value, $icon])
-            <article class="auth-panel metric-card">
-                <span>{{ $icon }}</span>
-                <strong>{{ $value }}</strong>
-                <p>{{ $label }}</p>
-            </article>
-        @endforeach
-    </div>
-
-    <div class="dash-columns">
-        <article class="auth-panel">
-            <h2>Today’s gentle plan</h2>
-            <ul class="mission-list">
-                @foreach($missions as $mission)
-                    <li><span>✓</span>{{ $mission }}</li>
-                @endforeach
-            </ul>
-        </article>
-
-        <article class="auth-panel">
-            <h2>Quick actions</h2>
-            <div class="action-list">
-                @foreach($quickActions as [$label, $url])
-                    <a href="{{ $url }}">{{ $label }} →</a>
-                @endforeach
-            </div>
-        </article>
-    </div>
-
-    <form class="auth-panel auth-form compact" method="POST" action="{{ route('dashboard.profile.update') }}">
-        @csrf
-        @method('PUT')
-        <h2>Profile</h2>
-        <label>Name <input name="name" value="{{ old('name', $user->name) }}" required></label>
-        <label>Role
-            <select name="role" required>
-                @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','professional'=>'Professional'] as $value => $label)
-                    <option value="{{ $value }}" @selected(old('role', $role) === $value)>{{ $label }}</option>
-                @endforeach
-            </select>
-        </label>
-        <label>Learning stage <input name="learning_stage" value="{{ old('learning_stage', $user->learning_stage) }}"></label>
-        <label>Buddy style <input name="avatar_style" value="{{ old('avatar_style', $user->avatar_style) }}"></label>
-        <button class="btn" type="submit">Save profile</button>
-    </form>
+<section class="dash-wrap" aria-labelledby="dashboard-title">
+    <div class="dash-hero auth-panel"><div><p class="eyebrow">{{ $roleLabel }}</p><h1 id="dashboard-title">Welcome back, {{ $user->name }} ✨</h1><p>Your StudyBuddy space is readable, role-aware, and built around what you need next.</p>@if(session('status'))<div class="auth-success inline-status" role="status">{{ session('status') }}</div>@endif</div><div class="dash-avatar" aria-hidden="true">🐬</div></div>
+    @if($errors->any()) <div class="auth-error" role="alert">{{ $errors->first() }}</div> @endif
+    <div class="dash-grid">@foreach($metrics as [$label, $value, $icon, $note])<article class="auth-panel metric-card"><span>{{ $icon }}</span><strong>{{ $value }}</strong><p>{{ $label }}</p><small>{{ $note }}</small></article>@endforeach</div>
+    <div class="dash-columns"><article class="auth-panel"><div class="panel-head"><div><p class="eyebrow">Today</p><h2>Gentle plan</h2></div><span class="soft-pill">Clear steps</span></div><ul class="mission-list">@foreach($missions as $mission)<li><span>✓</span>{{ $mission }}</li>@endforeach</ul></article><article class="auth-panel"><div class="panel-head"><div><p class="eyebrow">Actions</p><h2>Quick links</h2></div><span class="soft-pill">Useful pages</span></div><div class="action-list">@foreach($quickActions as [$label, $url])<a href="{{ $url }}">{{ $label }} <span>→</span></a>@endforeach</div></article></div>
+    <div class="learning-card-grid">@foreach($learningCards as [$title, $body, $icon])<article class="auth-panel learning-card"><span>{{ $icon }}</span><h3>{{ $title }}</h3><p>{{ $body }}</p></article>@endforeach</div>
+    <div class="dash-columns"><form class="auth-panel auth-form compact" method="POST" action="{{ route('dashboard.profile.update') }}">@csrf @method('PUT')<p class="eyebrow">Profile</p><h2>Account details</h2><label>Name <input name="name" value="{{ old('name', $user->name) }}" required></label><label>Role <select name="role" required>@foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','professional'=>'Professional'] as $value => $label)<option value="{{ $value }}" @selected(old('role', $role) === $value)>{{ $label }}</option>@endforeach</select></label><label>Learning stage or focus <input name="learning_stage" value="{{ old('learning_stage', $user->learning_stage) }}"></label><label>Buddy style <input name="avatar_style" value="{{ old('avatar_style', $user->avatar_style) }}"></label><button class="btn" type="submit">Save profile</button></form><form class="auth-panel auth-form compact" method="POST" action="{{ route('dashboard.password.update') }}">@csrf @method('PUT')<p class="eyebrow">Security</p><h2>Update access key</h2><label>Current access key <input type="password" name="current_password" autocomplete="current-password" required></label><label>New access key <input type="password" name="password" autocomplete="new-password" required></label><label>Confirm new access key <input type="password" name="password_confirmation" autocomplete="new-password" required></label><button class="btn btn-ghost" type="submit">Update key</button></form></div>
 </section>
 @endsection
