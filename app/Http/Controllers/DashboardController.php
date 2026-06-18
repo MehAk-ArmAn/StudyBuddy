@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FooterItem;
 use App\Models\NavigationItem;
 use App\Models\SiteSetting;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -31,6 +32,25 @@ class DashboardController extends Controller
             'missions' => $this->missions($role),
             'quickActions' => $this->quickActions($role),
         ]);
+    }
+
+    public function updateProfile(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:120'],
+            'role' => ['required', 'in:student,parent,teacher,professional'],
+            'learning_stage' => ['nullable', 'string', 'max:120'],
+            'avatar_style' => ['nullable', 'string', 'max:120'],
+        ]);
+
+        $request->user()->update($data);
+
+        return back()->with('status', 'Profile updated.');
+    }
+
+    public function updatePassword(Request $request): RedirectResponse
+    {
+        return back()->with('status', 'Account safety changes are handled by an administrator for now.');
     }
 
     private function metrics(string $role): array
