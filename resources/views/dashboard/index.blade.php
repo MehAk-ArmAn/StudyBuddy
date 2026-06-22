@@ -116,7 +116,7 @@
 
             <label>Role
                 <select name="role" required>
-                    @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','professional'=>'Professional'] as $value => $label)
+                    @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','independent_learner'=>'Independent Learner'] as $value => $label)
                         <option value="{{ $value }}" @selected(old('role', $role) === $value)>{{ $label }}</option>
                     @endforeach
                 </select>
@@ -162,7 +162,7 @@
         <div>
             <p class="eyebrow">Saved for this role</p>
             <h2>Resource shelf</h2>
-            <p>These links change depending on whether the account is a learner, family account, teacher, or professional user.</p>
+            <p>These links change depending on whether the account is a learner, family account, teacher, or independent learner.</p>
         </div>
         <div class="action-list shelf-actions">
             @foreach($resourceShelf as [$label, $url])

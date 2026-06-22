@@ -19,7 +19,7 @@
         <label>Email <input type="email" name="email" value="{{ old('email', $user->email) }}" required></label>
         <label>Role
             <select name="role">
-                @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','professional'=>'Professional','admin'=>'Admin'] as $value => $label)
+                @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','independent_learner'=>'Independent Learner','admin'=>'Admin'] as $value => $label)
                     <option value="{{ $value }}" @selected(old('role', $user->role ?: 'student') === $value)>{{ $label }}</option>
                 @endforeach
             </select>

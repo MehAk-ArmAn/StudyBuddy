@@ -56,7 +56,7 @@ class UserController extends Controller
         return $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'email', 'max:190'],
-            'role' => ['required', Rule::in(['student','parent','teacher','professional','admin'])],
+            'role' => ['required', Rule::in(['student','parent','teacher','independent_learner','admin'])],
             'learning_stage' => ['nullable', 'string', 'max:120'],
             'avatar_style' => ['nullable', 'string', 'max:120'],
             'cosmic_points' => ['nullable', 'integer', 'min:0'],

@@ -46,7 +46,7 @@ class UserAccessController extends Controller
             'name' => ['required', 'string', 'max:120'],
             'real_name' => ['required', 'string', 'max:160'],
             'email' => ['required', 'email', 'max:190', 'unique:users,email'],
-            'role' => ['required', Rule::in(['student', 'parent', 'teacher', 'professional'])],
+            'role' => ['required', Rule::in(['student', 'parent', 'teacher', 'independent_learner'])],
             'date_of_birth' => ['required', 'date', 'before:today', 'after:1900-01-01'],
             'country' => ['nullable', 'string', 'max:90'],
             'guardian_email' => ['nullable', 'email', 'max:190'],
@@ -63,8 +63,8 @@ class UserAccessController extends Controller
         $age = $dob->age;
         $role = $data['role'];
 
-        if (in_array($role, ['parent', 'teacher', 'professional'], true) && $age < 18) {
-            throw ValidationException::withMessages(['date_of_birth' => 'Parent, teacher, and professional accounts must be 18+ because they can supervise or manage learner spaces.']);
+        if (in_array($role, ['parent', 'teacher', 'independent_learner'], true) && $age < 18) {
+            throw ValidationException::withMessages(['date_of_birth' => 'Parent, teacher, and independent learner accounts must be 18+ because they can supervise or manage learner spaces.']);
         }
 
         if ($role === 'student' && $age < 13 && empty($data['guardian_email'])) {
@@ -95,10 +95,10 @@ class UserAccessController extends Controller
             'avatar_style' => $this->defaultAvatar($role),
             'cosmic_points' => $this->startingPoints($role),
             'is_admin' => false,
-            'age_verified_at' => in_array($role, ['parent', 'teacher', 'professional'], true) ? now() : null,
+            'age_verified_at' => in_array($role, ['parent', 'teacher', 'independent_learner'], true) ? now() : null,
             'role_verification_status' => $this->initialVerificationStatus($role),
             'safeguarding_agreed_at' => now(),
-            'verification_submitted_at' => in_array($role, ['teacher', 'professional'], true) ? now() : null,
+            'verification_submitted_at' => in_array($role, ['teacher', 'independent_learner'], true) ? now() : null,
         ]);
 
         $user->sendEmailVerificationNotification();
@@ -139,7 +139,7 @@ class UserAccessController extends Controller
         return match ($role) {
             'parent' => 'parent-guide',
             'teacher' => 'teacher-mentor',
-            'professional' => 'cosmic-explorer',
+            'independent_learner' => 'cosmic-explorer',
             default => 'dolphin-cadet',
         };
     }
@@ -148,7 +148,7 @@ class UserAccessController extends Controller
     {
         return match ($role) {
             'parent', 'teacher' => 120,
-            'professional' => 80,
+            'independent_learner' => 80,
             default => 50,
         };
     }
@@ -156,7 +156,7 @@ class UserAccessController extends Controller
     private function initialVerificationStatus(string $role): string
     {
         return match ($role) {
-            'teacher', 'professional' => 'pending_admin_review',
+            'teacher', 'independent_learner' => 'pending_admin_review',
             'parent' => 'pending_child_approval',
             default => 'not_required',
         };

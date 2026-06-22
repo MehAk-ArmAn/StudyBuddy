@@ -21,7 +21,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('alt_text')->nullable();
-            $table->string('path');
+            $table->string('path', 2048);
             $table->string('type')->default('image');
             $table->string('mime_type')->nullable();
             $table->unsignedBigInteger('file_size')->nullable();

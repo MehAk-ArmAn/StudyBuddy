@@ -70,6 +70,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isPowerRole(): bool
     {
-        return in_array($this->role, ['parent', 'teacher', 'professional', 'admin'], true);
+        return in_array($this->role, ['parent', 'teacher', 'independent_learner', 'admin'], true);
     }
 }

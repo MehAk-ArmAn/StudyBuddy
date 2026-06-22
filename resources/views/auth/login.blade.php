@@ -9,7 +9,7 @@
     <article class="auth-panel auth-copy-panel">
         <p class="eyebrow">StudyBuddy Access</p>
         <h1 id="login-title">Welcome back.</h1>
-        <p>Login to reach your calm learning dashboard. Students, families, teachers, and professional users all get a dashboard shaped around their role.</p>
+        <p>Login to reach your calm learning dashboard. Students, families, teachers, and independent learners all get a dashboard shaped around their role.</p>
         <div class="auth-mini-grid"><span>Readable dashboard</span><span>Gentle progress</span><span>Role-based tools</span></div>
     </article>
     <form class="auth-panel auth-form" method="POST" action="{{ route('login.store') }}">

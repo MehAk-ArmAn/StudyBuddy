@@ -6,7 +6,7 @@
     <div class="resource-header">
         <div>
             <h2>User Accounts</h2>
-            <p>Manage students, parents, teachers, professionals, and admin accounts.</p>
+            <p>Manage students, parents, teachers, independent learners, and admin accounts.</p>
         </div>
         <a class="button" href="{{ route('admin.users.create') }}">Create User</a>
     </div>

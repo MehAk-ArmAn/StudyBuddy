@@ -10,7 +10,7 @@
         <p class="eyebrow">Start your space</p>
         <h1 id="register-title">Create your StudyBuddy account.</h1>
         <p>Pick the role that fits you. Your dashboard changes its language, cards, and next steps so the experience feels clear from the first click.</p>
-        <div class="role-preview-grid"><span>🎒 Student</span><span>💜 Parent</span><span>🎓 Teacher</span><span>🧭 Professional</span></div>
+        <div class="role-preview-grid"><span>🎒 Student</span><span>💜 Parent</span><span>🎓 Teacher</span><span>🧭 Independent Learner</span></div>
         <p class="readability-note">Designed for calm reading, clear buttons, and low-clutter learning.</p>
     </article>
     <form class="auth-panel auth-form" method="POST" action="{{ route('register.store') }}">
@@ -21,7 +21,7 @@
         @if($errors->any()) <div class="auth-error" role="alert">{{ $errors->first() }}</div> @endif
         <label>Name <input name="name" value="{{ old('name') }}" autocomplete="name" required></label>
         <label>Email <input type="email" name="email" value="{{ old('email') }}" autocomplete="email" required></label>
-        <label>I am a <select name="role" required>@foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','professional'=>'Professional'] as $value => $label)<option value="{{ $value }}" @selected(old('role') === $value)>{{ $label }}</option>@endforeach</select></label>
+        <label>I am a <select name="role" required>@foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','independent_learner'=>'Independent Learner'] as $value => $label)<option value="{{ $value }}" @selected(old('role') === $value)>{{ $label }}</option>@endforeach</select></label>
         <label>Learning stage or focus <input name="learning_stage" value="{{ old('learning_stage') }}" placeholder="Example: Primary 4, GCSE, classroom, family routine"></label>
         <label>Access key <input type="password" name="password" autocomplete="new-password" required></label>
         <label>Confirm access key <input type="password" name="password_confirmation" autocomplete="new-password" required></label>

@@ -42,7 +42,7 @@ class DashboardController extends Controller
     {
         $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
-            'role' => ['required', Rule::in(['student', 'parent', 'teacher', 'professional'])],
+            'role' => ['required', Rule::in(['student', 'parent', 'teacher', 'independent_learner'])],
             'learning_stage' => ['nullable', 'string', 'max:120'],
             'avatar_style' => ['nullable', 'string', 'max:120'],
         ]);
@@ -74,7 +74,7 @@ class DashboardController extends Controller
             'primary', 'secondary' => 'student',
             'parent' => 'parent',
             'teacher' => 'teacher',
-            'professional' => 'professional',
+            'independent_learner' => 'independent_learner',
             default => 'student',
         };
     }
@@ -124,9 +124,9 @@ class DashboardController extends Controller
                 'focus_zones' => ['Lesson flow', 'Practice tasks', 'Classroom clarity', 'Shareable resources'],
                 'resource_shelf' => [['Teacher page', '/for-teachers'], ['Apps', '/apps'], ['Privacy', '/privacy-policy']],
             ],
-            'professional' => [
+            'independent_learner' => [
                 'label' => 'Product Workspace',
-                'eyebrow' => 'Professional view',
+                'eyebrow' => 'Independent Learner view',
                 'intro' => 'A product-focused dashboard for exploring StudyBuddy pages, learning flows, trust content, and support information.',
                 'hero_image' => $base.'brand/logo-icon.png',
                 'metrics' => [
