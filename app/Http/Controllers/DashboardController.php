@@ -18,6 +18,8 @@ class DashboardController extends Controller
         $user = $request->user();
         $role = $this->displayRole((string) $user->role);
         $profile = $this->roleProfile($role);
+        $themeOptions = $this->themeOptions();
+        $currentTheme = $this->validTheme((string) ($user->avatar_style ?: 'cosmic-dolphin'));
 
         return view('dashboard.index', [
             'settings' => SiteSetting::query()->pluck('value', 'key')->toArray(),
@@ -35,21 +37,27 @@ class DashboardController extends Controller
             'controlPanels' => $profile['control_panels'],
             'focusZones' => $profile['focus_zones'],
             'resourceShelf' => $profile['resource_shelf'],
+            'themeOptions' => $themeOptions,
+            'currentTheme' => $currentTheme,
         ]);
     }
 
     public function updateProfile(Request $request): RedirectResponse
     {
+        $themeSlugs = array_column($this->themeOptions(), 'slug');
+
         $data = $request->validate([
             'name' => ['required', 'string', 'max:120'],
             'role' => ['required', Rule::in(['student', 'parent', 'teacher', 'independent_learner'])],
             'learning_stage' => ['nullable', 'string', 'max:120'],
-            'avatar_style' => ['nullable', 'string', 'max:120'],
+            'avatar_style' => ['required', Rule::in($themeSlugs)],
         ]);
+
+        $data['avatar_style'] = $this->validTheme($data['avatar_style']);
 
         $request->user()->update($data);
 
-        return back()->with('status', 'Profile updated. Your dashboard has been reshaped for your role.');
+        return back()->with('status', 'Profile updated. Your theme now shapes the whole StudyBuddy experience.');
     }
 
     public function updatePassword(Request $request): RedirectResponse
@@ -77,6 +85,70 @@ class DashboardController extends Controller
             'independent_learner' => 'independent_learner',
             default => 'student',
         };
+    }
+
+    private function validTheme(string $theme): string
+    {
+        $theme = $theme ?: 'cosmic-dolphin';
+        $allowed = array_column($this->themeOptions(), 'slug');
+
+        return in_array($theme, $allowed, true) ? $theme : 'cosmic-dolphin';
+    }
+
+    private function themeOptions(): array
+    {
+        $base = 'assets/studybuddy-imgs/dashboard/themes/';
+
+        return [
+            [
+                'slug' => 'cosmic-dolphin',
+                'label' => 'Cosmic Dolphin',
+                'description' => 'Classic StudyBuddy: blue, purple, sparkly, friendly, and focused.',
+                'image' => $base.'cosmic-dolphin.svg',
+            ],
+            [
+                'slug' => 'bts-purple-galaxy',
+                'label' => 'BTS Purple Galaxy',
+                'description' => 'Purple ARMY-inspired galaxy energy with soft stars and premium glow.',
+                'image' => $base.'bts-purple-galaxy.svg',
+            ],
+            [
+                'slug' => 'ocean-focus',
+                'label' => 'Ocean Focus',
+                'description' => 'Calm aqua learning mode for peaceful study sessions.',
+                'image' => $base.'ocean-focus.svg',
+            ],
+            [
+                'slug' => 'candy-pop',
+                'label' => 'Candy Pop',
+                'description' => 'Bright playful colors for fun, younger, high-energy learning.',
+                'image' => $base.'candy-pop.svg',
+            ],
+            [
+                'slug' => 'forest-calm',
+                'label' => 'Forest Calm',
+                'description' => 'Green calming theme for focus, routines, and quiet practice.',
+                'image' => $base.'forest-calm.svg',
+            ],
+            [
+                'slug' => 'night-study',
+                'label' => 'Night Study',
+                'description' => 'Deep midnight theme for cozy revision and focused dashboards.',
+                'image' => $base.'night-study.svg',
+            ],
+            [
+                'slug' => 'solar-gold',
+                'label' => 'Solar Gold',
+                'description' => 'Warm golden progress vibe for streaks, wins, and motivation.',
+                'image' => $base.'solar-gold.svg',
+            ],
+            [
+                'slug' => 'neon-gamer',
+                'label' => 'Neon Gamer',
+                'description' => 'Arcade-style high contrast theme for mini apps and challenges.',
+                'image' => $base.'neon-gamer.svg',
+            ],
+        ];
     }
 
     private function roleProfile(string $role): array

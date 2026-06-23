@@ -5,6 +5,10 @@
 @endpush
 
 @section('content')
+@php
+    $selectedTheme = old('avatar_style', $currentTheme ?? $user->avatar_style ?? 'cosmic-dolphin');
+@endphp
+
 <section class="dash-wrap role-{{ $role }}" aria-labelledby="dashboard-title">
     <div class="dash-hero auth-panel">
         <div class="dash-hero-copy">
@@ -107,7 +111,7 @@
             <div>
                 <p class="eyebrow">Profile</p>
                 <h2>Personalize your space</h2>
-                <p class="soft-copy">Changing your role reshapes your controls and dashboard language.</p>
+                <p class="soft-copy">Changing your role and theme reshapes your controls, colors, cards, and learning vibe across StudyBuddy.</p>
             </div>
 
             <label>Name
@@ -127,8 +131,28 @@
             </label>
 
             <label>Dashboard style
-                <input name="avatar_style" value="{{ old('avatar_style', $user->avatar_style) }}" placeholder="Example: dolphin-cadet">
+                <select name="avatar_style" required data-theme-select>
+                    @foreach($themeOptions as $theme)
+                        <option value="{{ $theme['slug'] }}" @selected($selectedTheme === $theme['slug'])>
+                            {{ $theme['label'] }} — {{ $theme['description'] }}
+                        </option>
+                    @endforeach
+                </select>
             </label>
+
+            <div class="theme-preview-grid" data-theme-picker aria-label="Theme preview options">
+                @foreach($themeOptions as $theme)
+                    <button
+                        type="button"
+                        class="theme-preview-card {{ $selectedTheme === $theme['slug'] ? 'active' : '' }}"
+                        data-theme-choice="{{ $theme['slug'] }}"
+                    >
+                        <img src="{{ asset($theme['image']) }}" alt="{{ $theme['label'] }} theme preview">
+                        <strong>{{ $theme['label'] }}</strong>
+                        <span>{{ $theme['description'] }}</span>
+                    </button>
+                @endforeach
+            </div>
 
             <button class="btn" type="submit">Save profile</button>
         </form>

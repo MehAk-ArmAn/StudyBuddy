@@ -1,4 +1,12 @@
 <!doctype html>
+@php
+    $studyBuddyTheme = auth()->check()
+        ? (auth()->user()->avatar_style ?: 'cosmic-dolphin')
+        : request()->cookie('studybuddy_theme', 'cosmic-dolphin');
+
+    $studyBuddyTheme = $studyBuddyTheme ?: 'cosmic-dolphin';
+    $studyBuddyThemeClass = 'theme-' . \Illuminate\Support\Str::slug($studyBuddyTheme);
+@endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -8,15 +16,15 @@
     @if (!empty($settings['seo_keywords']))<meta name="keywords" content="{{ $settings['seo_keywords'] }}">@endif
     @if (!empty($settings['favicon_path']))<link rel="icon" href="{{ preg_match('/^https?:\/\//i', $settings['favicon_path']) ? $settings['favicon_path'] : asset($settings['favicon_path']) }}">@endif
     <link rel="stylesheet" href="{{ asset('assets/css/site.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/experience.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/experience.css') }}?v={{ file_exists(public_path('assets/css/experience.css')) ? filemtime(public_path('assets/css/experience.css')) : time() }}">
     @stack('styles')
 </head>
-<body id="top" class="studybuddy-site">
+<body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}">
     @include('partials.navbar', ['settings' => $settings ?? [], 'navigationItems' => $navigationItems ?? collect()])
     <main>@yield('content')</main>
     @include('partials.footer', ['settings' => $settings ?? [], 'footerGroups' => $footerGroups ?? collect()])
     <script src="{{ asset('assets/js/site.js') }}" defer></script>
-    <script src="{{ asset('assets/js/experience.js') }}" defer></script>
+    <script src="{{ asset('assets/js/experience.js') }}?v={{ file_exists(public_path('assets/js/experience.js')) ? filemtime(public_path('assets/js/experience.js')) : time() }}" defer></script>
     @stack('scripts')
 </body>
 </html>
