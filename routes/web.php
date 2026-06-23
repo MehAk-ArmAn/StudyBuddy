@@ -57,3 +57,27 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
         Route::resource('pages.sections.items', AdminPageSectionItemController::class)->parameters(['sections' => 'section', 'items' => 'item'])->except(['show']);
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Email Verification Routes
+|--------------------------------------------------------------------------
+| Needed because StudyBuddy sends email verification after registration.
+*/
+Route::middleware('auth')->group(function () {
+    Route::get('/email/verify', function () {
+        return response('<h1>Verify your email</h1><p>Please check your email for the StudyBuddy verification link.</p>');
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (\Illuminate\Foundation\Auth\EmailVerificationRequest $request) {
+        $request->fulfill();
+
+        return redirect('/dashboard')->with('status', 'Email verified successfully.');
+    })->middleware(['signed'])->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (\Illuminate\Http\Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+
+        return back()->with('status', 'Verification link sent.');
+    })->middleware(['throttle:6,1'])->name('verification.send');
+});
