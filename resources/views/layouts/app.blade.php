@@ -18,13 +18,15 @@
     <link rel="stylesheet" href="{{ asset('assets/css/site.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/experience.css') }}?v={{ file_exists(public_path('assets/css/experience.css')) ? filemtime(public_path('assets/css/experience.css')) : time() }}">
     @stack('styles')
+    <link rel="stylesheet" href="{{ asset('assets/css/sb-premium-fixes.css') }}?v={{ filemtime(public_path('assets/css/sb-premium-fixes.css')) }}">
 </head>
-<body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}">
+<body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     @include('partials.navbar', ['settings' => $settings ?? [], 'navigationItems' => $navigationItems ?? collect()])
     <main>@yield('content')</main>
     @include('partials.footer', ['settings' => $settings ?? [], 'footerGroups' => $footerGroups ?? collect()])
     <script src="{{ asset('assets/js/site.js') }}" defer></script>
     <script src="{{ asset('assets/js/experience.js') }}?v={{ file_exists(public_path('assets/js/experience.js')) ? filemtime(public_path('assets/js/experience.js')) : time() }}" defer></script>
     @stack('scripts')
+    <script defer src="{{ asset('assets/js/sb-premium-fixes.js') }}?v={{ filemtime(public_path('assets/js/sb-premium-fixes.js')) }}"></script>
 </body>
 </html>
