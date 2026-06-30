@@ -86,3 +86,5 @@ Route::middleware('auth')->group(function () {
 if (file_exists(__DIR__ . '/studybuddy_phase3.php')) {
     require __DIR__ . '/studybuddy_phase3.php';
 }
+
+require __DIR__.'/studybuddy_phase4.php';

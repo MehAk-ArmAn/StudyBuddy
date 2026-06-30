@@ -26,3 +26,6 @@ public/storage
 package-lock.json
 bootstrap/cache/*.php
 !bootstrap/cache/.gitignore
+_phase4_command_center_backup_*/
+studybuddy_phase4_command_center_patch/
+*.zip

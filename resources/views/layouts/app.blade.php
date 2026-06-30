@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/sb-premium-fixes.css') }}?v={{ filemtime(public_path('assets/css/sb-premium-fixes.css')) }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('assets/css/sb-phase3-quest-vault.css') }}?v={{ filemtime(public_path('assets/css/sb-phase3-quest-vault.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/sb-phase4-command-center.css') }}?v={{ filemtime(public_path('assets/css/sb-phase4-command-center.css')) }}">
 </head>
 <body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     @include('partials.navbar', ['settings' => $settings ?? [], 'navigationItems' => $navigationItems ?? collect()])
@@ -31,5 +32,6 @@
     @stack('scripts')
     <script defer src="{{ asset('assets/js/sb-premium-fixes.js') }}?v={{ filemtime(public_path('assets/js/sb-premium-fixes.js')) }}"></script>
     <script defer src="{{ asset('assets/js/sb-phase3-quest-vault.js') }}?v={{ filemtime(public_path('assets/js/sb-phase3-quest-vault.js')) }}"></script>
+    <script defer src="{{ asset('assets/js/sb-phase4-command-center.js') }}?v={{ filemtime(public_path('assets/js/sb-phase4-command-center.js')) }}"></script>
 </body>
 </html>
