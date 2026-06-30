@@ -1,9 +1,20 @@
+@php
+    $experienceRoutes = [
+        'learning-hub' => '/learning-hub',
+        'learning-paths' => '/learning-paths',
+        'rewards' => '/rewards',
+        'parents-center' => '/parents-center',
+        'teacher-studio' => '/teacher-studio',
+        'safety-support' => '/safety-support',
+        'app-ecosystem' => '/app-ecosystem',
+    ];
+@endphp
+
 <nav class="sbx-nav" aria-label="StudyBuddy experience navigation">
-    <a href="{{ route('studybuddy.learning-hub') }}" class="sbx-nav__link {{ request()->routeIs('studybuddy.learning-hub') ? 'is-active' : '' }}">Learning Hub</a>
-    <a href="{{ route('studybuddy.learning-paths') }}" class="sbx-nav__link {{ request()->routeIs('studybuddy.learning-paths') ? 'is-active' : '' }}">Paths</a>
-    <a href="{{ route('studybuddy.rewards') }}" class="sbx-nav__link {{ request()->routeIs('studybuddy.rewards') ? 'is-active' : '' }}">Rewards</a>
-    <a href="{{ route('studybuddy.app-ecosystem') }}" class="sbx-nav__link {{ request()->routeIs('studybuddy.app-ecosystem') ? 'is-active' : '' }}">App Ecosystem</a>
-    <a href="{{ route('studybuddy.parents-center') }}" class="sbx-nav__link {{ request()->routeIs('studybuddy.parents-center') ? 'is-active' : '' }}">Parents</a>
-    <a href="{{ route('studybuddy.teacher-studio') }}" class="sbx-nav__link {{ request()->routeIs('studybuddy.teacher-studio') ? 'is-active' : '' }}">Teachers</a>
-    <a href="{{ route('studybuddy.safety-support') }}" class="sbx-nav__link {{ request()->routeIs('studybuddy.safety-support') ? 'is-active' : '' }}">Support</a>
+    @foreach($navPages as $navPage)
+        @php $navSlug = $navPage->slug ?? ''; @endphp
+        <a class="sbx-nav__link {{ ($slug ?? '') === $navSlug ? 'is-active' : '' }}" href="{{ $experienceRoutes[$navSlug] ?? '/' }}">
+            {{ $navPage->title ?? str($navSlug)->replace('-', ' ')->title() }}
+        </a>
+    @endforeach
 </nav>

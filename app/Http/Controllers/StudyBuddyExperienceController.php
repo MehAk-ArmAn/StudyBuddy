@@ -2,108 +2,166 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\StudyBuddyAppCatalogItem;
+use App\Models\StudyBuddyContentItem;
+use App\Models\StudyBuddyContentPage;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 class StudyBuddyExperienceController extends Controller
 {
-    private function sharedData(): array
+    public function learningHub(): View
     {
-        $user = Auth::user();
+        return $this->renderPage('learning-hub');
+    }
+
+    public function learningPaths(): View
+    {
+        return $this->renderPage('learning-paths');
+    }
+
+    public function rewards(): View
+    {
+        return $this->renderPage('rewards');
+    }
+
+    public function parentsCenter(): View
+    {
+        return $this->renderPage('parents-center');
+    }
+
+    public function teacherStudio(): View
+    {
+        return $this->renderPage('teacher-studio');
+    }
+
+    public function safetySupport(): View
+    {
+        return $this->renderPage('safety-support');
+    }
+
+    public function appEcosystem(): View
+    {
+        return $this->renderPage('app-ecosystem');
+    }
+
+    protected function renderPage(string $slug): View
+    {
+        $page = $this->page($slug);
+        $items = $this->items($slug);
+        $apps = $slug === 'app-ecosystem' ? $this->apps() : collect();
+
+        return view('studybuddy.experience.dynamic-page', [
+            'page' => $page,
+            'items' => $items,
+            'apps' => $apps,
+            'slug' => $slug,
+            'navPages' => $this->navPages(),
+        ]);
+    }
+
+    protected function page(string $slug): object
+    {
+        try {
+            if (Schema::hasTable('studybuddy_content_pages')) {
+                $page = StudyBuddyContentPage::where('slug', $slug)->where('is_published', true)->first();
+                if ($page) {
+                    return $page;
+                }
+            }
+        } catch (Throwable $e) {
+            // Database may not be migrated yet. Fall back to safe content.
+        }
+
+        return (object) $this->fallbackPage($slug);
+    }
+
+    protected function items(string $slug)
+    {
+        try {
+            if (Schema::hasTable('studybuddy_content_items')) {
+                return StudyBuddyContentItem::where('page_slug', $slug)
+                    ->where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->orderBy('title')
+                    ->get();
+            }
+        } catch (Throwable $e) {
+            // Ignore and use empty collection.
+        }
+
+        return collect();
+    }
+
+    protected function apps()
+    {
+        try {
+            if (Schema::hasTable('studybuddy_app_catalog_items')) {
+                return StudyBuddyAppCatalogItem::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->orderBy('title')
+                    ->get();
+            }
+        } catch (Throwable $e) {
+            // Ignore and use empty collection.
+        }
+
+        return collect($this->fallbackApps())->map(fn ($item) => (object) $item);
+    }
+
+    protected function navPages()
+    {
+        try {
+            if (Schema::hasTable('studybuddy_content_pages')) {
+                return StudyBuddyContentPage::where('is_published', true)
+                    ->orderBy('sort_order')
+                    ->get(['slug', 'title']);
+            }
+        } catch (Throwable $e) {
+            // Ignore.
+        }
+
+        return collect([
+            (object) ['slug' => 'learning-hub', 'title' => 'Learning Hub'],
+            (object) ['slug' => 'learning-paths', 'title' => 'Learning Paths'],
+            (object) ['slug' => 'rewards', 'title' => 'Rewards'],
+            (object) ['slug' => 'parents-center', 'title' => 'Parents'],
+            (object) ['slug' => 'teacher-studio', 'title' => 'Teachers'],
+            (object) ['slug' => 'safety-support', 'title' => 'Safety'],
+            (object) ['slug' => 'app-ecosystem', 'title' => 'App Ecosystem'],
+        ]);
+    }
+
+    protected function fallbackPage(string $slug): array
+    {
+        $title = str($slug)->replace('-', ' ')->title()->toString();
 
         return [
-            'user' => $user,
-            'roles' => [
-                [
-                    'key' => 'student',
-                    'title' => 'Student',
-                    'emoji' => '🚀',
-                    'summary' => 'Learn through quests, mini-apps, streaks, points, and playful progress.',
-                    'cta' => 'Start as a learner',
-                ],
-                [
-                    'key' => 'parent',
-                    'title' => 'Parent',
-                    'emoji' => '💜',
-                    'summary' => 'Understand your child’s learning rhythm, safety, goals, and progress.',
-                    'cta' => 'Guide my learner',
-                ],
-                [
-                    'key' => 'teacher',
-                    'title' => 'Teacher',
-                    'emoji' => '🎓',
-                    'summary' => 'Use quests, activities, and class-friendly mini-app ideas to support lessons.',
-                    'cta' => 'Plan a class mission',
-                ],
-                [
-                    'key' => 'independent_learner',
-                    'title' => 'Independent Learner',
-                    'emoji' => '🌙',
-                    'summary' => 'Build your own study routine, track quests, and learn at your own pace.',
-                    'cta' => 'Build my routine',
-                ],
-            ],
-            'miniApps' => [
-                ['name' => 'Math Quest', 'type' => 'Practice Game', 'status' => 'Planned', 'points' => 120, 'focus' => 'problem solving'],
-                ['name' => 'Spelling Sprint', 'type' => 'Speed Challenge', 'status' => 'Planned', 'points' => 90, 'focus' => 'vocabulary'],
-                ['name' => 'Reading Garden', 'type' => 'Reading Tracker', 'status' => 'Planned', 'points' => 110, 'focus' => 'comprehension'],
-                ['name' => 'Focus Forest', 'type' => 'Focus Timer', 'status' => 'Planned', 'points' => 75, 'focus' => 'attention'],
-                ['name' => 'Planner City', 'type' => 'Study Planner', 'status' => 'Planned', 'points' => 80, 'focus' => 'routine'],
-                ['name' => 'Quiz Galaxy', 'type' => 'Review Mode', 'status' => 'Planned', 'points' => 100, 'focus' => 'revision'],
-                ['name' => 'Shapes Lab', 'type' => 'Visual Lab', 'status' => 'Planned', 'points' => 85, 'focus' => 'geometry'],
-                ['name' => 'Flashcard Castle', 'type' => 'Memory Tool', 'status' => 'Planned', 'points' => 95, 'focus' => 'recall'],
-            ],
-            'themes' => [
-                'cosmic-dolphin' => 'Cosmic Dolphin',
-                'bts-purple-galaxy' => 'BTS Purple Galaxy',
-                'ocean-focus' => 'Ocean Focus',
-                'candy-pop' => 'Candy Pop',
-                'forest-calm' => 'Forest Calm',
-                'night-study' => 'Night Study',
-                'solar-gold' => 'Solar Gold',
-                'neon-gamer' => 'Neon Gamer',
-            ],
-            'faqs' => [
-                ['q' => 'Can StudyBuddy connect multiple mini-apps later?', 'a' => 'Yes. The platform is being shaped as one dashboard that can connect separate apps, games, rewards, and learner progress.'],
-                ['q' => 'Do web-play and downloads exist yet?', 'a' => 'The current phase prepares the content and ecosystem UI. Real app hosting, web-play builds, iOS, Windows, and Android download pipelines are planned for the final app distribution phase.'],
-                ['q' => 'Will points be shared across apps?', 'a' => 'That is the intended direction. The dashboard and Quest Vault prepare the foundation for shared points, quests, streaks, and progress.'],
-                ['q' => 'Is the Professional role included?', 'a' => 'No. Current supported paths are Student, Parent, Teacher, and Independent Learner.'],
+            'slug' => $slug,
+            'title' => $title,
+            'eyebrow' => 'StudyBuddy Experience',
+            'subtitle' => 'This page is ready for admin-editable content once migrations are run.',
+            'hero_badge' => 'Admin editable',
+            'primary_cta_label' => 'Open Command Center',
+            'primary_cta_url' => '/command-center',
+            'secondary_cta_label' => 'Open Apps',
+            'secondary_cta_url' => '/apps',
+            'content_blocks' => [
+                ['type' => 'cards', 'title' => 'Editable content area', 'items' => [
+                    ['icon' => '✨', 'title' => 'Admin controlled', 'description' => 'Update this page from the StudyBuddy Content Studio.'],
+                    ['icon' => '🛠️', 'title' => 'Safe fallback', 'description' => 'This fallback appears only if the database content is missing.'],
+                ]],
             ],
         ];
     }
 
-    public function learningHub()
+    protected function fallbackApps(): array
     {
-        return view('studybuddy.experience.learning-hub', $this->sharedData());
-    }
-
-    public function learningPaths()
-    {
-        return view('studybuddy.experience.learning-paths', $this->sharedData());
-    }
-
-    public function rewards()
-    {
-        return view('studybuddy.experience.rewards', $this->sharedData());
-    }
-
-    public function parentsCenter()
-    {
-        return view('studybuddy.experience.parents-center', $this->sharedData());
-    }
-
-    public function teacherStudio()
-    {
-        return view('studybuddy.experience.teacher-studio', $this->sharedData());
-    }
-
-    public function safetySupport()
-    {
-        return view('studybuddy.experience.safety-support', $this->sharedData());
-    }
-
-    public function appEcosystem()
-    {
-        return view('studybuddy.experience.app-ecosystem', $this->sharedData());
+        return [
+            ['title'=>'Math Quest','category'=>'Math','summary'=>'Math missions','description'=>'Planned mini app.','icon'=>'➗','launch_status'=>'planned','points_reward'=>25],
+            ['title'=>'Spelling Sprint','category'=>'Language','summary'=>'Spelling missions','description'=>'Planned mini app.','icon'=>'✏️','launch_status'=>'planned','points_reward'=>20],
+            ['title'=>'Reading Garden','category'=>'Reading','summary'=>'Reading missions','description'=>'Planned mini app.','icon'=>'🌱','launch_status'=>'planned','points_reward'=>20],
+        ];
     }
 }

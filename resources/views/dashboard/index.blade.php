@@ -200,3 +200,5 @@
 @include('dashboard.partials.phase5-experience-links')
 
 @endsection
+
+@includeIf('admin.studybuddy.content-studio.partials.admin-shortcut')

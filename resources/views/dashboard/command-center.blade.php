@@ -116,6 +116,7 @@
             </div>
         @endif
     </section>
+    @includeIf('admin.studybuddy.content-studio.partials.admin-shortcut')
 </main>
 
 @include('dashboard.partials.phase5-experience-links')
