@@ -5,6 +5,7 @@
 @endpush
 
 @section('content')
+@include('dashboard.partials.command-center-link')
 @php
     $selectedTheme = old('avatar_style', $currentTheme ?? $user->avatar_style ?? 'cosmic-dolphin');
 @endphp
@@ -195,4 +196,7 @@
         </div>
     </article>
 </section>
+
+@include('dashboard.partials.phase5-experience-links')
+
 @endsection

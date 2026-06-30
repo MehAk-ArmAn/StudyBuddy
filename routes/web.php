@@ -88,3 +88,6 @@ if (file_exists(__DIR__ . '/studybuddy_phase3.php')) {
 }
 
 require __DIR__.'/studybuddy_phase4.php';
+
+// StudyBuddy Phase 5: premium content and interactive experience routes
+if (file_exists(__DIR__.'/studybuddy_phase5.php')) { require __DIR__.'/studybuddy_phase5.php'; }

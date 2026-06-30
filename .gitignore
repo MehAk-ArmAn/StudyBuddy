@@ -29,3 +29,8 @@ bootstrap/cache/*.php
 _phase4_command_center_backup_*/
 studybuddy_phase4_command_center_patch/
 *.zip
+
+# StudyBuddy local patch installers and backups
+_phase*_backup_*/
+studybuddy_phase*_patch/
+studybuddy_phase*_*.zip
