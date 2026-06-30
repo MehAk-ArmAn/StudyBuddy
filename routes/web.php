@@ -81,3 +81,8 @@ Route::middleware('auth')->group(function () {
         return back()->with('status', 'Verification link sent.');
     })->middleware(['throttle:6,1'])->name('verification.send');
 });
+
+// StudyBuddy Phase 3: Quest Vault + server-synced theme routes
+if (file_exists(__DIR__ . '/studybuddy_phase3.php')) {
+    require __DIR__ . '/studybuddy_phase3.php';
+}
