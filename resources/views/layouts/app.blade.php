@@ -24,6 +24,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/sb-phase4-command-center.css') }}?v={{ filemtime(public_path('assets/css/sb-phase4-command-center.css')) }}">
     <link rel="stylesheet" href="{{ asset('assets/css/sb-phase5-experience.css') }}?v={{ filemtime(public_path('assets/css/sb-phase5-experience.css')) }}">
     <link rel="stylesheet" href="{{ asset('assets/css/sb-phase5-admin-experience.css') }}?v={{ filemtime(public_path('assets/css/sb-phase5-admin-experience.css')) }}">
+
+    {{-- StudyBuddy Phase 6 final platform / PWA shell --}}
+    <link rel="manifest" href="{{ asset('manifest.webmanifest') }}">
+    <meta name="theme-color" content="#7C3AED">
+    <link rel="stylesheet" href="{{ asset('assets/css/sb-phase6-final-platform.css') }}?v={{ filemtime(public_path('assets/css/sb-phase6-final-platform.css')) }}">
 </head>
 <body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     @include('partials.navbar', ['settings' => $settings ?? [], 'navigationItems' => $navigationItems ?? collect()])
@@ -37,5 +42,7 @@
     <script defer src="{{ asset('assets/js/sb-phase4-command-center.js') }}?v={{ filemtime(public_path('assets/js/sb-phase4-command-center.js')) }}"></script>
     <script defer src="{{ asset('assets/js/sb-phase5-experience.js') }}?v={{ filemtime(public_path('assets/js/sb-phase5-experience.js')) }}"></script>
     <script defer src="{{ asset('assets/js/sb-phase5-admin-experience.js') }}?v={{ filemtime(public_path('assets/js/sb-phase5-admin-experience.js')) }}"></script>
+
+    <script defer src="{{ asset('assets/js/sb-phase6-final-platform.js') }}?v={{ filemtime(public_path('assets/js/sb-phase6-final-platform.js')) }}"></script>
 </body>
 </html>

@@ -95,3 +95,5 @@ if (file_exists(__DIR__.'/studybuddy_phase5.php')) { require __DIR__.'/studybudd
 if (file_exists(__DIR__.'/studybuddy_phase5_admin_experience.php')) {
     require __DIR__.'/studybuddy_phase5_admin_experience.php';
 }
+
+require __DIR__.'/studybuddy_phase6_final.php';

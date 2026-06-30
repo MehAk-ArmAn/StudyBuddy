@@ -36,3 +36,9 @@ studybuddy_phase*_patch/
 studybuddy_phase*_*.zip
 _phase*_backup_*
 studybuddy_phase5_admin_editable_experience_patch/
+
+# StudyBuddy ZIP patch installers / local backups
+studybuddy_phase*_patch/
+studybuddy_phase*_*.zip
+_phase*_backup_*/
+_phase*_*/
