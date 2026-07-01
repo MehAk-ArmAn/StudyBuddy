@@ -49,3 +49,5 @@ tmp-test.txt
 _final_*_backup_*/
 studybuddy_*_patch/
 studybuddy_*_patch.zip
+studybuddy_phase*_patch*/
+studybuddy_final_*_patch*/
