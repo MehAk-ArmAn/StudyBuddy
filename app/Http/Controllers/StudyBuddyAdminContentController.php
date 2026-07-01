@@ -143,14 +143,9 @@ class StudyBuddyAdminContentController extends Controller
             abort(403);
         }
 
-        if (app()->environment('local')) {
-            return;
-        }
-
-        $role = strtolower((string) ($user->role ?? $user->user_role ?? ''));
         $isAdmin = (bool) ($user->is_admin ?? false);
 
-        if ($user->id === 1 || $isAdmin || in_array($role, ['admin', 'owner', 'teacher'], true)) {
+        if ($user->id === 1 || $isAdmin) {
             return;
         }
 

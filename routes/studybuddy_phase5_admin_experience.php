@@ -1,20 +1,4 @@
 <?php
-
-use App\Http\Controllers\StudyBuddyAdminContentController;
-use App\Http\Controllers\StudyBuddyExperienceController;
-use Illuminate\Support\Facades\Route;
-
-Route::get('/learning-hub', [StudyBuddyExperienceController::class, 'learningHub'])->name('studybuddy.experience.learning-hub');
-Route::get('/learning-paths', [StudyBuddyExperienceController::class, 'learningPaths'])->name('studybuddy.experience.learning-paths');
-Route::get('/rewards', [StudyBuddyExperienceController::class, 'rewards'])->name('studybuddy.experience.rewards');
-Route::get('/parents-center', [StudyBuddyExperienceController::class, 'parentsCenter'])->name('studybuddy.experience.parents-center');
-Route::get('/teacher-studio', [StudyBuddyExperienceController::class, 'teacherStudio'])->name('studybuddy.experience.teacher-studio');
-Route::get('/safety-support', [StudyBuddyExperienceController::class, 'safetySupport'])->name('studybuddy.experience.safety-support');
-Route::get('/app-ecosystem', [StudyBuddyExperienceController::class, 'appEcosystem'])->name('studybuddy.experience.app-ecosystem');
-
-Route::middleware(['auth'])->prefix('admin/studybuddy')->name('studybuddy.admin.')->group(function () {
-    Route::get('/content-studio', [StudyBuddyAdminContentController::class, 'index'])->name('content.index');
-    Route::patch('/content-pages/{page}', [StudyBuddyAdminContentController::class, 'updatePage'])->name('content.pages.update');
-    Route::patch('/content-items/{item}', [StudyBuddyAdminContentController::class, 'updateItem'])->name('content.items.update');
-    Route::patch('/apps/{app}', [StudyBuddyAdminContentController::class, 'updateApp'])->name('content.apps.update');
-});
+use App\Http\Controllers\StudyBuddyAdminContentController;use App\Http\Controllers\StudyBuddyExperienceController;use Illuminate\Support\Facades\Route;
+Route::get('/learning-hub',[StudyBuddyExperienceController::class,'learningHub'])->name('studybuddy.experience.learning-hub');Route::get('/learning-paths',[StudyBuddyExperienceController::class,'learningPaths'])->name('studybuddy.experience.learning-paths');Route::get('/rewards',[StudyBuddyExperienceController::class,'rewards'])->name('studybuddy.experience.rewards');Route::get('/parents-center',[StudyBuddyExperienceController::class,'parentsCenter'])->name('studybuddy.experience.parents-center');Route::get('/teacher-studio',[StudyBuddyExperienceController::class,'teacherStudio'])->name('studybuddy.experience.teacher-studio');Route::get('/safety-support',[StudyBuddyExperienceController::class,'safetySupport'])->name('studybuddy.experience.safety-support');Route::get('/app-ecosystem',[StudyBuddyExperienceController::class,'appEcosystem'])->name('studybuddy.experience.app-ecosystem');
+Route::middleware(['admin'])->prefix('admin/studybuddy')->name('studybuddy.admin.')->group(function(){Route::get('/content-studio',[StudyBuddyAdminContentController::class,'index'])->name('content.index');Route::patch('/content-pages/{page}',[StudyBuddyAdminContentController::class,'updatePage'])->name('content.pages.update');Route::patch('/content-items/{item}',[StudyBuddyAdminContentController::class,'updateItem'])->name('content.items.update');Route::patch('/apps/{app}',[StudyBuddyAdminContentController::class,'updateApp'])->name('content.apps.update');});

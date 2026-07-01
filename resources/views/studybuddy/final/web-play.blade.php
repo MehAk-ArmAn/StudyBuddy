@@ -24,8 +24,8 @@
                     @csrf
                     <input type="hidden" name="app_slug" value="{{ $app->slug }}">
                     <input type="hidden" name="title" value="Completed {{ $app->name }} demo session">
-                    <input type="hidden" name="points" value="{{ $app->points_reward }}">
                     <button class="sb-final-btn" type="submit">Complete Demo Session +{{ $app->points_reward }} pts</button>
+                    <p class="sb-final-safe-note">Points are awarded from the server app catalog, not the browser.</p>
                 </form>
             @else
                 <a href="{{ route('login') }}" class="sb-final-btn">Login to earn points</a>

@@ -1,3 +1,6 @@
+
+.skip-link{position:fixed;left:1rem;top:1rem;z-index:9999;transform:translateY(-160%);padding:.85rem 1rem;border-radius:14px;background:#fff;color:#111827;font-weight:900;text-decoration:none;box-shadow:0 18px 48px rgba(0,0,0,.28)}.skip-link:focus{transform:translateY(0);outline:3px solid var(--cyan);outline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid rgba(34,211,238,.9);outline-offset:3px}
+
 :root{
     --bg:#030515;--bg2:#070b2d;--panel:rgba(13,18,55,.72);--panel2:rgba(44,23,93,.52);
     --line:rgba(168,85,247,.34);--cyan:#22d3ee;--blue:#60a5fa;--purple:#8b5cf6;--pink:#ec4899;

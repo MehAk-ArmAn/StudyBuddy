@@ -45,6 +45,12 @@
                 <a class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}" href="{{ route('admin.pages.index') }}">
                     <span>Pages</span>
                 </a>
+            
+                <a class="nav-link { request()->routeIs('studybuddy.admin.content.index') ? 'active' : '' }" href="{{ route('studybuddy.admin.content.index') }}">Content Studio</a>
+            
+                <a class="nav-link { request()->routeIs('studybuddy.admin.final.index') ? 'active' : '' }" href="{{ route('studybuddy.admin.final.index') }}">Final Platform</a>
+            
+                <a class="nav-link { request()->routeIs('studybuddy.admin.verifications.index') ? 'active' : '' }" href="{{ route('studybuddy.admin.verifications.index') }}">Verifications</a>
             </nav>
 
             <div class="admin-sidebar-footer">

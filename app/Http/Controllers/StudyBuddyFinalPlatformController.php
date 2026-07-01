@@ -1,104 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
-use App\Models\StudyBuddyLaunchChecklistItem;
-use App\Models\StudyBuddyMiniAppPlatform;
-use App\Models\StudyBuddyPlatformSetting;
-use App\Models\StudyBuddyPointTransaction;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
-class StudyBuddyFinalPlatformController extends Controller
-{
-    public function appLaunchpad()
-    {
-        $settings = StudyBuddyPlatformSetting::publicMap();
-        $apps = StudyBuddyMiniAppPlatform::query()->active()->ordered()->get();
-        $featured = $apps->where('is_featured', true)->take(3);
-        $categories = $apps->pluck('category')->unique()->values();
-
-        return view('studybuddy.final.app-launchpad', compact('settings', 'apps', 'featured', 'categories'));
-    }
-
-    public function webPlay(string $slug)
-    {
-        $app = StudyBuddyMiniAppPlatform::query()->where('slug', $slug)->firstOrFail();
-        $settings = StudyBuddyPlatformSetting::publicMap();
-
-        return view('studybuddy.final.web-play', compact('app', 'settings'));
-    }
-
-    public function pointsWallet()
-    {
-        $user = Auth::user();
-        $transactions = StudyBuddyPointTransaction::query()
-            ->where('user_id', $user?->id)
-            ->latest()
-            ->take(30)
-            ->get();
-        $total = (int) $transactions->sum('points');
-        $earned = (int) $transactions->where('points', '>', 0)->sum('points');
-        $spent = abs((int) $transactions->where('points', '<', 0)->sum('points'));
-        $settings = StudyBuddyPlatformSetting::publicMap();
-
-        return view('studybuddy.final.points-wallet', compact('transactions', 'total', 'earned', 'spent', 'settings'));
-    }
-
-    public function platformRoadmap()
-    {
-        $settings = StudyBuddyPlatformSetting::publicMap();
-        $apps = StudyBuddyMiniAppPlatform::query()->active()->ordered()->get();
-        $checks = StudyBuddyLaunchChecklistItem::query()->orderBy('sort_order')->get();
-
-        return view('studybuddy.final.platform-roadmap', compact('settings', 'apps', 'checks'));
-    }
-
-    public function launchReadiness()
-    {
-        $settings = StudyBuddyPlatformSetting::publicMap();
-        $checks = StudyBuddyLaunchChecklistItem::query()->orderBy('sort_order')->get();
-        $total = max($checks->count(), 1);
-        $done = $checks->where('status', 'done')->count();
-        $score = (int) round(($done / $total) * 100);
-
-        return view('studybuddy.final.launch-readiness', compact('settings', 'checks', 'score', 'done', 'total'));
-    }
-
-    public function completeSession(Request $request)
-    {
-        $data = $request->validate([
-            'app_slug' => ['required', 'string', 'max:120'],
-            'title' => ['nullable', 'string', 'max:180'],
-            'points' => ['nullable', 'integer', 'min:0', 'max:500'],
-        ]);
-
-        $app = StudyBuddyMiniAppPlatform::query()->where('slug', $data['app_slug'])->first();
-        $points = (int) ($data['points'] ?? $app?->points_reward ?? 10);
-        $title = $data['title'] ?? (($app?->name ?? 'StudyBuddy') . ' session completed');
-
-        $transaction = StudyBuddyPointTransaction::create([
-            'user_id' => $request->user()->id,
-            'source_type' => 'mini_app_session',
-            'source_slug' => $data['app_slug'],
-            'title' => $title,
-            'points' => $points,
-            'status' => 'earned',
-            'meta' => [
-                'app_name' => $app?->name,
-                'completed_from' => 'studybuddy_web_shell',
-            ],
-        ]);
-
-        if ($request->expectsJson()) {
-            return response()->json([
-                'ok' => true,
-                'points' => $points,
-                'transaction_id' => $transaction->id,
-                'message' => "{$points} points added to your StudyBuddy wallet.",
-            ]);
-        }
-
-        return back()->with('status', "{$points} points added to your StudyBuddy wallet.");
-    }
-}
+use App\Models\StudyBuddyLaunchChecklistItem;use App\Models\StudyBuddyMiniAppPlatform;use App\Models\StudyBuddyPlatformSetting;use App\Models\StudyBuddyPointTransaction;use Illuminate\Http\Request;use Illuminate\Support\Facades\Auth;use Illuminate\Support\Facades\Schema;use Illuminate\Validation\Rule;use Throwable;
+class StudyBuddyFinalPlatformController extends Controller{
+ public function appLaunchpad(){ $settings=StudyBuddyPlatformSetting::publicMap();$apps=$this->apps();$featured=$apps->where('is_featured',true)->take(3);$categories=$apps->pluck('category')->filter()->unique()->values();return view('studybuddy.final.app-launchpad',compact('settings','apps','featured','categories'));}
+ public function webPlay(string $slug){$app=$this->apps()->firstWhere('slug',$slug);abort_if(!$app,404,'This StudyBuddy mini-app is not available yet.');abort_if(!(bool)($app->is_web_enabled??false),404,'Web play is not enabled for this mini-app yet.');$settings=StudyBuddyPlatformSetting::publicMap();return view('studybuddy.final.web-play',compact('app','settings'));}
+ public function pointsWallet(){ $user=Auth::user();$transactions=StudyBuddyPointTransaction::where('user_id',$user?->id)->latest()->take(100)->get();$total=(int)StudyBuddyPointTransaction::where('user_id',$user?->id)->sum('points');$earned=(int)StudyBuddyPointTransaction::where('user_id',$user?->id)->where('points','>',0)->sum('points');$spent=abs((int)StudyBuddyPointTransaction::where('user_id',$user?->id)->where('points','<',0)->sum('points'));$settings=StudyBuddyPlatformSetting::publicMap();return view('studybuddy.final.points-wallet',compact('transactions','total','earned','spent','settings'));}
+ public function platformRoadmap(){ $settings=StudyBuddyPlatformSetting::publicMap();$apps=$this->apps();$checks=$this->checks();return view('studybuddy.final.platform-roadmap',compact('settings','apps','checks'));}
+ public function launchReadiness(){ $settings=StudyBuddyPlatformSetting::publicMap();$checks=$this->checks();$total=max($checks->count(),1);$done=$checks->where('status','done')->count();$score=(int)round(($done/$total)*100);return view('studybuddy.final.launch-readiness',compact('settings','checks','score','done','total'));}
+ public function completeSession(Request $request){$data=$request->validate(['app_slug'=>['required','string','max:120',Rule::exists('studybuddy_mini_app_platforms','slug')->where('is_active',true)]]);$app=StudyBuddyMiniAppPlatform::active()->where('is_web_enabled',true)->where('slug',$data['app_slug'])->firstOrFail();$dupe=StudyBuddyPointTransaction::where('user_id',$request->user()->id)->where('source_type','mini_app_session')->where('source_slug',$app->slug)->where('created_at','>=',now()->subMinutes(10))->exists();if($dupe){$m='Session already counted recently. Keep learning, then claim again later.';return $request->expectsJson()?response()->json(['ok'=>false,'message'=>$m],429):back()->with('status',$m);} $points=(int)min(max($app->points_reward,0),500);$tx=StudyBuddyPointTransaction::create(['user_id'=>$request->user()->id,'source_type'=>'mini_app_session','source_slug'=>$app->slug,'title'=>$app->name.' session completed','points'=>$points,'status'=>'earned','meta'=>['app_name'=>$app->name,'completed_from'=>'studybuddy_web_shell','server_controlled_points'=>true]]);return $request->expectsJson()?response()->json(['ok'=>true,'points'=>$points,'transaction_id'=>$tx->id,'message'=>"{$points} points added to your StudyBuddy wallet."]):back()->with('status',"{$points} points added to your StudyBuddy wallet.");}
+ protected function apps(){try{if(Schema::hasTable('studybuddy_mini_app_platforms')){$apps=StudyBuddyMiniAppPlatform::active()->ordered()->get();if($apps->isNotEmpty())return $apps;}}catch(Throwable $e){} return collect([(object)['slug'=>'focus-forest','name'=>'Focus Forest','category'=>'Focus','tagline'=>'Build focus one session at a time.','description'=>'A safe demo web shell for focus sessions.','status'=>'beta','icon'=>'🌲','accent'=>'emerald','points_reward'=>50,'estimated_minutes'=>20,'is_web_enabled'=>true,'is_download_enabled'=>false,'is_featured'=>true,'web_play_url'=>'/play/focus-forest','ios_url'=>null,'android_url'=>null,'windows_url'=>null,'mac_url'=>null]]);} protected function checks(){try{if(Schema::hasTable('studybuddy_launch_checklist_items'))return StudyBuddyLaunchChecklistItem::orderBy('sort_order')->get();}catch(Throwable $e){} return collect();}}

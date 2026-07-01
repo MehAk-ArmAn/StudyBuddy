@@ -5,7 +5,9 @@
 @endpush
 
 @section('content')
+@include('dashboard.partials.verification-status-card')
 @include('dashboard.partials.command-center-link')
+@include('dashboard.partials.role-compass')
 @php
     $selectedTheme = old('avatar_style', $currentTheme ?? $user->avatar_style ?? 'cosmic-dolphin');
 @endphp
