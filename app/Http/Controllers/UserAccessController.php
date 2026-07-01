@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +21,7 @@ class UserAccessController extends Controller
 
     public function showRegister(): View
     {
-        return view('auth.register', ['pageTitle' => 'Create your verified StudyBuddy account']);
+        return view('auth.register', ['pageTitle' => 'Create your StudyBuddy account']);
     }
 
     public function login(Request $request): RedirectResponse
@@ -34,10 +33,10 @@ class UserAccessController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended(route('dashboard'))->with('status', 'Welcome back. Your dashboard is ready.');
+            return redirect()->intended(route('dashboard'))->with('status', 'Welcome back. Your StudyBuddy space is ready.');
         }
 
-        return back()->withErrors(['email' => 'We could not match those login details. Please check your email and access key.'])->onlyInput('email');
+        return back()->withErrors(['email' => 'We could not match those login details. Please check your email and password.'])->onlyInput('email');
     }
 
     public function register(Request $request): RedirectResponse
@@ -83,6 +82,7 @@ class UserAccessController extends Controller
             'name' => $data['name'],
             'real_name' => $data['real_name'],
             'email' => $data['email'],
+            'email_verified_at' => now(), // Email verification is intentionally disabled for StudyBuddy local/platform flow.
             'password' => Hash::make($data['password']),
             'role' => $role,
             'date_of_birth' => $dob->toDateString(),
@@ -101,29 +101,20 @@ class UserAccessController extends Controller
             'verification_submitted_at' => in_array($role, ['teacher', 'independent_learner'], true) ? now() : null,
         ]);
 
-        $user->sendEmailVerificationNotification();
-
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('dashboard')->with('status', 'Account created. Verify your email next; powerful controls stay locked until trust checks finish.');
+        return redirect()->route('dashboard')->with('status', 'Account created. StudyBuddy is ready. Role-based controls unlock according to your account type and safety status.');
     }
 
-    public function verificationNotice(): View
+    public function verificationNotice(): RedirectResponse
     {
-        return view('auth.verify-email');
-    }
-
-    public function verifyEmail(EmailVerificationRequest $request): RedirectResponse
-    {
-        $request->fulfill();
-        return redirect()->route('dashboard')->with('status', 'Email verified. Thank you for keeping StudyBuddy trustworthy.');
+        return redirect()->route('dashboard')->with('status', 'Email verification is disabled. StudyBuddy uses role, age, admin, and parent/student safety checks instead.');
     }
 
     public function resendVerification(Request $request): RedirectResponse
     {
-        $request->user()->sendEmailVerificationNotification();
-        return back()->with('status', 'Verification email sent again.');
+        return back()->with('status', 'Email verification is disabled. No inbox email is needed for StudyBuddy access.');
     }
 
     public function logout(Request $request): RedirectResponse
@@ -131,7 +122,7 @@ class UserAccessController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login')->with('status', 'You have been logged out safely.');
+        return redirect()->route('home')->with('status', 'You have been logged out safely. Public StudyBuddy style has reset.');
     }
 
     private function defaultAvatar(string $role): string

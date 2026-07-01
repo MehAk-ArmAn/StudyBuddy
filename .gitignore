@@ -51,3 +51,8 @@ studybuddy_*_patch/
 studybuddy_*_patch.zip
 studybuddy_phase*_patch*/
 studybuddy_final_*_patch*/
+# StudyBuddy local patch/build artifacts
+/public/storage
+_no_email_role_ui_cleanup_backup_*/
+studybuddy_final_*_patch/
+studybuddy_no_email_role_ui_cleanup_patch/

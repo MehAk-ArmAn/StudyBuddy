@@ -7,10 +7,7 @@ use App\Models\StudyBuddyContentItem;
 use App\Models\StudyBuddyContentPage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
-use Throwable;
 
 class StudyBuddyAdminContentController extends Controller
 {
@@ -98,7 +95,7 @@ class StudyBuddyAdminContentController extends Controller
             'ios_url' => ['nullable', 'string', 'max:255'],
             'android_url' => ['nullable', 'string', 'max:255'],
             'windows_url' => ['nullable', 'string', 'max:255'],
-            'points_reward' => ['nullable', 'integer', 'min:0'],
+            'points_reward' => ['nullable', 'integer', 'min:0', 'max:500'],
             'launch_status' => ['required', 'string', 'max:100'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'available_web' => ['nullable'],
@@ -109,10 +106,7 @@ class StudyBuddyAdminContentController extends Controller
             'extra_json' => ['nullable', 'string'],
         ]);
 
-        $app->fill(collect($data)->except([
-            'available_web', 'available_ios', 'available_android', 'available_windows', 'is_active', 'extra_json'
-        ])->toArray());
-
+        $app->fill(collect($data)->except(['available_web', 'available_ios', 'available_android', 'available_windows', 'is_active', 'extra_json'])->toArray());
         $app->available_web = $request->boolean('available_web');
         $app->available_ios = $request->boolean('available_ios');
         $app->available_android = $request->boolean('available_android');
@@ -131,24 +125,14 @@ class StudyBuddyAdminContentController extends Controller
         }
 
         $decoded = json_decode($json, true);
-
         return is_array($decoded) ? $decoded : $fallback;
     }
 
     protected function authorizeStudio(): void
     {
         $user = auth()->user();
-
-        if (! $user) {
-            abort(403);
+        if (! $user || ! (bool) $user->is_admin) {
+            abort(403, 'Only StudyBuddy admins can edit platform content.');
         }
-
-        $isAdmin = (bool) ($user->is_admin ?? false);
-
-        if ($user->id === 1 || $isAdmin) {
-            return;
-        }
-
-        abort(403, 'Only StudyBuddy admins can edit platform content.');
     }
 }

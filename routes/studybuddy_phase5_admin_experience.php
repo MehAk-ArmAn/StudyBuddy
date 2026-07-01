@@ -11,7 +11,7 @@ Route::get('/parents-center', [StudyBuddyExperienceController::class, 'parentsCe
 Route::get('/teacher-studio', [StudyBuddyExperienceController::class, 'teacherStudio'])->name('studybuddy.experience.teacher-studio');
 Route::get('/safety-support', [StudyBuddyExperienceController::class, 'safetySupport'])->name('studybuddy.experience.safety-support');
 
-Route::middleware(['admin'])->prefix('admin/studybuddy')->name('studybuddy.admin.')->group(function (): void {
+Route::middleware(['auth', 'admin'])->prefix('admin/studybuddy')->name('studybuddy.admin.')->group(function () {
     Route::get('/content-studio', [StudyBuddyAdminContentController::class, 'index'])->name('content.index');
     Route::patch('/content-pages/{page}', [StudyBuddyAdminContentController::class, 'updatePage'])->name('content.pages.update');
     Route::patch('/content-items/{item}', [StudyBuddyAdminContentController::class, 'updateItem'])->name('content.items.update');

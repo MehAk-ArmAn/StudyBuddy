@@ -22,23 +22,29 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('guest')->group(function (): void {
     Route::get('/login', [UserAccessController::class, 'showLogin'])->name('login');
-    Route::post('/login', [UserAccessController::class, 'login'])->middleware('throttle:10,1')->name('login.store');
+    Route::post('/login', [UserAccessController::class, 'login'])->name('login.store');
     Route::get('/register', [UserAccessController::class, 'showRegister'])->name('register');
-    Route::post('/register', [UserAccessController::class, 'register'])->middleware('throttle:6,1')->name('register.store');
+    Route::post('/register', [UserAccessController::class, 'register'])->name('register.store');
 });
 
 Route::middleware('auth')->group(function (): void {
     Route::post('/logout', [UserAccessController::class, 'logout'])->name('logout');
-    Route::get('/email/verify', [UserAccessController::class, 'verificationNotice'])->name('verification.notice');
-    Route::get('/email/verify/{id}/{hash}', [UserAccessController::class, 'verifyEmail'])->middleware(['signed', 'throttle:6,1'])->name('verification.verify');
-    Route::post('/email/verification-notification', [UserAccessController::class, 'resendVerification'])->middleware(['throttle:6,1'])->name('verification.send');
-});
-
-Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::put('/dashboard/profile', [DashboardController::class, 'updateProfile'])->name('dashboard.profile.update');
     Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->name('dashboard.password.update');
 });
+
+// Email verification is intentionally disabled. Keep these URLs safe so stale links never crash.
+Route::middleware('auth')->group(function (): void {
+    Route::get('/email/verify', [UserAccessController::class, 'verificationNotice'])->name('verification.notice');
+    Route::post('/email/verification-notification', [UserAccessController::class, 'resendVerification'])->name('verification.send');
+});
+Route::get('/email/verify/{id}/{hash}', fn () => redirect()->route('dashboard')->with('status', 'Email verification is disabled for StudyBuddy.'))->name('verification.verify');
+
+// Official StudyBuddy app system: /apps, /apps/{slug}, /play/{slug}.
+if (file_exists(__DIR__.'/studybuddy_apps_unified.php')) {
+    require __DIR__.'/studybuddy_apps_unified.php';
+}
 
 foreach (['for-parents', 'for-teachers', 'about-us', 'privacy-policy', 'data-deletion', 'contact-us', 'support'] as $slug) {
     Route::get('/'.$slug, [PageController::class, 'show'])->defaults('slug', $slug)->name('pages.'.$slug);
@@ -46,7 +52,7 @@ foreach (['for-parents', 'for-teachers', 'about-us', 'privacy-policy', 'data-del
 
 Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
-    Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:10,1')->name('login.store');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     Route::middleware('admin')->group(function (): void {
@@ -64,7 +70,7 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
     });
 });
 
-foreach (['studybuddy_phase3.php', 'studybuddy_phase4.php', 'studybuddy_phase5_admin_experience.php', 'studybuddy_phase6_final.php', 'studybuddy_verification.php'] as $routeFile) {
+foreach (['studybuddy_phase3.php', 'studybuddy_phase4.php', 'studybuddy_phase5_admin_experience.php', 'studybuddy_phase6_final.php', 'studybuddy_connections.php', 'studybuddy_verification.php'] as $routeFile) {
     if (file_exists(__DIR__.'/'.$routeFile)) {
         require __DIR__.'/'.$routeFile;
     }
