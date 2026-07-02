@@ -4,17 +4,17 @@
         'student' => [
             'title' => 'Student path',
             'copy' => 'Practice in short quests, collect points, and keep your study streak gentle but consistent.',
-            'links' => [['Apps', route('studybuddy.final.app-launchpad')], ['My Quest', route('studybuddy.quests.index')], ['Rewards', route('studybuddy.experience.rewards')]],
+            'links' => [['Apps', url('/apps')], ['My Quest', route('studybuddy.quests.index')], ['Rewards', route('studybuddy.experience.rewards')]],
         ],
         'parent' => [
             'title' => 'Parent path',
             'copy' => 'Guide routines, check safety information, and help learners choose calm, age-aware practice.',
-            'links' => [['Parents Center', route('studybuddy.experience.parents-center')], ['Safety', route('studybuddy.experience.safety-support')], ['Launchpad', route('studybuddy.final.app-launchpad')]],
+            'links' => [['Parents Center', route('studybuddy.experience.parents-center')], ['Safety', route('studybuddy.experience.safety-support')], ['Launchpad', url('/apps')]],
         ],
         'teacher' => [
             'title' => 'Teacher path',
             'copy' => 'Turn mini-apps into classroom activities, save useful quests, and prepare simple learning flows.',
-            'links' => [['Teacher Studio', route('studybuddy.experience.teacher-studio')], ['Learning Paths', route('studybuddy.experience.learning-paths')], ['Apps', route('studybuddy.final.app-launchpad')]],
+            'links' => [['Teacher Studio', route('studybuddy.experience.teacher-studio')], ['Learning Paths', route('studybuddy.experience.learning-paths')], ['Apps', url('/apps')]],
         ],
         'independent_learner' => [
             'title' => 'Independent learner path',

@@ -1,0 +1,5 @@
+.sb-consistent-more { z-index: 95; }
+.sb-consistent-more[open] > div { display: grid; z-index: 120; }
+.sb-consistent-more > summary { user-select: none; }
+.sb-consistent-links > a[href*="?section="],
+.sb-footer-column a[href*="?section="] { cursor: pointer; }

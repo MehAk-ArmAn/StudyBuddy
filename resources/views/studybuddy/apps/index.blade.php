@@ -47,7 +47,7 @@
     </section>
 
     <section class="sb-apps-filters" aria-label="Filter StudyBuddy apps">
-        <form method="GET" action="{{ route('pages.apps') }}" class="sb-apps-filter-form">
+        <form method="GET" action="{{ url('/apps') }}" class="sb-apps-filter-form">
             <label>
                 <span>Search</span>
                 <input type="search" name="q" placeholder="Search apps..." data-sb-app-search>
@@ -79,7 +79,7 @@
             </label>
         </form>
         <div class="sb-apps-filter-pills" aria-label="Quick filters">
-            <a href="{{ route('pages.apps') }}" @class(['is-active' => $role === 'all' && $status === 'all' && $category === 'all'])>All</a>
+            <a href="{{ url('/apps') }}" @class(['is-active' => $role === 'all' && $status === 'all' && $category === 'all'])>All</a>
             <a href="{{ route('pages.apps', ['role' => 'student']) }}" @class(['is-active' => $role === 'student'])>Students</a>
             <a href="{{ route('pages.apps', ['role' => 'parent']) }}" @class(['is-active' => $role === 'parent'])>Parents</a>
             <a href="{{ route('pages.apps', ['role' => 'teacher']) }}" @class(['is-active' => $role === 'teacher'])>Teachers</a>

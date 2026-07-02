@@ -1,59 +1,73 @@
+@php
+    $adminTitle = trim($__env->yieldContent('title')) ?: ($title ?? 'StudyBuddy Admin');
+    $adminUser = auth()->user();
+    $adminLinks = [
+        ['label' => 'Overview', 'url' => url('/admin/control-room'), 'icon' => 'dashboard.svg'],
+        ['label' => 'Website Shell', 'url' => url('/admin/control-room/shell'), 'icon' => 'shell.svg'],
+        ['label' => 'Content Studio', 'url' => url('/admin/control-room/content-studio'), 'icon' => 'content.svg'],
+        ['label' => 'Apps & Platform', 'url' => url('/admin/control-room/final-platform'), 'icon' => 'apps.svg'],
+        ['label' => 'Users & Roles', 'url' => url('/admin/control-room/users'), 'icon' => 'users.svg'],
+        ['label' => 'Safety Review', 'url' => url('/admin/control-room/verifications'), 'icon' => 'safety.svg'],
+        ['label' => 'Site Settings', 'url' => url('/admin/control-room/site-settings'), 'icon' => 'settings.svg'],
+    ];
+@endphp
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>StudyBuddy Admin</title>
-    <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}">
-    @if(file_exists(public_path('assets/css/sb-final-ui-safety-polish.css')))
-        <link rel="stylesheet" href="{{ asset('assets/css/sb-final-ui-safety-polish.css') }}?v={{ filemtime(public_path('assets/css/sb-final-ui-safety-polish.css')) }}">
-    @endif
-    @if(file_exists(public_path('assets/css/sb-bangtan-nav-footer.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-bangtan-nav-footer.css') }}?v={{ filemtime(public_path('assets/css/sb-bangtan-nav-footer.css')) }}">@endif
-    @if(file_exists(public_path('assets/css/sb-admin-bangtan-polish.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-admin-bangtan-polish.css') }}?v={{ filemtime(public_path('assets/css/sb-admin-bangtan-polish.css')) }}">@endif
-    @if(file_exists(public_path('assets/css/sb-bangtan-hover-footer-upgrade.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-bangtan-hover-footer-upgrade.css') }}?v={{ filemtime(public_path('assets/css/sb-bangtan-hover-footer-upgrade.css')) }}">@endif
-    @if(file_exists(public_path('assets/css/sb-consistent-shell.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-consistent-shell.css') }}?v={{ filemtime(public_path('assets/css/sb-consistent-shell.css')) }}">@endif
+    <title>{{ $adminTitle }}</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/sb-control-room-admin.css') }}?v={{ file_exists(public_path('assets/css/sb-control-room-admin.css')) ? filemtime(public_path('assets/css/sb-control-room-admin.css')) : time() }}">
+    @stack('styles')
 </head>
-<body class="admin-body">
-    <div class="admin-shell">
-        <aside class="admin-sidebar" aria-label="Admin sidebar">
-            <a class="admin-brand" href="{{ route('admin.dashboard') }}">
-                <span class="admin-brand-mark">✦</span>
-                <span><strong>StudyBuddy</strong><small>Admin Control Center</small></span>
+<body class="sb-control-admin-body">
+    <div class="sb-control-admin-app">
+        <aside class="sb-control-sidebar">
+            <a class="sb-control-brand" href="{{ url('/admin/control-room') }}">
+                <img src="{{ asset('assets/studybuddy-control/logo.svg') }}" alt="StudyBuddy">
+                <span><strong>StudyBuddy</strong><em>Control Room</em></span>
             </a>
 
-            <nav class="admin-nav" aria-label="Admin navigation">
-                <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"><span>Dashboard</span></a>
-                <a class="nav-link {{ request()->routeIs('studybuddy.admin.content.*') ? 'active' : '' }}" href="{{ route('studybuddy.admin.content.index') }}"><span>Content Studio</span></a>
-                @if(Route::has('studybuddy.admin.final.index'))<a class="nav-link {{ request()->routeIs('studybuddy.admin.final.*') ? 'active' : '' }}" href="{{ route('studybuddy.admin.final.index') }}"><span>App Platform</span></a>@endif
-                @if(Route::has('studybuddy.admin.verifications.index'))<a class="nav-link {{ request()->routeIs('studybuddy.admin.verifications.*') ? 'active' : '' }}" href="{{ route('studybuddy.admin.verifications.index') }}"><span>Verifications</span></a>@endif
-                <a class="nav-link {{ request()->routeIs('admin.site-settings.*') ? 'active' : '' }}" href="{{ route('admin.site-settings.index') }}"><span>Site Settings</span></a>
-                <a class="nav-link {{ request()->routeIs('admin.navigation-items.*') ? 'active' : '' }}" href="{{ route('admin.navigation-items.index') }}"><span>Navigation</span></a>
-                <a class="nav-link {{ request()->routeIs('admin.footer-items.*') ? 'active' : '' }}" href="{{ route('admin.footer-items.index') }}"><span>Footer</span></a>
-                <a class="nav-link {{ request()->routeIs('admin.media-assets.*') ? 'active' : '' }}" href="{{ route('admin.media-assets.index') }}"><span>Media Library</span></a>
-                <a class="nav-link {{ request()->routeIs('admin.homepage-sections.*') || request()->routeIs('admin.homepage-section-items.*') ? 'active' : '' }}" href="{{ route('admin.homepage-sections.index') }}"><span>Homepage</span></a>
-                <a class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}" href="{{ route('admin.pages.index') }}"><span>Pages</span></a>
-                <a class="nav-link" href="{{ route('studybuddy.apps') }}" target="_blank" rel="noopener"><span>Preview Apps</span></a>
+            <nav class="sb-control-nav" aria-label="Admin navigation">
+                @foreach($adminLinks as $link)
+                    @php $path = trim(parse_url($link['url'], PHP_URL_PATH), '/'); @endphp
+                    <a href="{{ $link['url'] }}" @class(['active' => request()->is($path . '*')])>
+                        <img src="{{ asset('assets/studybuddy-control/' . $link['icon']) }}" alt="">
+                        <span>{{ $link['label'] }}</span>
+                    </a>
+                @endforeach
             </nav>
 
-            <div class="admin-sidebar-footer">
-                <p>Logged in as</p>
-                <strong>{{ auth()->user()?->name ?? 'Admin' }}</strong>
-                <form method="POST" action="{{ route('admin.logout') }}">@csrf<button class="logout-button" type="submit">Logout</button></form>
+            <div class="sb-control-upgrade">
+                <img src="{{ asset('assets/studybuddy-control/reports.svg') }}" alt="">
+                <strong>Professional Mode</strong>
+                <p>Everything stays inside the control room.</p>
             </div>
         </aside>
 
-        <main class="admin-main" id="admin-content">
-            <header class="admin-topbar">
-                <div><p class="admin-kicker">StudyBuddy Control Center</p><h1>@yield('page_title', 'Dashboard')</h1></div>
-                <a class="site-preview" href="{{ route('home') }}" target="_blank" rel="noopener">View Site</a>
+        <main class="sb-control-main">
+            <header class="sb-control-topbar">
+                <div>
+                    <p>StudyBuddy Admin</p>
+                    <h1>{{ $adminTitle }}</h1>
+                </div>
+
+                <div class="sb-control-top-actions">
+                    <a href="{{ url('/') }}" target="_blank" rel="noopener">Preview website</a>
+                    <span class="sb-control-avatar">{{ strtoupper(substr($adminUser->name ?? 'A', 0, 1)) }}</span>
+                    @auth
+                        <form method="POST" action="{{ route('logout') }}">@csrf<button type="submit">Logout</button></form>
+                    @endauth
+                </div>
             </header>
 
-            @if (session('status'))<div class="notice">{{ session('status') }}</div>@endif
+            @if(session('status'))
+                <div class="sb-control-alert">{{ session('status') }}</div>
+            @endif
+
             @yield('content')
         </main>
     </div>
-    @if(file_exists(public_path('assets/js/sb-bangtan-nav-footer.js')))<script src="{{ asset('assets/js/sb-bangtan-nav-footer.js') }}?v={{ filemtime(public_path('assets/js/sb-bangtan-nav-footer.js')) }}" defer></script>@endif
-    @if(file_exists(public_path('assets/js/sb-bangtan-hover-footer-upgrade.js')))<script src="{{ asset('assets/js/sb-bangtan-hover-footer-upgrade.js') }}?v={{ filemtime(public_path('assets/js/sb-bangtan-hover-footer-upgrade.js')) }}" defer></script>@endif
-    @if(file_exists(public_path('assets/js/sb-consistent-shell.js')))<script src="{{ asset('assets/js/sb-consistent-shell.js') }}?v={{ filemtime(public_path('assets/js/sb-consistent-shell.js')) }}" defer></script>@endif
+    @stack('scripts')
 </body>
 </html>

@@ -22,42 +22,48 @@
         return is_array($decoded) ? $decoded : $fallback;
     };
 
-    $groups = $decode($settings['shell_footer_groups_json'] ?? '', [
+    $safeGroups = [
         'Explore' => [
+            ['label' => 'Home', 'url' => '/'],
             ['label' => 'Apps', 'url' => '/apps'],
-            ['label' => 'Learning Hub', 'url' => '/learning-hub'],
-            ['label' => 'Quests', 'url' => '/my-quest'],
-            ['label' => 'Points Wallet', 'url' => '/points-wallet'],
+            ['label' => 'Learning Hub', 'url' => '/apps?section=learning'],
+            ['label' => 'Rewards', 'url' => '/apps?section=rewards'],
         ],
         'Roles' => [
             ['label' => 'Students', 'url' => '/apps?role=student'],
-            ['label' => 'Parents', 'url' => '/parents-center'],
-            ['label' => 'Teachers', 'url' => '/teacher-studio'],
+            ['label' => 'Parents', 'url' => '/apps?role=parent'],
+            ['label' => 'Teachers', 'url' => '/apps?role=teacher'],
             ['label' => 'Independent Learners', 'url' => '/apps?role=independent_learner'],
         ],
         'Learning Worlds' => [
             ['label' => 'Math Quest', 'url' => '/apps/math-quest'],
+            ['label' => 'Spelling Sprint', 'url' => '/apps/spelling-sprint'],
             ['label' => 'Reading Garden', 'url' => '/apps/reading-garden'],
             ['label' => 'Focus Forest', 'url' => '/apps/focus-forest'],
             ['label' => 'Quiz Galaxy', 'url' => '/apps/quiz-galaxy'],
         ],
-        'Community' => [
-            ['label' => 'About', 'url' => '/about'],
-            ['label' => 'Contact', 'url' => '/contact'],
-            ['label' => 'Privacy Policy', 'url' => '/privacy-policy'],
-            ['label' => 'Terms of Use', 'url' => '/terms'],
+        'Account' => [
+            ['label' => 'Login', 'url' => '/login'],
+            ['label' => 'Create Account', 'url' => '/register'],
+            ['label' => 'Dashboard', 'url' => '/dashboard'],
         ],
-    ]);
+    ];
+
+    $groups = $decode($settings['shell_footer_groups_json'] ?? '', $safeGroups);
 
     $socials = collect($decode($settings['shell_social_links_json'] ?? '', []))->filter(fn($link) => filled($link['url'] ?? null));
 
     $pills = [
         ['icon' => asset('assets/studybuddy-brand/icon-apps.svg'), 'label' => $settings['footer_pill_one'] ?? 'Explore apps', 'url' => '/apps'],
-        ['icon' => asset('assets/studybuddy-brand/icon-skills.svg'), 'label' => $settings['footer_pill_two'] ?? 'Build skills', 'url' => '/learning-hub'],
-        ['icon' => asset('assets/studybuddy-brand/icon-points.svg'), 'label' => $settings['footer_pill_three'] ?? 'Earn points', 'url' => '/points-wallet'],
+        ['icon' => asset('assets/studybuddy-brand/icon-skills.svg'), 'label' => $settings['footer_pill_two'] ?? 'Build skills', 'url' => '/apps?section=learning'],
+        ['icon' => asset('assets/studybuddy-brand/icon-points.svg'), 'label' => $settings['footer_pill_three'] ?? 'Earn points', 'url' => '/apps?section=rewards'],
     ];
 
-    $linkUrl = fn($url) => Str::startsWith(($url ?: '#'), ['http://', 'https://', '/']) ? ($url ?: '#') : url($url);
+    $linkUrl = function ($url) {
+        $url = trim((string) ($url ?: '#'));
+        if ($url === '#') return '#';
+        return Str::startsWith($url, ['http://', 'https://']) ? $url : url(Str::startsWith($url, '/') ? $url : '/' . $url);
+    };
 @endphp
 
 <footer class="sb-consistent-footer-wrap">
@@ -65,19 +71,12 @@
         <section class="sb-consistent-footer-top">
             <div class="sb-consistent-footer-brand">
                 <img src="{{ $logoSrc }}" alt="{{ $siteName }} logo">
-                <div>
-                    <p class="sb-footer-kicker">{{ $tagline }}</p>
-                    <h2>{{ $logoText }}</h2>
-                    <p>{{ $brandPromise }}</p>
-                </div>
+                <div><p class="sb-footer-kicker">{{ $tagline }}</p><h2>{{ $logoText }}</h2><p>{{ $brandPromise }}</p></div>
             </div>
 
             <div class="sb-footer-pills">
                 @foreach($pills as $pill)
-                    <a href="{{ $linkUrl($pill['url']) }}">
-                        <img src="{{ $pill['icon'] }}" alt="">
-                        <span>{{ $pill['label'] }}</span>
-                    </a>
+                    <a href="{{ $linkUrl($pill['url']) }}"><img src="{{ $pill['icon'] }}" alt=""><span>{{ $pill['label'] }}</span></a>
                 @endforeach
             </div>
         </section>
@@ -96,11 +95,7 @@
         </section>
 
         <section class="sb-footer-connect">
-            <div>
-                <p class="sb-footer-kicker">Connect with the StudyBuddy learning hub</p>
-                <h3>Find us across the learning universe</h3>
-                <p>Follow, subscribe, share, and stay connected with every creative corner of StudyBuddy.</p>
-            </div>
+            <div><p class="sb-footer-kicker">Connect with the StudyBuddy learning hub</p><h3>Find us across the learning universe</h3><p>Follow, subscribe, share, and stay connected with every creative corner of StudyBuddy.</p></div>
 
             <div class="sb-footer-socials">
                 @forelse($socials as $social)

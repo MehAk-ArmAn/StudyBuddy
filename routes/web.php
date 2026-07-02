@@ -77,3 +77,9 @@ foreach (['studybuddy_phase3.php', 'studybuddy_phase4.php', 'studybuddy_phase5_a
 }
 
 if (file_exists(__DIR__ . '/studybuddy_shell_admin.php')) { require __DIR__ . '/studybuddy_shell_admin.php'; }
+
+if (file_exists(__DIR__ . '/studybuddy_shell_redirects.php')) { require __DIR__ . '/studybuddy_shell_redirects.php'; }
+
+if (file_exists(__DIR__ . '/studybuddy_control_room.php')) { require __DIR__ . '/studybuddy_control_room.php'; }
+
+if (file_exists(__DIR__ . '/studybuddy_control_room_links.php')) { require __DIR__ . '/studybuddy_control_room_links.php'; }

@@ -14,7 +14,7 @@
 
 <main class="sb-app-detail-shell">
     <nav class="sb-app-breadcrumb" aria-label="Breadcrumb">
-        <a href="{{ route('pages.apps') }}">Apps</a>
+        <a href="{{ url('/apps') }}">Apps</a>
         <span>/</span>
         <strong>{{ $app->name }}</strong>
     </nav>

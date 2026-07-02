@@ -1,45 +1,34 @@
 @extends('layouts.admin')
 
+@section('title', $title ?? 'Admin Form')
+
 @section('content')
-    @php
-        $parentParams = $parentParams ?? (isset($parent) ? (is_array($parent) ? $parent : [$parent]) : []);
-        $formAction = $method === 'POST'
-            ? route($route.'.store', $parentParams)
-            : route($route.'.update', array_merge($parentParams, [$item]));
-    @endphp
-
-    <h2>{{ $title }}</h2>
-
-    @if($errors->any())
-        <div class="error">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form class="editor" method="POST" action="{{ $formAction }}">
+<section class="sb-control-resource">
+    <form class="sb-control-panel sb-control-form" method="POST" action="{{ ($method ?? 'POST') === 'PUT' ? route($route . '.update', $item) : route($route . '.store') }}">
         @csrf
-        @if($method !== 'POST')
-            @method($method)
-        @endif
+        @if(($method ?? 'POST') === 'PUT') @method('PUT') @endif
 
-        @foreach($fields as $field)
-            <label>
-                {{ $field }}
-                @if(in_array($field, ['is_enabled', 'opens_new_tab', 'is_active']))
-                    <input type="checkbox" name="{{ $field }}" value="1" @checked(old($field, $item->$field ?? true))>
-                @elseif(str_contains($field, 'body') || str_contains($field, 'subtitle') || str_contains($field, 'description') || $field === 'value' || $field === 'settings')
-                    <textarea name="{{ $field }}">{{ old($field, is_array($item->$field) ? json_encode($item->$field) : $item->$field) }}</textarea>
-                @else
-                    <input name="{{ $field }}" value="{{ old($field, $item->$field) }}" type="text" @if(str_contains($field, 'url')) placeholder="Use /apps, #section, mailto:hello@example.com, or https://..." @endif>
-                @endif
-            </label>
-        @endforeach
+        <div class="sb-control-panel-head wide">
+            <div><p class="sb-control-kicker">Editor</p><h2>{{ $title ?? 'Edit' }}</h2><p>Keep data clean and easy to understand.</p></div>
+            <div class="sb-control-row-actions">
+                @if(isset($route) && Route::has($route . '.index'))<a href="{{ route($route . '.index') }}">Back</a>@endif
+                <button class="primary" type="submit">Save</button>
+            </div>
+        </div>
 
-        <button>Save</button>
-        <a class="button" href="{{ route($route.'.index', $parentParams) }}">Cancel</a>
+        <div class="sb-control-form-grid">
+            @foreach(($fields ?? []) as $field)
+                @php
+                    $value = old($field, data_get($item, $field));
+                    $isLong = in_array($field, ['value', 'description', 'content', 'settings']) || strlen((string) $value) > 110;
+                @endphp
+                <label class="{{ $isLong ? 'wide' : '' }}">
+                    <span>{{ str($field)->replace('_', ' ')->title() }}</span>
+                    @if($isLong)<textarea name="{{ $field }}" rows="7">{{ $value }}</textarea>@else<input name="{{ $field }}" value="{{ $value }}">@endif
+                    @error($field)<small>{{ $message }}</small>@enderror
+                </label>
+            @endforeach
+        </div>
     </form>
+</section>
 @endsection

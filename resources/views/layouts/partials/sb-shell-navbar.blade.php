@@ -1,6 +1,5 @@
 @php
     use Illuminate\Support\Facades\DB;
-    use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
     use Illuminate\Support\Str;
 
@@ -19,12 +18,13 @@
         return is_array($decoded) ? $decoded : $fallback;
     };
 
-    $defaultNav = [
-        ['label' => 'Apps', 'url' => '/apps'],
-        ['label' => 'Learning', 'url' => '/learning-hub'],
-        ['label' => 'Parents', 'url' => '/parents-center'],
-        ['label' => 'Teachers', 'url' => '/teacher-studio'],
-        ['label' => 'Safety', 'url' => '/safety-support'],
+    $safePublicNav = [
+        ['label' => 'Home', 'url' => '/', 'roles' => ['all']],
+        ['label' => 'Apps', 'url' => '/apps', 'roles' => ['all']],
+        ['label' => 'Learning', 'url' => '/apps?section=learning', 'roles' => ['all']],
+        ['label' => 'Parents', 'url' => '/apps?role=parent', 'roles' => ['all']],
+        ['label' => 'Teachers', 'url' => '/apps?role=teacher', 'roles' => ['all']],
+        ['label' => 'Safety', 'url' => '/apps?section=safety', 'roles' => ['all']],
     ];
 
     $navItems = $decode($settings['shell_navigation_json'] ?? '', []);
@@ -33,28 +33,29 @@
         $navItems = collect($navigationItems)->filter(fn($item) => (bool)($item->is_enabled ?? true))->map(fn($item) => [
             'label' => $item->label ?? $item->title ?? $item->name ?? 'Link',
             'url' => $item->url ?? $item->href ?? '/',
+            'roles' => ['all'],
         ])->values()->all();
     }
 
-    $navItems = $navItems ?: $defaultNav;
+    $navItems = $navItems ?: $safePublicNav;
     $role = auth()->check() ? (auth()->user()->role ?? 'student') : 'guest';
 
     $visibleNav = collect($navItems)->filter(function ($item) use ($role) {
-        $roles = $item['roles'] ?? null;
-        if (!$roles || in_array('all', (array) $roles, true)) {
+        $roles = $item['roles'] ?? ['all'];
+        if (in_array('all', (array) $roles, true)) {
             return true;
         }
         return in_array($role, (array) $roles, true);
     })->values();
 
     $linkUrl = function ($url) {
-        $url = $url ?: '/';
-        return Str::startsWith($url, ['http://', 'https://', '/']) ? $url : url($url);
+        $url = trim((string) ($url ?: '/'));
+        if ($url === '') return url('/');
+        return Str::startsWith($url, ['http://', 'https://']) ? $url : url(Str::startsWith($url, '/') ? $url : '/' . $url);
     };
 
-    $primaryItems = $visibleNav->take(7);
-    $moreItems = $visibleNav->slice(7);
-
+    $primaryItems = $visibleNav->take(5);
+    $moreItems = $visibleNav->slice(5);
     $roleLabel = str_replace('_', ' ', $role);
 @endphp
 
@@ -62,10 +63,7 @@
     <div class="sb-consistent-nav">
         <a class="sb-consistent-brand" href="{{ url('/') }}" aria-label="{{ $siteName }} home">
             <img src="{{ $logoSrc }}" alt="{{ $siteName }} logo">
-            <span>
-                <strong>{{ $logoText }}</strong>
-                <em>{{ $tagline }}</em>
-            </span>
+            <span><strong>{{ $logoText }}</strong><em>{{ $tagline }}</em></span>
         </a>
 
         <button class="sb-consistent-menu" type="button" aria-expanded="false" aria-controls="sb-consistent-links">
