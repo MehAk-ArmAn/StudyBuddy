@@ -1,65 +1,88 @@
 @php
-    $user = auth()->user();
-    $role = $user?->normalizedRole();
-    $publicLinks = [
-        ['label' => 'Home', 'url' => route('home'), 'active' => request()->routeIs('home')],
-        ['label' => 'Apps', 'url' => route('studybuddy.apps'), 'active' => request()->is('apps*')],
-        ['label' => 'Learning', 'url' => route('studybuddy.experience.learning-hub'), 'active' => request()->routeIs('studybuddy.experience.learning-hub')],
-        ['label' => 'Paths', 'url' => route('studybuddy.experience.learning-paths'), 'active' => request()->routeIs('studybuddy.experience.learning-paths')],
-        ['label' => 'Parents', 'url' => route('studybuddy.experience.parents-center'), 'active' => request()->routeIs('studybuddy.experience.parents-center')],
-        ['label' => 'Teachers', 'url' => route('studybuddy.experience.teacher-studio'), 'active' => request()->routeIs('studybuddy.experience.teacher-studio')],
-        ['label' => 'Safety', 'url' => route('studybuddy.experience.safety-support'), 'active' => request()->routeIs('studybuddy.experience.safety-support')],
-    ];
-    $authLinks = [
-        ['label' => 'Dashboard', 'url' => route('dashboard'), 'active' => request()->routeIs('dashboard')],
-        ['label' => 'Command', 'url' => route('studybuddy.command-center'), 'active' => request()->routeIs('studybuddy.command-center') || request()->routeIs('studybuddy.dashboard.command-center')],
-        ['label' => 'My Quest', 'url' => route('studybuddy.quests.index'), 'active' => request()->routeIs('studybuddy.quests.*')],
-        ['label' => 'Wallet', 'url' => route('studybuddy.final.points-wallet'), 'active' => request()->routeIs('studybuddy.final.points-wallet')],
-    ];
-    if (Route::has('studybuddy.verification.center')) {
-        $authLinks[] = ['label' => 'Verify', 'url' => route('studybuddy.verification.center'), 'active' => request()->routeIs('studybuddy.verification.*')];
+    $settings = $settings ?? [];
+    $navigationItems = $navigationItems ?? collect();
+
+    $siteName = $settings['site_name'] ?? 'StudyBuddy';
+    $logoText = $settings['logo_text'] ?? $siteName;
+    $tagline = $settings['site_tagline'] ?? 'Learn • Play • Grow';
+
+    $navItems = collect($navigationItems ?? [])->filter(fn($item) => (bool)($item->is_enabled ?? true))->values();
+
+    if ($navItems->isEmpty()) {
+        $navItems = collect([
+            (object)['label' => 'Apps', 'title' => 'Apps', 'url' => url('/apps')],
+            (object)['label' => 'Learning', 'title' => 'Learning', 'url' => url('/learning-hub')],
+            (object)['label' => 'Parents', 'title' => 'Parents', 'url' => url('/parents-center')],
+            (object)['label' => 'Teachers', 'title' => 'Teachers', 'url' => url('/teacher-studio')],
+            (object)['label' => 'Safety', 'title' => 'Safety', 'url' => url('/safety-support')],
+        ]);
     }
+
+    $primaryItems = $navItems->take(7);
+    $moreItems = $navItems->slice(7);
+
+    $itemUrl = function ($item) {
+        $url = $item->url ?? $item->href ?? null;
+        if ($url) {
+            return \Illuminate\Support\Str::startsWith($url, ['http://', 'https://', '/']) ? $url : url($url);
+        }
+
+        $route = $item->route_name ?? $item->route ?? null;
+        return ($route && \Illuminate\Support\Facades\Route::has($route)) ? route($route) : url('/');
+    };
+
+    $itemLabel = fn ($item) => $item->label ?? $item->title ?? $item->name ?? 'Link';
 @endphp
-<nav class="sb-main-nav" aria-label="Main navigation" data-sb-polished-nav>
-    <a class="sb-brand" href="{{ route('home') }}" aria-label="StudyBuddy home">
-        @if (!empty($settings['logo_path']))
-            <img src="{{ asset($settings['logo_path']) }}" alt="" loading="lazy">
-        @else
-            <span class="sb-brand-mark">✦</span>
-        @endif
-        <span>{{ $settings['brand_name'] ?? 'StudyBuddy' }}</span>
-    </a>
 
-    <button class="sb-nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="sb-primary-nav">
-        <span>Menu</span><i aria-hidden="true">☰</i>
-    </button>
+<header class="sb-universe-nav-wrap">
+    <div class="sb-universe-nav" data-sb-universe-nav>
+        <a class="sb-universe-brand" href="{{ url('/') }}" aria-label="{{ $siteName }} home">
+            <span class="sb-universe-logo" aria-hidden="true">
+                @if(!empty($settings['logo_image']))
+                    <img src="{{ $settings['logo_image'] }}" alt="">
+                @else
+                    <span>🐬</span>
+                @endif
+            </span>
+            <span class="sb-universe-brand-text">
+                <strong>{{ $logoText }}</strong>
+                <em>{{ $tagline }}</em>
+            </span>
+        </a>
 
-    <div class="sb-nav-panel" id="sb-primary-nav" data-nav-links>
-        <div class="sb-nav-scroll">
-            @foreach($publicLinks as $link)
-                <a class="sb-nav-link {{ $link['active'] ? 'is-active' : '' }}" href="{{ $link['url'] }}">{{ $link['label'] }}</a>
+        <button class="sb-universe-toggle" type="button" aria-expanded="false" aria-controls="sb-universe-links">
+            <span></span><span></span><span></span>
+            <b>Menu</b>
+        </button>
+
+        <nav id="sb-universe-links" class="sb-universe-links" aria-label="Main navigation">
+            @foreach($primaryItems as $item)
+                <a href="{{ $itemUrl($item) }}"><span>{{ $itemLabel($item) }}</span></a>
             @endforeach
 
+            @if($moreItems->isNotEmpty())
+                <details class="sb-universe-more">
+                    <summary><span>More</span> <i>⌄</i></summary>
+                    <div>
+                        @foreach($moreItems as $item)
+                            <a href="{{ $itemUrl($item) }}">✦ {{ $itemLabel($item) }}</a>
+                        @endforeach
+                    </div>
+                </details>
+            @endif
+        </nav>
+
+        <div class="sb-universe-actions">
             @auth
-                <span class="sb-nav-divider" aria-hidden="true"></span>
-                @foreach($authLinks as $link)
-                    <a class="sb-nav-link {{ $link['active'] ? 'is-active' : '' }}" href="{{ $link['url'] }}">{{ $link['label'] }}</a>
-                @endforeach
-                @if($user?->is_admin)
-                    <span class="sb-nav-divider" aria-hidden="true"></span>
-                    <a class="sb-nav-link sb-nav-admin" href="{{ route('admin.dashboard') }}">Admin</a>
-                    @if(Route::has('studybuddy.admin.content.index'))<a class="sb-nav-link sb-nav-admin" href="{{ route('studybuddy.admin.content.index') }}">Content</a>@endif
-                    @if(Route::has('studybuddy.admin.final.index'))<a class="sb-nav-link sb-nav-admin" href="{{ route('studybuddy.admin.final.index') }}">Platform</a>@endif
-                @endif
-                <form class="sb-nav-logout" method="POST" action="{{ route('logout') }}" data-sb-logout-form>
+                <a class="sb-universe-soft" href="{{ route('dashboard') }}">Dashboard</a>
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit">Logout</button>
                 </form>
             @else
-                <span class="sb-nav-divider" aria-hidden="true"></span>
-                <a class="sb-nav-link" href="{{ route('login') }}">{{ $settings['login_label'] ?? 'Login' }}</a>
-                <a class="sb-nav-cta" href="{{ route('register') }}">{{ $settings['register_label'] ?? 'Get Started' }}</a>
+                <a class="sb-universe-soft" href="{{ route('login') }}">Login</a>
+                <a class="sb-universe-join" href="{{ route('register') }}">Join</a>
             @endauth
         </div>
     </div>
-</nav>
+</header>

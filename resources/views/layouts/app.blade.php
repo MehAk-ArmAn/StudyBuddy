@@ -32,6 +32,8 @@
     @endforeach
     @stack('styles')
     @if(file_exists(public_path('assets/css/sb-auth-role-ui.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-auth-role-ui.css') }}?v={{ filemtime(public_path('assets/css/sb-auth-role-ui.css')) }}">@endif
+    @if(file_exists(public_path('assets/css/sb-bangtan-nav-footer.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-bangtan-nav-footer.css') }}?v={{ filemtime(public_path('assets/css/sb-bangtan-nav-footer.css')) }}">@endif
+    @if(file_exists(public_path('assets/css/sb-bangtan-hover-footer-upgrade.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-bangtan-hover-footer-upgrade.css') }}?v={{ filemtime(public_path('assets/css/sb-bangtan-hover-footer-upgrade.css')) }}">@endif
 </head>
 <body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     <a class="sb-skip-link" href="#main-content">Skip to content</a>
@@ -53,5 +55,7 @@
     @endforeach
     @stack('scripts')
     @if(file_exists(public_path('assets/js/sb-auth-role-ui.js')))<script src="{{ asset('assets/js/sb-auth-role-ui.js') }}?v={{ filemtime(public_path('assets/js/sb-auth-role-ui.js')) }}" defer></script>@endif
+    @if(file_exists(public_path('assets/js/sb-bangtan-nav-footer.js')))<script src="{{ asset('assets/js/sb-bangtan-nav-footer.js') }}?v={{ filemtime(public_path('assets/js/sb-bangtan-nav-footer.js')) }}" defer></script>@endif
+    @if(file_exists(public_path('assets/js/sb-bangtan-hover-footer-upgrade.js')))<script src="{{ asset('assets/js/sb-bangtan-hover-footer-upgrade.js') }}?v={{ filemtime(public_path('assets/js/sb-bangtan-hover-footer-upgrade.js')) }}" defer></script>@endif
 </body>
 </html>
