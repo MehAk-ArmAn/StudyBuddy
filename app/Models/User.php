@@ -104,4 +104,23 @@ class User extends Authenticatable
             && ! empty($this->age_verified_at)
             && in_array($this->role_verification_status, ['verified', 'not_required', 'pending_child_approval', 'pending_admin_review'], true);
     }
+
+    public function needsAdultVerification(): bool
+    {
+        $role = $this->role ?? 'student';
+        $status = $this->adult_verification_status ?? 'not_required';
+
+        return in_array($role, ['parent', 'teacher', 'independent_learner'], true)
+            && !in_array($status, ['approved', 'not_required'], true);
+    }
+
+    public function needsRoleVerification(): bool
+    {
+        $role = $this->role ?? 'student';
+        $status = $this->role_verification_status ?? 'not_required';
+
+        return in_array($role, ['parent', 'teacher'], true)
+            && !in_array($status, ['approved', 'not_required'], true);
+    }
+
 }

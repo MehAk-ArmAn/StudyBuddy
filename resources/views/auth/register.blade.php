@@ -1,160 +1,45 @@
 @extends('layouts.app')
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
-@endpush
+@section('title', 'Create your StudyBuddy dashboard')
 
 @section('content')
-<section class="auth-wrap" aria-labelledby="register-title">
-    <article class="auth-panel auth-copy-panel">
-        <p class="eyebrow">Start your space</p>
-        <h1 id="register-title">Create your StudyBuddy account.</h1>
-        <p>Pick the role that fits you. Your dashboard changes its language, cards, and next steps so the experience feels clear from the first click.</p>
-
-        <div class="role-preview-grid">
-            <span>Student</span>
-            <span>Parent</span>
-            <span>Teacher</span>
-            <span>Independent Learner</span>
-        </div>
-
-        <p class="readability-note">Trust-first signup: learners, parents, teachers, and independent learners each get the right dashboard and safety flow.</p>
-    </article>
-
-    <form class="auth-panel auth-form" method="POST" action="{{ route('register.store') }}" data-register-form>
-        @csrf
-
-        <p class="eyebrow">Register</p>
-        <h2>Build your dashboard</h2>
-        <p class="soft-copy">After signup, youâ€™ll go straight to your welcome dashboard.</p>
-
-        @if($errors->any())
-            <div class="auth-error" role="alert">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
+<section class="sb-auth-stage" data-auth-page="register">
+    <div class="sb-auth-card sb-auth-card-wide">
+        <div class="sb-auth-intro">
+            <p class="eyebrow">Create account</p>
+            <h1>Build your StudyBuddy dashboard.</h1>
+            <p>Choose your role and StudyBuddy will shape the setup around you. Parent accounts connect through child emails, not learning-stage fields.</p>
+            <div class="sb-auth-flip-grid">
+                <article data-role-preview="student" class="is-active"><span>🎒</span><strong>Students</strong><p>Apps, quests, points, and learning stages.</p></article>
+                <article data-role-preview="parent"><span>🛡️</span><strong>Parents</strong><p>Secure child links and progress support.</p></article>
+                <article data-role-preview="teacher"><span>🏫</span><strong>Teachers</strong><p>Classroom tools and activity planning.</p></article>
+                <article data-role-preview="independent_learner"><span>🚀</span><strong>Independent</strong><p>Self-paced goals and focus routines.</p></article>
             </div>
-        @endif
-
-        <label>
-            Display name
-            <input name="name" value="{{ old('name') }}" autocomplete="name" placeholder="Example: Mehak" required>
-        </label>
-
-        <label>
-            Real name
-            <input name="real_name" value="{{ old('real_name') }}" autocomplete="name" placeholder="Your real name for trust and verification" required>
-        </label>
-
-        <label>
-            Email
-            <input type="email" name="email" value="{{ old('email') }}" autocomplete="email" required>
-        </label>
-
-        <label>
-            I am a
-            <select name="role" required data-role-select>
-                @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','independent_learner'=>'Independent Learner'] as $value => $label)
-                    <option value="{{ $value }}" @selected(old('role', 'student') === $value)>{{ $label }}</option>
-                @endforeach
-            </select>
-        </label>
-
-        <label>
-            Date of birth
-            <input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}" required>
-        </label>
-
-        <label>
-            Country
-            <input name="country" value="{{ old('country') }}" placeholder="Example: UAE">
-        </label>
-
-        <label>
-            Learning stage or focus
-            <input name="learning_stage" value="{{ old('learning_stage') }}" placeholder="Example: Year 10, GCSE, reading, math, focus">
-        </label>
-
-        <div class="role-extra" data-student-extra>
-            <label>
-                Parent / guardian email
-                <input type="email" name="guardian_email" value="{{ old('guardian_email') }}" placeholder="Needed for younger learners">
-            </label>
-            <p class="soft-copy">Learners under 13 need a parent or guardian email for safety.</p>
         </div>
 
-        <div class="role-extra" data-teacher-extra hidden>
-            <label>
-                School / organization name
-                <input name="organization_name" value="{{ old('organization_name') }}" placeholder="Example: StudyBuddy School">
-            </label>
+        <form method="POST" action="{{ route('register') }}" class="sb-auth-form" novalidate>
+            @csrf
+            <div class="sb-form-grid">
+                <label><span>Display name</span><input type="text" name="name" value="{{ old('name') }}" placeholder="Example: Mehak" required autocomplete="name">@error('name')<small>{{ $message }}</small>@enderror</label>
+                <label><span>Real name</span><input type="text" name="real_name" value="{{ old('real_name') }}" placeholder="Used for trust and safety" autocomplete="name">@error('real_name')<small>{{ $message }}</small>@enderror</label>
+                <label class="full"><span>Email</span><input type="email" name="email" value="{{ old('email') }}" placeholder="you@example.com" required autocomplete="email">@error('email')<small>{{ $message }}</small>@enderror</label>
+                <label><span>I am a</span><select name="role" id="sb-auth-role" required><option value="student" @selected(old('role','student')==='student')>Student</option><option value="parent" @selected(old('role')==='parent')>Parent</option><option value="teacher" @selected(old('role')==='teacher')>Teacher</option><option value="independent_learner" @selected(old('role')==='independent_learner')>Independent Learner</option></select>@error('role')<small>{{ $message }}</small>@enderror</label>
+                <label><span>Date of birth</span><input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}">@error('date_of_birth')<small>{{ $message }}</small>@enderror</label>
+                <label><span>Country</span><input type="text" name="country" value="{{ old('country') }}" placeholder="Example: UAE">@error('country')<small>{{ $message }}</small>@enderror</label>
+                <label data-student-field><span>Learning stage or focus</span><input type="text" name="learning_stage" value="{{ old('learning_stage') }}" placeholder="Year 10, GCSE, reading, math, focus">@error('learning_stage')<small>{{ $message }}</small>@enderror</label>
+            </div>
 
-            <label>
-                School / organization email
-                <input type="email" name="organization_email" value="{{ old('organization_email') }}" placeholder="Example: teacher@school.com">
-            </label>
+            <section class="sb-role-dynamic-panel" data-panel="student"><div class="sb-panel-icon">🎒</div><div><h2>Student setup</h2><p>Choose what StudyBuddy should help with first.</p></div><div class="sb-form-grid compact"><label><span>Main goal</span><select name="study_goal"><option value="">Choose one</option><option>Build confidence</option><option>Improve focus</option><option>Practice daily</option><option>Have fun learning</option></select></label><label><span>Favorite subjects</span><input name="favorite_subjects" value="{{ old('favorite_subjects') }}" placeholder="Math, reading, spelling..."></label></div></section>
+            <section class="sb-role-dynamic-panel is-hidden" data-panel="parent"><div class="sb-panel-icon">🛡️</div><div><h2>Parent setup</h2><p>Add your child account emails. They are used for secure approved connections.</p></div><label class="sb-block-label"><span>Children's email addresses</span><textarea name="child_emails_text" rows="3" placeholder="child1@email.com, child2@email.com">{{ old('child_emails_text') }}</textarea>@error('child_emails_text')<small>{{ $message }}</small>@enderror</label><div class="sb-form-grid compact"><label><span>Parent goal</span><select name="parent_goal"><option value="">Choose one</option><option>Support homework</option><option>Track safe progress</option><option>Find learning apps</option><option>Encourage routine</option></select></label><label><span>Child age range</span><select name="child_age_range"><option value="">Choose one</option><option>Under 7</option><option>7-10</option><option>11-13</option><option>14-16</option><option>Mixed ages</option></select></label></div></section>
+            <section class="sb-role-dynamic-panel is-hidden" data-panel="teacher"><div class="sb-panel-icon">🏫</div><div><h2>Teacher setup</h2><p>Set the classroom style so your dashboard shows professional teaching tools.</p></div><div class="sb-form-grid compact"><label><span>Class level</span><select name="class_level"><option value="">Choose one</option><option>Primary</option><option>Middle school</option><option>High school</option><option>Mixed level</option><option>Tutoring</option></select></label><label><span>Teaching focus</span><input name="teaching_focus" value="{{ old('teaching_focus') }}" placeholder="Reading, quiz prep, focus skills..."></label></div></section>
+            <section class="sb-role-dynamic-panel is-hidden" data-panel="independent_learner"><div class="sb-panel-icon">🚀</div><div><h2>Independent learner setup</h2><p>Choose a personal learning routine that fits your pace and style.</p></div><div class="sb-form-grid compact"><label><span>Learning goal</span><select name="independent_goal"><option value="">Choose one</option><option>Daily focus</option><option>Skill building</option><option>Revision routine</option><option>Creative learning</option><option>Career prep</option></select></label><label><span>Daily study time</span><select name="daily_time"><option value="">Choose one</option><option>5-10 minutes</option><option>15-20 minutes</option><option>30 minutes</option><option>1 hour+</option><option>Flexible</option></select></label></div></section>
 
-            <label>
-                Position title
-                <input name="position_title" value="{{ old('position_title') }}" placeholder="Example: Teacher, Tutor, Coordinator">
-            </label>
-
-            <p class="soft-copy">Teacher accounts need verification before classroom tools unlock.</p>
-        </div>
-
-        <label>
-            Access key
-            <input type="password" name="password" autocomplete="new-password" required>
-        </label>
-
-        <label>
-            Confirm access key
-            <input type="password" name="password_confirmation" autocomplete="new-password" required>
-        </label>
-
-        <label class="check-row">
-            <input type="checkbox" name="safeguarding_agreement" value="1" required @checked(old('safeguarding_agreement'))>
-            <span>I agree to use StudyBuddy safely and respectfully.</span>
-        </label>
-
-        <label class="check-row">
-            <input type="checkbox" name="truth_confirmation" value="1" required @checked(old('truth_confirmation'))>
-            <span>I confirm the information I entered is accurate.</span>
-        </label>
-
-        <button class="btn" type="submit">Create dashboard</button>
-
-        <p class="auth-switch">Already have an account? <a href="{{ route('login') }}">Login instead</a></p>
-    </form>
+            <div class="sb-form-grid"><label><span>Access key</span><input type="password" name="password" required autocomplete="new-password">@error('password')<small>{{ $message }}</small>@enderror</label><label><span>Confirm access key</span><input type="password" name="password_confirmation" required autocomplete="new-password"></label></div>
+            <label class="sb-check-row"><input type="checkbox" name="safe_use_confirmed" value="1" required @checked(old('safe_use_confirmed'))><span>I agree to use StudyBuddy safely and respectfully.</span></label>
+            <label class="sb-check-row"><input type="checkbox" name="accuracy_confirmed" value="1" required @checked(old('accuracy_confirmed'))><span>I confirm the information I entered is accurate.</span></label>
+            <button class="sb-auth-submit" type="submit">Create dashboard</button>
+            <p class="sb-auth-switch">Already have an account? <a href="{{ route('login') }}">Login instead</a></p>
+        </form>
+    </div>
 </section>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    const select = document.querySelector('[data-role-select]');
-    const teacherExtra = document.querySelector('[data-teacher-extra]');
-    const studentExtra = document.querySelector('[data-student-extra]');
-
-    function syncRoleFields() {
-        const role = select ? select.value : 'student';
-
-        if (teacherExtra) {
-            teacherExtra.hidden = role !== 'teacher';
-            teacherExtra.querySelectorAll('input').forEach(input => {
-                input.required = role === 'teacher';
-            });
-        }
-
-        if (studentExtra) {
-            studentExtra.hidden = role !== 'student';
-        }
-    }
-
-    if (select) {
-        select.addEventListener('change', syncRoleFields);
-        syncRoleFields();
-    }
-});
-</script>
 @endsection

@@ -1,0 +1,1 @@
+@include('errors.studybuddy-friendly', ['code' => '403', 'title' => 'This area is role-protected.', 'message' => 'Your account is safe, but this page is not available for your current StudyBuddy role yet.'])

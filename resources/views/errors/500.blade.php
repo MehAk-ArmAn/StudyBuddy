@@ -1,0 +1,1 @@
+@include('errors.studybuddy-friendly', ['code' => '500', 'title' => 'StudyBuddy hit a glitch.', 'message' => 'The app could not finish this request. Try refreshing once, then return to the dashboard.'])

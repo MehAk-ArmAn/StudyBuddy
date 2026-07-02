@@ -1,0 +1,1 @@
+@include('errors.studybuddy-friendly', ['code' => '419', 'title' => 'Your session took a tiny nap.', 'message' => 'Refresh the page and try again. This usually happens when a form stays open for too long.'])
