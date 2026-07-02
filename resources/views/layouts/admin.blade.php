@@ -11,6 +11,7 @@
     @if(file_exists(public_path('assets/css/sb-bangtan-nav-footer.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-bangtan-nav-footer.css') }}?v={{ filemtime(public_path('assets/css/sb-bangtan-nav-footer.css')) }}">@endif
     @if(file_exists(public_path('assets/css/sb-admin-bangtan-polish.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-admin-bangtan-polish.css') }}?v={{ filemtime(public_path('assets/css/sb-admin-bangtan-polish.css')) }}">@endif
     @if(file_exists(public_path('assets/css/sb-bangtan-hover-footer-upgrade.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-bangtan-hover-footer-upgrade.css') }}?v={{ filemtime(public_path('assets/css/sb-bangtan-hover-footer-upgrade.css')) }}">@endif
+    @if(file_exists(public_path('assets/css/sb-consistent-shell.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-consistent-shell.css') }}?v={{ filemtime(public_path('assets/css/sb-consistent-shell.css')) }}">@endif
 </head>
 <body class="admin-body">
     <div class="admin-shell">
@@ -53,5 +54,6 @@
     </div>
     @if(file_exists(public_path('assets/js/sb-bangtan-nav-footer.js')))<script src="{{ asset('assets/js/sb-bangtan-nav-footer.js') }}?v={{ filemtime(public_path('assets/js/sb-bangtan-nav-footer.js')) }}" defer></script>@endif
     @if(file_exists(public_path('assets/js/sb-bangtan-hover-footer-upgrade.js')))<script src="{{ asset('assets/js/sb-bangtan-hover-footer-upgrade.js') }}?v={{ filemtime(public_path('assets/js/sb-bangtan-hover-footer-upgrade.js')) }}" defer></script>@endif
+    @if(file_exists(public_path('assets/js/sb-consistent-shell.js')))<script src="{{ asset('assets/js/sb-consistent-shell.js') }}?v={{ filemtime(public_path('assets/js/sb-consistent-shell.js')) }}" defer></script>@endif
 </body>
 </html>

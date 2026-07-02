@@ -75,3 +75,5 @@ foreach (['studybuddy_phase3.php', 'studybuddy_phase4.php', 'studybuddy_phase5_a
         require __DIR__.'/'.$routeFile;
     }
 }
+
+if (file_exists(__DIR__ . '/studybuddy_shell_admin.php')) { require __DIR__ . '/studybuddy_shell_admin.php'; }
