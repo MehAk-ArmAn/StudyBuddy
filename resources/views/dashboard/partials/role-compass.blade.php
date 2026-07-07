@@ -1,38 +1,45 @@
 @php
-    $roleKey = strtolower((string) (auth()->user()->role ?? 'student'));
-    $roleCards = [
+    $user = auth()->user();
+    $role = $user?->role ?? 'student';
+
+    $cards = [
         'student' => [
-            'title' => 'Student path',
-            'copy' => 'Practice in short quests, collect points, and keep your study streak gentle but consistent.',
-            'links' => [['Apps', url('/apps')], ['My Quest', route('studybuddy.quests.index')], ['Rewards', route('studybuddy.experience.rewards')]],
+            ['title' => 'Learning Hub', 'body' => 'Pick a path and keep practicing.', 'url' => url('/apps?section=learning')],
+            ['title' => 'Rewards', 'body' => 'See points and progress rewards.', 'url' => url('/apps?section=rewards')],
+            ['title' => 'My Quest', 'body' => 'Continue saved missions.', 'url' => \Illuminate\Support\Facades\Route::has('studybuddy.quests.index') ? route('studybuddy.quests.index') : url('/my-quest')],
         ],
         'parent' => [
-            'title' => 'Parent path',
-            'copy' => 'Guide routines, check safety information, and help learners choose calm, age-aware practice.',
-            'links' => [['Parents Center', route('studybuddy.experience.parents-center')], ['Safety', route('studybuddy.experience.safety-support')], ['Launchpad', url('/apps')]],
+            ['title' => 'Parent View', 'body' => 'Preview parent support tools.', 'url' => url('/apps?role=parent')],
+            ['title' => 'Safety Support', 'body' => 'Review safe learning guidance.', 'url' => url('/apps?section=safety')],
+            ['title' => 'Apps', 'body' => 'Explore learning apps for your child.', 'url' => url('/apps')],
         ],
         'teacher' => [
-            'title' => 'Teacher path',
-            'copy' => 'Turn mini-apps into classroom activities, save useful quests, and prepare simple learning flows.',
-            'links' => [['Teacher Studio', route('studybuddy.experience.teacher-studio')], ['Learning Paths', route('studybuddy.experience.learning-paths')], ['Apps', url('/apps')]],
+            ['title' => 'Teacher Tools', 'body' => 'Preview classroom-ready tools.', 'url' => url('/apps?role=teacher')],
+            ['title' => 'Learning Hub', 'body' => 'Find learning experiences.', 'url' => url('/apps?section=learning')],
+            ['title' => 'Apps', 'body' => 'Explore app catalog.', 'url' => url('/apps')],
         ],
         'independent_learner' => [
-            'title' => 'Independent learner path',
-            'copy' => 'Build your own routine with quests, focused sessions, points, and a clear personal roadmap.',
-            'links' => [['Learning Hub', route('studybuddy.experience.learning-hub')], ['Wallet', route('studybuddy.final.points-wallet')], ['Roadmap', route('studybuddy.final.roadmap')]],
+            ['title' => 'Learning Hub', 'body' => 'Build a self-paced routine.', 'url' => url('/apps?role=independent_learner')],
+            ['title' => 'Rewards', 'body' => 'Track points and momentum.', 'url' => url('/apps?section=rewards')],
+            ['title' => 'Roadmap', 'body' => 'See what is coming next.', 'url' => url('/apps?section=roadmap')],
         ],
     ];
-    $card = $roleCards[$roleKey] ?? $roleCards['student'];
+
+    $items = $cards[$role] ?? $cards['student'];
 @endphp
-<section class="sb-role-compass auth-panel" aria-label="Role-aware StudyBuddy shortcuts">
-    <div>
+
+<section class="sb-role-compass sbv-dashboard-card">
+    <div class="sb-role-compass__head">
         <p class="eyebrow">Role compass</p>
-        <h2>{{ $card['title'] }}</h2>
-        <p>{{ $card['copy'] }}</p>
+        <h2>{{ str_replace('_', ' ', ucfirst($role)) }} options</h2>
+        <p>Your dashboard shortcuts are safe direct URLs now, so they won’t crash when old route names move.</p>
     </div>
-    <div class="sb-role-compass__links">
-        @foreach($card['links'] as [$label, $href])
-            <a href="{{ $href }}">{{ $label }} <span>→</span></a>
+    <div class="sb-role-compass__grid">
+        @foreach($items as $item)
+            <a class="sb-role-compass__card" href="{{ $item['url'] }}">
+                <strong>{{ $item['title'] }}</strong>
+                <span>{{ $item['body'] }}</span>
+            </a>
         @endforeach
     </div>
 </section>

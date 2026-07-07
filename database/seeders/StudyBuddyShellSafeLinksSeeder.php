@@ -53,16 +53,13 @@ class StudyBuddyShellSafeLinksSeeder extends Seeder
 
         foreach ($settings as $key => $value) {
             $payload = ['key' => $key, 'value' => $value];
-
             foreach (['type' => 'json', 'group' => 'shell', 'sort_order' => 10, 'is_enabled' => true] as $column => $default) {
                 if (Schema::hasColumn('site_settings', $column)) {
                     $payload[$column] = $default;
                 }
             }
-
             if (Schema::hasColumn('site_settings', 'updated_at')) $payload['updated_at'] = now();
             if (Schema::hasColumn('site_settings', 'created_at')) $payload['created_at'] = now();
-
             DB::table('site_settings')->updateOrInsert(['key' => $key], $payload);
         }
 

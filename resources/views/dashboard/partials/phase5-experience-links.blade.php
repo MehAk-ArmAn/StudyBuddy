@@ -1,13 +1,13 @@
-<section class="sbx-dashboard-links" aria-label="StudyBuddy experience shortcuts">
+<section class="sbx-dashboard-links">
     <div>
-        <span class="sbx-kicker">Experience hub</span>
-        <h2>Keep building your StudyBuddy universe</h2>
-        <p>Explore learning paths, rewards, parent/teacher guidance, and the connected mini-app ecosystem.</p>
+        <p class="sbx-kicker">StudyBuddy Experience</p>
+        <h2>Explore your connected learning universe</h2>
+        <p>Open learning, rewards, app worlds, and safety support without route errors.</p>
     </div>
     <div class="sbx-dashboard-links__grid">
-        <a href="{{ route('studybuddy.experience.learning-hub') }}">Learning Hub <span>→</span></a>
-        <a href="{{ route('studybuddy.experience.rewards') }}">Rewards <span>→</span></a>
-        <a href="{{ route('studybuddy.experience.app-ecosystem') }}">App Ecosystem <span>→</span></a>
-        <a href="{{ route('studybuddy.experience.safety-support') }}">Support <span>→</span></a>
+        <a href="{{ url('/apps?section=learning') }}">Learning Hub <span>→</span></a>
+        <a href="{{ url('/apps?section=rewards') }}">Rewards <span>→</span></a>
+        <a href="{{ url('/apps') }}">App Ecosystem <span>→</span></a>
+        <a href="{{ url('/apps?section=safety') }}">Support <span>→</span></a>
     </div>
 </section>

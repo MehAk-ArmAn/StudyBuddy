@@ -1,1 +1,1 @@
-@include('admin.control-room.index')
+@extends('admin.control-room.index')

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FooterItemController;
 use App\Http\Controllers\Admin\HomepageSectionController;
 use App\Http\Controllers\Admin\HomepageSectionItemController;
@@ -18,6 +17,14 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserAccessController;
 use Illuminate\Support\Facades\Route;
 
+/*
+|--------------------------------------------------------------------------
+| Core Website Routes
+|--------------------------------------------------------------------------
+| Keep this file boring and organized. StudyBuddy feature modules live in
+| routes/studybuddy.php so web.php does not become patch spaghetti again.
+*/
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('guest')->group(function (): void {
@@ -34,21 +41,23 @@ Route::middleware('auth')->group(function (): void {
     Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->name('dashboard.password.update');
 });
 
-// Email verification is intentionally disabled. Keep these URLs safe so stale links never crash.
+// Email verification is intentionally disabled. Keep stale URLs safe.
 Route::middleware('auth')->group(function (): void {
     Route::get('/email/verify', [UserAccessController::class, 'verificationNotice'])->name('verification.notice');
     Route::post('/email/verification-notification', [UserAccessController::class, 'resendVerification'])->name('verification.send');
 });
 Route::get('/email/verify/{id}/{hash}', fn () => redirect()->route('dashboard')->with('status', 'Email verification is disabled for StudyBuddy.'))->name('verification.verify');
 
-// Official StudyBuddy app system: /apps, /apps/{slug}, /play/{slug}.
-if (file_exists(__DIR__.'/studybuddy_apps_unified.php')) {
-    require __DIR__.'/studybuddy_apps_unified.php';
-}
-
 foreach (['for-parents', 'for-teachers', 'about-us', 'privacy-policy', 'data-deletion', 'contact-us', 'support'] as $slug) {
     Route::get('/'.$slug, [PageController::class, 'show'])->defaults('slug', $slug)->name('pages.'.$slug);
 }
+
+/*
+|--------------------------------------------------------------------------
+| Classic Admin Resource Routes
+|--------------------------------------------------------------------------
+| These remain for compatibility, but the sidebar points to /admin/control-room.
+*/
 
 Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
@@ -56,7 +65,7 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     Route::middleware('admin')->group(function (): void {
-        Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
+        Route::redirect('/dashboard', '/admin/control-room')->name('dashboard');
         Route::resource('users', AdminUserController::class)->except(['show']);
         Route::resource('site-settings', SiteSettingController::class)->except(['show']);
         Route::resource('media-assets', MediaAssetController::class)->except(['show']);
@@ -70,16 +79,8 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
     });
 });
 
-foreach (['studybuddy_phase3.php', 'studybuddy_phase4.php', 'studybuddy_phase5_admin_experience.php', 'studybuddy_phase6_final.php', 'studybuddy_connections.php', 'studybuddy_verification.php'] as $routeFile) {
-    if (file_exists(__DIR__.'/'.$routeFile)) {
-        require __DIR__.'/'.$routeFile;
-    }
+if (file_exists(__DIR__.'/studybuddy.php')) {
+    require __DIR__.'/studybuddy.php';
 }
 
-if (file_exists(__DIR__ . '/studybuddy_shell_admin.php')) { require __DIR__ . '/studybuddy_shell_admin.php'; }
-
-if (file_exists(__DIR__ . '/studybuddy_shell_redirects.php')) { require __DIR__ . '/studybuddy_shell_redirects.php'; }
-
-if (file_exists(__DIR__ . '/studybuddy_control_room.php')) { require __DIR__ . '/studybuddy_control_room.php'; }
-
-if (file_exists(__DIR__ . '/studybuddy_control_room_links.php')) { require __DIR__ . '/studybuddy_control_room_links.php'; }
+if (file_exists(__DIR__ . '/studybuddy_missing_route_aliases.php')) { require __DIR__ . '/studybuddy_missing_route_aliases.php'; }

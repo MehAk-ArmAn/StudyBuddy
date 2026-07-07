@@ -80,11 +80,11 @@
         </form>
         <div class="sb-apps-filter-pills" aria-label="Quick filters">
             <a href="{{ url('/apps') }}" @class(['is-active' => $role === 'all' && $status === 'all' && $category === 'all'])>All</a>
-            <a href="{{ route('pages.apps', ['role' => 'student']) }}" @class(['is-active' => $role === 'student'])>Students</a>
-            <a href="{{ route('pages.apps', ['role' => 'parent']) }}" @class(['is-active' => $role === 'parent'])>Parents</a>
-            <a href="{{ route('pages.apps', ['role' => 'teacher']) }}" @class(['is-active' => $role === 'teacher'])>Teachers</a>
-            <a href="{{ route('pages.apps', ['role' => 'independent_learner']) }}" @class(['is-active' => $role === 'independent_learner'])>Independent</a>
-            <a href="{{ route('pages.apps', ['status' => 'web']) }}" @class(['is-active' => $status === 'web'])>Web Play</a>
+            <a href="{{ url('/apps') . '?' . http_build_query(['role' => 'student']) }}" @class(['is-active' => $role === 'student'])>Students</a>
+            <a href="{{ url('/apps') . '?' . http_build_query(['role' => 'parent']) }}" @class(['is-active' => $role === 'parent'])>Parents</a>
+            <a href="{{ url('/apps') . '?' . http_build_query(['role' => 'teacher']) }}" @class(['is-active' => $role === 'teacher'])>Teachers</a>
+            <a href="{{ url('/apps') . '?' . http_build_query(['role' => 'independent_learner']) }}" @class(['is-active' => $role === 'independent_learner'])>Independent</a>
+            <a href="{{ url('/apps') . '?' . http_build_query(['status' => 'web']) }}" @class(['is-active' => $status === 'web'])>Web Play</a>
         </div>
     </section>
 

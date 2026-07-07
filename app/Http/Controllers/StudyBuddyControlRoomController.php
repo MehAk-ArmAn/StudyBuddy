@@ -23,20 +23,21 @@ class StudyBuddyControlRoomController extends Controller
             'quests' => $count('saved_quests'),
         ];
 
-        $sections = $this->sections();
-
-        return view('admin.control-room.index', compact('stats', 'sections'));
+        return view('admin.control-room.index', [
+            'stats' => $stats,
+            'sections' => $this->sections(),
+        ]);
     }
 
     private function sections(): array
     {
         return [
-            ['title' => 'Website Shell', 'subtitle' => 'Navbar, footer, logo, brand promise, social links.', 'url' => url('/admin/studybuddy/shell'), 'icon' => asset('assets/studybuddy-control/shell.svg'), 'class' => 'purple', 'cta' => 'Edit shell'],
-            ['title' => 'Content Studio', 'subtitle' => 'Public page content, learning copy, sections, blocks.', 'url' => url('/admin/studybuddy/content-studio'), 'icon' => asset('assets/studybuddy-control/content.svg'), 'class' => 'blue', 'cta' => 'Manage content'],
-            ['title' => 'Apps & Platform', 'subtitle' => 'Mini apps, platform readiness, links, points.', 'url' => url('/admin/studybuddy/final-platform'), 'icon' => asset('assets/studybuddy-control/apps.svg'), 'class' => 'cyan', 'cta' => 'Manage apps'],
-            ['title' => 'Users & Roles', 'subtitle' => 'Students, parents, teachers, independent learners.', 'url' => url('/admin/users'), 'icon' => asset('assets/studybuddy-control/users.svg'), 'class' => 'purple', 'cta' => 'View users'],
-            ['title' => 'Safety Review', 'subtitle' => 'Role checks, verification, child/parent safety.', 'url' => url('/admin/studybuddy/verifications'), 'icon' => asset('assets/studybuddy-control/safety.svg'), 'class' => 'blue', 'cta' => 'Review safety'],
-            ['title' => 'Site Settings', 'subtitle' => 'Advanced setting keys and fallback values.', 'url' => url('/admin/site-settings'), 'icon' => asset('assets/studybuddy-control/settings.svg'), 'class' => 'cyan', 'cta' => 'Open settings'],
+            ['title' => 'Website Shell', 'subtitle' => 'Navbar, footer, logo, brand promise, social links.', 'url' => url('/admin/control-room/shell'), 'icon' => asset('assets/studybuddy-control/shell.svg'), 'class' => 'purple', 'cta' => 'Edit shell'],
+            ['title' => 'Content Studio', 'subtitle' => 'Public page content, learning copy, sections, blocks.', 'url' => url('/admin/control-room/content-studio'), 'icon' => asset('assets/studybuddy-control/content.svg'), 'class' => 'blue', 'cta' => 'Manage content'],
+            ['title' => 'Apps & Platform', 'subtitle' => 'Mini apps, platform readiness, links, points.', 'url' => url('/admin/control-room/final-platform'), 'icon' => asset('assets/studybuddy-control/apps.svg'), 'class' => 'cyan', 'cta' => 'Manage apps'],
+            ['title' => 'Users & Roles', 'subtitle' => 'Students, parents, teachers, independent learners.', 'url' => url('/admin/control-room/users'), 'icon' => asset('assets/studybuddy-control/users.svg'), 'class' => 'purple', 'cta' => 'View users'],
+            ['title' => 'Safety Review', 'subtitle' => 'Role checks, verification, child/parent safety.', 'url' => url('/admin/control-room/verifications'), 'icon' => asset('assets/studybuddy-control/safety.svg'), 'class' => 'blue', 'cta' => 'Review safety'],
+            ['title' => 'Site Settings', 'subtitle' => 'Advanced setting keys and fallback values.', 'url' => url('/admin/control-room/site-settings'), 'icon' => asset('assets/studybuddy-control/settings.svg'), 'class' => 'cyan', 'cta' => 'Open settings'],
         ];
     }
 

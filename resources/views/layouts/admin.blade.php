@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $adminTitle }}</title>
     <link rel="stylesheet" href="{{ asset('assets/css/sb-control-room-admin.css') }}?v={{ file_exists(public_path('assets/css/sb-control-room-admin.css')) ? filemtime(public_path('assets/css/sb-control-room-admin.css')) : time() }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/sb-control-room-hardening.css') }}?v={{ file_exists(public_path('assets/css/sb-control-room-hardening.css')) ? filemtime(public_path('assets/css/sb-control-room-hardening.css')) : time() }}">
     @stack('styles')
 </head>
 <body class="sb-control-admin-body">
