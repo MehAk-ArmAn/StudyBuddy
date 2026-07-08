@@ -39,6 +39,9 @@
     @if(file_exists(public_path('assets/css/sb-shell-safe-links-fix.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-shell-safe-links-fix.css') }}?v={{ filemtime(public_path('assets/css/sb-shell-safe-links-fix.css')) }}">@endif
     @if(file_exists(public_path('assets/css/sb-admin-simple-roomy.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-admin-simple-roomy.css') }}?v={{ filemtime(public_path('assets/css/sb-admin-simple-roomy.css')) }}">@endif
     @if(file_exists(public_path('assets/css/sb-structure-publish-polish.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-structure-publish-polish.css') }}?v={{ filemtime(public_path('assets/css/sb-structure-publish-polish.css')) }}">@endif
+    @if(file_exists(public_path('assets/css/studybuddy-advanced-shell.css')))
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-advanced-shell.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-advanced-shell.css')) }}">
+    @endif
 </head>
 <body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     <a class="sb-skip-link" href="#main-content">Skip to content</a>
@@ -64,5 +67,8 @@
     @if(file_exists(public_path('assets/js/sb-bangtan-hover-footer-upgrade.js')))<script src="{{ asset('assets/js/sb-bangtan-hover-footer-upgrade.js') }}?v={{ filemtime(public_path('assets/js/sb-bangtan-hover-footer-upgrade.js')) }}" defer></script>@endif
     @if(file_exists(public_path('assets/js/sb-shell-nav-footer.js')))<script src="{{ asset('assets/js/sb-shell-nav-footer.js') }}?v={{ filemtime(public_path('assets/js/sb-shell-nav-footer.js')) }}" defer></script>@endif
     @if(file_exists(public_path('assets/js/sb-consistent-shell.js')))<script src="{{ asset('assets/js/sb-consistent-shell.js') }}?v={{ filemtime(public_path('assets/js/sb-consistent-shell.js')) }}" defer></script>@endif
+    @if(file_exists(public_path('assets/js/studybuddy-advanced-shell.js')))
+        <script src="{{ asset('assets/js/studybuddy-advanced-shell.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-advanced-shell.js')) }}" defer></script>
+    @endif
 </body>
 </html>

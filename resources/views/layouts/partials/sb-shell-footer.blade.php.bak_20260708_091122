@@ -76,12 +76,11 @@
 @endphp
 
 <footer class="sb-advanced-footer">
-    <div class="sb-footer-glow one" aria-hidden="true"></div>
-    <div class="sb-footer-glow two" aria-hidden="true"></div>
+    <div class="sb-footer-orbit" aria-hidden="true"></div>
 
     <div class="sb-footer-inner">
-        <section class="sb-footer-top-section">
-            <div class="sb-footer-brand-block">
+        <section class="sb-footer-hero">
+            <div>
                 <a class="sb-footer-brand" href="{{ url('/') }}">
                     @if($logoPath)
                         <img src="{{ str_starts_with($logoPath, 'http') ? $logoPath : asset(ltrim($logoPath, '/')) }}" alt="StudyBuddy logo">
@@ -91,90 +90,62 @@
                         <em>{{ $tagline }}</em>
                     </span>
                 </a>
-
                 <p>{{ $promise }}</p>
             </div>
 
-            <div class="sb-footer-action-card">
-                <span>Ready to start?</span>
-                <h2>Build your learning dashboard.</h2>
-                <p>Choose your role, explore the app universe, and grow with calm progress.</p>
-                <div>
-                    <a href="{{ url('/register') }}">Create account</a>
-                    <a class="soft" href="{{ url('/apps') }}">Explore apps</a>
-                </div>
+            <div class="sb-footer-pills">
+                <span>{{ $pillOne }}</span>
+                <span>{{ $pillTwo }}</span>
+                <span>{{ $pillThree }}</span>
             </div>
         </section>
 
-        <section class="sb-footer-value-strip" aria-label="StudyBuddy values">
-            <article>
-                <strong>{{ $pillOne }}</strong>
-                <span>Discover skill-building mini apps.</span>
-            </article>
-            <article>
-                <strong>{{ $pillTwo }}</strong>
-                <span>Practice with clear feedback and routines.</span>
-            </article>
-            <article>
-                <strong>{{ $pillThree }}</strong>
-                <span>Stay motivated with quests and progress.</span>
-            </article>
-        </section>
-
-        <section class="sb-footer-link-section">
-            <div class="sb-footer-section-heading">
-                <span>StudyBuddy Map</span>
-                <h2>Everything connected in one learning universe.</h2>
-            </div>
-
-            <div class="sb-footer-grid" aria-label="StudyBuddy footer navigation">
-                @foreach($footerGroups as $group => $links)
-                    <div class="sb-footer-group">
-                        <h3>{{ $group }}</h3>
-                        <ul>
-                            @foreach($links as $link)
-                                @php
-                                    $label = $link['label'] ?? 'Link';
-                                    $url = $link['url'] ?? '#';
-                                    $isExternal = str_starts_with($url, 'http') || str_starts_with($url, 'mailto:');
-                                @endphp
-                                <li>
-                                    <a href="{{ $isExternal ? $url : url($url) }}" @if($isExternal && str_starts_with($url, 'http')) target="_blank" rel="noopener" @endif>
-                                        <span>{{ $label }}</span>
-                                        <i>→</i>
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endforeach
-
-                <div class="sb-footer-group sb-footer-newsletter">
-                    <h3>Updates</h3>
-                    <p>Launch notes, new learning worlds, and StudyBuddy improvements.</p>
-
-                    <form action="{{ url('/register') }}" method="GET">
-                        <input name="email" type="email" placeholder="Your email">
-                        <button type="submit">Join</button>
-                    </form>
-
-                    <div class="sb-footer-socials">
-                        @foreach($socials as $social)
+        <section class="sb-footer-grid" aria-label="StudyBuddy footer navigation">
+            @foreach($footerGroups as $group => $links)
+                <div class="sb-footer-group">
+                    <h2>{{ $group }}</h2>
+                    <ul>
+                        @foreach($links as $link)
                             @php
-                                $url = $social['url'] ?? '';
-                                $label = $social['label'] ?? 'Social';
+                                $label = $link['label'] ?? 'Link';
+                                $url = $link['url'] ?? '#';
+                                $isExternal = str_starts_with($url, 'http') || str_starts_with($url, 'mailto:');
                             @endphp
-                            @if($url)
-                                <a href="{{ $url }}" target="_blank" rel="noopener">{{ $label }}</a>
-                            @endif
+                            <li>
+                                <a href="{{ $isExternal ? $url : url($url) }}" @if($isExternal && str_starts_with($url, 'http')) target="_blank" rel="noopener" @endif>
+                                    {{ $label }}
+                                    <span>→</span>
+                                </a>
+                            </li>
                         @endforeach
-                    </div>
+                    </ul>
+                </div>
+            @endforeach
+
+            <div class="sb-footer-group sb-footer-newsletter">
+                <h2>Stay in the loop</h2>
+                <p>Get StudyBuddy updates, launch notes, and new learning worlds.</p>
+                <form action="{{ url('/register') }}" method="GET">
+                    <input name="email" type="email" placeholder="Your email">
+                    <button type="submit">Join</button>
+                </form>
+
+                <div class="sb-footer-socials">
+                    @foreach($socials as $social)
+                        @php
+                            $url = $social['url'] ?? '';
+                            $label = $social['label'] ?? 'Social';
+                        @endphp
+                        @if($url)
+                            <a href="{{ $url }}" target="_blank" rel="noopener">{{ $label }}</a>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </section>
 
         <section class="sb-footer-bottom">
-            <p>© {{ date('Y') }} {{ $brandName }}. Safe, playful learning for every role.</p>
+            <p>© {{ date('Y') }} {{ $brandName }}. Built for safe, playful learning.</p>
             <p>Created by <a href="{{ $shellSettings['creator_url'] ?? 'https://pixelcraftslab.com' }}" target="_blank" rel="noopener">{{ $shellSettings['creator_name'] ?? 'PixelCraftsLab Studio' }}</a></p>
         </section>
     </div>
