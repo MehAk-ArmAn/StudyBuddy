@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/sb-control-room-admin.css') }}?v={{ file_exists(public_path('assets/css/sb-control-room-admin.css')) ? filemtime(public_path('assets/css/sb-control-room-admin.css')) : time() }}">
         <link rel="stylesheet" href="{{ asset('assets/css/sb-control-room-hardening.css') }}?v={{ file_exists(public_path('assets/css/sb-control-room-hardening.css')) ? filemtime(public_path('assets/css/sb-control-room-hardening.css')) : time() }}">
     @stack('styles')
-    @if(file_exists(public_path('assets/css/sb-structure-publish-polish.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-structure-publish-polish.css') }}?v={{ filemtime(public_path('assets/css/sb-structure-publish-polish.css')) }}">@endif
 </head>
 <body class="sb-control-admin-body">
     <div class="sb-control-admin-app">

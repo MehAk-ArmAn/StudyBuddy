@@ -27,7 +27,7 @@ class StudyBuddyControlRoomBridgeController extends Controller
             'title' => 'Safety Review',
             'subtitle' => 'Review parent, teacher, and learner safety workflows.',
             'cards' => [
-                ['title' => 'Verification review', 'body' => 'Open the verification review module if available.', 'url' => $this->safeUrl('studybuddy.admin.verifications.index', '/admin/control-room/verifications')],
+                ['title' => 'Verification review', 'body' => 'Open the verification review module if available.', 'url' => $this->safeUrl('studybuddy.admin.verifications.index', '/admin/studybuddy/verifications')],
                 ['title' => 'Website Shell', 'body' => 'Edit safety links shown in the public navbar/footer.', 'url' => url('/admin/control-room/shell')],
                 ['title' => 'Control Room', 'body' => 'Return to the command center.', 'url' => url('/admin/control-room')],
             ],
@@ -40,7 +40,7 @@ class StudyBuddyControlRoomBridgeController extends Controller
             'title' => 'Content Studio',
             'subtitle' => 'Manage editable public content. This area routes through the current content studio module.',
             'cards' => [
-                ['title' => 'Open Content Studio', 'body' => 'Edit public content blocks and pages.', 'url' => $this->safeUrl('studybuddy.admin.content-studio.index', '/admin/control-room/content-studio')],
+                ['title' => 'Open Content Studio', 'body' => 'Edit public content blocks and pages.', 'url' => $this->safeUrl('studybuddy.admin.content-studio.index', '/admin/studybuddy/content-studio')],
                 ['title' => 'Website Shell', 'body' => 'Edit navbar/footer content and links.', 'url' => url('/admin/control-room/shell')],
                 ['title' => 'Control Room', 'body' => 'Return to the command center.', 'url' => url('/admin/control-room')],
             ],

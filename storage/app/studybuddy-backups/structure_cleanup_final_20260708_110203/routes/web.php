@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FooterItemController;
 use App\Http\Controllers\Admin\HomepageSectionController;
 use App\Http\Controllers\Admin\HomepageSectionItemController;
@@ -20,22 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Public website
+| Core Website Routes
 |--------------------------------------------------------------------------
+| Keep this file boring and organized. StudyBuddy feature modules live in
+| routes/studybuddy.php so web.php does not become patch spaghetti again.
 */
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-foreach (['for-parents', 'for-teachers', 'about-us', 'privacy-policy', 'data-deletion', 'contact-us', 'support'] as $slug) {
-    Route::get('/'.$slug, [PageController::class, 'show'])
-        ->defaults('slug', $slug)
-        ->name('pages.'.$slug);
-}
-
-/*
-|--------------------------------------------------------------------------
-| Public authentication + dashboard
-|--------------------------------------------------------------------------
-*/
 Route::middleware('guest')->group(function (): void {
     Route::get('/login', [UserAccessController::class, 'showLogin'])->name('login');
     Route::post('/login', [UserAccessController::class, 'login'])->name('login.store');
@@ -48,28 +39,33 @@ Route::middleware('auth')->group(function (): void {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::put('/dashboard/profile', [DashboardController::class, 'updateProfile'])->name('dashboard.profile.update');
     Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->name('dashboard.password.update');
+});
 
-    // Email verification is disabled, but stale Laravel/Breeze URLs stay safe.
+// Email verification is intentionally disabled. Keep stale URLs safe.
+Route::middleware('auth')->group(function (): void {
     Route::get('/email/verify', [UserAccessController::class, 'verificationNotice'])->name('verification.notice');
     Route::post('/email/verification-notification', [UserAccessController::class, 'resendVerification'])->name('verification.send');
 });
+Route::get('/email/verify/{id}/{hash}', fn () => redirect()->route('dashboard')->with('status', 'Email verification is disabled for StudyBuddy.'))->name('verification.verify');
 
-Route::get('/email/verify/{id}/{hash}', fn () => redirect()->route('dashboard')->with('status', 'Email verification is disabled for StudyBuddy.'))
-    ->name('verification.verify');
+foreach (['for-parents', 'for-teachers', 'about-us', 'privacy-policy', 'data-deletion', 'contact-us', 'support'] as $slug) {
+    Route::get('/'.$slug, [PageController::class, 'show'])->defaults('slug', $slug)->name('pages.'.$slug);
+}
 
 /*
 |--------------------------------------------------------------------------
-| Legacy admin resources
+| Classic Admin Resource Routes
 |--------------------------------------------------------------------------
-| Kept for compatibility. The preferred admin home is /admin/control-room.
+| These remain for compatibility, but the sidebar points to /admin/control-room.
 */
+
 Route::prefix('admin')->name('admin.')->group(function (): void {
     Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::post('/login', [LoginController::class, 'store'])->name('login.store');
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     Route::middleware('admin')->group(function (): void {
-        Route::get('/dashboard', AdminDashboardController::class)->name('dashboard');
+        Route::redirect('/dashboard', '/admin/control-room')->name('dashboard');
         Route::resource('users', AdminUserController::class)->except(['show']);
         Route::resource('site-settings', SiteSettingController::class)->except(['show']);
         Route::resource('media-assets', MediaAssetController::class)->except(['show']);
@@ -83,10 +79,8 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
     });
 });
 
-/*
-|--------------------------------------------------------------------------
-| StudyBuddy modules
-|--------------------------------------------------------------------------
-| All StudyBuddy-specific routes live in one organized file.
-*/
-require __DIR__.'/studybuddy.php';
+if (file_exists(__DIR__.'/studybuddy.php')) {
+    require __DIR__.'/studybuddy.php';
+}
+
+if (file_exists(__DIR__ . '/studybuddy_missing_route_aliases.php')) { require __DIR__ . '/studybuddy_missing_route_aliases.php'; }
