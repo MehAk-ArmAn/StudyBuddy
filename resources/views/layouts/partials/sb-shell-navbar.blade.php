@@ -1,6 +1,7 @@
 @php
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Schema;
 
     $shellSettings = [];
@@ -28,12 +29,6 @@
         }
     }
 
-    $safeJson = function ($value, $fallback) {
-        if (!is_string($value) || trim($value) === '') return $fallback;
-        $decoded = json_decode($value, true);
-        return is_array($decoded) ? $decoded : $fallback;
-    };
-
     $fallbackNav = [
         ['label' => 'Home', 'url' => '/', 'roles' => ['all']],
         ['label' => 'Apps', 'url' => '/apps', 'roles' => ['all']],
@@ -42,14 +37,18 @@
         ['label' => 'Teachers', 'url' => '/apps?role=teacher', 'roles' => ['all']],
         ['label' => 'Safety', 'url' => '/apps?section=safety', 'roles' => ['all']],
         ['label' => 'Rewards', 'url' => '/apps?section=rewards', 'roles' => ['all']],
-        ['label' => 'Roadmap', 'url' => '/apps?section=roadmap', 'roles' => ['all']],
     ];
 
-    $navItems = $safeJson($shellSettings['shell_navigation_json'] ?? null, $fallbackNav);
+    $navItems = $fallbackNav;
+    if (!empty($shellSettings['shell_navigation_json'])) {
+        $decoded = json_decode($shellSettings['shell_navigation_json'], true);
+        if (is_array($decoded)) $navItems = $decoded;
+    }
 
     $user = Auth::user();
     $role = $user->role ?? null;
     $isAdmin = $user && (($user->is_admin ?? false) || $role === 'admin' || ($user->email ?? null) === 'admin@studybuddy.fun');
+    $logoutUrl = Route::has('logout') ? route('logout') : url('/logout');
 
     $visibleNav = collect($navItems)->filter(function ($item) use ($role, $user) {
         $roles = $item['roles'] ?? ['all'];
@@ -62,8 +61,7 @@
     $primaryNav = $visibleNav->take(5);
     $moreNav = $visibleNav->slice(5);
 
-    $currentUrl = request()->path();
-    $isActive = function ($url) use ($currentUrl) {
+    $isActive = function ($url) {
         $path = trim(parse_url($url, PHP_URL_PATH) ?: '/', '/');
         if ($path === '') return request()->is('/');
         return request()->is($path) || request()->is($path . '/*');
@@ -71,48 +69,32 @@
 @endphp
 
 <header class="sb-advanced-shell" data-shell>
-    <a class="sb-skip-link" href="#main-content">Skip to content</a>
-
-    <nav class="sb-advanced-nav" aria-label="StudyBuddy primary navigation">
+    <nav class="sb-advanced-nav" aria-label="StudyBuddy navigation">
         <div class="sb-nav-inner">
-            <a class="sb-nav-brand" href="{{ url('/') }}" aria-label="StudyBuddy home">
+            <a class="sb-nav-brand" href="{{ url('/') }}">
                 @if($logoPath)
                     <img src="{{ str_starts_with($logoPath, 'http') ? $logoPath : asset(ltrim($logoPath, '/')) }}" alt="StudyBuddy logo">
                 @else
                     <span class="sb-nav-brand-fallback">SB</span>
                 @endif
-                <span>
-                    <strong>{{ $brandName }}</strong>
-                    <em>{{ $tagline }}</em>
-                </span>
+                <span><strong>{{ $brandName }}</strong><em>{{ $tagline }}</em></span>
             </a>
 
-            <div class="sb-nav-links" data-nav-links>
+            <div class="sb-nav-links">
                 @foreach($primaryNav as $item)
-                    @php
-                        $url = $item['url'] ?? '#';
-                        $label = $item['label'] ?? 'Link';
-                    @endphp
-                    <a href="{{ url($url) }}" @class(['active' => $isActive($url)])>
-                        {{ $label }}
-                    </a>
+                    @php($url = $item['url'] ?? '#')
+                    @php($label = $item['label'] ?? 'Link')
+                    <a href="{{ url($url) }}" @class(['active' => $isActive($url)])>{{ $label }}</a>
                 @endforeach
 
                 @if($moreNav->count())
                     <div class="sb-nav-more" data-more>
-                        <button type="button" aria-expanded="false" aria-haspopup="true" data-more-button>
-                            More
-                            <span>⌄</span>
-                        </button>
-                        <div class="sb-nav-more-menu" data-more-menu>
+                        <button type="button" aria-expanded="false" data-more-button>More <span>⌄</span></button>
+                        <div class="sb-nav-more-menu">
                             @foreach($moreNav as $item)
-                                @php
-                                    $url = $item['url'] ?? '#';
-                                    $label = $item['label'] ?? 'Link';
-                                @endphp
-                                <a href="{{ url($url) }}" @class(['active' => $isActive($url)])>
-                                    {{ $label }}
-                                </a>
+                                @php($url = $item['url'] ?? '#')
+                                @php($label = $item['label'] ?? 'Link')
+                                <a href="{{ url($url) }}" @class(['active' => $isActive($url)])>{{ $label }}</a>
                             @endforeach
                         </div>
                     </div>
@@ -120,8 +102,7 @@
             </div>
 
             <form class="sb-nav-search" action="{{ url('/apps') }}" method="GET" role="search">
-                <label class="sr-only" for="sb-shell-search">Search StudyBuddy apps</label>
-                <input id="sb-shell-search" name="q" value="{{ request('q') }}" placeholder="Search apps..." autocomplete="off">
+                <input name="q" value="{{ request('q') }}" placeholder="Search apps..." autocomplete="off" aria-label="Search StudyBuddy apps">
                 <button type="submit" aria-label="Search">⌕</button>
             </form>
 
@@ -130,16 +111,23 @@
                     <a class="ghost" href="{{ url('/login') }}">Log in</a>
                     <a class="solid" href="{{ url('/register') }}">Start free</a>
                 @else
-                    @if($isAdmin)
-                        <a class="ghost" href="{{ url('/admin/control-room') }}">Control Room</a>
-                    @endif
-                    <a class="solid" href="{{ url('/dashboard') }}">Dashboard</a>
+                    <div class="sb-account-menu" data-account-menu>
+                        <button type="button" class="sb-account-trigger" data-account-button aria-expanded="false">
+                            <span class="sb-account-avatar">{{ strtoupper(substr($user->name ?? $user->email ?? 'U', 0, 1)) }}</span>
+                            <span class="sb-account-label"><strong>{{ $user->name ?? 'My Account' }}</strong><em>{{ $role ? str_replace('_', ' ', $role) : 'Learner' }}</em></span>
+                            <i>⌄</i>
+                        </button>
+                        <div class="sb-account-dropdown">
+                            <a href="{{ url('/dashboard') }}">Dashboard</a>
+                            @if($isAdmin)<a href="{{ url('/admin/control-room') }}">Control Room</a>@endif
+                            <a href="{{ url('/profile') }}">Profile</a>
+                            <form method="POST" action="{{ $logoutUrl }}">@csrf<button type="submit">Logout</button></form>
+                        </div>
+                    </div>
                 @endguest
             </div>
 
-            <button class="sb-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
-                <span></span><span></span><span></span>
-            </button>
+            <button class="sb-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
         </div>
 
         <div class="sb-mobile-panel" data-mobile-panel>
@@ -147,28 +135,20 @@
                 <input name="q" value="{{ request('q') }}" placeholder="Search apps, skills, quests...">
                 <button type="submit">Search</button>
             </form>
-
             <div class="sb-mobile-links">
                 @foreach($visibleNav as $item)
-                    @php
-                        $url = $item['url'] ?? '#';
-                        $label = $item['label'] ?? 'Link';
-                    @endphp
-                    <a href="{{ url($url) }}" @class(['active' => $isActive($url)])>
-                        {{ $label }}
-                    </a>
+                    @php($url = $item['url'] ?? '#')
+                    @php($label = $item['label'] ?? 'Link')
+                    <a href="{{ url($url) }}" @class(['active' => $isActive($url)])>{{ $label }}</a>
                 @endforeach
             </div>
-
             <div class="sb-mobile-actions">
                 @guest
-                    <a href="{{ url('/login') }}">Log in</a>
-                    <a class="solid" href="{{ url('/register') }}">Start free</a>
+                    <a href="{{ url('/login') }}">Log in</a><a class="solid" href="{{ url('/register') }}">Start free</a>
                 @else
-                    @if($isAdmin)
-                        <a href="{{ url('/admin/control-room') }}">Control Room</a>
-                    @endif
-                    <a class="solid" href="{{ url('/dashboard') }}">Dashboard</a>
+                    <a href="{{ url('/dashboard') }}">Dashboard</a>
+                    @if($isAdmin)<a href="{{ url('/admin/control-room') }}">Control Room</a>@endif
+                    <form class="sb-mobile-logout-form" method="POST" action="{{ $logoutUrl }}">@csrf<button type="submit">Logout</button></form>
                 @endguest
             </div>
         </div>

@@ -2,76 +2,56 @@
     const shell = document.querySelector('[data-shell]');
     if (!shell) return;
 
-    const toggle = shell.querySelector('[data-nav-toggle]');
-    const panel = shell.querySelector('[data-mobile-panel]');
+    const mobileToggle = shell.querySelector('[data-nav-toggle]');
+    const mobilePanel = shell.querySelector('[data-mobile-panel]');
     const more = shell.querySelector('[data-more]');
     const moreButton = shell.querySelector('[data-more-button]');
+    const accountMenu = shell.querySelector('[data-account-menu]');
+    const accountButton = shell.querySelector('[data-account-button]');
+    const nav = shell.querySelector('.sb-advanced-nav');
 
-    if (toggle && panel) {
-        toggle.addEventListener('click', () => {
-            const open = panel.classList.toggle('open');
-            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    const closeMore = () => {
+        if (!more || !moreButton) return;
+        more.classList.remove('open');
+        moreButton.setAttribute('aria-expanded', 'false');
+    };
+
+    const closeAccount = () => {
+        if (!accountMenu || !accountButton) return;
+        accountMenu.classList.remove('open');
+        accountButton.setAttribute('aria-expanded', 'false');
+    };
+
+    if (mobileToggle && mobilePanel) {
+        mobileToggle.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const open = mobilePanel.classList.toggle('open');
+            mobileToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
     }
 
     if (more && moreButton) {
         moreButton.addEventListener('click', (event) => {
             event.stopPropagation();
+            closeAccount();
             const open = more.classList.toggle('open');
             moreButton.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
-
-        document.addEventListener('click', () => {
-            more.classList.remove('open');
-            moreButton.setAttribute('aria-expanded', 'false');
-        });
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                more.classList.remove('open');
-                moreButton.setAttribute('aria-expanded', 'false');
-            }
-        });
+        more.addEventListener('click', (event) => event.stopPropagation());
     }
-})();
 
-
-// === StudyBuddy interactive shell polish ===
-(() => {
-    const shell = document.querySelector('.sb-advanced-shell');
-    const nav = document.querySelector('.sb-advanced-nav');
-
-    const setScrolled = () => {
-        if (!shell) return;
-        shell.classList.toggle('is-scrolled', window.scrollY > 18);
-    };
-
-    setScrolled();
-    window.addEventListener('scroll', setScrolled, { passive: true });
-
-    document.querySelectorAll('.sb-footer-action-card, .sb-footer-value-strip article, .sb-footer-group').forEach((card) => {
-        card.addEventListener('mousemove', (event) => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
-            card.style.setProperty('--my', `${event.clientY - rect.top}px`);
+    if (accountMenu && accountButton) {
+        accountButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            closeMore();
+            const open = accountMenu.classList.toggle('open');
+            accountButton.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
-    });
+        accountMenu.addEventListener('click', (event) => event.stopPropagation());
+    }
 
-    document.querySelectorAll('.sb-nav-search button, .sb-footer-newsletter button, .sb-footer-action-card a, .sb-nav-actions a, .sb-mobile-actions a').forEach((button) => {
-        button.addEventListener('click', (event) => {
-            const oldRipple = button.querySelector('.sb-ripple');
-            if (oldRipple) oldRipple.remove();
-
-            const rect = button.getBoundingClientRect();
-            const ripple = document.createElement('span');
-            ripple.className = 'sb-ripple';
-            ripple.style.left = `${event.clientX - rect.left}px`;
-            ripple.style.top = `${event.clientY - rect.top}px`;
-
-            button.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 650);
-        });
-    });
+    document.addEventListener('click', () => { closeMore(); closeAccount(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape') { closeMore(); closeAccount(); } });
 
     if (nav) {
         nav.addEventListener('pointermove', (event) => {
@@ -81,4 +61,3 @@
         });
     }
 })();
-// === End StudyBuddy interactive shell polish ===
