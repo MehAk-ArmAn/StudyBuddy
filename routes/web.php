@@ -99,3 +99,6 @@ require __DIR__ . '/studybuddy_search_final.php';
 
 // Final StudyBuddy info/legal/roles pages
 require __DIR__ . '/studybuddy_info_pages_final.php';
+
+// StudyBuddy role dashboard tools
+require __DIR__ . '/studybuddy_role_dashboard_tools.php';

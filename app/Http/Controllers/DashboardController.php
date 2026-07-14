@@ -2,88 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\View\View;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
     public function index(): View
     {
         $user = Auth::user();
+        $role = method_exists($user, 'normalizedRole') ? $user->normalizedRole() : ($user->role ?? 'student');
         $profile = $this->profileArray($user->role_profile ?? null);
 
-        $settings = $this->settings();
-
-        $apps = Schema::hasTable('studybuddy_mini_app_platforms')
-            ? collect(DB::table('studybuddy_mini_app_platforms')
-                ->where(function ($query) {
-                    if (Schema::hasColumn('studybuddy_mini_app_platforms', 'is_active')) {
-                        $query->where('is_active', true);
-                    }
-                })
-                ->orderBy(Schema::hasColumn('studybuddy_mini_app_platforms', 'sort_order') ? 'sort_order' : 'id')
-                ->limit(8)
-                ->get())
-            : collect();
-
-        $favoriteSlugs = collect($profile['favorite_app_slugs'] ?? [])->filter()->values();
-
-        $recommendedApps = $favoriteSlugs->count()
-            ? $apps->filter(fn ($app) => $favoriteSlugs->contains($app->slug ?? null))->values()
-            : $apps->take(4)->values();
-
-        if ($recommendedApps->isEmpty()) {
-            $recommendedApps = $apps->take(4)->values();
-        }
-
-        $recentPoints = Schema::hasTable('studybuddy_point_transactions')
-            ? collect(DB::table('studybuddy_point_transactions')
-                ->where('user_id', $user->id)
-                ->latest('id')
-                ->limit(5)
-                ->get())
-            : collect();
-
-        $savedQuests = Schema::hasTable('saved_quests')
-            ? collect(DB::table('saved_quests')
-                ->where('user_id', $user->id)
-                ->latest('id')
-                ->limit(4)
-                ->get())
-            : collect();
-
-        $leaderboard = Schema::hasTable('users')
-            ? collect(DB::table('users')
-                ->select('id', 'name', 'role', 'cosmic_points', 'avatar_style', 'role_profile', 'created_at')
-                ->where('is_admin', false)
-                ->orderByDesc('cosmic_points')
-                ->limit(12)
-                ->get())
-            : collect();
-
+        $apps = $this->apps();
+        $recentPoints = $this->recentPoints($user->id);
+        $assignments = $this->learnerAssignments($user);
+        $leaderboard = $this->leaderboard();
         $rank = $leaderboard->search(fn ($item) => (int) $item->id === (int) $user->id);
         $rank = $rank === false ? null : $rank + 1;
 
-        $completion = $this->profileCompletion($user, $profile);
-
         return view('dashboard.index', [
             'user' => $user,
+            'role' => $role,
             'profile' => $profile,
-            'settings' => $settings,
+            'settings' => $this->settings(),
             'apps' => $apps,
-            'recommendedApps' => $recommendedApps,
+            'recommendedApps' => $this->recommendedApps($apps, $profile, $role),
             'recentPoints' => $recentPoints,
-            'savedQuests' => $savedQuests,
+            'assignments' => $assignments,
             'leaderboard' => $leaderboard,
             'rank' => $rank,
-            'completion' => $completion,
+            'completion' => $this->profileCompletion($user, $profile),
+            'parentData' => $this->parentData($user),
+            'teacherData' => $this->teacherData($user),
+            'learnerData' => $this->learnerData($user, $profile, $recentPoints, $assignments),
         ]);
     }
 
@@ -109,25 +67,209 @@ class DashboardController extends Controller
 
     private function settings(): array
     {
-        if (!Schema::hasTable('site_settings')) {
-            return [];
-        }
+        if (!Schema::hasTable('site_settings')) return [];
 
         return DB::table('site_settings')->pluck('value', 'key')->all();
     }
 
-    private function profileArray($value): array
+    private function apps(): Collection
     {
-        if (is_array($value)) {
-            return $value;
+        if (!Schema::hasTable('studybuddy_mini_app_platforms')) return collect();
+
+        $query = DB::table('studybuddy_mini_app_platforms');
+
+        if (Schema::hasColumn('studybuddy_mini_app_platforms', 'is_active')) {
+            $query->where('is_active', true);
         }
 
-        if (is_string($value) && trim($value) !== '') {
-            $decoded = json_decode($value, true);
-            return is_array($decoded) ? $decoded : [];
+        return collect($query
+            ->orderBy(Schema::hasColumn('studybuddy_mini_app_platforms', 'sort_order') ? 'sort_order' : 'id')
+            ->get());
+    }
+
+    private function recommendedApps(Collection $apps, array $profile, string $role): Collection
+    {
+        $favorites = collect($profile['favorite_app_slugs'] ?? [])->filter()->values();
+
+        if ($favorites->count()) {
+            $matched = $apps->filter(fn ($app) => $favorites->contains($app->slug ?? null))->values();
+            if ($matched->count()) return $matched->take(4);
         }
 
-        return [];
+        return match ($role) {
+            'parent' => $apps->filter(fn ($app) => str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'reading') || str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'focus'))->take(4)->values(),
+            'teacher' => $apps->filter(fn ($app) => str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'quiz') || str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'math'))->take(4)->values(),
+            'independent_learner' => $apps->filter(fn ($app) => str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'focus') || str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'planner'))->take(4)->values(),
+            default => $apps->take(4)->values(),
+        };
+    }
+
+    private function recentPoints(int $userId): Collection
+    {
+        if (!Schema::hasTable('studybuddy_point_transactions')) return collect();
+
+        return collect(DB::table('studybuddy_point_transactions')
+            ->where('user_id', $userId)
+            ->latest('id')
+            ->limit(8)
+            ->get());
+    }
+
+    private function leaderboard(): Collection
+    {
+        if (!Schema::hasTable('users')) return collect();
+
+        return collect(DB::table('users')
+            ->select('id', 'name', 'role', 'cosmic_points', 'avatar_style', 'profile_photo_path', 'role_profile')
+            ->where('is_admin', false)
+            ->orderByDesc('cosmic_points')
+            ->limit(10)
+            ->get());
+    }
+
+    private function learnerAssignments($user): Collection
+    {
+        if (!Schema::hasTable('studybuddy_assignment_recipients') || !Schema::hasTable('studybuddy_assignments')) {
+            return collect();
+        }
+
+        return collect(DB::table('studybuddy_assignment_recipients as r')
+            ->join('studybuddy_assignments as a', 'a.id', '=', 'r.assignment_id')
+            ->where(function ($query) use ($user) {
+                $query->where('r.user_id', $user->id)
+                    ->orWhere('r.email', $user->email);
+            })
+            ->select('r.*', 'a.title', 'a.type', 'a.app_slug', 'a.instructions', 'a.due_at', 'a.points_reward')
+            ->latest('a.id')
+            ->limit(8)
+            ->get());
+    }
+
+    private function parentData($user): array
+    {
+        $children = collect();
+        $familyGroup = null;
+
+        if (Schema::hasTable('studybuddy_learning_groups')) {
+            $familyGroup = DB::table('studybuddy_learning_groups')
+                ->where('owner_id', $user->id)
+                ->where('type', 'family')
+                ->first();
+        }
+
+        if ($familyGroup && Schema::hasTable('studybuddy_group_members')) {
+            $children = collect(DB::table('studybuddy_group_members')
+                ->where('group_id', $familyGroup->id)
+                ->where('owner_id', $user->id)
+                ->orderBy('display_name')
+                ->get());
+        }
+
+        $childEmails = collect($user->child_emails ?? [])->filter()->values();
+
+        if ($children->isEmpty() && $childEmails->count() && Schema::hasTable('users')) {
+            $children = collect(DB::table('users')
+                ->whereIn('email', $childEmails)
+                ->select('id as user_id', 'name as display_name', 'email', 'role', 'cosmic_points', 'profile_photo_path')
+                ->get());
+        }
+
+        $childUsers = collect();
+
+        if ($children->count() && Schema::hasTable('users')) {
+            $emails = $children->pluck('email')->filter()->unique()->values();
+            $ids = $children->pluck('user_id')->filter()->unique()->values();
+
+            $query = DB::table('users')->where('is_admin', false);
+
+            $query->where(function ($q) use ($emails, $ids) {
+                if ($emails->count()) $q->orWhereIn('email', $emails);
+                if ($ids->count()) $q->orWhereIn('id', $ids);
+            });
+
+            $childUsers = collect($query->get());
+        }
+
+        $childIds = $childUsers->pluck('id')->filter()->values();
+
+        $childActivity = collect();
+        if ($childIds->count() && Schema::hasTable('studybuddy_point_transactions')) {
+            $childActivity = collect(DB::table('studybuddy_point_transactions')
+                ->whereIn('user_id', $childIds)
+                ->latest('id')
+                ->limit(10)
+                ->get());
+        }
+
+        return [
+            'familyGroup' => $familyGroup,
+            'children' => $children,
+            'childUsers' => $childUsers,
+            'childActivity' => $childActivity,
+            'metrics' => [
+                'children' => $children->count(),
+                'total_points' => (int) $childUsers->sum('cosmic_points'),
+                'avg_points' => $childUsers->count() ? (int) round($childUsers->avg('cosmic_points')) : 0,
+                'recent_events' => $childActivity->count(),
+            ],
+        ];
+    }
+
+    private function teacherData($user): array
+    {
+        $groups = collect();
+        $members = collect();
+        $assignments = collect();
+
+        if (Schema::hasTable('studybuddy_learning_groups')) {
+            $groups = collect(DB::table('studybuddy_learning_groups')
+                ->where('owner_id', $user->id)
+                ->where('type', 'class')
+                ->latest('id')
+                ->get());
+        }
+
+        if ($groups->count() && Schema::hasTable('studybuddy_group_members')) {
+            $members = collect(DB::table('studybuddy_group_members')
+                ->where('owner_id', $user->id)
+                ->whereIn('group_id', $groups->pluck('id'))
+                ->orderBy('display_name')
+                ->get());
+        }
+
+        if (Schema::hasTable('studybuddy_assignments')) {
+            $assignments = collect(DB::table('studybuddy_assignments')
+                ->where('owner_id', $user->id)
+                ->latest('id')
+                ->limit(12)
+                ->get());
+        }
+
+        return [
+            'groups' => $groups,
+            'members' => $members,
+            'assignments' => $assignments,
+            'metrics' => [
+                'classes' => $groups->count(),
+                'students' => $members->count(),
+                'assignments' => $assignments->count(),
+                'drafts' => $assignments->where('status', 'draft')->count(),
+            ],
+        ];
+    }
+
+    private function learnerData($user, array $profile, Collection $recentPoints, Collection $assignments): array
+    {
+        return [
+            'metrics' => [
+                'points' => (int) ($user->cosmic_points ?? 0),
+                'rank' => null,
+                'assignments' => $assignments->where('status', 'assigned')->count(),
+                'recent_events' => $recentPoints->count(),
+            ],
+            'focus' => $profile['current_focus'] ?? $user->learning_stage ?? 'Build confidence',
+            'goal' => $profile['learning_goal'] ?? 'Complete one tiny win today',
+        ];
     }
 
     private function profileCompletion($user, array $profile): int
@@ -145,8 +287,18 @@ class DashboardController extends Controller
             !empty($profile['favorite_app_slugs'] ?? []),
         ];
 
-        $done = collect($items)->filter()->count();
+        return (int) round((collect($items)->filter()->count() / count($items)) * 100);
+    }
 
-        return (int) round(($done / count($items)) * 100);
+    private function profileArray($value): array
+    {
+        if (is_array($value)) return $value;
+
+        if (is_string($value) && trim($value) !== '') {
+            $decoded = json_decode($value, true);
+            return is_array($decoded) ? $decoded : [];
+        }
+
+        return [];
     }
 }
