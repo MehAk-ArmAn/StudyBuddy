@@ -28,15 +28,12 @@
             break;
         }
     }
-
     $fallbackNav = [
         ['label' => 'Home', 'url' => '/', 'roles' => ['all']],
         ['label' => 'Apps', 'url' => '/apps', 'roles' => ['all']],
         ['label' => 'Roles', 'url' => '/roles', 'roles' => ['all']],
         ['label' => 'Community', 'url' => '/community', 'roles' => ['all']],
-        ['label' => 'Profile', 'url' => '/profile', 'roles' => ['auth']],
-        ['label' => 'Dashboard', 'url' => '/dashboard', 'roles' => ['auth']],
-        ['label' => 'Safety', 'url' => '/apps?section=safety', 'roles' => ['all']],
+        ['label' => 'Search', 'url' => '/search', 'roles' => ['all']],
     ];
 
     $navItems = $fallbackNav;
@@ -46,6 +43,13 @@
     }
 
     $user = Auth::user();
+    $userPhotoUrl = null;
+
+    if ($user && !empty($user->profile_photo_path)) {
+        $userPhotoUrl = preg_match('/^https?:\/\//i', $user->profile_photo_path)
+            ? $user->profile_photo_path
+            : asset('storage/' . ltrim($user->profile_photo_path, '/'));
+    }
     $role = $user->role ?? null;
     $isAdmin = $user && (($user->is_admin ?? false) || $role === 'admin' || ($user->email ?? null) === 'admin@studybuddy.fun');
 
@@ -116,7 +120,13 @@
                 @else
                     <div class="sb-account-menu" data-account-menu>
                         <button type="button" class="sb-account-trigger" data-account-button aria-expanded="false">
-                            <span class="sb-account-avatar">{{ strtoupper(substr($user->name ?? $user->email ?? 'U', 0, 1)) }}</span>
+                            <span class="sb-account-avatar">
+                                @if($userPhotoUrl)
+                                    <img src="{{ $userPhotoUrl }}" alt="{{ $user->name ?? 'User' }} profile picture">
+                                @else
+                                    {{ strtoupper(substr($user->name ?? $user->email ?? 'U', 0, 1)) }}
+                                @endif
+                            </span>
                             <span class="sb-account-label">
                                 <strong>{{ $user->name ?? 'My Account' }}</strong>
                                 <em>{{ $role ? str_replace('_', ' ', $role) : 'Learner' }}</em>

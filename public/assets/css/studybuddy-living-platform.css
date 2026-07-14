@@ -174,3 +174,13 @@
     *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
     .sb-floating-buddy{display:none!important}
 }
+
+/* === Global navbar PFP polish === */
+.sb-account-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    display: block;
+}
+/* === End Global navbar PFP polish === */

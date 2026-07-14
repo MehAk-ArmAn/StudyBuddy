@@ -7,6 +7,13 @@
     use Illuminate\Support\Facades\Route;
 
     $role = method_exists($user, 'normalizedRole') ? $user->normalizedRole() : ($user->role ?? 'student');
+
+    $dashboardPhotoUrl = null;
+    if (!empty($user->profile_photo_path)) {
+        $dashboardPhotoUrl = preg_match('/^https?:\/\//i', $user->profile_photo_path)
+            ? $user->profile_photo_path
+            : asset('storage/'.ltrim($user->profile_photo_path, '/'));
+    }
     $displayRole = ucwords(str_replace('_', ' ', $role));
 
     $assetUrl = function ($path) {
@@ -43,7 +50,11 @@
 
         <aside class="sb-profile-passport" data-hub-card>
             <div class="avatar-ring">
-                <span>{{ strtoupper(substr($user->name ?? 'S', 0, 1)) }}</span>
+                @if($dashboardPhotoUrl)
+                    <img src="{{ $dashboardPhotoUrl }}" alt="{{ $user->name }} profile picture">
+                @else
+                    <span>{{ strtoupper(substr($user->name ?? 'S', 0, 1)) }}</span>
+                @endif
             </div>
             <strong>{{ $user->name }}</strong>
             <p>{{ $profile['headline'] ?? $displayRole.' learning dashboard' }}</p>

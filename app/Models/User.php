@@ -15,10 +15,13 @@ class User extends Authenticatable
         'name',
         'real_name',
         'email',
+        'child_emails',
+        'role_profile',
         'email_verified_at',
         'password',
         'role',
         'avatar_style',
+        'profile_photo_path',
         'learning_stage',
         'cosmic_points',
         'is_admin',
@@ -34,6 +37,8 @@ class User extends Authenticatable
         'role_verified_at',
         'safeguarding_agreed_at',
         'verification_submitted_at',
+        'adult_verification_status',
+        'adult_verification_consent_at',
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -41,6 +46,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
+            'child_emails' => 'array',
+            'role_profile' => 'array',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'cosmic_points' => 'integer',
@@ -50,6 +57,7 @@ class User extends Authenticatable
             'role_verified_at' => 'datetime',
             'safeguarding_agreed_at' => 'datetime',
             'verification_submitted_at' => 'datetime',
+            'adult_verification_consent_at' => 'datetime',
         ];
     }
 
@@ -73,16 +81,6 @@ class User extends Authenticatable
         return $this->hasMany(SavedQuest::class);
     }
 
-    public function hasVerifiedRole(): bool
-    {
-        return in_array($this->role_verification_status, ['verified', 'not_required'], true) || (bool) $this->is_admin;
-    }
-
-    public function isPowerRole(): bool
-    {
-        return in_array($this->role, ['parent', 'teacher', 'independent_learner', 'admin'], true) || (bool) $this->is_admin;
-    }
-
     public function normalizedRole(): string
     {
         return match ($this->role) {
@@ -94,6 +92,16 @@ class User extends Authenticatable
         };
     }
 
+    public function hasVerifiedRole(): bool
+    {
+        return in_array($this->role_verification_status, ['verified', 'approved', 'not_required'], true) || (bool) $this->is_admin;
+    }
+
+    public function isPowerRole(): bool
+    {
+        return in_array($this->normalizedRole(), ['parent', 'teacher', 'independent_learner', 'admin'], true) || (bool) $this->is_admin;
+    }
+
     public function canUseAdultControls(): bool
     {
         if ($this->is_admin) {
@@ -101,8 +109,7 @@ class User extends Authenticatable
         }
 
         return in_array($this->normalizedRole(), ['parent', 'teacher', 'independent_learner'], true)
-            && ! empty($this->age_verified_at)
-            && in_array($this->role_verification_status, ['verified', 'not_required', 'pending_child_approval', 'pending_admin_review'], true);
+            && in_array($this->role_verification_status, ['verified', 'approved', 'not_required', 'pending_child_approval', 'pending_admin_review'], true);
     }
 
     public function needsAdultVerification(): bool
@@ -111,7 +118,7 @@ class User extends Authenticatable
         $status = $this->adult_verification_status ?? 'not_required';
 
         return in_array($role, ['parent', 'teacher', 'independent_learner'], true)
-            && !in_array($status, ['approved', 'not_required'], true);
+            && !in_array($status, ['approved', 'verified', 'not_required'], true);
     }
 
     public function needsRoleVerification(): bool
@@ -119,8 +126,7 @@ class User extends Authenticatable
         $role = $this->role ?? 'student';
         $status = $this->role_verification_status ?? 'not_required';
 
-        return in_array($role, ['parent', 'teacher'], true)
-            && !in_array($status, ['approved', 'not_required'], true);
+        return in_array($role, ['parent', 'teacher', 'independent_learner'], true)
+            && !in_array($status, ['approved', 'verified', 'not_required'], true);
     }
-
 }
