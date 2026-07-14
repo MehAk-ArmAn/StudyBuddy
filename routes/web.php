@@ -96,3 +96,6 @@ require __DIR__ . '/studybuddy_dashboard_profile_final.php';
 
 // Final StudyBuddy search routes
 require __DIR__ . '/studybuddy_search_final.php';
+
+// Final StudyBuddy info/legal/roles pages
+require __DIR__ . '/studybuddy_info_pages_final.php';

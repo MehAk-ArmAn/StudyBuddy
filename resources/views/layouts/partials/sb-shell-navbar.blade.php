@@ -32,11 +32,10 @@
     $fallbackNav = [
         ['label' => 'Home', 'url' => '/', 'roles' => ['all']],
         ['label' => 'Apps', 'url' => '/apps', 'roles' => ['all']],
+        ['label' => 'Roles', 'url' => '/roles', 'roles' => ['all']],
         ['label' => 'Community', 'url' => '/community', 'roles' => ['all']],
         ['label' => 'Profile', 'url' => '/profile', 'roles' => ['auth']],
         ['label' => 'Dashboard', 'url' => '/dashboard', 'roles' => ['auth']],
-        ['label' => 'Parents', 'url' => '/apps?role=parent', 'roles' => ['all']],
-        ['label' => 'Teachers', 'url' => '/apps?role=teacher', 'roles' => ['all']],
         ['label' => 'Safety', 'url' => '/apps?section=safety', 'roles' => ['all']],
     ];
 
