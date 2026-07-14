@@ -102,3 +102,6 @@ require __DIR__ . '/studybuddy_info_pages_final.php';
 
 // StudyBuddy role dashboard tools
 require __DIR__ . '/studybuddy_role_dashboard_tools.php';
+
+// Final StudyBuddy professional admin tools
+require __DIR__ . '/studybuddy_admin_pro_final.php';
