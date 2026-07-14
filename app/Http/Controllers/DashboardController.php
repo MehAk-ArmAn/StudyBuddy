@@ -7,6 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class DashboardController extends Controller
 {
@@ -81,6 +85,26 @@ class DashboardController extends Controller
             'rank' => $rank,
             'completion' => $completion,
         ]);
+    }
+
+    public function updateProfile(Request $request): RedirectResponse
+    {
+        return redirect()->route('profile')
+            ->with('status', 'Profile settings now live in Profile Studio.');
+    }
+
+    public function updatePassword(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
+        ]);
+
+        $request->user()->forceFill([
+            'password' => Hash::make($data['password']),
+        ])->save();
+
+        return back()->with('status', 'Access key updated safely.');
     }
 
     private function settings(): array

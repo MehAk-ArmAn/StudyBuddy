@@ -93,3 +93,6 @@ require __DIR__.'/studybuddy.php';
 
 // Final StudyBuddy dashboard/profile routes
 require __DIR__ . '/studybuddy_dashboard_profile_final.php';
+
+// Final StudyBuddy search routes
+require __DIR__ . '/studybuddy_search_final.php';

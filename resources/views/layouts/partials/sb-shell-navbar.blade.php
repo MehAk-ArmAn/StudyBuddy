@@ -33,11 +33,11 @@
         ['label' => 'Home', 'url' => '/', 'roles' => ['all']],
         ['label' => 'Apps', 'url' => '/apps', 'roles' => ['all']],
         ['label' => 'Community', 'url' => '/community', 'roles' => ['all']],
-        ['label' => 'Learning', 'url' => '/apps?section=learning', 'roles' => ['all']],
+        ['label' => 'Profile', 'url' => '/profile', 'roles' => ['auth']],
+        ['label' => 'Dashboard', 'url' => '/dashboard', 'roles' => ['auth']],
         ['label' => 'Parents', 'url' => '/apps?role=parent', 'roles' => ['all']],
         ['label' => 'Teachers', 'url' => '/apps?role=teacher', 'roles' => ['all']],
         ['label' => 'Safety', 'url' => '/apps?section=safety', 'roles' => ['all']],
-        ['label' => 'Rewards', 'url' => '/apps?section=rewards', 'roles' => ['all']],
     ];
 
     $navItems = $fallbackNav;
@@ -49,7 +49,6 @@
     $user = Auth::user();
     $role = $user->role ?? null;
     $isAdmin = $user && (($user->is_admin ?? false) || $role === 'admin' || ($user->email ?? null) === 'admin@studybuddy.fun');
-    $logoutUrl = Route::has('logout') ? route('logout') : url('/logout');
 
     $visibleNav = collect($navItems)->filter(function ($item) use ($role, $user) {
         $roles = $item['roles'] ?? ['all'];
@@ -78,7 +77,10 @@
                 @else
                     <span class="sb-nav-brand-fallback">SB</span>
                 @endif
-                <span><strong>{{ $brandName }}</strong><em>{{ $tagline }}</em></span>
+                <span>
+                    <strong>{{ $brandName }}</strong>
+                    <em>{{ $tagline }}</em>
+                </span>
             </a>
 
             <div class="sb-nav-links">
@@ -102,9 +104,10 @@
                 @endif
             </div>
 
-            <form class="sb-nav-search" action="{{ url('/apps') }}" method="GET" role="search">
-                <input name="q" value="{{ request('q') }}" placeholder="Search apps..." autocomplete="off" aria-label="Search StudyBuddy apps">
+            <form class="sb-nav-search sb-live-search" action="{{ route('studybuddy.search') }}" method="GET" role="search" data-search-root data-search-endpoint="{{ route('studybuddy.search.suggest') }}">
+                <input name="q" value="{{ request('q') }}" placeholder="Search apps, profiles, pages..." autocomplete="off" aria-label="Search StudyBuddy" data-search-input>
                 <button type="submit" aria-label="Search">⌕</button>
+                <div class="sb-search-popover" data-search-results hidden></div>
             </form>
 
             <div class="sb-nav-actions">
@@ -115,27 +118,35 @@
                     <div class="sb-account-menu" data-account-menu>
                         <button type="button" class="sb-account-trigger" data-account-button aria-expanded="false">
                             <span class="sb-account-avatar">{{ strtoupper(substr($user->name ?? $user->email ?? 'U', 0, 1)) }}</span>
-                            <span class="sb-account-label"><strong>{{ $user->name ?? 'My Account' }}</strong><em>{{ $role ? str_replace('_', ' ', $role) : 'Learner' }}</em></span>
+                            <span class="sb-account-label">
+                                <strong>{{ $user->name ?? 'My Account' }}</strong>
+                                <em>{{ $role ? str_replace('_', ' ', $role) : 'Learner' }}</em>
+                            </span>
                             <i>⌄</i>
                         </button>
                         <div class="sb-account-dropdown">
                             <a href="{{ url('/dashboard') }}">Dashboard</a>
+                            <a href="{{ url('/profile') }}">Profile Studio</a>
+                            <a href="{{ url('/community') }}">Community</a>
                             @if($isAdmin)<a href="{{ url('/admin/control-room') }}">Control Room</a>@endif
-                            <a href="{{ url('/profile') }}">Profile</a>
-                            <form method="POST" action="{{ $logoutUrl }}">@csrf<button type="submit">Logout</button></form>
+                            <form method="POST" action="{{ route('logout') }}">@csrf<button type="submit">Logout</button></form>
                         </div>
                     </div>
                 @endguest
             </div>
 
-            <button class="sb-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span></span><span></span><span></span></button>
+            <button class="sb-nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle>
+                <span></span><span></span><span></span>
+            </button>
         </div>
 
         <div class="sb-mobile-panel" data-mobile-panel>
-            <form class="sb-mobile-search" action="{{ url('/apps') }}" method="GET" role="search">
-                <input name="q" value="{{ request('q') }}" placeholder="Search apps, skills, quests...">
+            <form class="sb-mobile-search sb-live-search" action="{{ route('studybuddy.search') }}" method="GET" role="search" data-search-root data-search-endpoint="{{ route('studybuddy.search.suggest') }}">
+                <input name="q" value="{{ request('q') }}" placeholder="Search StudyBuddy..." autocomplete="off" data-search-input>
                 <button type="submit">Search</button>
+                <div class="sb-search-popover mobile" data-search-results hidden></div>
             </form>
+
             <div class="sb-mobile-links">
                 @foreach($visibleNav as $item)
                     @php($url = $item['url'] ?? '#')
@@ -143,13 +154,17 @@
                     <a href="{{ url($url) }}" @class(['active' => $isActive($url)])>{{ $label }}</a>
                 @endforeach
             </div>
+
             <div class="sb-mobile-actions">
                 @guest
-                    <a href="{{ url('/login') }}">Log in</a><a class="solid" href="{{ url('/register') }}">Start free</a>
+                    <a href="{{ url('/login') }}">Log in</a>
+                    <a class="solid" href="{{ url('/register') }}">Start free</a>
                 @else
                     <a href="{{ url('/dashboard') }}">Dashboard</a>
+                    <a href="{{ url('/profile') }}">Profile Studio</a>
+                    <a href="{{ url('/community') }}">Community</a>
                     @if($isAdmin)<a href="{{ url('/admin/control-room') }}">Control Room</a>@endif
-                    <form class="sb-mobile-logout-form" method="POST" action="{{ $logoutUrl }}">@csrf<button type="submit">Logout</button></form>
+                    <form class="sb-mobile-logout-form" method="POST" action="{{ route('logout') }}">@csrf<button type="submit">Logout</button></form>
                 @endguest
             </div>
         </div>
