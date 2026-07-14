@@ -90,3 +90,6 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
 | All StudyBuddy-specific routes live in one organized file.
 */
 require __DIR__.'/studybuddy.php';
+
+// Final StudyBuddy dashboard/profile routes
+require __DIR__ . '/studybuddy_dashboard_profile_final.php';

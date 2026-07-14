@@ -1,208 +1,177 @@
 @extends('layouts.app')
 
-@push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
-@endpush
+@section('title', 'My StudyBuddy Dashboard')
 
 @section('content')
-@include('dashboard.partials.verification-status-card')
-@include('dashboard.partials.command-center-link')
-@include('dashboard.partials.role-compass')
 @php
-    $selectedTheme = old('avatar_style', $currentTheme ?? $user->avatar_style ?? 'cosmic-dolphin');
+    use Illuminate\Support\Facades\Route;
+
+    $role = method_exists($user, 'normalizedRole') ? $user->normalizedRole() : ($user->role ?? 'student');
+    $displayRole = ucwords(str_replace('_', ' ', $role));
+
+    $assetUrl = function ($path) {
+        if (!$path) return asset('assets/studybuddy-imgs/brand/logo-icon.png');
+        if (preg_match('/^https?:\/\//i', $path)) return $path;
+        $clean = ltrim($path, '/');
+        return file_exists(public_path($clean)) ? asset($clean) : asset('assets/studybuddy-imgs/brand/logo-icon.png');
+    };
+
+    $profileUrl = route('profile');
+    $publicProfileUrl = route('studybuddy.profile.public', $user->id);
+    $communityUrl = route('studybuddy.community');
+    $pointsUrl = Route::has('studybuddy.final.points-wallet') ? route('studybuddy.final.points-wallet') : url('/points-wallet');
+    $appsUrl = Route::has('studybuddy.apps') ? route('studybuddy.apps') : url('/apps');
+    $questsUrl = Route::has('studybuddy.quests.index') ? route('studybuddy.quests.index') : $appsUrl;
 @endphp
 
-<section class="dash-wrap role-{{ $role }}" aria-labelledby="dashboard-title">
-    <div class="dash-hero auth-panel">
-        <div class="dash-hero-copy">
-            <p class="eyebrow">{{ $roleEyebrow }}</p>
-            <h1 id="dashboard-title">{{ $roleLabel }}</h1>
-            <p>Hello {{ $user->name }} — {{ $dashboardIntro }}</p>
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? filemtime(public_path('assets/css/studybuddy-dashboard-system.css')) : time() }}">
+<script src="{{ asset('assets/js/studybuddy-dashboard-system.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-dashboard-system.js')) ? filemtime(public_path('assets/js/studybuddy-dashboard-system.js')) : time() }}" defer></script>
 
-            @if(session('status'))
-                <div class="auth-success inline-status" role="status">{{ session('status') }}</div>
-            @endif
-
-            <div class="dash-hero-actions" aria-label="Dashboard quick actions">
-                @foreach(array_slice($quickActions, 0, 2) as [$label, $url])
-                    <a class="btn {{ $loop->first ? '' : 'btn-ghost' }}" href="{{ $url }}">{{ $label }}</a>
-                @endforeach
-            </div>
-        </div>
-
-        <div class="dash-hero-art">
-            <img src="{{ asset($heroImage) }}" alt="{{ $roleLabel }} illustration">
-        </div>
-    </div>
-
-    @if($errors->any())
-        <div class="auth-error" role="alert">{{ $errors->first() }}</div>
-    @endif
-
-    <div class="dash-grid" aria-label="Dashboard metrics">
-        @foreach($metrics as [$label, $value, $note])
-            <article class="auth-panel metric-card">
-                <span class="metric-orb" aria-hidden="true"></span>
-                <strong>{{ $value }}</strong>
-                <p>{{ $label }}</p>
-                <small>{{ $note }}</small>
-            </article>
-        @endforeach
-    </div>
-
-    <div class="role-control-grid" aria-label="Role controls">
-        @foreach($controlPanels as [$title, $body, $image, $url, $button])
-            <article class="auth-panel control-panel-card">
-                <div class="control-image-wrap">
-                    <img src="{{ asset($image) }}" alt="{{ $title }} illustration">
-                </div>
-                <div>
-                    <h2>{{ $title }}</h2>
-                    <p>{{ $body }}</p>
-                    <a class="control-link" href="{{ $url }}">{{ $button }} <span>→</span></a>
-                </div>
-            </article>
-        @endforeach
-    </div>
-
-    <div class="dash-columns">
-        <article class="auth-panel">
-            <div class="panel-head">
-                <div>
-                    <p class="eyebrow">Today</p>
-                    <h2>Role-specific plan</h2>
-                </div>
-                <span class="soft-pill">Clear steps</span>
-            </div>
-            <ul class="mission-list">
-                @foreach($missions as $mission)
-                    <li><span aria-hidden="true">✓</span>{{ $mission }}</li>
-                @endforeach
-            </ul>
-        </article>
-
-        <article class="auth-panel">
-            <div class="panel-head">
-                <div>
-                    <p class="eyebrow">Controls</p>
-                    <h2>Your tools</h2>
-                </div>
-                <span class="soft-pill">Fast access</span>
-            </div>
-            <div class="action-list">
-                @foreach($quickActions as [$label, $url])
-                    <a href="{{ $url }}">{{ $label }} <span>→</span></a>
-                @endforeach
-            </div>
-        </article>
-    </div>
-
-    <div class="learning-card-grid" aria-label="Focus zones">
-        @foreach($focusZones as $zone)
-            <article class="auth-panel learning-card">
-                <span class="learning-dot" aria-hidden="true"></span>
-                <h3>{{ $zone }}</h3>
-                <p>Keep this area clear, calm, and easy to access from your dashboard.</p>
-            </article>
-        @endforeach
-    </div>
-
-    <div class="dash-columns">
-        <form class="auth-panel auth-form compact" method="POST" action="{{ route('dashboard.profile.update') }}">
-            @csrf
-            @method('PUT')
-            <div>
-                <p class="eyebrow">Profile</p>
-                <h2>Personalize your space</h2>
-                <p class="soft-copy">Changing your role and theme reshapes your controls, colors, cards, and learning vibe across StudyBuddy.</p>
-            </div>
-
-            <label>Name
-                <input name="name" value="{{ old('name', $user->name) }}" required>
-            </label>
-
-            <label>Role
-                <select name="role" required>
-                    @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','independent_learner'=>'Independent Learner'] as $value => $label)
-                        <option value="{{ $value }}" @selected(old('role', $role) === $value)>{{ $label }}</option>
-                    @endforeach
-                </select>
-            </label>
-
-            <label>Learning stage or focus
-                <input name="learning_stage" value="{{ old('learning_stage', $user->learning_stage) }}" placeholder="Example: Primary 4, family routine, Year 8 class">
-            </label>
-
-            <label>Dashboard style
-                <select name="avatar_style" required data-theme-select>
-                    @foreach($themeOptions as $theme)
-                        <option value="{{ $theme['slug'] }}" @selected($selectedTheme === $theme['slug'])>
-                            {{ $theme['label'] }} — {{ $theme['description'] }}
-                        </option>
-                    @endforeach
-                </select>
-            </label>
-
-            <div class="theme-preview-grid" data-theme-picker aria-label="Theme preview options">
-                @foreach($themeOptions as $theme)
-                    <button
-                        type="button"
-                        class="theme-preview-card {{ $selectedTheme === $theme['slug'] ? 'active' : '' }}"
-                        data-theme-choice="{{ $theme['slug'] }}"
-                    >
-                        <img src="{{ asset($theme['image']) }}" alt="{{ $theme['label'] }} theme preview">
-                        <strong>{{ $theme['label'] }}</strong>
-                        <span>{{ $theme['description'] }}</span>
-                    </button>
-                @endforeach
-            </div>
-
-            <button class="btn" type="submit">Save profile</button>
-        </form>
-
-        <form class="auth-panel auth-form compact" method="POST" action="{{ route('dashboard.password.update') }}">
-            @csrf
-            @method('PUT')
-            <div>
-                <p class="eyebrow">Security</p>
-                <h2>Update access key</h2>
-                <p class="soft-copy">Use at least 8 characters. Keep your account safe.</p>
-            </div>
-
-            <label>Current access key
-                <input type="password" name="current_password" autocomplete="current-password" required>
-            </label>
-
-            <label>New access key
-                <input type="password" name="password" autocomplete="new-password" required>
-            </label>
-
-            <label>Confirm new access key
-                <input type="password" name="password_confirmation" autocomplete="new-password" required>
-            </label>
-
-            <button class="btn btn-ghost" type="submit">Update key</button>
-        </form>
-    </div>
-
-    <article class="auth-panel resource-shelf">
+<main id="main-content" class="sb-user-hub">
+    <section class="sb-hub-hero">
         <div>
-            <p class="eyebrow">Saved for this role</p>
-            <h2>Resource shelf</h2>
-            <p>These links change depending on whether the account is a learner, family account, teacher, or independent learner.</p>
+            <p class="sb-hub-kicker">Your StudyBuddy Space</p>
+            <h1>{{ $settings['dashboard_heading'] ?? 'Welcome back, '.$user->name.'.' }}</h1>
+            <p>{{ $settings['dashboard_intro'] ?? 'Control your profile, apps, quests, points, and learning preferences from one clean dashboard.' }}</p>
+
+            <div class="sb-hub-actions">
+                <a href="{{ $appsUrl }}">Explore apps</a>
+                <a class="soft" href="{{ $profileUrl }}">Edit profile</a>
+                <a class="soft" href="{{ $communityUrl }}">Community profiles</a>
+            </div>
         </div>
-        <div class="action-list shelf-actions">
-            @foreach($resourceShelf as [$label, $url])
-                <a href="{{ $url }}">{{ $label }} <span>→</span></a>
-            @endforeach
-        </div>
-    </article>
-</section>
 
-@include('dashboard.partials.phase5-experience-links')
+        <aside class="sb-profile-passport" data-hub-card>
+            <div class="avatar-ring">
+                <span>{{ strtoupper(substr($user->name ?? 'S', 0, 1)) }}</span>
+            </div>
+            <strong>{{ $user->name }}</strong>
+            <p>{{ $profile['headline'] ?? $displayRole.' learning dashboard' }}</p>
 
+            <div class="passport-stats">
+                <article><span>Points</span><b>{{ number_format((int) ($user->cosmic_points ?? 0)) }}</b></article>
+                <article><span>Rank</span><b>{{ $rank ? '#'.$rank : 'New' }}</b></article>
+                <article><span>Profile</span><b>{{ $completion }}%</b></article>
+            </div>
 
-@include('dashboard.partials.phase6-final-links')
+            <div class="profile-progress"><i style="width: {{ $completion }}%"></i></div>
+        </aside>
+    </section>
+
+    <section class="sb-hub-grid">
+        <article class="sb-hub-card wide" data-hub-card>
+            <div class="card-head">
+                <div>
+                    <p class="sb-hub-kicker">Continue learning</p>
+                    <h2>Your app worlds</h2>
+                </div>
+                <a href="{{ $appsUrl }}">View all</a>
+            </div>
+
+            <div class="mini-app-grid">
+                @forelse($recommendedApps as $app)
+                    @php($image = $assetUrl($app->hero_image ?? $app->image_path ?? null))
+                    <a href="{{ url('/apps/'.$app->slug) }}" class="mini-app-card">
+                        <img src="{{ $image }}" alt="{{ $app->name }} artwork">
+                        <span>{{ $app->icon ?? '✨' }}</span>
+                        <strong>{{ $app->name }}</strong>
+                        <small>{{ $app->tagline ?? $app->category ?? 'Learning world' }}</small>
+                    </a>
+                @empty
+                    <div class="empty-panel">
+                        <strong>No apps yet</strong>
+                        <p>Your app universe will appear here once apps are added.</p>
+                    </div>
+                @endforelse
+            </div>
+        </article>
+
+        <article class="sb-hub-card" data-hub-card>
+            <div class="card-head">
+                <div>
+                    <p class="sb-hub-kicker">Profile control</p>
+                    <h2>Public profile</h2>
+                </div>
+            </div>
+
+            <p>Your profile can showcase your learning style, favourite apps, goals, and points.</p>
+
+            <div class="status-row">
+                <span>{{ ($profile['public_profile_enabled'] ?? false) ? 'Public profile is ON' : 'Public profile is private' }}</span>
+                <b>{{ ($profile['show_points'] ?? false) ? 'Points visible' : 'Points hidden' }}</b>
+            </div>
+
+            <div class="stack-actions">
+                <a href="{{ $profileUrl }}">Edit my profile</a>
+                <a class="soft" href="{{ $publicProfileUrl }}">Preview profile</a>
+            </div>
+        </article>
+
+        <article class="sb-hub-card" data-hub-card>
+            <div class="card-head">
+                <div>
+                    <p class="sb-hub-kicker">Quick access</p>
+                    <h2>Controls</h2>
+                </div>
+            </div>
+
+            <div class="control-list">
+                <a href="{{ $pointsUrl }}"><span>⭐</span><strong>Points wallet</strong><small>Rewards and activity</small></a>
+                <a href="{{ $questsUrl }}"><span>✨</span><strong>My quest</strong><small>Saved learning missions</small></a>
+                <a href="{{ $communityUrl }}"><span>🌍</span><strong>Community</strong><small>Public learner profiles</small></a>
+                @if(($user->is_admin ?? false) || ($user->role ?? null) === 'admin')
+                    <a href="{{ url('/admin/control-room') }}"><span>⚙️</span><strong>Control Room</strong><small>Admin settings</small></a>
+                @endif
+            </div>
+        </article>
+
+        <article class="sb-hub-card wide" data-hub-card>
+            <div class="card-head">
+                <div>
+                    <p class="sb-hub-kicker">Progress</p>
+                    <h2>Recent activity</h2>
+                </div>
+                <a href="{{ $pointsUrl }}">Open wallet</a>
+            </div>
+
+            <div class="activity-list">
+                @forelse($recentPoints as $item)
+                    <article>
+                        <span>{{ ($item->points ?? 0) >= 0 ? '+' : '' }}{{ $item->points ?? 0 }}</span>
+                        <div>
+                            <strong>{{ $item->label ?? $item->reason ?? 'StudyBuddy activity' }}</strong>
+                            <small>{{ $item->created_at ?? 'Recently' }}</small>
+                        </div>
+                    </article>
+                @empty
+                    <div class="empty-panel">
+                        <strong>No activity yet</strong>
+                        <p>Open an app, complete a session, and your progress will show here.</p>
+                    </div>
+                @endforelse
+            </div>
+        </article>
+
+        <article class="sb-hub-card" data-hub-card>
+            <div class="card-head">
+                <div>
+                    <p class="sb-hub-kicker">Leaderboard</p>
+                    <h2>Community rank</h2>
+                </div>
+            </div>
+
+            <div class="leaderboard-mini">
+                @forelse($leaderboard->take(5) as $index => $member)
+                    <div>
+                        <span>#{{ $index + 1 }}</span>
+                        <strong>{{ $member->name }}</strong>
+                        <small>{{ number_format((int) ($member->cosmic_points ?? 0)) }} pts</small>
+                    </div>
+                @empty
+                    <div class="empty-panel"><strong>No rankings yet</strong></div>
+                @endforelse
+            </div>
+        </article>
+    </section>
+</main>
 @endsection
-
-@includeIf('admin.studybuddy.content-studio.partials.admin-shortcut')
