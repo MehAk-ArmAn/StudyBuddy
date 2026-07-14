@@ -39,7 +39,6 @@ class StudyBuddyProfileController extends Controller
             'country' => ['nullable', 'string', 'max:90'],
             'learning_stage' => ['nullable', 'string', 'max:120'],
             'avatar_style' => ['nullable', 'string', 'max:80'],
-
             'profile_photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:2048'],
 
             'headline' => ['nullable', 'string', 'max:140'],
@@ -47,13 +46,13 @@ class StudyBuddyProfileController extends Controller
             'favorite_subjects' => ['nullable', 'string', 'max:190'],
             'learning_goal' => ['nullable', 'string', 'max:190'],
             'current_focus' => ['nullable', 'string', 'max:190'],
-
-            'profile_theme' => ['required', 'string', 'max:60'],
-            'profile_frame' => ['required', 'string', 'max:60'],
-            'profile_badge' => ['required', 'string', 'max:80'],
-            'profile_color' => ['required', 'string', 'max:60'],
-            'avatar_shape' => ['required', 'string', 'max:60'],
             'profile_mood' => ['nullable', 'string', 'max:80'],
+
+            'profile_theme' => ['nullable', 'string', 'max:60'],
+            'profile_frame' => ['nullable', 'string', 'max:60'],
+            'profile_badge' => ['nullable', 'string', 'max:80'],
+            'profile_color' => ['nullable', 'string', 'max:60'],
+            'avatar_shape' => ['nullable', 'string', 'max:60'],
 
             'favorite_app_slugs' => ['nullable', 'array'],
             'favorite_app_slugs.*' => ['string', 'max:120'],
@@ -64,49 +63,51 @@ class StudyBuddyProfileController extends Controller
             'show_favorite_apps' => ['nullable'],
         ]);
 
-        $profile = $this->profileArray($user->role_profile ?? null);
         $catalog = $this->customizationCatalog();
+        $profile = $this->profileArray($user->role_profile ?? null);
 
         $selected = [
-            'profile_theme' => $data['profile_theme'],
-            'profile_frame' => $data['profile_frame'],
-            'profile_badge' => $data['profile_badge'],
-            'profile_color' => $data['profile_color'],
-            'avatar_shape' => $data['avatar_shape'],
+            'profile_theme' => $data['profile_theme'] ?? ($profile['profile_theme'] ?? 'cosmic'),
+            'profile_frame' => $data['profile_frame'] ?? ($profile['profile_frame'] ?? 'none'),
+            'profile_badge' => $data['profile_badge'] ?? ($profile['profile_badge'] ?? 'learning-spark'),
+            'profile_color' => $data['profile_color'] ?? ($profile['profile_color'] ?? 'purple'),
+            'avatar_shape' => $data['avatar_shape'] ?? ($profile['avatar_shape'] ?? 'rounded'),
         ];
 
         foreach ($selected as $field => $value) {
             if (!isset($catalog[$field][$value])) {
-                throw ValidationException::withMessages([
-                    $field => 'That customization is not available yet.',
-                ]);
+                throw ValidationException::withMessages([$field => 'That profile style is not available yet.']);
             }
         }
 
         $unlocked = collect($profile['unlocked_profile_items'] ?? [
             'profile_theme:cosmic',
+            'profile_theme:ocean',
+            'profile_theme:forest',
             'profile_frame:none',
             'profile_badge:learning-spark',
             'profile_color:purple',
+            'profile_color:cyan',
             'avatar_shape:rounded',
-        ])->unique()->values()->all();
+            'avatar_shape:circle',
+        ])->unique()->values();
 
         $newUnlocks = [];
         $totalCost = 0;
 
         foreach ($selected as $field => $value) {
-            $unlockKey = "{$field}:{$value}";
+            $key = $field.':'.$value;
             $cost = (int) ($catalog[$field][$value]['cost'] ?? 0);
 
-            if ($cost > 0 && !in_array($unlockKey, $unlocked, true)) {
-                $newUnlocks[] = $unlockKey;
+            if ($cost > 0 && !$unlocked->contains($key)) {
+                $newUnlocks[] = $key;
                 $totalCost += $cost;
             }
         }
 
         if ($totalCost > (int) ($user->cosmic_points ?? 0)) {
             throw ValidationException::withMessages([
-                'profile_theme' => "You need {$totalCost} coins to unlock those customizations. Earn more points first.",
+                'profile_theme' => "You need {$totalCost} coins to unlock those profile styles.",
             ]);
         }
 
@@ -114,19 +115,16 @@ class StudyBuddyProfileController extends Controller
             $path = $request->file('profile_photo')->store('profile-photos', 'public');
 
             if (Schema::hasColumn('users', 'profile_photo_path')) {
-                $oldPath = $user->profile_photo_path ?? null;
-
-                if ($oldPath && !str_starts_with($oldPath, 'http')) {
-                    Storage::disk('public')->delete($oldPath);
+                $old = $user->profile_photo_path ?? null;
+                if ($old && !preg_match('/^https?:\/\//i', $old)) {
+                    Storage::disk('public')->delete($old);
                 }
-
                 $user->profile_photo_path = $path;
             }
         }
 
-        if ($totalCost > 0) {
+        if ($totalCost > 0 && Schema::hasColumn('users', 'cosmic_points')) {
             $user->cosmic_points = max(0, (int) ($user->cosmic_points ?? 0) - $totalCost);
-            $this->recordPointSpend($user->id, $totalCost, 'Profile customization unlock');
         }
 
         $profile = array_merge($profile, [
@@ -137,22 +135,19 @@ class StudyBuddyProfileController extends Controller
             'current_focus' => $data['current_focus'] ?? null,
             'profile_mood' => $data['profile_mood'] ?? null,
             'favorite_app_slugs' => array_values($data['favorite_app_slugs'] ?? []),
-
-            'profile_theme' => $data['profile_theme'],
-            'profile_frame' => $data['profile_frame'],
-            'profile_badge' => $data['profile_badge'],
-            'profile_color' => $data['profile_color'],
-            'avatar_shape' => $data['avatar_shape'],
-
-            'unlocked_profile_items' => collect($unlocked)->merge($newUnlocks)->unique()->values()->all(),
-
+            'profile_theme' => $selected['profile_theme'],
+            'profile_frame' => $selected['profile_frame'],
+            'profile_badge' => $selected['profile_badge'],
+            'profile_color' => $selected['profile_color'],
+            'avatar_shape' => $selected['avatar_shape'],
+            'unlocked_profile_items' => $unlocked->merge($newUnlocks)->unique()->values()->all(),
             'public_profile_enabled' => $request->boolean('public_profile_enabled'),
             'show_points' => $request->boolean('show_points'),
             'show_role' => $request->boolean('show_role'),
-            'show_favorite_apps' => $request->boolean('show_favorite_apps'),
+            'show_favorite_apps' => $request->boolean('show_favorite_apps', true),
         ]);
 
-        $payload = [
+        foreach ([
             'name' => $data['name'],
             'real_name' => $data['real_name'] ?? $data['name'],
             'email' => $data['email'],
@@ -160,10 +155,7 @@ class StudyBuddyProfileController extends Controller
             'learning_stage' => $data['learning_stage'] ?? null,
             'avatar_style' => $data['avatar_style'] ?? ($user->avatar_style ?? 'dolphin-cadet'),
             'role_profile' => $profile,
-            'updated_at' => now(),
-        ];
-
-        foreach ($payload as $column => $value) {
+        ] as $column => $value) {
             if (Schema::hasColumn('users', $column)) {
                 $user->{$column} = $value;
             }
@@ -172,7 +164,7 @@ class StudyBuddyProfileController extends Controller
         $user->save();
 
         return back()->with('status', $totalCost > 0
-            ? "Profile updated and {$totalCost} coins spent on new customizations."
+            ? "Profile updated. {$totalCost} coins spent on new showcase styles."
             : 'Profile updated. Your showcase looks fresh.'
         );
     }
@@ -181,6 +173,7 @@ class StudyBuddyProfileController extends Controller
     {
         $viewer = Auth::user();
         $profile = $this->profileArray($user->role_profile ?? null);
+
         $isOwner = $viewer && (int) $viewer->id === (int) $user->id;
         $isAdmin = $viewer && (($viewer->is_admin ?? false) || ($viewer->role ?? null) === 'admin');
 
@@ -199,20 +192,16 @@ class StudyBuddyProfileController extends Controller
 
     public function community(): View
     {
-        $profiles = collect();
-
-        if (Schema::hasTable('users')) {
-            $profiles = User::query()
-                ->where('is_admin', false)
-                ->latest('id')
-                ->limit(120)
-                ->get()
-                ->filter(function ($user) {
-                    $profile = $this->profileArray($user->role_profile ?? null);
-                    return (bool) ($profile['public_profile_enabled'] ?? false);
-                })
-                ->values();
-        }
+        $profiles = User::query()
+            ->where('is_admin', false)
+            ->latest('id')
+            ->limit(120)
+            ->get()
+            ->filter(function ($user) {
+                $profile = $this->profileArray($user->role_profile ?? null);
+                return (bool) ($profile['public_profile_enabled'] ?? false);
+            })
+            ->values();
 
         return view('profile.community', [
             'profiles' => $profiles,
@@ -225,11 +214,6 @@ class StudyBuddyProfileController extends Controller
         if (!Schema::hasTable('studybuddy_mini_app_platforms')) return collect();
 
         return collect(DB::table('studybuddy_mini_app_platforms')
-            ->where(function ($query) {
-                if (Schema::hasColumn('studybuddy_mini_app_platforms', 'is_active')) {
-                    $query->where('is_active', true);
-                }
-            })
             ->orderBy(Schema::hasColumn('studybuddy_mini_app_platforms', 'sort_order') ? 'sort_order' : 'id')
             ->get());
     }
@@ -237,12 +221,11 @@ class StudyBuddyProfileController extends Controller
     private function appsForProfile(array $profile): \Illuminate\Support\Collection
     {
         $slugs = collect($profile['favorite_app_slugs'] ?? [])->filter()->values();
+        $apps = $this->apps();
 
-        if ($slugs->isEmpty()) return $this->apps()->take(4);
+        if ($slugs->isEmpty()) return $apps->take(4);
 
-        return $this->apps()
-            ->filter(fn ($app) => $slugs->contains($app->slug ?? null))
-            ->values();
+        return $apps->filter(fn ($app) => $slugs->contains($app->slug ?? null))->values();
     }
 
     private function profileArray($value): array
@@ -296,36 +279,5 @@ class StudyBuddyProfileController extends Controller
                 'diamond' => ['label' => 'Diamond', 'cost' => 180],
             ],
         ];
-    }
-
-    private function recordPointSpend(int $userId, int $amount, string $label): void
-    {
-        if (!Schema::hasTable('studybuddy_point_transactions')) return;
-
-        try {
-            $payload = [];
-
-            foreach ([
-                'user_id' => $userId,
-                'points' => -abs($amount),
-                'label' => $label,
-                'reason' => $label,
-                'type' => 'spend',
-                'source' => 'profile_customization',
-                'meta' => json_encode(['cost' => $amount]),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ] as $column => $value) {
-                if (Schema::hasColumn('studybuddy_point_transactions', $column)) {
-                    $payload[$column] = $value;
-                }
-            }
-
-            if ($payload) {
-                DB::table('studybuddy_point_transactions')->insert($payload);
-            }
-        } catch (\Throwable $e) {
-            // Points were already deducted from the user. Do not break profile save for optional activity logging.
-        }
     }
 }

@@ -1,16 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Edit StudyBuddy Profile')
+@section('title', 'Profile Studio')
 
 @section('content')
 @php
     $selectedApps = collect($profile['favorite_app_slugs'] ?? []);
     $unlocked = collect($profile['unlocked_profile_items'] ?? [
         'profile_theme:cosmic',
+        'profile_theme:ocean',
+        'profile_theme:forest',
         'profile_frame:none',
         'profile_badge:learning-spark',
         'profile_color:purple',
+        'profile_color:cyan',
         'avatar_shape:rounded',
+        'avatar_shape:circle',
     ]);
 
     $photoUrl = null;
@@ -20,11 +24,11 @@
             : asset('storage/'.$user->profile_photo_path);
     }
 
-    $currentTheme = $profile['profile_theme'] ?? 'cosmic';
-    $currentFrame = $profile['profile_frame'] ?? 'none';
-    $currentBadge = $profile['profile_badge'] ?? 'learning-spark';
-    $currentColor = $profile['profile_color'] ?? 'purple';
-    $currentShape = $profile['avatar_shape'] ?? 'rounded';
+    $currentTheme = old('profile_theme', $profile['profile_theme'] ?? 'cosmic');
+    $currentFrame = old('profile_frame', $profile['profile_frame'] ?? 'none');
+    $currentBadge = old('profile_badge', $profile['profile_badge'] ?? 'learning-spark');
+    $currentColor = old('profile_color', $profile['profile_color'] ?? 'purple');
+    $currentShape = old('avatar_shape', $profile['avatar_shape'] ?? 'rounded');
 @endphp
 
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? filemtime(public_path('assets/css/studybuddy-dashboard-system.css')) : time() }}">
@@ -65,7 +69,7 @@
             </div>
 
             <div class="showcase-preview">
-                <div class="showcase-avatar" data-preview-avatar>
+                <div class="showcase-avatar">
                     @if($photoUrl)
                         <img src="{{ $photoUrl }}" alt="{{ $user->name }} profile picture" data-pfp-preview>
                     @else
@@ -82,35 +86,19 @@
         </section>
 
         <section class="profile-form-card">
-            <div class="section-title">
-                <div>
-                    <p class="sb-hub-kicker">Profile picture</p>
-                    <h2>Choose your avatar.</h2>
-                </div>
-            </div>
-
+            <div class="section-title"><div><p class="sb-hub-kicker">Profile picture</p><h2>Choose your avatar.</h2></div></div>
             <div class="pfp-upload-row">
                 <label class="pfp-drop">
                     <input type="file" name="profile_photo" accept="image/png,image/jpeg,image/jpg,image/webp,image/gif" data-pfp-input>
                     <span>Upload profile picture</span>
                     <small>PNG, JPG, WEBP, or GIF. Max 2MB.</small>
                 </label>
-
-                <div class="pfp-tips">
-                    <strong>Tip:</strong>
-                    <p>Use a clear square image. Your frame and colours will appear on your public profile and community card.</p>
-                </div>
+                <div class="pfp-tips"><strong>Tip:</strong><p>Use a clear square image. Your frame and colours will appear on your public profile and community card.</p></div>
             </div>
         </section>
 
         <section class="profile-form-card">
-            <div class="section-title">
-                <div>
-                    <p class="sb-hub-kicker">Basics</p>
-                    <h2>Account display</h2>
-                </div>
-            </div>
-
+            <div class="section-title"><div><p class="sb-hub-kicker">Basics</p><h2>Account display</h2></div></div>
             <div class="profile-form-grid">
                 <label><span>Display name</span><input name="name" value="{{ old('name', $user->name) }}" required data-name-input></label>
                 <label><span>Real name</span><input name="real_name" value="{{ old('real_name', $user->real_name) }}"></label>
@@ -129,13 +117,7 @@
         </section>
 
         <section class="profile-form-card">
-            <div class="section-title">
-                <div>
-                    <p class="sb-hub-kicker">Public profile</p>
-                    <h2>Your showcase text</h2>
-                </div>
-            </div>
-
+            <div class="section-title"><div><p class="sb-hub-kicker">Public profile</p><h2>Your showcase text</h2></div></div>
             <div class="profile-form-grid">
                 <label><span>Headline</span><input name="headline" value="{{ old('headline', $profile['headline'] ?? '') }}" placeholder="Example: Focus queen building daily wins" data-headline-input></label>
                 <label><span>Profile mood</span><input name="profile_mood" value="{{ old('profile_mood', $profile['profile_mood'] ?? '') }}" placeholder="Calm, creative, exam mode..."></label>
@@ -148,20 +130,11 @@
 
         <section class="profile-form-card">
             <div class="section-title">
-                <div>
-                    <p class="sb-hub-kicker">Style shop</p>
-                    <h2>Unlock with coins</h2>
-                </div>
+                <div><p class="sb-hub-kicker">Style shop</p><h2>Unlock with coins</h2></div>
                 <span class="coin-pill">⭐ {{ number_format((int) ($user->cosmic_points ?? 0)) }}</span>
             </div>
 
-            @foreach([
-                'profile_theme' => 'Profile theme',
-                'profile_frame' => 'Avatar frame',
-                'profile_badge' => 'Showcase badge',
-                'profile_color' => 'Accent colour',
-                'avatar_shape' => 'Avatar shape',
-            ] as $field => $label)
+            @foreach(['profile_theme' => 'Profile theme', 'profile_frame' => 'Avatar frame', 'profile_badge' => 'Showcase badge', 'profile_color' => 'Accent colour', 'avatar_shape' => 'Avatar shape'] as $field => $label)
                 @php($current = old($field, $profile[$field] ?? array_key_first($customizations[$field])))
                 <div class="custom-shop-group">
                     <h3>{{ $label }}</h3>
@@ -174,15 +147,7 @@
                             @endphp
 
                             <label class="custom-option {{ $isUnlocked ? 'is-unlocked' : 'is-locked' }}">
-                                <input
-                                    type="radio"
-                                    name="{{ $field }}"
-                                    value="{{ $value }}"
-                                    @checked($current === $value)
-                                    data-custom-field="{{ $field }}"
-                                    data-custom-value="{{ $value }}"
-                                    data-custom-label="{{ $item['label'] }}"
-                                >
+                                <input type="radio" name="{{ $field }}" value="{{ $value }}" @checked($current === $value) data-custom-field="{{ $field }}" data-custom-value="{{ $value }}" data-custom-label="{{ $item['label'] }}">
                                 <span>{{ $item['label'] }}</span>
                                 <small>{{ $isUnlocked ? 'Unlocked' : '⭐ '.$cost.' coins' }}</small>
                             </label>
@@ -193,13 +158,7 @@
         </section>
 
         <section class="profile-form-card">
-            <div class="section-title">
-                <div>
-                    <p class="sb-hub-kicker">Favorite apps</p>
-                    <h2>Choose your worlds</h2>
-                </div>
-            </div>
-
+            <div class="section-title"><div><p class="sb-hub-kicker">Favorite apps</p><h2>Choose your worlds</h2></div></div>
             <div class="favorite-app-picker">
                 @foreach($apps as $app)
                     <label>
@@ -213,13 +172,7 @@
         </section>
 
         <section class="profile-form-card">
-            <div class="section-title">
-                <div>
-                    <p class="sb-hub-kicker">Visibility</p>
-                    <h2>Privacy controls</h2>
-                </div>
-            </div>
-
+            <div class="section-title"><div><p class="sb-hub-kicker">Visibility</p><h2>Privacy controls</h2></div></div>
             <div class="visibility-grid">
                 <label><input type="checkbox" name="public_profile_enabled" value="1" @checked(old('public_profile_enabled', $profile['public_profile_enabled'] ?? false))><span>Make my profile public</span></label>
                 <label><input type="checkbox" name="show_points" value="1" @checked(old('show_points', $profile['show_points'] ?? false))><span>Show my points</span></label>
