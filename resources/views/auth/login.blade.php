@@ -18,6 +18,21 @@
         <form method="POST" action="{{ route('login') }}" class="sb-auth-form">
             @csrf
 
+            @if ($errors->any())
+                <div class="sb-auth-error-summary" role="alert" aria-live="polite">
+                    <div class="sb-auth-error-icon">!</div>
+                    <div>
+                        <strong>Almost there — fix these first:</strong>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
+
             @if(session('status'))
                 <div class="sb-auth-status">{{ session('status') }}</div>
             @endif

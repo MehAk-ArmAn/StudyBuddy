@@ -21,6 +21,21 @@
         <form method="POST" action="{{ route('register') }}" class="sb-auth-form" novalidate>
             @csrf
 
+            @if ($errors->any())
+                <div class="sb-auth-error-summary" role="alert" aria-live="polite">
+                    <div class="sb-auth-error-icon">!</div>
+                    <div>
+                        <strong>Almost there — fix these first:</strong>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+
+
             <div class="sb-form-grid">
                 <label>
                     <span>Display name</span>
