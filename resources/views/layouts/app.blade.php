@@ -75,8 +75,5 @@
     @if(file_exists(public_path('assets/js/studybuddy-living-platform.js')))
         <script src="{{ asset('assets/js/studybuddy-living-platform.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-living-platform.js')) }}" defer></script>
     @endif
-    @if(file_exists(public_path('assets/js/studybuddy-final-no-error-polish.js')))
-        <script src="{{ asset('assets/js/studybuddy-final-no-error-polish.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-final-no-error-polish.js')) }}" defer></script>
-    @endif
 </body>
 </html>
