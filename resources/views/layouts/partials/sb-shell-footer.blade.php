@@ -37,9 +37,9 @@
     $fallbackFooter = [
         'Explore' => [
             ['label' => 'Apps', 'url' => '/apps'],
-            ['label' => 'Learning Hub', 'url' => '/apps?section=learning'],
-            ['label' => 'Rewards', 'url' => '/apps?section=rewards'],
-            ['label' => 'Dashboard', 'url' => '/dashboard'],
+            ['label' => 'Roles', 'url' => '/roles'],
+            ['label' => 'Community', 'url' => '/community'],
+            ['label' => 'Search', 'url' => '/search'],
         ],
         'Learning Worlds' => [
             ['label' => 'Math Quest', 'url' => '/apps/math-quest'],
@@ -49,16 +49,16 @@
             ['label' => 'Quiz Galaxy', 'url' => '/apps/quiz-galaxy'],
         ],
         'For Every Role' => [
-            ['label' => 'Students', 'url' => '/apps?role=student'],
-            ['label' => 'Parents', 'url' => '/apps?role=parent'],
-            ['label' => 'Teachers', 'url' => '/apps?role=teacher'],
-            ['label' => 'Independent Learners', 'url' => '/apps?role=independent_learner'],
+            ['label' => 'Students', 'url' => '/roles'],
+            ['label' => 'Parents', 'url' => '/roles'],
+            ['label' => 'Teachers', 'url' => '/roles'],
+            ['label' => 'Independent Learners', 'url' => '/roles'],
         ],
         'Trust & Support' => [
-            ['label' => 'Safety Promise', 'url' => '/apps?section=safety'],
+            ['label' => 'Community Guidelines', 'url' => '/community-guidelines'],
             ['label' => 'Privacy First', 'url' => '/privacy-policy'],
             ['label' => 'Terms of Use', 'url' => '/terms'],
-            ['label' => 'Contact Support', 'url' => 'mailto:support@studybuddy.fun'],
+            ['label' => 'Contact Support', 'url' => '/contact'],
         ],
     ];
 

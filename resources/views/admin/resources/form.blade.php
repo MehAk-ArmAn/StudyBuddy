@@ -24,17 +24,8 @@
         $string = $normaliseAdminValue($value);
 
         return in_array($field, [
-            'value',
-            'description',
-            'content',
-            'body',
-            'settings',
-            'metadata',
-            'meta',
-            'role_profile',
-            'child_emails',
-            'settings_json',
-            'metrics_json',
+            'value','description','content','body','settings','metadata','meta',
+            'role_profile','child_emails','settings_json','metrics_json'
         ], true) || strlen($string) > 110 || str_contains($string, "\n");
     };
 @endphp
@@ -51,14 +42,13 @@
             <div>
                 <p class="sb-control-kicker">Editor</p>
                 <h2>{{ $title ?? 'Edit' }}</h2>
-                <p>Keep data clean and easy to understand. JSON fields are shown safely as editable JSON.</p>
+                <p>JSON fields are safely shown as editable JSON, so admin pages do not crash.</p>
             </div>
 
             <div class="sb-control-row-actions">
                 @if(isset($route) && Route::has($route.'.index'))
                     <a href="{{ route($route.'.index') }}">Back</a>
                 @endif
-
                 <button class="primary" type="submit">Save</button>
             </div>
         </div>
@@ -78,10 +68,6 @@
                     @if($isLong)
                         <textarea name="{{ $field }}" rows="8">{{ $value }}</textarea>
                     @else
-                        <input name="{{ $field }}" value="{{ $value }}">
-                    @endif
-
-                    @if(is_array($rawValue) || is
                         <input name="{{ $field }}" value="{{ $value }}">
                     @endif
 
