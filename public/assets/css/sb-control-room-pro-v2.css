@@ -312,3 +312,26 @@
     color: rgba(226, 232, 240, .66);
 }
 /* === End Admin password changer fix UI === */
+
+/* === Safe generic admin resource editor === */
+.admin-json-hint {
+    display: block;
+    margin-top: 7px;
+    border: 1px solid rgba(34, 211, 238, .26);
+    border-radius: 12px;
+    padding: 7px 9px;
+    color: #a5f3fc !important;
+    background: rgba(34, 211, 238, .08);
+    font-size: .8rem;
+    font-weight: 850;
+}
+
+.sb-control-table td {
+    max-width: 320px;
+    overflow-wrap: anywhere;
+}
+
+.sb-control-form textarea {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+/* === End Safe generic admin resource editor === */
