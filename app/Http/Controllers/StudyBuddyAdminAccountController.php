@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class StudyBuddyAdminAccountController extends Controller
@@ -54,17 +55,37 @@ class StudyBuddyAdminAccountController extends Controller
 
     public function updatePassword(Request $request): RedirectResponse
     {
+        $user = $request->user();
+
         $data = $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', 'confirmed', Password::min(10)->letters()->mixedCase()->numbers()],
+            'current_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', 'different:current_password'],
+        ], [
+            'current_password.required' => 'Type your current admin password first.',
+            'password.required' => 'Type your new admin password.',
+            'password.min' => 'Your new password must be at least 8 characters.',
+            'password.confirmed' => 'The new password confirmation does not match.',
+            'password.different' => 'Your new password must be different from the current password.',
         ]);
 
-        $request->user()->forceFill([
+        if (!Hash::check($data['current_password'], $user->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => 'The current password is not correct. If you forgot it, use the reset command I gave below.',
+            ]);
+        }
+
+        $user->forceFill([
             'password' => Hash::make($data['password']),
-        ])->save();
+        ]);
+
+        if (Schema::hasColumn('users', 'remember_token')) {
+            $user->remember_token = Str::random(60);
+        }
+
+        $user->save();
 
         $request->session()->regenerate();
 
-        return back()->with('status', 'Admin password updated safely.');
+        return back()->with('status', 'Admin password updated successfully. Use the new password next login.');
     }
 }

@@ -238,3 +238,77 @@
         display: grid;
     }
 }
+
+/* === Admin password changer fix UI === */
+.pro-alert.error,
+.sb-control-alert.error {
+    border: 1px solid rgba(248, 113, 113, .48) !important;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(248, 113, 113, .20), transparent 34%),
+        rgba(127, 29, 29, .30) !important;
+    color: #fecaca !important;
+}
+
+.pro-alert.error strong,
+.sb-control-alert.error strong {
+    display: block;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.pro-alert.error ul,
+.sb-control-alert.error ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.sb-control-form small {
+    display: block;
+    margin-top: 7px;
+    border: 1px solid rgba(248, 113, 113, .42);
+    border-radius: 14px;
+    padding: 8px 10px;
+    color: #fecaca !important;
+    background: rgba(127, 29, 29, .22);
+    font-weight: 850;
+}
+
+.sb-control-form small::before {
+    content: "⚠ ";
+}
+
+.sb-control-form label:has(small) input {
+    border-color: rgba(248, 113, 113, .82) !important;
+    box-shadow: 0 0 0 4px rgba(248, 113, 113, .13) !important;
+}
+
+.pro-password-help {
+    margin-top: 16px;
+    border: 1px solid rgba(34, 211, 238, .24);
+    border-radius: 20px;
+    padding: 14px;
+    background: rgba(34, 211, 238, .08);
+    color: rgba(226, 232, 240, .82);
+}
+
+.pro-password-help strong,
+.pro-password-help span,
+.pro-password-help small {
+    display: block;
+}
+
+.pro-password-help strong {
+    color: #fff;
+}
+
+.pro-password-help span {
+    color: #22d3ee;
+    font-weight: 950;
+    margin-top: 4px;
+}
+
+.pro-password-help small {
+    margin-top: 5px;
+    color: rgba(226, 232, 240, .66);
+}
+/* === End Admin password changer fix UI === */
