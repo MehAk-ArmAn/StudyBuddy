@@ -1,9 +1,22 @@
-<section class="role-grid">
+@php
+    $roleImage = $settings['role_image_parent'] ?? 'https://raw.githubusercontent.com/MehAk-ArmAn/StudyBuddy-Imgs/main/homepage-paths/path-parents.png';
+@endphp
+
+<section class="role-grid parent-readable-dashboard">
+    <article class="role-card wide role-art-card" data-role-card>
+        <div>
+            <p class="role-kicker">Parent overview</p>
+            <h2>Guide your child’s progress safely.</h2>
+            <p>Parents can only connect a child with the child’s StudyBuddy Connect Code. No random linking. No password sharing.</p>
+        </div>
+        <img src="{{ $roleImage }}" alt="Parent StudyBuddy path" onerror="this.src='{{ asset('assets/studybuddy-imgs/brand/logo-icon.png') }}'">
+    </article>
+
     <article class="role-card wide" data-role-card>
         <div class="role-card-head">
             <div>
-                <p class="role-kicker">Parent overview</p>
-                <h2>Child progress snapshot</h2>
+                <p class="role-kicker">Progress snapshot</p>
+                <h2>Connected child metrics</h2>
             </div>
             <a href="{{ url('/community-guidelines') }}">Safety guide</a>
         </div>
@@ -17,20 +30,21 @@
     </article>
 
     <article class="role-card" data-role-card>
-        <p class="role-kicker">Connect child</p>
-        <h2>Add child account</h2>
+        <p class="role-kicker">Verified connection</p>
+        <h2>Connect child account</h2>
+        <p class="role-help-text">Ask the learner to open their dashboard and share their current StudyBuddy Connect Code.</p>
 
         <form method="POST" action="{{ route('studybuddy.parent.children.store') }}" class="role-form">
             @csrf
             <label>
-                <span>Child name</span>
-                <input name="child_name" placeholder="Example: Ayaan">
-            </label>
-            <label>
                 <span>Child email</span>
                 <input type="email" name="child_email" required placeholder="child@example.com">
             </label>
-            <button type="submit">Connect child</button>
+            <label>
+                <span>Child Connect Code</span>
+                <input name="child_connect_code" required placeholder="Example: A1B2C3D4">
+            </label>
+            <button type="submit">Connect child safely</button>
         </form>
     </article>
 
@@ -59,12 +73,12 @@
                     @endif
                 </article>
             @empty
-                <div class="empty-role-panel">No child accounts connected yet. Add a child email to begin.</div>
+                <div class="empty-role-panel">No child accounts connected yet. Use email + Connect Code to connect safely.</div>
             @endforelse
         </div>
     </article>
 
-    <article class="role-card" data-role-card>
+    <article class="role-card wide" data-role-card>
         <p class="role-kicker">Activity feed</p>
         <h2>Recent child activity</h2>
 
@@ -73,8 +87,8 @@
                 <article>
                     <span>{{ ($activity->points ?? 0) >= 0 ? '+' : '' }}{{ $activity->points ?? 0 }}</span>
                     <div>
-                        <strong>{{ $activity->label ?? $activity->reason ?? 'Learning activity' }}</strong>
-                        <small>{{ $activity->created_at ?? 'Recently' }}</small>
+                        <strong>{{ $activity->learner_name ?? 'Learner' }}</strong>
+                        <small>{{ $activity->label ?? $activity->reason ?? 'Learning activity' }} • {{ $activity->created_at ?? 'Recently' }}</small>
                     </div>
                 </article>
             @empty

@@ -3,6 +3,14 @@
 @section('title', 'How StudyBuddy Roles Work')
 
 @section('content')
+@php
+    $roleImages = [
+        'student' => $pageData['settings']['role_image_student'] ?? 'https://raw.githubusercontent.com/MehAk-ArmAn/StudyBuddy-Imgs/main/homepage-paths/path-apps.png',
+        'parent' => $pageData['settings']['role_image_parent'] ?? 'https://raw.githubusercontent.com/MehAk-ArmAn/StudyBuddy-Imgs/main/homepage-paths/path-parents.png',
+        'teacher' => $pageData['settings']['role_image_teacher'] ?? 'https://raw.githubusercontent.com/MehAk-ArmAn/StudyBuddy-Imgs/main/homepage-paths/path-teachers.png',
+        'independent_learner' => $pageData['settings']['role_image_independent_learner'] ?? 'https://raw.githubusercontent.com/MehAk-ArmAn/StudyBuddy-Imgs/main/homepage-paths/path-learning.png',
+    ];
+@endphp
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-info-pages.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-info-pages.css')) ? filemtime(public_path('assets/css/studybuddy-info-pages.css')) : time() }}">
 <script src="{{ asset('assets/js/studybuddy-info-pages.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-info-pages.js')) ? filemtime(public_path('assets/js/studybuddy-info-pages.js')) : time() }}" defer></script>
 
@@ -33,6 +41,9 @@
         @foreach($roleCards as $role)
             <article class="role-card-panel {{ $loop->first ? 'active' : '' }}" data-role-panel="{{ $role['key'] }}" data-info-card>
                 <div class="role-panel-main">
+                    <div class="role-panel-art">
+                        <img src="{{ $roleImages[$role['key']] ?? asset('assets/studybuddy-imgs/brand/logo-icon.png') }}" alt="{{ $role['title'] }} StudyBuddy path" onerror="this.src='{{ asset('assets/studybuddy-imgs/brand/logo-icon.png') }}'">
+                    </div>
                     <span class="role-big-icon">{{ $role['icon'] ?? '✨' }}</span>
                     <p class="sb-info-kicker">{{ $role['title'] }}</p>
                     <h2>{{ $role['tagline'] }}</h2>

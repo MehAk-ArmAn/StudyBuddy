@@ -1,4 +1,6 @@
 <section class="role-grid">
+    @include('dashboard.partials.learner-connect-code')
+
     <article class="role-card wide" data-role-card>
         <div class="role-card-head">
             <div>

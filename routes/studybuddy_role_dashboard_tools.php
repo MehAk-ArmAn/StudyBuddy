@@ -4,6 +4,9 @@ use App\Http\Controllers\StudyBuddyRoleDashboardActionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web', 'auth'])->group(function () {
+    Route::post('/dashboard/learner/connect-code', [StudyBuddyRoleDashboardActionController::class, 'regenerateConnectCode'])
+        ->name('studybuddy.learner.connect-code.regenerate');
+
     Route::post('/dashboard/parent/children', [StudyBuddyRoleDashboardActionController::class, 'addChild'])
         ->name('studybuddy.parent.children.store');
 

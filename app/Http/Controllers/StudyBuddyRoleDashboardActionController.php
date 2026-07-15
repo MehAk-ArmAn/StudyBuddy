@@ -7,9 +7,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class StudyBuddyRoleDashboardActionController extends Controller
 {
+    public function regenerateConnectCode(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+        $profile = $this->profileArray($user->role_profile ?? null);
+        $profile['connect_code'] = strtoupper(Str::random(8));
+
+        DB::table('users')->where('id', $user->id)->update([
+            'role_profile' => json_encode($profile, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+            'updated_at' => now(),
+        ]);
+
+        return back()->with('status', 'Your StudyBuddy Connect Code was regenerated.');
+    }
+
     public function addChild(Request $request): RedirectResponse
     {
         $user = $request->user();
@@ -17,39 +32,37 @@ class StudyBuddyRoleDashboardActionController extends Controller
         abort_unless(in_array($user->role, ['parent', 'admin'], true) || ($user->is_admin ?? false), 403);
 
         $data = $request->validate([
-            'child_name' => ['nullable', 'string', 'max:120'],
             'child_email' => ['required', 'email', 'max:190'],
+            'child_connect_code' => ['required', 'string', 'min:4', 'max:20'],
         ]);
 
-        $email = Str::lower(trim($data['child_email']));
+        $childUser = $this->verifyLearnerConnection($data['child_email'], $data['child_connect_code'], 'child');
+
         $group = $this->ensureGroup($user->id, 'family', 'Family Learning Hub', null);
 
-        $childUser = Schema::hasTable('users')
-            ? DB::table('users')->where('email', $email)->first()
-            : null;
-
         DB::table('studybuddy_group_members')->updateOrInsert(
-            ['group_id' => $group->id, 'email' => $email],
+            ['group_id' => $group->id, 'email' => Str::lower($childUser->email)],
             [
                 'owner_id' => $user->id,
-                'user_id' => $childUser->id ?? null,
-                'display_name' => $data['child_name'] ?: ($childUser->name ?? $email),
+                'user_id' => $childUser->id,
+                'display_name' => $childUser->name,
                 'member_role' => 'child',
-                'status' => $childUser ? 'connected' : 'invited',
+                'status' => 'connected_with_code',
+                'metrics_json' => json_encode(['verified_at' => now()->toDateTimeString(), 'method' => 'learner_connect_code']),
                 'updated_at' => now(),
                 'created_at' => now(),
             ]
         );
 
         if (Schema::hasColumn('users', 'child_emails')) {
-            $emails = collect($user->child_emails ?? [])->push($email)->unique()->values()->all();
+            $emails = collect($user->child_emails ?? [])->push(Str::lower($childUser->email))->unique()->values()->all();
             DB::table('users')->where('id', $user->id)->update([
                 'child_emails' => json_encode($emails),
                 'updated_at' => now(),
             ]);
         }
 
-        return back()->with('status', 'Child account added to your parent dashboard.');
+        return back()->with('status', 'Child account connected with StudyBuddy Connect Code.');
     }
 
     public function removeChild(Request $request, int $member): RedirectResponse
@@ -133,29 +146,27 @@ class StudyBuddyRoleDashboardActionController extends Controller
         abort_unless($class, 404);
 
         $data = $request->validate([
-            'student_name' => ['nullable', 'string', 'max:120'],
             'student_email' => ['required', 'email', 'max:190'],
+            'student_connect_code' => ['required', 'string', 'min:4', 'max:20'],
         ]);
 
-        $email = Str::lower(trim($data['student_email']));
-        $studentUser = Schema::hasTable('users')
-            ? DB::table('users')->where('email', $email)->first()
-            : null;
+        $studentUser = $this->verifyLearnerConnection($data['student_email'], $data['student_connect_code'], 'student');
 
         DB::table('studybuddy_group_members')->updateOrInsert(
-            ['group_id' => $class->id, 'email' => $email],
+            ['group_id' => $class->id, 'email' => Str::lower($studentUser->email)],
             [
                 'owner_id' => $user->id,
-                'user_id' => $studentUser->id ?? null,
-                'display_name' => $data['student_name'] ?: ($studentUser->name ?? $email),
+                'user_id' => $studentUser->id,
+                'display_name' => $studentUser->name,
                 'member_role' => 'student',
-                'status' => $studentUser ? 'connected' : 'invited',
+                'status' => 'connected_with_code',
+                'metrics_json' => json_encode(['verified_at' => now()->toDateTimeString(), 'method' => 'learner_connect_code']),
                 'updated_at' => now(),
                 'created_at' => now(),
             ]
         );
 
-        return back()->with('status', 'Student added to class roster.');
+        return back()->with('status', 'Student connected to class with StudyBuddy Connect Code.');
     }
 
     public function createAssignment(Request $request): RedirectResponse
@@ -207,6 +218,7 @@ class StudyBuddyRoleDashboardActionController extends Controller
         if ($groupId) {
             $members = DB::table('studybuddy_group_members')
                 ->where('group_id', $groupId)
+                ->where('status', 'connected_with_code')
                 ->get();
 
             foreach ($members as $member) {
@@ -222,7 +234,38 @@ class StudyBuddyRoleDashboardActionController extends Controller
             }
         }
 
-        return back()->with('status', $groupId ? 'Assignment created and assigned.' : 'Assignment draft created.');
+        return back()->with('status', $groupId ? 'Assignment created and assigned to verified students.' : 'Assignment draft created.');
+    }
+
+    private function verifyLearnerConnection(string $email, string $code, string $label)
+    {
+        $email = Str::lower(trim($email));
+        $code = strtoupper(trim($code));
+
+        $learner = DB::table('users')->where('email', $email)->first();
+
+        if (!$learner) {
+            throw ValidationException::withMessages([
+                "{$label}_email" => "This learner account does not exist yet. The learner must create an account first.",
+            ]);
+        }
+
+        if (($learner->is_admin ?? false) || in_array($learner->role ?? '', ['parent', 'teacher', 'admin'], true)) {
+            throw ValidationException::withMessages([
+                "{$label}_email" => "Only student or independent learner accounts can be connected here.",
+            ]);
+        }
+
+        $profile = $this->profileArray($learner->role_profile ?? null);
+        $expected = strtoupper((string) ($profile['connect_code'] ?? ''));
+
+        if (!$expected || !hash_equals($expected, $code)) {
+            throw ValidationException::withMessages([
+                "{$label}_connect_code" => "The StudyBuddy Connect Code is incorrect. Ask the learner to open their dashboard and share their current code.",
+            ]);
+        }
+
+        return $learner;
     }
 
     private function ensureGroup(int $ownerId, string $type, string $name, ?string $organizationName)
@@ -248,5 +291,17 @@ class StudyBuddyRoleDashboardActionController extends Controller
         ]);
 
         return DB::table('studybuddy_learning_groups')->where('id', $id)->first();
+    }
+
+    private function profileArray($value): array
+    {
+        if (is_array($value)) return $value;
+
+        if (is_string($value) && trim($value) !== '') {
+            $decoded = json_decode($value, true);
+            return is_array($decoded) ? $decoded : [];
+        }
+
+        return [];
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
@@ -97,7 +98,7 @@ class DashboardController extends Controller
         }
 
         return match ($role) {
-            'parent' => $apps->filter(fn ($app) => str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'reading') || str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'focus'))->take(4)->values(),
+            'parent' => $apps->filter(fn ($app) => str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'focus') || str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'reading'))->take(4)->values(),
             'teacher' => $apps->filter(fn ($app) => str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'quiz') || str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'math'))->take(4)->values(),
             'independent_learner' => $apps->filter(fn ($app) => str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'focus') || str_contains(strtolower(($app->category ?? '').' '.($app->tagline ?? '')), 'planner'))->take(4)->values(),
             default => $apps->take(4)->values(),
@@ -165,39 +166,30 @@ class DashboardController extends Controller
                 ->get());
         }
 
-        $childEmails = collect($user->child_emails ?? [])->filter()->values();
-
-        if ($children->isEmpty() && $childEmails->count() && Schema::hasTable('users')) {
-            $children = collect(DB::table('users')
-                ->whereIn('email', $childEmails)
-                ->select('id as user_id', 'name as display_name', 'email', 'role', 'cosmic_points', 'profile_photo_path')
-                ->get());
-        }
-
         $childUsers = collect();
 
         if ($children->count() && Schema::hasTable('users')) {
             $emails = $children->pluck('email')->filter()->unique()->values();
             $ids = $children->pluck('user_id')->filter()->unique()->values();
 
-            $query = DB::table('users')->where('is_admin', false);
-
-            $query->where(function ($q) use ($emails, $ids) {
-                if ($emails->count()) $q->orWhereIn('email', $emails);
-                if ($ids->count()) $q->orWhereIn('id', $ids);
-            });
-
-            $childUsers = collect($query->get());
+            $childUsers = collect(DB::table('users')
+                ->where(function ($q) use ($emails, $ids) {
+                    if ($emails->count()) $q->orWhereIn('email', $emails);
+                    if ($ids->count()) $q->orWhereIn('id', $ids);
+                })
+                ->get());
         }
 
         $childIds = $childUsers->pluck('id')->filter()->values();
 
         $childActivity = collect();
         if ($childIds->count() && Schema::hasTable('studybuddy_point_transactions')) {
-            $childActivity = collect(DB::table('studybuddy_point_transactions')
-                ->whereIn('user_id', $childIds)
-                ->latest('id')
-                ->limit(10)
+            $childActivity = collect(DB::table('studybuddy_point_transactions as p')
+                ->join('users as u', 'u.id', '=', 'p.user_id')
+                ->whereIn('p.user_id', $childIds)
+                ->select('p.*', 'u.name as learner_name', 'u.email as learner_email')
+                ->latest('p.id')
+                ->limit(14)
                 ->get());
         }
 
@@ -220,6 +212,8 @@ class DashboardController extends Controller
         $groups = collect();
         $members = collect();
         $assignments = collect();
+        $studentUsers = collect();
+        $studentActivity = collect();
 
         if (Schema::hasTable('studybuddy_learning_groups')) {
             $groups = collect(DB::table('studybuddy_learning_groups')
@@ -237,39 +231,83 @@ class DashboardController extends Controller
                 ->get());
         }
 
+        if ($members->count() && Schema::hasTable('users')) {
+            $emails = $members->pluck('email')->filter()->unique()->values();
+            $ids = $members->pluck('user_id')->filter()->unique()->values();
+
+            $studentUsers = collect(DB::table('users')
+                ->where(function ($q) use ($emails, $ids) {
+                    if ($emails->count()) $q->orWhereIn('email', $emails);
+                    if ($ids->count()) $q->orWhereIn('id', $ids);
+                })
+                ->get());
+        }
+
+        if ($studentUsers->count() && Schema::hasTable('studybuddy_point_transactions')) {
+            $studentActivity = collect(DB::table('studybuddy_point_transactions as p')
+                ->join('users as u', 'u.id', '=', 'p.user_id')
+                ->whereIn('p.user_id', $studentUsers->pluck('id'))
+                ->select('p.*', 'u.name as learner_name', 'u.email as learner_email')
+                ->latest('p.id')
+                ->limit(18)
+                ->get());
+        }
+
         if (Schema::hasTable('studybuddy_assignments')) {
             $assignments = collect(DB::table('studybuddy_assignments')
                 ->where('owner_id', $user->id)
                 ->latest('id')
-                ->limit(12)
+                ->limit(14)
                 ->get());
         }
 
         return [
             'groups' => $groups,
             'members' => $members,
+            'studentUsers' => $studentUsers,
+            'studentActivity' => $studentActivity,
             'assignments' => $assignments,
             'metrics' => [
                 'classes' => $groups->count(),
                 'students' => $members->count(),
                 'assignments' => $assignments->count(),
-                'drafts' => $assignments->where('status', 'draft')->count(),
+                'activity' => $studentActivity->count(),
             ],
         ];
     }
 
     private function learnerData($user, array $profile, Collection $recentPoints, Collection $assignments): array
     {
+        $connectCode = $this->ensureConnectCode($user, $profile);
+
         return [
+            'connect_code' => $connectCode,
             'metrics' => [
                 'points' => (int) ($user->cosmic_points ?? 0),
-                'rank' => null,
                 'assignments' => $assignments->where('status', 'assigned')->count(),
                 'recent_events' => $recentPoints->count(),
             ],
             'focus' => $profile['current_focus'] ?? $user->learning_stage ?? 'Build confidence',
             'goal' => $profile['learning_goal'] ?? 'Complete one tiny win today',
         ];
+    }
+
+    private function ensureConnectCode($user, array $profile): string
+    {
+        if (!empty($profile['connect_code'])) {
+            return strtoupper((string) $profile['connect_code']);
+        }
+
+        $profile['connect_code'] = strtoupper(Str::random(8));
+
+        if (Schema::hasColumn('users', 'role_profile')) {
+            DB::table('users')->where('id', $user->id)->update([
+                'role_profile' => json_encode($profile, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
+                'updated_at' => now(),
+            ]);
+        }
+
+        return $profile['connect_code'];
     }
 
     private function profileCompletion($user, array $profile): int
