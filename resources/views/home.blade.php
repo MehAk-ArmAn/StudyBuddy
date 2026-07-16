@@ -1,4 +1,8 @@
 @extends('layouts.app')
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-home-hero-clean.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-home-hero-clean.css')) ? filemtime(public_path('assets/css/studybuddy-home-hero-clean.css')) : time() }}">
+@endpush
 @section('content')
     @php
         $sectionMap = $sections->keyBy('section_key');
@@ -16,8 +20,6 @@
     <div class="sparkle-field" data-sparkle-field aria-hidden="true"></div>
     @if ($hero)
         <section id="top" class="sb-hero home-hero journey-hero">
-            <img class="float-planet planet-left" src="{{ $imageUrl($assetBase . 'decor/planets/planet-ringed-lg.png') }}" alt="" aria-hidden="true">
-            <img class="float-planet planet-right" src="{{ $imageUrl($assetBase . 'decor/planets/planet-purple-lg.png') }}" alt="" aria-hidden="true">
             <div class="hero-copy">
                 @if ($hero->eyebrow)<p class="eyebrow">{{ $hero->eyebrow }}</p>@endif
                 <h1>@php $title=$hero->title ?? ''; $highlight=data_get($hero->settings,'highlight','Your Way'); @endphp {!! str_replace($highlight, '<span>'.e($highlight).'</span>', e($title)) !!}</h1>
@@ -25,7 +27,10 @@
                 @if ($hero->body)<p class="hero-body">{{ $hero->body }}</p>@endif
                 <div class="hero-actions">@if ($hero->button_label)<a class="btn btn-primary" href="{{ $hero->button_url ?: url('/apps') }}">{{ $hero->button_label }}</a>@endif @if ($hero->secondary_button_label)<a class="btn btn-ghost" href="{{ $hero->secondary_button_url ?: route('register') }}">{{ $hero->secondary_button_label }}</a>@endif</div>
             </div>
-            <div class="hero-art-wrap fun-orbit-card"><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="sparkle s1">✦</span><span class="sparkle s2">✦</span><span class="sparkle s3">★</span><span class="sparkle s4">✧</span><div class="popup-bubble bubble-one">{{ data_get($hero->settings, 'bubble_one', 'Daily wins') }}</div><div class="popup-bubble bubble-two">{{ data_get($hero->settings, 'bubble_two', 'Focus mode') }}</div><div class="popup-bubble bubble-three">{{ data_get($hero->settings, 'bubble_three', 'Tiny quests') }}</div>@if ($hero->image_path)<img class="hero-art" src="{{ $imageUrl($hero->image_path) }}" alt="{{ $hero->title }}">@endif</div>
+            <div class="hero-art-wrap home-hero-visual">
+                <span class="home-hero-glow" aria-hidden="true"></span>
+                @if ($hero->image_path)<img class="hero-art" src="{{ $imageUrl($hero->image_path) }}" alt="{{ $hero->title }}">@endif
+            </div>
         </section>
     @endif
     <section class="personalization-lab" data-role-demo><div class="personalization-card"><p class="eyebrow">Personalized learning</p><h2>Your dashboard should not look like everyone else’s.</h2><p>StudyBuddy adapts the experience by role: learner, parent, teacher, or independent learner.</p><div class="role-choice-cloud"><button class="active" type="button" data-role-choice="student">Student</button><button type="button" data-role-choice="parent">Parent</button><button type="button" data-role-choice="teacher">Teacher</button><button type="button" data-role-choice="independent">Independent Learner</button></div></div><div class="personalization-card role-output-card"><p class="eyebrow">Live preview</p><div class="role-output" data-role-output>Your dashboard becomes a daily quest board with practice, focus, streaks, and friendly progress.</div></div></section>
@@ -35,6 +40,6 @@
     @if ($why)<section id="why" class="sb-section why-section"><div class="section-heading">@if ($why->eyebrow)<p class="eyebrow">{{ $why->eyebrow }}</p>@endif<h2>{{ $why->title }}</h2>@if ($why->subtitle)<p>{{ $why->subtitle }}</p>@endif</div><div class="feature-grid">@foreach ($why->items as $item)<article class="feature-card lively-card"><span>{{ $item->badge_text ?: '✦' }}</span><h3>{{ $item->title }}</h3><p>{{ $item->subtitle }}</p></article>@endforeach</div></section>@endif
     @if ($trust)<section class="sb-section trust-console"><div class="section-heading wide-heading"><div>@if ($trust->eyebrow)<p class="eyebrow">{{ $trust->eyebrow }}</p>@endif<h2>{{ $trust->title }}</h2>@if ($trust->subtitle)<p>{{ $trust->subtitle }}</p>@endif</div>@if ($trust->button_label)<a class="btn btn-ghost" href="{{ $trust->button_url ?: route('register') }}">{{ $trust->button_label }}</a>@endif</div><div class="feature-grid">@foreach ($trust->items as $item)<article class="feature-card lively-card">@if ($item->image_path)<img class="feature-img" src="{{ $imageUrl($item->image_path) }}" alt="{{ $item->title }}">@else<span>{{ $item->badge_text ?: '✓' }}</span>@endif<h3>{{ $item->title }}</h3>@if ($item->subtitle)<p>{{ $item->subtitle }}</p>@endif</article>@endforeach</div></section>@endif
     @if ($cta)<section id="cta" class="sb-section cta-card"><div>@if ($cta->eyebrow)<p class="eyebrow">{{ $cta->eyebrow }}</p>@endif<h2>{{ $cta->title }}</h2>@if ($cta->subtitle)<p>{{ $cta->subtitle }}</p>@endif<div class="hero-actions">@if ($cta->button_label)<a class="btn btn-primary" href="{{ $cta->button_url ?: route('pages.contact-us') }}">{{ $cta->button_label }}</a>@endif @if ($cta->secondary_button_label)<a class="btn btn-ghost" href="{{ $cta->secondary_button_url ?: route('pages.support') }}">{{ $cta->secondary_button_label }}</a>@endif</div></div>@if ($cta->image_path)<img src="{{ $imageUrl($cta->image_path) }}" alt="{{ $cta->title }}">@endif</section>@endif
-    @include('partials.home-living-sections')
-    @include('partials.home-vibe-upgrade')
+    @includeIf('partials.home-living-sections')
+    @includeIf('partials.home-vibe-upgrade')
 @endsection
