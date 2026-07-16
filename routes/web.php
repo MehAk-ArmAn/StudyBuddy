@@ -1,5 +1,11 @@
 <?php
 
+// StudyBuddy contact inbox routes
+require __DIR__ . '/studybuddy_contact_inbox_final.php';
+
+// StudyBuddy admin health and homepage CMS
+require __DIR__ . '/studybuddy_admin_health_cms.php';
+
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FooterItemController;
 use App\Http\Controllers\Admin\HomepageSectionController;
