@@ -1,0 +1,187 @@
+@extends('layouts.app')
+
+@section('content')
+@php
+    $currentRole = auth()->user()?->normalizedRole();
+
+    $worldMap = [
+        'math-quest' => ['#7c3cff', '#246bff', '#22d3ee', 'Cosmic Number Quest'],
+        'spelling-sprint' => ['#ff4f9a', '#7c3cff', '#ffd166', 'Word Speed Arena'],
+        'reading-garden' => ['#16a34a', '#22c55e', '#22d3ee', 'Story Growth Garden'],
+        'focus-forest' => ['#0f766e', '#22c55e', '#22d3ee', 'Calm Focus Forest'],
+        'planner-city' => ['#f59e0b', '#ef4444', '#7c3cff', 'Routine Builder City'],
+        'quiz-galaxy' => ['#4f46e5', '#ec4899', '#22d3ee', 'Review Galaxy'],
+        'shapes-lab' => ['#06b6d4', '#8b5cf6', '#facc15', 'Geometry Lab'],
+        'flashcard-castle' => ['#9333ea', '#f97316', '#fde68a', 'Memory Castle'],
+    ];
+
+    $assetUrl = function ($path) {
+        if (!$path) return null;
+        if (preg_match('/^https?:\/\//i', $path)) return $path;
+        $clean = ltrim($path, '/');
+        return file_exists(public_path($clean)) ? asset($clean) : asset('assets/studybuddy-imgs/brand/logo-icon.png');
+    };
+@endphp
+
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-connected-apps.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-connected-apps.css')) ? filemtime(public_path('assets/css/studybuddy-connected-apps.css')) : time() }}">
+<script src="{{ asset('assets/js/studybuddy-connected-apps.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-connected-apps.js')) ? filemtime(public_path('assets/js/studybuddy-connected-apps.js')) : time() }}" defer></script>
+
+<main id="main-content" class="sb-connected-apps">
+    <section class="sb-apps-landing">
+        <div>
+            <p class="sb-apps-kicker">StudyBuddy App Universe</p>
+            <h1>{{ $settings['launchpad_heading'] ?? 'Choose your learning world.' }}</h1>
+            <p>{{ $settings['launchpad_intro'] ?? 'Pick a world, follow a tiny mission, collect progress, and make learning feel playful again.' }}</p>
+            <div class="sb-apps-actions">
+                @auth
+                    <a href="{{ route('studybuddy.final.points-wallet') }}">My Points Wallet</a>
+                    <a class="soft" href="{{ route('studybuddy.quests.index') }}">My Quest</a>
+                @else
+                    <a href="{{ route('register') }}">Create free account</a>
+                    <a class="soft" href="{{ route('login') }}">Login</a>
+                @endauth
+            </div>
+        </div>
+
+        <aside class="sb-apps-count-card">
+            <span>🚀</span>
+            <strong>{{ $apps->count() }}</strong>
+            <p>connected learning worlds</p>
+        </aside>
+    </section>
+
+    <section class="sb-apps-toolbar" aria-label="Find apps">
+        <label>
+            <span>Search</span>
+            <input type="search" placeholder="Search math, reading, focus..." data-sb-app-search>
+        </label>
+
+        <label>
+            <span>Category</span>
+            <select data-sb-app-filter>
+                <option value="all">All categories</option>
+                @foreach($categories as $category)
+                    <option value="{{ \Illuminate\Support\Str::slug($category) }}">{{ $category }}</option>
+                @endforeach
+            </select>
+        </label>
+
+        <label>
+            <span>Role</span>
+            <select data-sb-role-filter>
+                <option value="all">All roles</option>
+                @foreach($roles as $key => $label)
+                    <option value="{{ $key }}" @selected($currentRole === $key)>{{ $label }}</option>
+                @endforeach
+            </select>
+        </label>
+    </section>
+
+    <section class="sb-apps-note">
+        @guest
+            <strong>Preview mode:</strong> Browse every learning world. Login to save quests, play web builds, and earn points.
+        @else
+            <strong>{{ ucfirst(str_replace('_', ' ', $currentRole ?? 'learner')) }} mode:</strong> Apps stay connected to your dashboard, role, points, and quest flow.
+        @endguest
+    </section>
+
+    @if($apps->count())
+        <section class="sb-connected-grid" aria-label="StudyBuddy apps">
+            @foreach($apps as $app)
+                @php
+                    $rolesForApp = $app->audience_roles ?: ['student','parent','teacher','independent_learner'];
+                    $world = $worldMap[$app->slug] ?? [$app->accent ?: '#7c3cff', '#246bff', '#22d3ee', $app->category ?: 'Learning World'];
+                    $image = $assetUrl($app->safeHeroImage());
+
+                    $previewCandidates = [
+                        "assets/studybuddy-imgs/02_apps/{$app->slug}/01_app-icon/{$app->slug}_main-icon.png",
+                        "assets/studybuddy-imgs/02_apps/{$app->slug}/01_app-icon/{$app->slug}_icon-512.png",
+                        "assets/studybuddy-imgs/02_apps/{$app->slug}/02_orbs/{$app->slug}_orb-glow.png",
+                        "assets/studybuddy-imgs/02_apps/{$app->slug}/02_orbs/{$app->slug}_orb-small.png",
+                        "assets/studybuddy-imgs/02_apps/{$app->slug}/05_planets-bg/{$app->slug}_mini-planet.png",
+                        $app->safeHeroImage(),
+                    ];
+
+                    $previewImages = collect($previewCandidates)
+                        ->map(fn($path) => $assetUrl($path))
+                        ->filter()
+                        ->unique()
+                        ->take(4)
+                        ->values();
+
+                    $searchText = \Illuminate\Support\Str::lower($app->name.' '.$app->tagline.' '.$app->description.' '.$app->category.' '.implode(' ', $rolesForApp));
+                @endphp
+
+                <article class="sb-connected-card"
+                    style="--app-one: {{ $world[0] }}; --app-two: {{ $world[1] }}; --app-three: {{ $world[2] }};"
+                    data-app-card
+                    data-category="{{ \Illuminate\Support\Str::slug($app->category) }}"
+                    data-roles="{{ implode(' ', $rolesForApp) }}"
+                    data-search="{{ $searchText }}">
+
+                    <div class="sb-connected-media">
+                        <div class="sb-connected-glow"></div>
+                        <img src="{{ $image }}" alt="{{ $app->name }} artwork" loading="lazy">
+                        <span>{{ $app->icon ?: '✨' }}</span>
+
+                        <div class="sb-orbit-sparkles" aria-hidden="true">
+                            <i></i><i></i><i></i><i></i><i></i>
+                        </div>
+
+                        @if($previewImages->count() > 1)
+                            <div class="sb-card-mini-gallery" aria-hidden="true">
+                                @foreach($previewImages->skip(1)->take(3) as $previewImage)
+                                    <img src="{{ $previewImage }}" alt="">
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="sb-connected-card-body">
+                        <div class="sb-connected-topline">
+                            <span>{{ $world[3] }}</span>
+                            <b>{{ ucfirst($app->status) }}</b>
+                        </div>
+
+                        <h2>{{ $app->name }}</h2>
+                        <p class="tagline">{{ $app->tagline }}</p>
+                        <p>{{ $app->preview_text ?: \Illuminate\Support\Str::limit($app->description, 145) }}</p>
+
+                        <div class="sb-role-chips">
+                            @foreach($rolesForApp as $roleName)
+                                <span>{{ ucwords(str_replace('_', ' ', $roleName)) }}</span>
+                            @endforeach
+                        </div>
+
+                        <div class="sb-connected-meta">
+                            <span>⭐ {{ $app->points_reward }} pts</span>
+                            <span>⏱ {{ $app->estimated_minutes }} min</span>
+                            <span>{{ $app->age_min ? $app->age_min.'+' : 'All ages' }}</span>
+                        </div>
+
+                        <div class="sb-connected-links">
+                            <a href="{{ route('studybuddy.apps.show', $app->slug) }}">View Details</a>
+                            @if($app->is_web_enabled)
+                                @auth
+                                    <a class="soft" href="{{ route('studybuddy.final.web-play', $app->slug) }}">Play Web</a>
+                                @else
+                                    <a class="soft" href="{{ route('login') }}">Login to Play</a>
+                                @endauth
+                            @else
+                                <span>Web soon</span>
+                            @endif
+                        </div>
+                    </div>
+                </article>
+            @endforeach
+        </section>
+
+        <p class="sb-empty-apps" data-sb-empty hidden>No apps match this filter yet. Try “All categories” or clear the search.</p>
+    @else
+        <section class="sb-empty-apps">
+            <h2>No apps found in the database yet.</h2>
+            <p>Run <code>php tools/sync_studybuddy_connected_apps.php</code> to restore the connected StudyBuddy app universe.</p>
+        </section>
+    @endif
+</main>
+@endsection

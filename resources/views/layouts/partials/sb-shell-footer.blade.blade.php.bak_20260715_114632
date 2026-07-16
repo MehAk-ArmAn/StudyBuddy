@@ -1,0 +1,181 @@
+@php
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Schema;
+
+    $shellSettings = [];
+    if (Schema::hasTable('site_settings')) {
+        $shellSettings = DB::table('site_settings')->pluck('value', 'key')->all();
+    }
+
+    $brandName = $shellSettings['site_name'] ?? 'StudyBuddy';
+    $tagline = $shellSettings['site_tagline'] ?? 'Learn. Play. Grow. Your Way.';
+    $promise = $shellSettings['brand_promise'] ?? $shellSettings['footer_text'] ?? 'A playful learning universe for students, parents, teachers, and independent learners.';
+
+    $logoCandidates = [
+        $shellSettings['logo_image'] ?? null,
+        'assets/studybuddy-imgs/brand/logo-icon.png',
+        'assets/studybuddy-brand/logo-icon.png',
+        'assets/studybuddy-control/logo.svg',
+    ];
+
+    $logoPath = null;
+    foreach ($logoCandidates as $candidate) {
+        if (!$candidate) continue;
+        $clean = ltrim($candidate, '/');
+        if (str_starts_with($clean, 'http') || file_exists(public_path($clean))) {
+            $logoPath = $candidate;
+            break;
+        }
+    }
+
+    $safeJson = function ($value, $fallback) {
+        if (!is_string($value) || trim($value) === '') return $fallback;
+        $decoded = json_decode($value, true);
+        return is_array($decoded) ? $decoded : $fallback;
+    };
+
+    $fallbackFooter = [
+        'Explore' => [
+            ['label' => 'Apps', 'url' => '/apps'],
+            ['label' => 'Learning Hub', 'url' => '/apps?section=learning'],
+            ['label' => 'Rewards', 'url' => '/apps?section=rewards'],
+            ['label' => 'Dashboard', 'url' => '/dashboard'],
+        ],
+        'Learning Worlds' => [
+            ['label' => 'Math Quest', 'url' => '/apps/math-quest'],
+            ['label' => 'Spelling Sprint', 'url' => '/apps/spelling-sprint'],
+            ['label' => 'Reading Garden', 'url' => '/apps/reading-garden'],
+            ['label' => 'Focus Forest', 'url' => '/apps/focus-forest'],
+            ['label' => 'Quiz Galaxy', 'url' => '/apps/quiz-galaxy'],
+        ],
+        'For Every Role' => [
+            ['label' => 'Students', 'url' => '/apps?role=student'],
+            ['label' => 'Parents', 'url' => '/apps?role=parent'],
+            ['label' => 'Teachers', 'url' => '/apps?role=teacher'],
+            ['label' => 'Independent Learners', 'url' => '/apps?role=independent_learner'],
+        ],
+        'Trust & Support' => [
+            ['label' => 'Safety Promise', 'url' => '/apps?section=safety'],
+            ['label' => 'Privacy First', 'url' => '/privacy-policy'],
+            ['label' => 'Terms of Use', 'url' => '/terms'],
+            ['label' => 'Contact Support', 'url' => 'mailto:support@studybuddy.fun'],
+        ],
+    ];
+
+    $footerGroups = $safeJson($shellSettings['shell_footer_groups_json'] ?? null, $fallbackFooter);
+
+    $socials = $safeJson($shellSettings['shell_social_links_json'] ?? null, [
+        ['label' => 'Instagram', 'url' => ''],
+        ['label' => 'YouTube', 'url' => ''],
+        ['label' => 'LinkedIn', 'url' => ''],
+    ]);
+
+    $pillOne = $shellSettings['footer_pill_one'] ?? 'Explore apps';
+    $pillTwo = $shellSettings['footer_pill_two'] ?? 'Build skills';
+    $pillThree = $shellSettings['footer_pill_three'] ?? 'Earn points';
+@endphp
+
+<footer class="sb-advanced-footer">
+    <div class="sb-footer-glow one" aria-hidden="true"></div>
+    <div class="sb-footer-glow two" aria-hidden="true"></div>
+
+    <div class="sb-footer-inner">
+        <section class="sb-footer-top-section">
+            <div class="sb-footer-brand-block">
+                <a class="sb-footer-brand" href="{{ url('/') }}">
+                    @if($logoPath)
+                        <img src="{{ str_starts_with($logoPath, 'http') ? $logoPath : asset(ltrim($logoPath, '/')) }}" alt="StudyBuddy logo">
+                    @endif
+                    <span>
+                        <strong>{{ $brandName }}</strong>
+                        <em>{{ $tagline }}</em>
+                    </span>
+                </a>
+
+                <p>{{ $promise }}</p>
+            </div>
+
+            <div class="sb-footer-action-card">
+                <span>Ready to start?</span>
+                <h2>Build your learning dashboard.</h2>
+                <p>Choose your role, explore the app universe, and grow with calm progress.</p>
+                <div>
+                    <a href="{{ url('/register') }}">Create account</a>
+                    <a class="soft" href="{{ url('/apps') }}">Explore apps</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="sb-footer-value-strip" aria-label="StudyBuddy values">
+            <article>
+                <strong>{{ $pillOne }}</strong>
+                <span>Discover skill-building mini apps.</span>
+            </article>
+            <article>
+                <strong>{{ $pillTwo }}</strong>
+                <span>Practice with clear feedback and routines.</span>
+            </article>
+            <article>
+                <strong>{{ $pillThree }}</strong>
+                <span>Stay motivated with quests and progress.</span>
+            </article>
+        </section>
+
+        <section class="sb-footer-link-section">
+            <div class="sb-footer-section-heading">
+                <span>StudyBuddy Map</span>
+                <h2>Everything connected in one learning universe.</h2>
+            </div>
+
+            <div class="sb-footer-grid" aria-label="StudyBuddy footer navigation">
+                @foreach($footerGroups as $group => $links)
+                    <div class="sb-footer-group">
+                        <h3>{{ $group }}</h3>
+                        <ul>
+                            @foreach($links as $link)
+                                @php
+                                    $label = $link['label'] ?? 'Link';
+                                    $url = $link['url'] ?? '#';
+                                    $isExternal = str_starts_with($url, 'http') || str_starts_with($url, 'mailto:');
+                                @endphp
+                                <li>
+                                    <a href="{{ $isExternal ? $url : url($url) }}" @if($isExternal && str_starts_with($url, 'http')) target="_blank" rel="noopener" @endif>
+                                        <span>{{ $label }}</span>
+                                        <i>→</i>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endforeach
+
+                <div class="sb-footer-group sb-footer-newsletter">
+                    <h3>Updates</h3>
+                    <p>Launch notes, new learning worlds, and StudyBuddy improvements.</p>
+
+                    <form action="{{ url('/register') }}" method="GET">
+                        <input name="email" type="email" placeholder="Your email">
+                        <button type="submit">Join</button>
+                    </form>
+
+                    <div class="sb-footer-socials">
+                        @foreach($socials as $social)
+                            @php
+                                $url = $social['url'] ?? '';
+                                $label = $social['label'] ?? 'Social';
+                            @endphp
+                            @if($url)
+                                <a href="{{ $url }}" target="_blank" rel="noopener">{{ $label }}</a>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sb-footer-bottom">
+            <p>© {{ date('Y') }} {{ $brandName }}. Safe, playful learning for every role.</p>
+            <p>Created by <a href="{{ $shellSettings['creator_url'] ?? 'https://pixelcraftslab.com' }}" target="_blank" rel="noopener">{{ $shellSettings['creator_name'] ?? 'PixelCraftsLab Studio' }}</a></p>
+        </section>
+    </div>
+</footer>

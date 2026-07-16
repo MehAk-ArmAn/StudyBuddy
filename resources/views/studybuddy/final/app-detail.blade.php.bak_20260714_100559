@@ -1,0 +1,174 @@
+@extends('layouts.app')
+
+@section('content')
+@php
+    $worldMap = [
+        'math-quest' => ['✦', 'Cosmic Number Quest', '#7c3cff', '#246bff', '#22d3ee', '#fff3b0'],
+        'spelling-sprint' => ['Aa', 'Word Speed Arena', '#ff4f9a', '#7c3cff', '#ffd166', '#fff0f8'],
+        'reading-garden' => ['☘', 'Story Growth Garden', '#16a34a', '#22c55e', '#22d3ee', '#f0fff6'],
+        'focus-forest' => ['◌', 'Calm Focus Forest', '#0f766e', '#22c55e', '#22d3ee', '#ecfeff'],
+        'planner-city' => ['▦', 'Routine Builder City', '#f59e0b', '#ef4444', '#7c3cff', '#fff7ed'],
+        'quiz-galaxy' => ['◎', 'Review Galaxy', '#4f46e5', '#ec4899', '#22d3ee', '#eef2ff'],
+        'shapes-lab' => ['△', 'Geometry Discovery Lab', '#06b6d4', '#8b5cf6', '#facc15', '#ecfeff'],
+        'flashcard-castle' => ['▣', 'Memory Castle', '#9333ea', '#f97316', '#fde68a', '#faf5ff'],
+    ];
+
+    $world = $worldMap[$app->slug] ?? [$app->icon ?: '✨', $app->category ?: 'Learning World', $app->accent ?: '#7c3cff', '#246bff', '#22d3ee', '#f7f9ff'];
+
+    $assetUrl = function ($path) {
+        if (!$path) return null;
+        if (preg_match('/^https?:\/\//i', $path)) return $path;
+        $clean = ltrim($path, '/');
+        return file_exists(public_path($clean)) ? asset($clean) : null;
+    };
+
+    $firstExisting = function (array $paths) use ($assetUrl) {
+        foreach ($paths as $path) {
+            $url = $assetUrl($path);
+            if ($url) return $url;
+        }
+        return asset('assets/studybuddy-imgs/brand/logo-icon.png');
+    };
+
+    $slug = $app->slug;
+
+    $heroImage = $firstExisting([
+        $app->safeHeroImage(),
+        "assets/studybuddy-imgs/apps/app-{$slug}.png",
+        "assets/studybuddy-imgs/02_apps/{$slug}/01_app-icon/{$slug}_main-icon.png",
+    ]);
+
+    $decor = [
+        'orb' => $assetUrl("assets/studybuddy-imgs/02_apps/{$slug}/02_orbs/{$slug}_orb-glow.png"),
+        'smallOrb' => $assetUrl("assets/studybuddy-imgs/02_apps/{$slug}/02_orbs/{$slug}_orb-small.png"),
+        'star' => $assetUrl("assets/studybuddy-imgs/02_apps/{$slug}/03_sparks/{$slug}_star-main.png"),
+        'spark' => $assetUrl("assets/studybuddy-imgs/02_apps/{$slug}/03_sparks/{$slug}_spark-small.png"),
+        'comet' => $assetUrl("assets/studybuddy-imgs/02_apps/{$slug}/03_sparks/{$slug}_comet-trail.png"),
+        'planet' => $assetUrl("assets/studybuddy-imgs/02_apps/{$slug}/05_planets-bg/{$slug}_mini-planet.png"),
+    ];
+
+    $rolesForApp = $app->audience_roles ?: ['student','parent','teacher','independent_learner'];
+    $outcomes = collect($app->learning_outcomes ?: [])->map(fn($x) => is_array($x) ? ($x['text'] ?? $x['title'] ?? implode(' ', $x)) : $x)->filter()->values();
+    $sections = collect($app->detail_sections ?: [])->map(fn($x) => is_array($x) ? ['title' => $x['title'] ?? 'Learning step', 'body' => $x['body'] ?? $x['text'] ?? $x['description'] ?? 'A focused learning step.'] : ['title' => 'Learning step', 'body' => $x])->filter()->values();
+
+    if (!$outcomes->count()) $outcomes = collect(['Build confidence', 'Practice safely', 'Track progress', 'Keep learning fun']);
+    if (!$sections->count()) {
+        $sections = collect([
+            ['title' => 'Start', 'body' => 'Choose a short activity and begin with a tiny win.'],
+            ['title' => 'Practice', 'body' => 'Complete focused rounds with friendly feedback.'],
+            ['title' => 'Grow', 'body' => 'Review progress and come back stronger.'],
+        ]);
+    }
+
+    $relatedImage = function ($mini) use ($firstExisting) {
+        return $firstExisting([
+            $mini->safeHeroImage(),
+            "assets/studybuddy-imgs/apps/app-{$mini->slug}.png",
+            "assets/studybuddy-imgs/02_apps/{$mini->slug}/01_app-icon/{$mini->slug}_main-icon.png",
+        ]);
+    };
+@endphp
+
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-connected-apps.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-connected-apps.css')) ? filemtime(public_path('assets/css/studybuddy-connected-apps.css')) : time() }}">
+<script src="{{ asset('assets/js/studybuddy-connected-apps.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-connected-apps.js')) ? filemtime(public_path('assets/js/studybuddy-connected-apps.js')) : time() }}" defer></script>
+
+<main id="main-content" class="sb-app-detail-world" style="--app-one: {{ $world[2] }}; --app-two: {{ $world[3] }}; --app-three: {{ $world[4] }}; --app-soft: {{ $world[5] }};">
+    <section class="sb-detail-hero">
+        @if($decor['comet'])<img class="sb-detail-decor comet" src="{{ $decor['comet'] }}" alt="" aria-hidden="true">@endif
+        @if($decor['star'])<img class="sb-detail-decor star" src="{{ $decor['star'] }}" alt="" aria-hidden="true">@endif
+        @if($decor['planet'])<img class="sb-detail-decor planet" src="{{ $decor['planet'] }}" alt="" aria-hidden="true">@endif
+
+        <div class="sb-detail-copy">
+            <a class="sb-back-link" href="{{ route('studybuddy.apps') }}">← Back to App Universe</a>
+            <p class="sb-apps-kicker">{{ $world[1] }}</p>
+            <h1>{{ $app->name }}</h1>
+            <p>{{ $app->description }}</p>
+
+            <div class="sb-world-meta">
+                <span>{{ ucfirst($app->status) }}</span>
+                <span>⭐ {{ $app->points_reward }} points</span>
+                <span>⏱ {{ $app->estimated_minutes }} minutes</span>
+                <span>{{ $app->age_min ? $app->age_min.'+' : 'All ages' }}</span>
+            </div>
+
+            <div class="sb-apps-actions">
+                @if($app->is_web_enabled)
+                    @auth
+                        <a href="{{ route('studybuddy.final.web-play', $app->slug) }}">Play on Web</a>
+                    @else
+                        <a href="{{ route('login') }}">Login to Play</a>
+                    @endauth
+                @else
+                    <a href="{{ route('studybuddy.apps') }}">Explore Apps</a>
+                @endif
+                <a class="soft" href="{{ route('studybuddy.final.points-wallet') }}">Points Wallet</a>
+            </div>
+        </div>
+
+        <aside class="sb-detail-art" data-world-tilt>
+            <div class="art-glow"></div>
+            <span>{{ $world[0] }}</span>
+            <img class="main-art" src="{{ $heroImage }}" alt="{{ $app->name }} artwork">
+            @if($decor['orb'])<img class="float orb" src="{{ $decor['orb'] }}" alt="" aria-hidden="true">@endif
+            @if($decor['smallOrb'])<img class="float small-orb" src="{{ $decor['smallOrb'] }}" alt="" aria-hidden="true">@endif
+            @if($decor['spark'])<img class="float spark" src="{{ $decor['spark'] }}" alt="" aria-hidden="true">@endif
+        </aside>
+    </section>
+
+    <section class="sb-detail-strip">
+        <article><span>Category</span><strong>{{ $app->category }}</strong></article>
+        <article><span>Best for</span><strong>{{ collect($rolesForApp)->map(fn($r) => ucwords(str_replace('_', ' ', $r)))->join(', ') }}</strong></article>
+        <article><span>Connected image</span><strong>{{ $app->safeHeroImage() }}</strong></article>
+    </section>
+
+    <section class="sb-detail-section split">
+        <div>
+            <p class="sb-apps-kicker">Learning outcomes</p>
+            <h2>Small wins, clear progress.</h2>
+            <p>{{ $app->safety_note ?: 'StudyBuddy keeps practice guided, friendly, and connected to progress.' }}</p>
+        </div>
+
+        <div class="sb-detail-outcomes">
+            @foreach($outcomes as $outcome)
+                <article data-world-card><span>✓</span><strong>{{ $outcome }}</strong></article>
+            @endforeach
+        </div>
+    </section>
+
+    <section class="sb-detail-section">
+        <div class="section-head">
+            <p class="sb-apps-kicker">Journey</p>
+            <h2>How this app feels when you use it.</h2>
+        </div>
+
+        <div class="sb-detail-missions">
+            @foreach($sections as $section)
+                <article data-world-card>
+                    <span>0{{ $loop->iteration }}</span>
+                    <h3>{{ $section['title'] }}</h3>
+                    <p>{{ $section['body'] }}</p>
+                </article>
+            @endforeach
+        </div>
+    </section>
+
+    @if($related->count())
+        <section class="sb-detail-section">
+            <div class="section-head">
+                <p class="sb-apps-kicker">More worlds</p>
+                <h2>Keep exploring</h2>
+            </div>
+
+            <div class="sb-related-grid">
+                @foreach($related as $mini)
+                    <a href="{{ route('studybuddy.apps.show', $mini->slug) }}">
+                        <img src="{{ $relatedImage($mini) }}" alt="{{ $mini->name }} artwork">
+                        <strong>{{ $mini->name }}</strong>
+                        <span>{{ $mini->category }}</span>
+                    </a>
+                @endforeach
+            </div>
+        </section>
+    @endif
+</main>
+@endsection
