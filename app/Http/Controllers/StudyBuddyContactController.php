@@ -16,7 +16,7 @@ class StudyBuddyContactController extends Controller
             ? DB::table('site_settings')->pluck('value', 'key')->all()
             : [];
 
-        return view('studybuddy.contact.show', [
+        return view('studybuddy.contact.form', [
             'settings' => $settings,
             'categories' => [
                 'general' => 'General question',
@@ -62,6 +62,6 @@ class StudyBuddyContactController extends Controller
             ]);
         }
 
-        return back()->with('status', 'Message sent. StudyBuddy support can review it from the admin Control Room.');
+        return back()->with('status', 'Message sent. StudyBuddy support can now review it from the admin Control Room.');
     }
 }

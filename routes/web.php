@@ -1,5 +1,8 @@
 <?php
 
+// Force real StudyBuddy contact form before any generic page route
+require __DIR__ . '/studybuddy_contact_force_form.php';
+
 // StudyBuddy contact inbox routes
 require __DIR__ . '/studybuddy_contact_inbox_final.php';
 
