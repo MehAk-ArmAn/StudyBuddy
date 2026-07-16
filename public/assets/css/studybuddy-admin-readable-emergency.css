@@ -1,0 +1,282 @@
+/* =========================================================
+   StudyBuddy Admin Emergency Readability Fix
+   Purpose: stop white backgrounds + white text everywhere.
+   ========================================================= */
+
+html body.sb-control-admin-body,
+body.sb-control-admin-body,
+.sb-control-admin-body {
+    background:
+        radial-gradient(circle at 0% 0%, rgba(34, 211, 238, .12), transparent 32%),
+        radial-gradient(circle at 100% 0%, rgba(124, 60, 255, .16), transparent 34%),
+        linear-gradient(180deg, #050816 0%, #081026 54%, #050816 100%) !important;
+    color: #f8fbff !important;
+}
+
+/* Main admin wrappers */
+.sb-control-admin-body .sb-control-admin-app,
+.sb-control-admin-body .pro-admin-shell,
+.sb-control-admin-body .sb-control-main,
+.sb-control-admin-body .pro-main {
+    background: transparent !important;
+    color: #f8fbff !important;
+}
+
+/* Sidebar */
+.sb-control-admin-body .sb-control-sidebar,
+.sb-control-admin-body .pro-sidebar {
+    background:
+        linear-gradient(180deg, rgba(8, 13, 34, .98), rgba(5, 8, 22, .98)) !important;
+    border-right: 1px solid rgba(255,255,255,.12) !important;
+    color: #f8fbff !important;
+}
+
+.sb-control-admin-body .sb-control-brand,
+.sb-control-admin-body .pro-brand,
+.sb-control-admin-body .sb-control-brand *,
+.sb-control-admin-body .pro-brand * {
+    color: #ffffff !important;
+}
+
+/* Sidebar nav */
+.sb-control-admin-body .sb-control-nav a,
+.sb-control-admin-body .pro-nav a {
+    background: rgba(255,255,255,.055) !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+    color: #eaf6ff !important;
+}
+
+.sb-control-admin-body .sb-control-nav a span,
+.sb-control-admin-body .pro-nav a span {
+    color: #eaf6ff !important;
+}
+
+.sb-control-admin-body .sb-control-nav a:hover,
+.sb-control-admin-body .pro-nav a:hover,
+.sb-control-admin-body .sb-control-nav a.active,
+.sb-control-admin-body .pro-nav a.active {
+    background:
+        radial-gradient(circle at 0% 0%, rgba(34,211,238,.20), transparent 36%),
+        rgba(34,211,238,.12) !important;
+    border-color: rgba(34,211,238,.38) !important;
+    color: #ffffff !important;
+}
+
+/* Top bar */
+.sb-control-admin-body .sb-control-topbar,
+.sb-control-admin-body .pro-topbar {
+    background: rgba(8, 13, 34, .88) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    color: #ffffff !important;
+    backdrop-filter: blur(18px);
+}
+
+.sb-control-admin-body .sb-control-topbar p,
+.sb-control-admin-body .pro-topbar p {
+    color: #22d3ee !important;
+}
+
+.sb-control-admin-body .sb-control-topbar h1,
+.sb-control-admin-body .pro-topbar h1 {
+    color: #ffffff !important;
+}
+
+/* All panels/cards/modules */
+.sb-control-admin-body .sb-control-panel,
+.sb-control-admin-body .sb-control-feature,
+.sb-control-admin-body .pro-panel,
+.sb-control-admin-body .health-grid article,
+.sb-control-admin-body .health-list article,
+.sb-control-admin-body .health-log-list article,
+.sb-control-admin-body .cms-item-form,
+.sb-control-admin-body .cms-visual-bank,
+.sb-control-admin-body .cms-section-card,
+.sb-control-admin-body .pro-admin-list article,
+.sb-control-admin-body .message-detail-grid article,
+.sb-control-admin-body .message-body-box {
+    background:
+        radial-gradient(circle at 0% 0%, rgba(34, 211, 238, .08), transparent 34%),
+        rgba(10, 16, 40, .92) !important;
+    border: 1px solid rgba(255,255,255,.13) !important;
+    color: #f8fbff !important;
+    box-shadow: 0 24px 72px rgba(2,6,23,.32) !important;
+}
+
+/* Typography force */
+.sb-control-admin-body h1,
+.sb-control-admin-body h2,
+.sb-control-admin-body h3,
+.sb-control-admin-body h4,
+.sb-control-admin-body strong,
+.sb-control-admin-body b,
+.sb-control-admin-body label,
+.sb-control-admin-body th {
+    color: #ffffff !important;
+}
+
+.sb-control-admin-body p,
+.sb-control-admin-body small,
+.sb-control-admin-body span,
+.sb-control-admin-body td,
+.sb-control-admin-body li,
+.sb-control-admin-body code,
+.sb-control-admin-body em {
+    color: rgba(226, 232, 240, .86) !important;
+}
+
+.sb-control-admin-body .sb-control-kicker,
+.sb-control-admin-body .health-count,
+.sb-control-admin-body .pro-admin-list small,
+.sb-control-admin-body .sb-control-panel-head span {
+    color: #67e8f9 !important;
+}
+
+/* Links/buttons */
+.sb-control-admin-body a,
+.sb-control-admin-body .sb-control-row-actions a,
+.sb-control-admin-body .pro-actions a {
+    color: #dffbff !important;
+    background: rgba(255,255,255,.08) !important;
+    border: 1px solid rgba(255,255,255,.12) !important;
+    text-decoration: none !important;
+}
+
+.sb-control-admin-body a:hover,
+.sb-control-admin-body .sb-control-row-actions a:hover {
+    color: #ffffff !important;
+    background: rgba(34,211,238,.16) !important;
+    border-color: rgba(34,211,238,.38) !important;
+}
+
+.sb-control-admin-body button,
+.sb-control-admin-body button.primary,
+.sb-control-admin-body .primary,
+.sb-control-admin-body input[type="submit"] {
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #7c3cff, #246bff) !important;
+    border: 0 !important;
+    box-shadow: 0 14px 34px rgba(36,107,255,.28) !important;
+    font-weight: 950 !important;
+}
+
+/* Forms */
+.sb-control-admin-body input,
+.sb-control-admin-body textarea,
+.sb-control-admin-body select {
+    background: rgba(3, 7, 18, .78) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.05) !important;
+    caret-color: #22d3ee !important;
+}
+
+.sb-control-admin-body input::placeholder,
+.sb-control-admin-body textarea::placeholder {
+    color: rgba(226,232,240,.52) !important;
+}
+
+.sb-control-admin-body input:focus,
+.sb-control-admin-body textarea:focus,
+.sb-control-admin-body select:focus {
+    border-color: rgba(34,211,238,.78) !important;
+    outline: 3px solid rgba(34,211,238,.18) !important;
+}
+
+.sb-control-admin-body select option {
+    background: #07111f !important;
+    color: #ffffff !important;
+}
+
+/* Checkboxes should not turn huge/invisible */
+.sb-control-admin-body input[type="checkbox"],
+.sb-control-admin-body input[type="radio"] {
+    width: 18px !important;
+    height: 18px !important;
+    min-height: 18px !important;
+    accent-color: #22d3ee !important;
+}
+
+/* Tables */
+.sb-control-admin-body table,
+.sb-control-admin-body .sb-control-table {
+    background: rgba(3, 7, 18, .56) !important;
+    color: #f8fbff !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+}
+
+.sb-control-admin-body thead,
+.sb-control-admin-body .sb-control-table thead {
+    background: rgba(34,211,238,.12) !important;
+}
+
+.sb-control-admin-body th {
+    background: rgba(34,211,238,.12) !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255,255,255,.12) !important;
+}
+
+.sb-control-admin-body td {
+    color: rgba(248,251,255,.88) !important;
+    border-bottom: 1px solid rgba(255,255,255,.08) !important;
+}
+
+.sb-control-admin-body tr:hover td {
+    background: rgba(255,255,255,.045) !important;
+    color: #ffffff !important;
+}
+
+/* Alerts */
+.sb-control-admin-body .sb-control-alert,
+.sb-control-admin-body .pro-alert {
+    background: rgba(34,211,238,.10) !important;
+    border: 1px solid rgba(34,211,238,.30) !important;
+    color: #dffbff !important;
+}
+
+.sb-control-admin-body .sb-control-alert.error,
+.sb-control-admin-body .pro-alert.error {
+    background: rgba(127, 29, 29, .35) !important;
+    border-color: rgba(248,113,113,.52) !important;
+    color: #fecaca !important;
+}
+
+/* Pagination */
+.sb-control-admin-body .pagination,
+.sb-control-admin-body nav[role="navigation"] {
+    color: #ffffff !important;
+}
+
+.sb-control-admin-body .pagination *,
+.sb-control-admin-body nav[role="navigation"] * {
+    background: rgba(10,16,40,.92) !important;
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,.16) !important;
+}
+
+/* Admin health/CMS specific */
+.sb-control-admin-body .health-ring,
+.sb-control-admin-body .cms-preview-stack img,
+.sb-control-admin-body .cms-visual-grid button,
+.sb-control-admin-body .cms-image-preview {
+    background: rgba(10,16,40,.92) !important;
+    border-color: rgba(255,255,255,.14) !important;
+    color: #ffffff !important;
+}
+
+.sb-control-admin-body .cms-visual-grid button span {
+    color: rgba(226,232,240,.88) !important;
+}
+
+.sb-control-admin-body .cms-visual-grid button:hover {
+    border-color: rgba(34,211,238,.50) !important;
+    transform: translateY(-2px);
+}
+
+/* Make admin readable on smaller screens */
+@media (max-width: 980px) {
+    .sb-control-admin-body .sb-control-admin-app,
+    .sb-control-admin-body .pro-admin-shell {
+        background: #050816 !important;
+    }
+}

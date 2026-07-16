@@ -48,6 +48,9 @@
     @if(file_exists(public_path('assets/css/studybuddy-final-no-error-polish.css')))
         <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-final-no-error-polish.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-final-no-error-polish.css')) }}">
     @endif
+    @if(file_exists(public_path('assets/css/studybuddy-home-vibe-upgrade.css')))
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-home-vibe-upgrade.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-home-vibe-upgrade.css')) }}">
+    @endif
 </head>
 <body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     <a class="sb-skip-link" href="#main-content">Skip to content</a>
@@ -74,6 +77,9 @@
     @endif
     @if(file_exists(public_path('assets/js/studybuddy-living-platform.js')))
         <script src="{{ asset('assets/js/studybuddy-living-platform.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-living-platform.js')) }}" defer></script>
+    @endif
+    @if(file_exists(public_path('assets/js/studybuddy-home-vibe-upgrade.js')))
+        <script src="{{ asset('assets/js/studybuddy-home-vibe-upgrade.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-home-vibe-upgrade.js')) }}" defer></script>
     @endif
 </body>
 </html>

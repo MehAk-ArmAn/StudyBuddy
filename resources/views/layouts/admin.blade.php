@@ -11,6 +11,8 @@
 
     $adminLinks = [
         ['label' => 'Overview', 'url' => url('/admin/control-room'), 'icon' => 'dashboard.svg'],
+        ['label' => 'Homepage CMS', 'url' => url('/admin/control-room/homepage-cms'), 'icon' => 'content.svg'],
+        ['label' => 'Health Check', 'url' => url('/admin/control-room/health'), 'icon' => 'safety.svg'],
         ['label' => 'Website Shell', 'url' => url('/admin/control-room/shell'), 'icon' => 'shell.svg'],
         ['label' => 'Pages & Legal', 'url' => url('/admin/control-room/pages-legal'), 'icon' => 'content.svg'],
         ['label' => 'Content Studio', 'url' => url('/admin/control-room/content-studio'), 'icon' => 'content.svg'],
@@ -37,6 +39,13 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/sb-control-room-pro-v2.css') }}?v={{ file_exists(public_path('assets/css/sb-control-room-pro-v2.css')) ? filemtime(public_path('assets/css/sb-control-room-pro-v2.css')) : time() }}">
     @stack('styles')
+    @if(file_exists(public_path('assets/css/studybuddy-admin-health-cms.css')))
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-health-cms.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-health-cms.css')) }}">
+    @endif
+    {{-- Emergency admin readability override: must load LAST --}}
+    @if(file_exists(public_path('assets/css/studybuddy-admin-readable-emergency.css')))
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-readable-emergency.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-readable-emergency.css')) }}">
+    @endif
 </head>
 <body class="sb-control-admin-body">
     <div class="sb-control-admin-app pro-admin-shell">
