@@ -46,8 +46,16 @@
     @if(file_exists(public_path('assets/css/studybuddy-admin-readable-emergency.css')))
         <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-readable-emergency.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-readable-emergency.css')) }}">
     @endif
+    {{-- StudyBuddy admin readability hardlock: MUST stay last --}}
+    @if(file_exists(public_path('assets/css/studybuddy-admin-readable-hardlock.css')))
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-readable-hardlock.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-readable-hardlock.css')) }}">
+    @endif
+    @if(file_exists(public_path('assets/css/studybuddy-admin-quick-links.css')))
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-quick-links.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-quick-links.css')) }}">
+    @endif
 </head>
-<body class="sb-control-admin-body">
+<body class="sb-control-admin-body sb-control-admin-body sb-admin-readable-hardlock">
+@include('partials.admin-quick-links')
     <div class="sb-control-admin-app pro-admin-shell">
         <aside class="sb-control-sidebar pro-sidebar">
             <a class="sb-control-brand pro-brand" href="{{ url('/admin/control-room') }}">
@@ -124,5 +132,9 @@
 
     <script src="{{ asset('assets/js/sb-control-room-pro-v2.js') }}?v={{ file_exists(public_path('assets/js/sb-control-room-pro-v2.js')) ? filemtime(public_path('assets/js/sb-control-room-pro-v2.js')) : time() }}" defer></script>
     @stack('scripts')
+    {{-- StudyBuddy admin readability auto-fixer --}}
+    @if(file_exists(public_path('assets/js/studybuddy-admin-readable-hardlock.js')))
+        <script src="{{ asset('assets/js/studybuddy-admin-readable-hardlock.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-admin-readable-hardlock.js')) }}" defer></script>
+    @endif
 </body>
 </html>

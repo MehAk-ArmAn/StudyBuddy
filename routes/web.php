@@ -116,3 +116,6 @@ require __DIR__ . '/studybuddy_role_dashboard_tools.php';
 
 // Final StudyBuddy professional admin tools
 require __DIR__ . '/studybuddy_admin_pro_final.php';
+
+// Final contact route override: keep this LAST so /contact shows the real form
+require __DIR__ . '/studybuddy_contact_final_override.php';
