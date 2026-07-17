@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('page_title', 'Users')
+@section('title', 'Users')
 
 @section('content')
     <div class="resource-header">
