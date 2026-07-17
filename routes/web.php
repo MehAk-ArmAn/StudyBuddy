@@ -113,3 +113,5 @@ require __DIR__ . '/studybuddy_admin_pro_final.php';
 // The contact form and admin inbox are registered once near the top of this file.
 
 require __DIR__ . '/studybuddy_logout.php';
+
+require __DIR__ . '/studybuddy_mailing_list.php';

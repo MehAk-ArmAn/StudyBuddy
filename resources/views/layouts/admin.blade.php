@@ -53,6 +53,14 @@
     @if(file_exists(public_path('assets/css/studybuddy-admin-quick-links.css')))
         <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-quick-links.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-quick-links.css')) }}">
     @endif
+
+    @if(file_exists(public_path('assets/css/studybuddy-mailing-list.css')))
+        <link
+            rel="stylesheet"
+            href="{{ asset('assets/css/studybuddy-mailing-list.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-mailing-list.css')) }}"
+        >
+    @endif
+
 </head>
 <body class="sb-control-admin-body sb-control-admin-body sb-admin-readable-hardlock">
 @include('partials.admin-quick-links')
@@ -136,5 +144,8 @@
     @if(file_exists(public_path('assets/js/studybuddy-admin-readable-hardlock.js')))
         <script src="{{ asset('assets/js/studybuddy-admin-readable-hardlock.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-admin-readable-hardlock.js')) }}" defer></script>
     @endif
+
+    @includeIf('admin.partials.mailing-list-link')
+
 </body>
 </html>

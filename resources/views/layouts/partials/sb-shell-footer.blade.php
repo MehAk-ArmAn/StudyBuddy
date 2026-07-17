@@ -153,10 +153,41 @@
                     <h3>Updates</h3>
                     <p>Launch notes, new learning worlds, and StudyBuddy improvements.</p>
 
-                    <form action="{{ url('/register') }}" method="GET">
-                        <input name="email" type="email" placeholder="Your email">
+                    <form action="{{ route('newsletter.subscribe') }}" method="POST">
+    @csrf
+
+    <label class="sb-newsletter-honeypot" aria-hidden="true">
+        Website
+        <input
+            type="text"
+            name="website"
+            tabindex="-1"
+            autocomplete="off"
+        >
+    </label>
+
+                        <input name="email" type="email" placeholder="Your email" required autocomplete="email" value="{{ old('email') }}">
                         <button type="submit">Join</button>
-                    </form>
+                    
+    @if(session('newsletter_success'))
+        <p
+            class="sb-newsletter-feedback is-success"
+            role="status"
+        >
+            {{ session('newsletter_success') }}
+        </p>
+    @endif
+
+    @error('email')
+        <p
+            class="sb-newsletter-feedback is-error"
+            role="alert"
+        >
+            {{ $message }}
+        </p>
+    @enderror
+
+</form>
 
                     <div class="sb-footer-socials">
                         @foreach($socials as $social)
