@@ -81,7 +81,7 @@
                         @csrf
                         @method('PATCH')
 
-                        <label><span>Icon Text</span><input name="icon" value="{{ $item->icon }}"></label>
+                        <label><span>Icon / Badge Text</span><input name="badge_text" value="{{ $item->badge_text ?: $item->icon_path }}"></label>
                         <label><span>Title</span><input name="title" value="{{ $item->title }}" required></label>
                         <label class="wide"><span>Subtitle</span><input name="subtitle" value="{{ $item->subtitle }}"></label>
                         <label class="wide"><span>Body</span><textarea name="body" rows="3">{{ $item->body ?? (property_exists($item, 'description') ? $item->description : '') }}</textarea></label>
@@ -103,3 +103,7 @@
     @endforelse
 </section>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('assets/js/studybuddy-homepage-cms.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-homepage-cms.js')) ? filemtime(public_path('assets/js/studybuddy-homepage-cms.js')) : time() }}" defer></script>
+@endpush

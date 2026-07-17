@@ -1,34 +1,60 @@
 (() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
     document.querySelectorAll('[data-search-root]').forEach((root) => {
         const input = root.querySelector('[data-search-input]');
         const panel = root.querySelector('[data-search-results]');
         const endpoint = root.dataset.searchEndpoint;
 
-        if (!input || !panel || !endpoint) return;
+        if (!input || !panel || !endpoint) {
+            return;
+        }
 
         let timer;
 
+        const escapeHtml = (value = '') => {
+            return String(value).replace(
+                /[&<>'"]/g,
+                (character) => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#039;',
+                    '"': '&quot;',
+                })[character]
+            );
+        };
+
         const render = (items) => {
             if (!items.length) {
-                panel.innerHTML = '<div class="sb-search-empty-mini">No quick results yet. Press Enter to search.</div>';
+                panel.innerHTML =
+                    '<div class="sb-search-empty-mini">'
+                    + 'No quick results yet. Press Enter to search.'
+                    + '</div>';
+
                 panel.hidden = false;
                 return;
             }
 
             panel.innerHTML = items.map((item) => {
                 const media = item.image
-                    ? `<img src="${item.image}" alt="">`
-                    : `<span class="icon">${item.icon || '✨'}</span>`;
+                    ? `<img src="${escapeHtml(item.image)}" alt="">`
+                    : '<img src="/assets/studybuddy-brand/icon-world.svg" alt="">';
 
                 return `
-                    <a class="sb-search-hit" href="${item.url}">
+                    <a
+                        class="sb-search-hit"
+                        href="${escapeHtml(item.url || '#')}"
+                    >
                         ${media}
                         <div>
-                            <small>${item.type || 'Result'}</small>
-                            <strong>${item.title || 'StudyBuddy result'}</strong>
-                            <p>${item.description || 'Open this result.'}</p>
+                            <small>
+                                ${escapeHtml(item.type || 'Result')}
+                            </small>
+                            <strong>
+                                ${escapeHtml(item.title || 'StudyBuddy result')}
+                            </strong>
+                            <p>
+                                ${escapeHtml(item.description || 'Open this result.')}
+                            </p>
                         </div>
                     </a>
                 `;
@@ -38,119 +64,122 @@
         };
 
         const search = () => {
-            const q = input.value.trim();
+            const query = input.value.trim();
 
-            if (q.length < 1) {
+            if (!query) {
                 panel.hidden = true;
                 panel.innerHTML = '';
                 return;
             }
 
-            fetch(`${endpoint}?q=${encodeURIComponent(q)}`, {
-                headers: { 'Accept': 'application/json' }
-            })
-                .then((res) => res.json())
-                .then((data) => render(data.results || []))
+            fetch(
+                `${endpoint}?q=${encodeURIComponent(query)}`,
+                {
+                    headers: {
+                        Accept: 'application/json',
+                    },
+                }
+            )
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Search failed');
+                    }
+
+                    return response.json();
+                })
+                .then((data) => {
+                    render(data.results || []);
+                })
                 .catch(() => {
-                    panel.innerHTML = '<div class="sb-search-empty-mini">Search is warming up. Press Enter.</div>';
+                    panel.innerHTML =
+                        '<div class="sb-search-empty-mini">'
+                        + 'Search is unavailable right now. '
+                        + 'Press Enter for the full search page.'
+                        + '</div>';
+
                     panel.hidden = false;
                 });
         };
 
         input.addEventListener('input', () => {
-            clearTimeout(timer);
-            timer = setTimeout(search, 120);
+            window.clearTimeout(timer);
+            timer = window.setTimeout(search, 140);
         });
 
         input.addEventListener('focus', search);
 
         document.addEventListener('click', (event) => {
-            if (!root.contains(event.target)) panel.hidden = true;
+            if (!root.contains(event.target)) {
+                panel.hidden = true;
+            }
         });
     });
 
-    const cards = document.querySelectorAll('[data-living-card], .sb-hub-card, .profile-form-card, .community-card, .mini-app-card');
-    cards.forEach((card) => {
-        card.addEventListener('pointermove', (event) => {
-            const rect = card.getBoundingClientRect();
-            card.style.setProperty('--mx', `${event.clientX - rect.left}px`);
-            card.style.setProperty('--my', `${event.clientY - rect.top}px`);
-        });
-    });
+    const cards = Array.from(
+        document.querySelectorAll('[data-community-card]')
+    );
 
-    const sections = document.querySelectorAll('[data-animate-section]');
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) entry.target.classList.add('is-visible');
-            });
-        }, { threshold: 0.14 });
+    const searchField =
+        document.querySelector('[data-community-search]');
 
-        sections.forEach((section) => observer.observe(section));
-    } else {
-        sections.forEach((section) => section.classList.add('is-visible'));
-    }
+    const roleField =
+        document.querySelector('[data-community-role]');
 
-    const communityCards = Array.from(document.querySelectorAll('[data-community-card]'));
-    const communitySearch = document.querySelector('[data-community-search]');
-    const communityRole = document.querySelector('[data-community-role]');
-    const communityTheme = document.querySelector('[data-community-theme]');
-    const communityEmpty = document.querySelector('[data-community-empty]');
+    const themeField =
+        document.querySelector('[data-community-theme]');
 
-    const applyCommunityFilters = () => {
-        const q = (communitySearch?.value || '').trim().toLowerCase();
-        const role = communityRole?.value || 'all';
-        const theme = communityTheme?.value || 'all';
+    const empty =
+        document.querySelector('[data-community-empty]');
+
+    const applyFilters = () => {
+        const query =
+            (searchField?.value || '')
+                .trim()
+                .toLowerCase();
+
+        const role = roleField?.value || 'all';
+        const theme = themeField?.value || 'all';
+
         let visible = 0;
 
-        communityCards.forEach((card) => {
-            const okSearch = !q || (card.dataset.search || '').includes(q);
-            const okRole = role === 'all' || card.dataset.role === role;
-            const okTheme = theme === 'all' || card.dataset.theme === theme;
-            const show = okSearch && okRole && okTheme;
+        cards.forEach((card) => {
+            const matchesSearch =
+                !query
+                || (card.dataset.search || '').includes(query);
+
+            const matchesRole =
+                role === 'all'
+                || card.dataset.role === role;
+
+            const matchesTheme =
+                theme === 'all'
+                || card.dataset.theme === theme;
+
+            const show =
+                matchesSearch
+                && matchesRole
+                && matchesTheme;
 
             card.hidden = !show;
-            if (show) visible++;
+
+            if (show) {
+                visible += 1;
+            }
         });
 
-        if (communityEmpty) communityEmpty.hidden = visible !== 0;
+        if (empty) {
+            empty.hidden = visible !== 0;
+        }
     };
 
-    [communitySearch, communityRole, communityTheme].forEach((input) => {
-        if (!input) return;
-        input.addEventListener('input', applyCommunityFilters);
-        input.addEventListener('change', applyCommunityFilters);
+    [
+        searchField,
+        roleField,
+        themeField,
+    ].forEach((field) => {
+        field?.addEventListener('input', applyFilters);
+        field?.addEventListener('change', applyFilters);
     });
 
-    applyCommunityFilters();
-
-    if (!reduceMotion && !document.querySelector('.sb-floating-buddy')) {
-        const buddy = document.createElement('aside');
-        buddy.className = 'sb-floating-buddy';
-        buddy.innerHTML = `
-            <div class="sb-floating-buddy-head">
-                <span class="sb-floating-buddy-avatar">✨</span>
-                <strong>Need a tiny win?</strong>
-                <button type="button" aria-label="Close StudyBuddy helper">×</button>
-            </div>
-            <p>Pick one app world and start with a mini mission.</p>
-            <div class="sb-floating-buddy-links">
-                <a href="/apps/math-quest">Math Quest</a>
-                <a href="/apps/reading-garden">Reading</a>
-                <a href="/apps/focus-forest">Focus</a>
-                <a href="/community">Community</a>
-            </div>
-        `;
-
-        document.body.appendChild(buddy);
-
-        buddy.querySelector('button')?.addEventListener('click', () => {
-            buddy.hidden = true;
-            sessionStorage.setItem('studybuddy_buddy_closed', '1');
-        });
-
-        if (sessionStorage.getItem('studybuddy_buddy_closed') === '1') {
-            buddy.hidden = true;
-        }
-    }
+    applyFilters();
 })();

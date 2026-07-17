@@ -1,14 +1,5 @@
 <?php
 
-// Force real StudyBuddy contact form before any generic page route
-require __DIR__ . '/studybuddy_contact_force_form.php';
-
-// StudyBuddy contact inbox routes
-require __DIR__ . '/studybuddy_contact_inbox_final.php';
-
-// StudyBuddy admin health and homepage CMS
-require __DIR__ . '/studybuddy_admin_health_cms.php';
-
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FooterItemController;
 use App\Http\Controllers\Admin\HomepageSectionController;
@@ -27,6 +18,11 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserAccessController;
 use Illuminate\Support\Facades\Route;
 
+
+// Route modules that must be registered once before the public fallbacks.
+require __DIR__ . '/studybuddy_contact_inbox_final.php';
+require __DIR__ . '/studybuddy_admin_health_cms.php';
+
 /*
 |--------------------------------------------------------------------------
 | Public website
@@ -34,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-foreach (['for-parents', 'for-teachers', 'about-us', 'privacy-policy', 'data-deletion', 'contact-us', 'support'] as $slug) {
+foreach (['for-parents', 'for-teachers', 'about-us', 'privacy-policy', 'data-deletion', 'support'] as $slug) {
     Route::get('/'.$slug, [PageController::class, 'show'])
         ->defaults('slug', $slug)
         ->name('pages.'.$slug);
@@ -51,6 +47,9 @@ Route::middleware('guest')->group(function (): void {
     Route::get('/register', [UserAccessController::class, 'showRegister'])->name('register');
     Route::post('/register', [UserAccessController::class, 'register'])->name('register.store');
 });
+
+Route::get('/logout', [UserAccessController::class, 'showLogout'])
+    ->name('logout.confirm');
 
 Route::middleware('auth')->group(function (): void {
     Route::post('/logout', [UserAccessController::class, 'logout'])->name('logout');
@@ -113,9 +112,6 @@ require __DIR__ . '/studybuddy_info_pages_final.php';
 require __DIR__ . '/studybuddy_role_dashboard_tools.php';
 
 // Final StudyBuddy professional admin tools
-
-// Final StudyBuddy professional admin tools
 require __DIR__ . '/studybuddy_admin_pro_final.php';
 
-// Final contact route override: keep this LAST so /contact shows the real form
-require __DIR__ . '/studybuddy_contact_final_override.php';
+// The contact form and admin inbox are registered once near the top of this file.

@@ -1,0 +1,165 @@
+/* Global reflow and readability guardrails. Loaded last on public pages. */
+html{
+    min-width:320px;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+}
+
+body{
+    min-width:320px;
+    max-width:100%;
+    overflow-x:auto;
+}
+
+*,*::before,*::after{
+    box-sizing:border-box;
+}
+
+:where(main,section,article,aside,header,footer,nav,div,form,fieldset,label,dl,ul,ol,li){
+    min-width:0;
+}
+
+
+:where(.cosmic-bg,.sparkle-field){
+    max-width:100vw;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+:where(.sb-control-table-wrap,.table-wrap,.responsive-table,.sb-table-wrap){
+    max-width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+:where(img,svg,video,canvas,picture){
+    max-width:100%;
+}
+
+img,video{
+    height:auto;
+}
+
+iframe{
+    max-width:100%;
+}
+
+:where(h1,h2,h3,h4,h5,h6,p,li,dt,dd,figcaption,blockquote,a,button,label,small,strong,span){
+    overflow-wrap:anywhere;
+}
+
+:where(p,li,dd,figcaption,blockquote){
+    line-height:1.6;
+}
+
+:where(button,input,select,textarea){
+    max-width:100%;
+    font:inherit;
+}
+
+:where(textarea){
+    resize:vertical;
+}
+
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{
+    outline:3px solid #67e8f9 !important;
+    outline-offset:3px !important;
+}
+
+:where(a,button){
+    text-underline-offset:.18em;
+}
+
+:where(pre,code,kbd,samp){
+    max-width:100%;
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
+}
+
+:where(table){
+    max-width:100%;
+}
+
+:where(.sb-section,.sb-hero,.split-zone,.stats-strip,.site-footer,.page-section-stack,.auth-wrap,.dash-wrap){
+    width:min(1240px,calc(100% - 32px));
+}
+
+:where(.hero-copy,.section-heading,.wide-heading,.panel-head,.sb-control-panel-head){
+    min-width:0;
+}
+
+:where(.hero-copy h1,.section-heading h2,.cta-card h2,.split-card h2){
+    max-width:100%;
+    text-wrap:balance;
+}
+
+@media(max-width:720px){
+    :where(.sb-section,.sb-hero,.split-zone,.stats-strip,.site-footer,.page-section-stack,.auth-wrap,.dash-wrap){
+        width:min(100% - 20px,1240px);
+    }
+
+    :where(.hero-actions,.dash-hero-actions,.sb-final-actions,.sb-control-row-actions){
+        align-items:stretch;
+    }
+
+    :where(.hero-actions a,.hero-actions button,.dash-hero-actions a,.dash-hero-actions button){
+        max-width:100%;
+    }
+
+    :where(.float-planet,.orbit,.sparkle,.popup-bubble){
+        display:none !important;
+    }
+}
+
+@media(max-width:480px){
+    :where(.site-header,.sb-shell-header,.sb-advanced-header){
+        position:relative !important;
+        top:auto !important;
+    }
+
+    :where(.hero-copy h1,.section-heading h2,.cta-card h2,.split-card h2){
+        letter-spacing:-.035em !important;
+        line-height:1.05 !important;
+    }
+
+    :where(.btn,a[class*="button"],button){
+        white-space:normal;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+    }
+}
+
+/* Let page content grow when browser text is enlarged instead of clipping it. */
+#main-content{
+    min-width:0;
+    max-width:100%;
+}
+
+:where(.sb-user-hub,.sb-public-profile,.sb-info-page,.sb-search-page,.sb-role-dashboard,.sb-contact-page,.sb-contact-final,.sb-auth-world){
+    overflow:visible;
+}
+
+:where(.sb-nav-brand,.sb-nav-brand span,.sb-account-label,.sb-footer-brand,.sb-footer-brand span){
+    min-width:0;
+}
+
+@media(max-width:900px){
+    :where(.sb-nav-brand em,.sb-footer-brand strong,.sb-nav-links a,.sb-nav-actions a,.sb-account-label strong,.sb-account-label em){
+        max-width:100%;
+        white-space:normal !important;
+        overflow:visible !important;
+        text-overflow:clip !important;
+    }
+
+    :where(.sb-footer-brand-block,.sb-footer-action-card,.sb-footer-group){
+        overflow:visible;
+    }
+}

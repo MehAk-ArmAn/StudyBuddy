@@ -5,7 +5,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-living-platform.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-living-platform.css')) ? filemtime(public_path('assets/css/studybuddy-living-platform.css')) : time() }}">
 
-<main id="main-content" class="sb-search-page">
+<div class="sb-search-page">
     <section class="sb-search-hero">
         <p class="sb-living-kicker">Search StudyBuddy</p>
         <h1>Find apps, profiles, pages, and learning worlds.</h1>
@@ -37,5 +37,5 @@
             </article>
         @endforelse
     </section>
-</main>
+</div>
 @endsection

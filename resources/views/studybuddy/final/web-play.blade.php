@@ -1,73 +1,215 @@
-
 @extends('layouts.app')
 
+@section('title', 'Play '.$app->name)
+
+@push('styles')
+<link
+    rel="stylesheet"
+    href="{{ asset('assets/css/studybuddy-launcher-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-launcher-v3.css')) ? filemtime(public_path('assets/css/studybuddy-launcher-v3.css')) : time() }}"
+>
+@endpush
+
 @section('content')
-@php
-    $assetUrl = function ($path) {
-        if (!$path) return asset('assets/studybuddy-imgs/brand/logo-icon.png');
-        if (preg_match('/^https?:\/\//i', $path)) return $path;
-        $clean = ltrim($path, '/');
-        return file_exists(public_path($clean)) ? asset($clean) : asset('assets/studybuddy-imgs/brand/logo-icon.png');
-    };
+<div
+    class="sb-launcher-v3"
+    data-studybuddy-launcher
+    data-complete-url="{{ auth()->check() ? route('studybuddy.final.session.complete') : '' }}"
+    data-app-slug="{{ $app->slug }}"
+    data-points="{{ max(0, (int) $app->points_reward) }}"
+>
+    <header class="sb-launcher-v3__header">
+        <div class="sb-launcher-v3__title">
+            <a
+                href="{{ route('studybuddy.apps.show', $app->slug) }}"
+                aria-label="Back to {{ $app->name }}"
+            >
+                <svg
+                    viewBox="0 0 24 24"
+                    width="19"
+                    height="19"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                >
+                    <path d="m15 18-6-6 6-6"></path>
+                </svg>
+            </a>
 
-    $worlds = [
-        'math-quest' => ['✦', '#7c3cff', '#246bff', '#22d3ee'],
-        'spelling-sprint' => ['Aa', '#ff4f9a', '#7c3cff', '#ffd166'],
-        'reading-garden' => ['☘', '#16a34a', '#22c55e', '#22d3ee'],
-        'focus-forest' => ['◌', '#0f766e', '#22c55e', '#22d3ee'],
-        'planner-city' => ['▦', '#f59e0b', '#ef4444', '#7c3cff'],
-        'quiz-galaxy' => ['◎', '#4f46e5', '#ec4899', '#22d3ee'],
-        'shapes-lab' => ['△', '#06b6d4', '#8b5cf6', '#facc15'],
-        'flashcard-castle' => ['▣', '#9333ea', '#f97316', '#fde68a'],
-    ];
-
-    $world = $worlds[$app->slug] ?? [$app->icon ?: '✨', $app->accent ?: '#7c3cff', '#246bff', '#22d3ee'];
-    $image = $assetUrl($app->safeHeroImage());
-@endphp
-
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-connected-apps.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-connected-apps.css')) ? filemtime(public_path('assets/css/studybuddy-connected-apps.css')) : time() }}">
-<script src="{{ asset('assets/js/studybuddy-connected-apps.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-connected-apps.js')) ? filemtime(public_path('assets/js/studybuddy-connected-apps.js')) : time() }}" defer></script>
-
-<main id="main-content" class="sb-app-play-final" style="--app-one: {{ $world[1] }}; --app-two: {{ $world[2] }}; --app-three: {{ $world[3] }};">
-    <section class="play-stage" data-magic-card>
-        <div class="play-copy">
-            <a class="back-to-apps" href="{{ route('studybuddy.apps.show', $app->slug) }}">← Back to {{ $app->name }}</a>
-            <p class="sb-apps-kicker">Web Play</p>
-            <h1>{{ $app->name }}</h1>
-            <p>{{ $canPlay ? 'Complete a quick demo session and collect your StudyBuddy points.' : 'Login to start this learning session and save your progress.' }}</p>
-
-            <div class="detail-stat-row">
-                <span>⭐ {{ $app->points_reward }} points</span>
-                <span>⏱ {{ $app->estimated_minutes }} minutes</span>
-                <span>{{ $app->age_min ? $app->age_min.'+' : 'All ages' }}</span>
+            <div>
+                <p>StudyBuddy Web App</p>
+                <h1>{{ $app->name }}</h1>
             </div>
-
-            @if($canPlay)
-                <form method="POST" action="{{ route('studybuddy.final.session.complete') }}" class="play-form">
-                    @csrf
-                    <input type="hidden" name="app_slug" value="{{ $app->slug }}">
-                    <button type="submit">Finish demo session</button>
-                </form>
-            @else
-                <div class="sb-apps-hero-actions">
-                    <a href="{{ route('login') }}">Login to Play</a>
-                    <a class="soft" href="{{ route('register') }}">Create account</a>
-                </div>
-            @endif
         </div>
 
-        <aside class="play-art">
-            <div class="art-glow"></div>
-            <img src="{{ $image }}" alt="{{ $app->name }} artwork">
-            <span>{{ $world[0] }}</span>
-            <div class="generated-sparkles detail" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        </aside>
-    </section>
+        <div class="sb-launcher-v3__controls">
+            <span
+                class="sb-launcher-v3__state"
+                data-launcher-state
+            >
+                {{ $canLaunch ? 'Preparing app' : 'Not published' }}
+            </span>
 
-    <section class="play-steps">
-        <article><span>1</span><strong>Start small</strong><p>Open the session and focus on one tiny win.</p></article>
-        <article><span>2</span><strong>Try calmly</strong><p>Practice without pressure. StudyBuddy is built for friendly progress.</p></article>
-        <article><span>3</span><strong>Collect progress</strong><p>Finish the demo and return to your points wallet.</p></article>
-    </section>
-</main>
+            @if($canLaunch)
+                <button
+                    type="button"
+                    data-launcher-reload
+                >
+                    Reload
+                </button>
+
+                <button
+                    type="button"
+                    data-launcher-fullscreen
+                >
+                    Full screen
+                </button>
+
+                <a
+                    href="{{ $embedUrl }}"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    New tab
+                </a>
+            @endif
+
+            <a href="{{ route('studybuddy.apps') }}">
+                All apps
+            </a>
+        </div>
+    </header>
+
+    @if(session('status'))
+        <div
+            class="sb-launcher-v3__notice"
+            role="status"
+        >
+            {{ session('status') }}
+        </div>
+    @endif
+
+    @if($errors->any())
+        <div
+            class="sb-launcher-v3__notice is-error"
+            role="alert"
+        >
+            {{ $errors->first() }}
+        </div>
+    @endif
+
+    @if($canLaunch)
+        <section
+            class="sb-launcher-v3__stage"
+            data-launcher-stage
+        >
+            <div
+                class="sb-launcher-v3__loading"
+                data-launcher-loading
+            >
+                <div></div>
+                <strong>Opening {{ $app->name }}</strong>
+                <span>Loading the published app package…</span>
+            </div>
+
+            <iframe
+                src="{{ $embedUrl }}"
+                title="{{ $app->name }} web app"
+                loading="eager"
+                data-launcher-frame
+                allow="
+                    autoplay;
+                    fullscreen;
+                    gamepad;
+                    clipboard-read;
+                    clipboard-write;
+                    microphone;
+                    camera
+                "
+                sandbox="
+                    allow-scripts
+                    allow-same-origin
+                    allow-forms
+                    allow-modals
+                    allow-popups
+                    allow-popups-to-escape-sandbox
+                    allow-downloads
+                    allow-pointer-lock
+                    allow-presentation
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+            ></iframe>
+        </section>
+
+        <section class="sb-launcher-v3__footer">
+            <div>
+                <strong>Session controls</strong>
+
+                <p data-launcher-message>
+                    Complete the activity inside the app, then save your
+                    StudyBuddy points.
+                </p>
+            </div>
+
+            @if($canEarnPoints)
+                <button
+                    type="button"
+                    class="sb-launcher-v3__complete"
+                    data-launcher-complete
+                >
+                    Save {{ max(0, (int) $app->points_reward) }} points
+                </button>
+            @else
+                <a
+                    class="sb-launcher-v3__complete"
+                    href="{{ route('login') }}"
+                >
+                    Sign in to save points
+                </a>
+            @endif
+        </section>
+    @else
+        <section class="sb-launcher-v3__unavailable">
+            <img
+                src="{{ asset('assets/studybuddy-control/apps.svg') }}"
+                alt=""
+            >
+
+            <p>Web app launcher</p>
+
+            <h2>This package has not been published yet.</h2>
+
+            <p>
+                An admin can upload a static web-app ZIP containing
+                <code>index.html</code> from Control Room →
+                Apps &amp; Platform.
+            </p>
+
+            <div>
+                <a
+                    class="sb-launcher-v3__complete"
+                    href="{{ route('studybuddy.apps') }}"
+                >
+                    Explore available apps
+                </a>
+
+                @if(auth()->user()?->is_admin)
+                    <a
+                        href="{{ route('admin.control-room.final-platform') }}"
+                    >
+                        Open app controls
+                    </a>
+                @endif
+            </div>
+        </section>
+    @endif
+</div>
 @endsection
+
+@push('scripts')
+<script
+    src="{{ asset('assets/js/studybuddy-launcher-v3.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-launcher-v3.js')) ? filemtime(public_path('assets/js/studybuddy-launcher-v3.js')) : time() }}"
+    defer
+></script>
+@endpush

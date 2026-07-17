@@ -180,6 +180,15 @@ class UserAccessController extends Controller
         return back()->with('status', 'No inbox step is needed. Your StudyBuddy account is ready to use.');
     }
 
+    public function showLogout(): View|RedirectResponse
+    {
+        if (! Auth::check()) {
+            return redirect()->route('home');
+        }
+
+        return view('auth.logout-confirm');
+    }
+
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

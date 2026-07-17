@@ -9,7 +9,6 @@ Route::middleware(['web'])->group(function () {
 
     foreach ([
         'about' => 'about',
-        'contact' => 'contact',
         'privacy-policy' => 'privacy-policy',
         'terms' => 'terms',
         'disclaimer' => 'disclaimer',

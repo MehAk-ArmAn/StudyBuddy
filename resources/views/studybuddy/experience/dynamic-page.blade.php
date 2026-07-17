@@ -11,7 +11,7 @@
     }
 @endphp
 
-<main class="sbx-page" data-sbx-page="{{ $slug }}">
+<div class="sbx-page" data-sbx-page="{{ $slug }}">
     <section class="sbx-hero">
         <div class="sbx-hero__copy">
             <p class="sbx-kicker">{{ $page->eyebrow ?? 'StudyBuddy Experience' }}</p>
@@ -207,5 +207,5 @@
             </section>
         @endif
     @endforeach
-</main>
+</div>
 @endsection

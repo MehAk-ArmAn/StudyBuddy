@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-info-pages.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-info-pages.css')) ? filemtime(public_path('assets/css/studybuddy-info-pages.css')) : time() }}">
 <script src="{{ asset('assets/js/studybuddy-info-pages.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-info-pages.js')) ? filemtime(public_path('assets/js/studybuddy-info-pages.js')) : time() }}" defer></script>
 
-<main id="main-content" class="sb-info-page sb-info-{{ $pageData['slug'] }}">
+<div class="sb-info-page sb-info-{{ $pageData['slug'] }}">
     <section class="sb-info-hero" data-info-card>
         <p class="sb-info-kicker">{{ $pageData['eyebrow'] }}</p>
         <h1>{{ $pageData['title'] }}</h1>
@@ -63,5 +63,5 @@
             <a class="soft" href="{{ url('/contact') }}">Contact StudyBuddy</a>
         </div>
     </section>
-</main>
+</div>
 @endsection

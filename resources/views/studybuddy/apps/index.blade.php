@@ -22,7 +22,7 @@
     ];
 @endphp
 
-<main class="sb-apps-shell" data-sb-unified-apps>
+<div class="sb-apps-shell" data-sb-unified-apps>
     <section class="sb-apps-hero">
         <div class="sb-apps-hero-copy">
             <p class="sb-apps-kicker">StudyBuddy Apps</p>
@@ -147,7 +147,7 @@
             <div><strong>Admins</strong><p>Control every app, link, status, role, and page message from admin.</p></div>
         </div>
     </section>
-</main>
+</div>
 
 @include('studybuddy.apps.partials.locked-modal')
 @endsection

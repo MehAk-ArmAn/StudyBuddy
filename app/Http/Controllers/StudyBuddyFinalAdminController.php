@@ -6,8 +6,10 @@ use App\Models\StudyBuddyLaunchChecklistItem;
 use App\Models\StudyBuddyMiniAppPlatform;
 use App\Models\StudyBuddyPlatformSetting;
 use App\Models\StudyBuddyPointTransaction;
+use App\Services\StudyBuddyWebAppPublisher;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class StudyBuddyFinalAdminController extends Controller
@@ -40,8 +42,11 @@ class StudyBuddyFinalAdminController extends Controller
         return back()->with('status', 'Platform settings saved.');
     }
 
-    public function updateApp(Request $request, StudyBuddyMiniAppPlatform $app): RedirectResponse
-    {
+    public function updateApp(
+        Request $request,
+        StudyBuddyMiniAppPlatform $app,
+        StudyBuddyWebAppPublisher $publisher
+    ): RedirectResponse {
         $this->authorizeAdmin();
 
         $data = $request->validate([
@@ -55,6 +60,8 @@ class StudyBuddyFinalAdminController extends Controller
             'icon' => ['nullable', 'string', 'max:24'],
             'hero_image' => ['nullable', 'string', 'max:500'],
             'web_play_url' => ['nullable', 'string', 'max:500'],
+            'web_app_zip' => ['nullable', 'file', 'mimes:zip', 'max:30720'],
+            'remove_web_app' => ['nullable', 'boolean'],
             'ios_url' => ['nullable', 'string', 'max:500'],
             'android_url' => ['nullable', 'string', 'max:500'],
             'windows_url' => ['nullable', 'string', 'max:500'],
@@ -71,15 +78,56 @@ class StudyBuddyFinalAdminController extends Controller
             'is_active' => ['nullable', 'boolean'],
         ]);
 
+        $removeRequested = $request->boolean('remove_web_app');
+        $uploadRequested = $request->hasFile('web_app_zip');
+
+        if ($removeRequested && $uploadRequested) {
+            throw ValidationException::withMessages([
+                'web_app_zip' => 'Choose either “remove current web app” or upload a replacement ZIP, not both.',
+            ]);
+        }
+
+        unset($data['web_app_zip'], $data['remove_web_app']);
+
         $data['is_web_enabled'] = $request->boolean('is_web_enabled');
         $data['is_download_enabled'] = $request->boolean('is_download_enabled');
         $data['is_featured'] = $request->boolean('is_featured');
         $data['is_active'] = $request->boolean('is_active');
         $data['audience_roles'] = $data['audience_roles'] ?? ['student', 'parent', 'teacher', 'independent_learner'];
 
+        $published = null;
+        $oldPackagePath = $app->web_app_package_path;
+
+        if ($uploadRequested) {
+            try {
+                $published = $publisher->publish($app, $request->file('web_app_zip'));
+            } catch (\Throwable $exception) {
+                throw ValidationException::withMessages([
+                    'web_app_zip' => $exception->getMessage(),
+                ]);
+            }
+        }
+
         $app->update($data);
 
-        return back()->with('status', "{$app->name} updated.");
+        if ($removeRequested) {
+            $publisher->remove($app);
+            $app->update([
+                'web_play_url' => null,
+                'web_app_package_path' => null,
+                'web_app_entry_path' => null,
+                'web_app_uploaded_at' => null,
+                'is_web_enabled' => false,
+            ]);
+        } elseif ($published !== null) {
+            $app->update(array_merge($published, [
+                'is_web_enabled' => true,
+                'status' => in_array($app->status, ['planned', 'concept'], true) ? 'beta' : $app->status,
+            ]));
+            $publisher->deleteStoredPackage($oldPackagePath);
+        }
+
+        return back()->with('status', "{$app->fresh()->name} updated. The public Apps page now uses these settings.");
     }
 
     public function updateChecklist(Request $request, StudyBuddyLaunchChecklistItem $item): RedirectResponse

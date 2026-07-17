@@ -12,7 +12,7 @@
     ];
 @endphp
 
-<main class="sb-app-detail-shell">
+<div class="sb-app-detail-shell">
     <nav class="sb-app-breadcrumb" aria-label="Breadcrumb">
         <a href="{{ url('/apps') }}">Apps</a>
         <span>/</span>
@@ -137,7 +137,7 @@
             </div>
         </section>
     @endif
-</main>
+</div>
 
 @include('studybuddy.apps.partials.locked-modal')
 @endsection

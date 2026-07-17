@@ -5,7 +5,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-contact-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-contact-system.css')) ? filemtime(public_path('assets/css/studybuddy-contact-system.css')) : time() }}">
 
-<main class="sb-contact-page">
+<div class="sb-contact-page">
     <section class="sb-contact-hero">
         <div>
             <p class="sb-contact-kicker">Contact StudyBuddy</p>
@@ -84,5 +84,5 @@
             <article><strong>Data deletion?</strong><p>Choose Data Deletion Request and include the account email.</p></article>
         </aside>
     </section>
-</main>
+</div>
 @endsection

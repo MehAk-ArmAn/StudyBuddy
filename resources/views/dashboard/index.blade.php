@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-role-dashboards.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-role-dashboards.css')) ? filemtime(public_path('assets/css/studybuddy-role-dashboards.css')) : time() }}">
 <script src="{{ asset('assets/js/studybuddy-role-dashboards.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-role-dashboards.js')) ? filemtime(public_path('assets/js/studybuddy-role-dashboards.js')) : time() }}" defer></script>
 
-<main id="main-content" class="sb-role-dashboard role-{{ $role }}">
+<div class="sb-role-dashboard role-{{ $role }}">
     <section class="role-dash-hero" data-role-card>
         <div>
             <p class="role-kicker">{{ $displayRole }} Dashboard</p>
@@ -89,5 +89,5 @@
     @else
         @include('dashboard.partials.student-dashboard')
     @endif
-</main>
+</div>
 @endsection

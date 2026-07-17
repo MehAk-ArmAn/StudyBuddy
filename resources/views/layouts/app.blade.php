@@ -5,12 +5,14 @@
     };
     $studyBuddyTheme = auth()->check() ? (auth()->user()->avatar_style ?: 'cosmic-dolphin') : 'cosmic-dolphin';
     $studyBuddyThemeClass = 'theme-' . \Illuminate\Support\Str::slug($studyBuddyTheme ?: 'cosmic-dolphin');
+    $publicPageTitle = trim($__env->yieldContent('title'));
+    $currentRouteName = \Illuminate\Support\Facades\Route::currentRouteName() ?: 'page';
 @endphp
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $settings['seo_title'] ?? $settings['site_name'] ?? config('app.name', 'StudyBuddy') }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>{{ $publicPageTitle ? $publicPageTitle.' · ' : '' }}{{ $settings['site_name'] ?? config('app.name', 'StudyBuddy') }}</title>
     @if (!empty($settings['seo_description']))<meta name="description" content="{{ $settings['seo_description'] }}">@endif
     @if (!empty($settings['seo_keywords']))<meta name="keywords" content="{{ $settings['seo_keywords'] }}">@endif
     @if (!empty($settings['favicon_path']))<link rel="icon" href="{{ preg_match('/^https?:\/\//i', $settings['favicon_path']) ? $settings['favicon_path'] : asset($settings['favicon_path']) }}">@endif
@@ -30,7 +32,6 @@
     ] as $cssPath)
         @if($url = $safeAsset($cssPath))<link rel="stylesheet" href="{{ $url }}">@endif
     @endforeach
-    @stack('styles')
     @if(file_exists(public_path('assets/css/sb-auth-role-ui.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-auth-role-ui.css') }}?v={{ filemtime(public_path('assets/css/sb-auth-role-ui.css')) }}">@endif
     @if(file_exists(public_path('assets/css/sb-structure-publish-polish.css')))<link rel="stylesheet" href="{{ asset('assets/css/sb-structure-publish-polish.css') }}?v={{ filemtime(public_path('assets/css/sb-structure-publish-polish.css')) }}">@endif
     @if(file_exists(public_path('assets/css/studybuddy-advanced-shell.css')))
@@ -51,8 +52,15 @@
     @if(file_exists(public_path('assets/css/studybuddy-home-vibe-upgrade.css')))
         <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-home-vibe-upgrade.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-home-vibe-upgrade.css')) }}">
     @endif
+    @stack('styles')
+    @if(file_exists(public_path('assets/css/studybuddy-welcome-confetti.css')))
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-welcome-confetti.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-welcome-confetti.css')) }}">
+    @endif
+    @if(file_exists(public_path('assets/css/studybuddy-accessibility-hardening.css')))
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-accessibility-hardening.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-accessibility-hardening.css')) }}">
+    @endif
 </head>
-<body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
+<body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }} route-{{ \Illuminate\Support\Str::slug($currentRouteName) }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     <a class="sb-skip-link" href="#main-content">Skip to content</a>
     @include('partials.navbar', ['settings' => $settings ?? [], 'navigationItems' => $navigationItems ?? collect()])
     <main id="main-content" tabindex="-1">@yield('content')</main>
@@ -80,6 +88,10 @@
     @endif
     @if(file_exists(public_path('assets/js/studybuddy-home-vibe-upgrade.js')))
         <script src="{{ asset('assets/js/studybuddy-home-vibe-upgrade.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-home-vibe-upgrade.js')) }}" defer></script>
+    @endif
+    <script async src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.min.js"></script>
+    @if(file_exists(public_path('assets/js/studybuddy-welcome-confetti.js')))
+        <script src="{{ asset('assets/js/studybuddy-welcome-confetti.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-welcome-confetti.js')) }}" defer></script>
     @endif
 </body>
 </html>

@@ -16,6 +16,10 @@
     };
 @endphp
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-app-publisher.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-app-publisher.css')) ? filemtime(public_path('assets/css/studybuddy-admin-app-publisher.css')) : time() }}">
+@endpush
+
 @section('content')
 <section class="sb-control-resource">
     <div class="sb-control-panel">
@@ -68,7 +72,7 @@
         <div class="sb-control-panel-head wide"><div><p class="sb-control-kicker">Mini Apps</p><h2>Editable app records</h2><p>Use image paths from <code>public/assets/studybuddy-imgs</code> / the StudyBuddy-Imgs repo when possible.</p></div></div>
         <div class="sb-admin-app-editor-grid">
             @forelse($apps as $app)
-                <form class="sb-admin-app-editor" method="POST" action="{{ route('admin.control-room.final.apps.update', $app) }}">
+                <form class="sb-admin-app-editor" method="POST" enctype="multipart/form-data" action="{{ route('admin.control-room.final.apps.update', $app) }}">
                     @csrf
                     @method('PATCH')
                     <div class="sb-admin-app-preview">
@@ -86,7 +90,29 @@
                         <label><span>Status</span><select name="status">@foreach(['concept','planned','beta','live','paused'] as $status)<option value="{{ $status }}" @selected($app->status === $status)>{{ $status }}</option>@endforeach</select></label>
                         <label><span>Icon</span><input name="icon" value="{{ $app->icon }}"></label>
                         <label class="wide"><span>Hero image path</span><input name="hero_image" value="{{ $app->hero_image }}"></label>
-                        <label><span>Web play URL</span><input name="web_play_url" value="{{ $app->web_play_url }}"></label>
+                        <label class="wide"><span>Web play URL</span><input name="web_play_url" value="{{ $app->web_play_url }}" placeholder="Auto-filled after ZIP upload, or paste a trusted hosted URL"><small>Use a full trusted URL, or upload a static web-app ZIP below.</small></label>
+
+                        <div class="wide sb-web-app-publisher">
+                            <div>
+                                <span class="sb-publisher-label">Web app launcher</span>
+                                @if($app->hasPublishedWebApp())
+                                    <strong>Published and ready</strong>
+                                    <small>Last upload: {{ optional($app->web_app_uploaded_at)->format('d M Y, H:i') ?: 'URL-managed build' }}</small>
+                                    <a href="{{ route('studybuddy.final.web-play', $app->slug) }}" target="_blank" rel="noopener">Open launcher</a>
+                                @else
+                                    <strong>Not published yet</strong>
+                                    <small>Upload a ZIP containing index.html. StudyBuddy will publish it to this app automatically.</small>
+                                @endif
+                            </div>
+                            <label class="sb-publisher-upload">
+                                <span>Upload static web-app ZIP</span>
+                                <input type="file" name="web_app_zip" accept=".zip,application/zip">
+                                <small>Maximum 30 MB upload / 120 MB extracted. HTML, CSS, JS, images, audio, JSON, and other static assets are supported.</small>
+                            </label>
+                            @if($app->web_app_package_path || $app->web_play_url)
+                                <label class="sb-publisher-remove"><input type="checkbox" name="remove_web_app" value="1"> Remove the current published web app</label>
+                            @endif
+                        </div>
                         <label><span>iOS URL</span><input name="ios_url" value="{{ $app->ios_url }}"></label>
                         <label><span>Android URL</span><input name="android_url" value="{{ $app->android_url }}"></label>
                         <label><span>Windows URL</span><input name="windows_url" value="{{ $app->windows_url }}"></label>

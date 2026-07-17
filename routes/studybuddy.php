@@ -11,6 +11,7 @@ use App\Http\Controllers\StudyBuddyControlRoomController;
 use App\Http\Controllers\StudyBuddyExperienceController;
 use App\Http\Controllers\StudyBuddyFinalAdminController;
 use App\Http\Controllers\StudyBuddyFinalPlatformController;
+use App\Http\Controllers\StudyBuddyWebAppAssetController;
 use App\Http\Controllers\StudyBuddyShellAdminController;
 use App\Http\Controllers\StudyBuddyVerificationController;
 use Illuminate\Support\Facades\Route;
@@ -21,10 +22,18 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/apps', [StudyBuddyFinalPlatformController::class, 'apps'])->name('studybuddy.apps');
 Route::get('/apps-catalog', [StudyBuddyFinalPlatformController::class, 'apps'])->name('pages.apps');
+Route::get(
+    '/app-builds/{slug}/{path?}',
+    StudyBuddyWebAppAssetController::class
+)
+    ->where('path', '.*')
+    ->name('studybuddy.web-app.asset');
+
 Route::get('/apps/{slug}', [StudyBuddyFinalPlatformController::class, 'appDetail'])->name('studybuddy.apps.show');
 Route::get('/play/{slug}', [StudyBuddyFinalPlatformController::class, 'webPlay'])->name('studybuddy.final.web-play');
-Route::get('/web-play/{app?}', [StudyBuddyFinalPlatformController::class, 'webPlay'])->name('studybuddy.final.web-play.legacy');
-Route::post('/web-play/{app?}/complete', [StudyBuddyFinalPlatformController::class, 'completeSession'])->name('studybuddy.final.session.complete.legacy');
+Route::redirect('/web-play', '/apps', 301)->name('studybuddy.final.web-play.legacy-index');
+Route::get('/web-play/{slug}', [StudyBuddyFinalPlatformController::class, 'webPlay'])->name('studybuddy.final.web-play.legacy');
+Route::post('/web-play/{app?}/complete', [StudyBuddyFinalPlatformController::class, 'completeSession'])->middleware('auth')->name('studybuddy.final.session.complete.legacy');
 Route::redirect('/app-launchpad', '/apps', 301)->name('studybuddy.final.app-launchpad');
 Route::redirect('/app-ecosystem', '/apps', 301)->name('studybuddy.experience.app-ecosystem');
 /*

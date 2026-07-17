@@ -11,7 +11,8 @@ Route::middleware(['web'])->group(function () {
     Route::post('/contact', [StudyBuddyContactController::class, 'store'])
         ->name('studybuddy.contact.store');
 
-    Route::redirect('/contact-us', '/contact', 302);
+    Route::redirect('/contact-us', '/contact', 302)
+        ->name('pages.contact-us');
 });
 
 Route::middleware(['web', 'auth', 'admin'])

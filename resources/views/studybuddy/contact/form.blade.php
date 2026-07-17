@@ -5,7 +5,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-contact-form-final.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-contact-form-final.css')) ? filemtime(public_path('assets/css/studybuddy-contact-form-final.css')) : time() }}">
 
-<main class="sb-contact-final">
+<div class="sb-contact-final">
     <section class="sb-contact-final-hero">
         <div class="sb-contact-final-copy">
             <p>Contact StudyBuddy</p>
@@ -113,5 +113,5 @@
             </article>
         </aside>
     </section>
-</main>
+</div>
 @endsection

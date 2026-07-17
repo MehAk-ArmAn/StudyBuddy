@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-living-platform.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-living-platform.css')) ? filemtime(public_path('assets/css/studybuddy-living-platform.css')) : time() }}">
 <script src="{{ asset('assets/js/studybuddy-living-platform.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-living-platform.js')) ? filemtime(public_path('assets/js/studybuddy-living-platform.js')) : time() }}" defer></script>
 
-<main id="main-content" class="sb-user-hub sb-community-living">
+<div class="sb-user-hub sb-community-living">
     <section class="sb-page-hero">
         <p class="sb-hub-kicker">Community Profiles</p>
         <h1>Discover StudyBuddy learners.</h1>
@@ -94,5 +94,5 @@
     </section>
 
     <p class="community-empty" data-community-empty hidden>No profiles match that search yet.</p>
-</main>
+</div>
 @endsection

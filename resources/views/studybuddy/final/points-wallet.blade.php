@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sb-final-shell">
+<div class="sb-final-shell">
     <section class="sb-final-hero compact">
         <div>
             <p class="sb-final-kicker">StudyBuddy Rewards</p>
@@ -28,5 +28,5 @@
             <p>No points yet. Start a web session or complete a quest to begin.</p>
         @endforelse
     </section>
-</main>
+</div>
 @endsection

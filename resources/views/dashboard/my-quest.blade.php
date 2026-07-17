@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sb-quest-page">
+<div class="sb-quest-page">
     <section class="sb-quest-hero">
         <div>
             <p class="sb-eyebrow">StudyBuddy Quest Vault</p>
@@ -111,5 +111,5 @@
             <a href="{{ url('/apps') }}">Explore Apps</a>
         </section>
     @endif
-</main>
+</div>
 @endsection

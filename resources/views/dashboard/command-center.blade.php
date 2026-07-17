@@ -10,7 +10,7 @@
     $activeTheme = old('theme', auth()->user()->avatar_style ?? 'cosmic-dolphin');
 @endphp
 
-<main class="sb-command-center" data-command-center>
+<div class="sb-command-center" data-command-center>
     <section class="sb-command-hero">
         <div class="sb-command-hero__copy">
             <span class="sb-command-kicker">StudyBuddy Phase 4</span>
@@ -117,7 +117,7 @@
         @endif
     </section>
     @includeIf('admin.studybuddy.content-studio.partials.admin-shortcut')
-</main>
+</div>
 
 @include('dashboard.partials.phase5-experience-links')
 

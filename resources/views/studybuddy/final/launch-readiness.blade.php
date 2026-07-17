@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sb-final-shell">
+<div class="sb-final-shell">
     <section class="sb-final-hero compact">
         <div>
             <p class="sb-final-kicker">Launch QA</p>
@@ -23,5 +23,5 @@
             </div>
         @endforeach
     </section>
-</main>
+</div>
 @endsection

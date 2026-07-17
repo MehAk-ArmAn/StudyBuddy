@@ -43,7 +43,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? filemtime(public_path('assets/css/studybuddy-profile-customizer.css')) : time() }}">
 <script src="{{ asset('assets/js/studybuddy-profile-customizer.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-profile-customizer.js')) ? filemtime(public_path('assets/js/studybuddy-profile-customizer.js')) : time() }}" defer></script>
 
-<main id="main-content" class="sb-user-hub">
+<div class="sb-user-hub">
     <section class="sb-page-hero compact">
         <p class="sb-hub-kicker">Profile Studio</p>
         <h1>Customize your StudyBuddy showcase.</h1>
@@ -314,5 +314,5 @@
             </div>
         </section>
     </form>
-</main>
+</div>
 @endsection

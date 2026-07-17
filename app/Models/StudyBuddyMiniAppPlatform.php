@@ -10,7 +10,7 @@ class StudyBuddyMiniAppPlatform extends Model
 
     protected $fillable = [
         'slug', 'name', 'category', 'tagline', 'description', 'status', 'icon', 'accent', 'hero_image',
-        'preview_text', 'safety_note', 'web_play_url', 'ios_url', 'android_url', 'windows_url', 'mac_url', 'support_url',
+        'preview_text', 'safety_note', 'web_play_url', 'web_app_package_path', 'web_app_entry_path', 'web_app_uploaded_at', 'ios_url', 'android_url', 'windows_url', 'mac_url', 'support_url',
         'points_reward', 'estimated_minutes', 'age_min', 'age_max', 'audience_roles', 'learning_tags',
         'learning_outcomes', 'detail_sections', 'is_web_enabled', 'is_download_enabled', 'is_featured', 'is_active', 'sort_order',
     ];
@@ -20,6 +20,7 @@ class StudyBuddyMiniAppPlatform extends Model
         'learning_tags' => 'array',
         'learning_outcomes' => 'array',
         'detail_sections' => 'array',
+        'web_app_uploaded_at' => 'datetime',
         'is_web_enabled' => 'boolean',
         'is_download_enabled' => 'boolean',
         'is_featured' => 'boolean',
@@ -62,6 +63,31 @@ class StudyBuddyMiniAppPlatform extends Model
             return true;
         }
         return in_array($role, $roles, true);
+    }
+
+
+    public function hasPublishedWebApp(): bool
+    {
+        if (! $this->is_web_enabled || empty($this->web_play_url)) {
+            return false;
+        }
+
+        if (preg_match('/^https?:\/\//i', $this->web_play_url)) {
+            return true;
+        }
+
+        $path = ltrim((string) parse_url($this->web_play_url, PHP_URL_PATH), '/');
+
+        return $path !== '' && file_exists(public_path($path));
+    }
+
+    public function launcherUrl(): ?string
+    {
+        if (! $this->hasPublishedWebApp()) {
+            return null;
+        }
+
+        return route('studybuddy.final.web-play', $this->slug);
     }
 
     public function safeHeroImage(): ?string

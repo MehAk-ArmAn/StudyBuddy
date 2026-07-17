@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sb-final-shell">
+<div class="sb-final-shell">
     <section class="sb-final-hero compact">
         <div>
             <p class="sb-final-kicker">Smart Product Plan</p>
@@ -17,5 +17,5 @@
         <article><span>04</span><h2>Points system</h2><p>Apps can post completed sessions back to StudyBuddy.</p></article>
         <article><span>05</span><h2>Final distribution</h2><p>Real app builds and web hosted games get linked from admin.</p></article>
     </section>
-</main>
+</div>
 @endsection
