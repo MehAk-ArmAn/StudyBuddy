@@ -47,7 +47,7 @@
             <div class="sbx-card-grid">
                 @foreach($items as $item)
                     <article class="sbx-card">
-                        <span class="sbx-card__icon">{{ $item->icon ?: '✨' }}</span>
+                        <span class="sbx-card__icon">{{ $item->icon ?: '' }}</span>
                         @if($item->badge)<span class="sbx-pill">{{ $item->badge }}</span>@endif
                         <h3>{{ $item->title }}</h3>
                         @if($item->subtitle)<p class="sbx-muted">{{ $item->subtitle }}</p>@endif
@@ -127,7 +127,7 @@
                 <div class="sbx-tabs" data-sbx-tabs>
                     <div class="sbx-tabs__buttons">
                         @foreach(($block['items'] ?? []) as $i => $role)
-                            <button type="button" class="{{ $i === 0 ? 'is-active' : '' }}" data-sbx-tab-button="{{ $i }}">{{ $role['icon'] ?? '✨' }} {{ $role['role'] ?? $role['title'] ?? 'Path' }}</button>
+                            <button type="button" class="{{ $i === 0 ? 'is-active' : '' }}" data-sbx-tab-button="{{ $i }}">{{ $role['icon'] ?? '' }} {{ $role['role'] ?? $role['title'] ?? 'Path' }}</button>
                         @endforeach
                     </div>
                     @foreach(($block['items'] ?? []) as $i => $role)
@@ -162,7 +162,7 @@
                 <div class="sbx-app-grid">
                     @forelse($apps as $app)
                         <article class="sbx-app-card">
-                            <span class="sbx-card__icon">{{ $app->icon ?: '🎮' }}</span>
+                            <span class="sbx-card__icon">{{ $app->icon ?: '' }}</span>
                             <span class="sbx-pill">{{ ucfirst($app->launch_status ?? 'planned') }}</span>
                             <h3>{{ $app->title }}</h3>
                             <p class="sbx-muted">{{ $app->category }} • +{{ $app->points_reward ?? 0 }} pts</p>
@@ -194,10 +194,10 @@
                 <div class="{{ $type === 'checklist' ? 'sbx-checklist' : 'sbx-card-grid' }}">
                     @foreach(($block['items'] ?? []) as $entry)
                         @if(is_string($entry))
-                            <div class="sbx-check">✓ {{ $entry }}</div>
+                            <div class="sbx-check"> {{ $entry }}</div>
                         @else
                             <article class="sbx-card">
-                                <span class="sbx-card__icon">{{ $entry['icon'] ?? '✨' }}</span>
+                                <span class="sbx-card__icon">{{ $entry['icon'] ?? '' }}</span>
                                 <h3>{{ $entry['title'] ?? 'Item' }}</h3>
                                 <p>{{ $entry['description'] ?? '' }}</p>
                             </article>

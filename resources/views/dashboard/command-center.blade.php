@@ -21,7 +21,7 @@
                 <a href="{{ $questUrl }}" class="sb-command-btn sb-command-btn--ghost">Open My Quest</a>
             </div>
         </div>
-        <div class="sb-command-orb" aria-hidden="true"><div class="sb-command-orb__ring"></div><div class="sb-command-orb__core">✨</div></div>
+        <div class="sb-command-orb" aria-hidden="true"><div class="sb-command-orb__ring"></div><div class="sb-command-orb__core"></div></div>
     </section>
 
     <section class="sb-command-stats" aria-label="Quest statistics">
@@ -53,7 +53,7 @@
             <div class="sb-progress"><span style="width: {{ $profileChecklist['percent'] }}%"></span></div>
             <ul class="sb-checklist">
                 @foreach($profileChecklist['items'] as $item)
-                    <li class="{{ $item['done'] ? 'is-done' : '' }}"><span>{{ $item['done'] ? '✓' : '•' }}</span>{{ $item['label'] }}</li>
+                    <li class="{{ $item['done'] ? 'is-done' : '' }}"><span>{{ $item['done'] ? '' : '•' }}</span>{{ $item['label'] }}</li>
                 @endforeach
             </ul>
         </article>

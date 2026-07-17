@@ -8,7 +8,7 @@
             <h1>Launch Readiness Center</h1>
             <p>Track what is complete and what still needs real app builds, store assets, security hardening, and QA.</p>
         </div>
-        <div class="sb-final-orb-card"><span>✅</span><strong>{{ $score }}%</strong><p>{{ $done }}/{{ $total }} items done</p></div>
+        <div class="sb-final-orb-card"><span></span><strong>{{ $score }}%</strong><p>{{ $done }}/{{ $total }} items done</p></div>
     </section>
 
     <section class="sb-final-panel">

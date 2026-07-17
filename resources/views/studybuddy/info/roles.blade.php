@@ -43,13 +43,13 @@
                     @if($roleImage)
                         <img src="{{ $roleImage }}" alt="" loading="lazy">
                     @else
-                        <span aria-hidden="true">{{ $role['icon'] ?? '✦' }}</span>
+                        <span aria-hidden="true">{{ $role['icon'] ?? '' }}</span>
                     @endif
                 </div>
 
                 <div class="sb-role-card-content">
                     <div class="sb-role-card-title">
-                        <span aria-hidden="true">{{ $role['icon'] ?? '✦' }}</span>
+                        <span aria-hidden="true">{{ $role['icon'] ?? '' }}</span>
                         <h2>{{ $role['title'] ?? 'StudyBuddy role' }}</h2>
                     </div>
 

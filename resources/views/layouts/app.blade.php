@@ -59,6 +59,14 @@
     @if(file_exists(public_path('assets/css/studybuddy-accessibility-hardening.css')))
         <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-accessibility-hardening.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-accessibility-hardening.css')) }}">
     @endif
+
+    @if(file_exists(public_path('assets/css/studybuddy-independent-learner.css')))
+        <link
+            rel="stylesheet"
+            href="{{ asset('assets/css/studybuddy-independent-learner.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-independent-learner.css')) }}"
+        >
+    @endif
+
 </head>
 <body id="top" class="studybuddy-site {{ $studyBuddyThemeClass }} route-{{ \Illuminate\Support\Str::slug($currentRouteName) }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     <a class="sb-skip-link" href="#main-content">Skip to content</a>
@@ -93,5 +101,22 @@
     @if(file_exists(public_path('assets/js/studybuddy-welcome-confetti.js')))
         <script src="{{ asset('assets/js/studybuddy-welcome-confetti.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-welcome-confetti.js')) }}" defer></script>
     @endif
+
+    @if(file_exists(public_path('assets/js/studybuddy-independent-learner.js')))
+        <script
+            src="{{ asset('assets/js/studybuddy-independent-learner.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-independent-learner.js')) }}"
+            defer
+        ></script>
+    @endif
+
+
+
+    @if(file_exists(public_path('assets/js/studybuddy-remove-service-worker.js')))
+        <script
+            src="{{ asset('assets/js/studybuddy-remove-service-worker.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-remove-service-worker.js')) }}"
+            defer
+        ></script>
+    @endif
+
 </body>
 </html>

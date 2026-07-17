@@ -40,7 +40,7 @@
             </div>
         </div>
         <aside class="sb-apps-orbit-card" aria-label="StudyBuddy app universe summary">
-            <span class="sb-apps-orbit-icon">🚀</span>
+            <span class="sb-apps-orbit-icon"></span>
             <strong>{{ $allApps->count() }}</strong>
             <p>mini-app worlds controlled from one admin panel</p>
         </aside>
@@ -98,7 +98,7 @@
                     @if($app->image_url)
                         <img src="{{ str_starts_with($app->image_url, 'http') ? $app->image_url : asset(ltrim($app->image_url, '/')) }}" alt="{{ $app->name }} preview">
                     @else
-                        <span>{{ $app->icon ?: '✨' }}</span>
+                        <span>{{ $app->icon ?: '' }}</span>
                     @endif
                     <span class="sb-app-status status-{{ $app->status }}">{{ $app->statusLabel() }}</span>
                 </div>

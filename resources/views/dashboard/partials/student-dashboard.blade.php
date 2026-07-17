@@ -13,7 +13,7 @@
         <div class="role-app-grid">
             @forelse($recommendedApps as $app)
                 <a href="{{ url('/apps/'.$app->slug) }}">
-                    <span>{{ $app->icon ?? '✨' }}</span>
+                    <span>{{ $app->icon ?? '' }}</span>
                     <strong>{{ $app->name }}</strong>
                     <small>{{ $app->tagline ?? $app->category ?? 'Learning world' }}</small>
                 </a>
@@ -70,10 +70,10 @@
         </div>
 
         <div class="role-control-grid">
-            <a href="{{ url('/profile') }}"><span>🪄</span><strong>Edit profile</strong><small>Colors, PFP, badges, privacy</small></a>
-            <a href="{{ url('/community') }}"><span>🌍</span><strong>Community</strong><small>See public profiles</small></a>
+            <a href="{{ url('/profile') }}"><span></span><strong>Edit profile</strong><small>Colors, PFP, badges, privacy</small></a>
+            <a href="{{ url('/community') }}"><span></span><strong>Community</strong><small>See public profiles</small></a>
             <a href="{{ url('/search') }}"><span>⌕</span><strong>Search</strong><small>Find apps and pages</small></a>
-            <a href="{{ url('/roles') }}"><span>🎭</span><strong>Roles guide</strong><small>Understand the platform</small></a>
+            <a href="{{ url('/roles') }}"><span></span><strong>Roles guide</strong><small>Understand the platform</small></a>
         </div>
     </article>
 </section>

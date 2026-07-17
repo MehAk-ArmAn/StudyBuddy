@@ -12,7 +12,7 @@
         </div>
 
         <div class="sb-quest-orb" aria-hidden="true">
-            <span>✨</span>
+            <span></span>
         </div>
     </section>
 
@@ -105,7 +105,7 @@
         </div>
     @else
         <section class="sb-empty-quest">
-            <div class="sb-empty-icon">🌙</div>
+            <div class="sb-empty-icon"></div>
             <h2>No missions saved yet</h2>
             <p>Go to the Apps page, open a mission preview, and save your first mission to My Quest.</p>
             <a href="{{ url('/apps') }}">Explore Apps</a>

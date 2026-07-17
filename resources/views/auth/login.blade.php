@@ -10,8 +10,8 @@
             <h1>Open your StudyBuddy dashboard.</h1>
             <p>Jump back into your apps, quests, points, and role-based tools.</p>
             <div class="sb-auth-flip-grid small">
-                <article><span>🎮</span><strong>Apps</strong><p>Pick up where you left off.</p></article>
-                <article><span>✨</span><strong>Quests</strong><p>Keep your saved missions moving.</p></article>
+                <article><span></span><strong>Apps</strong><p>Pick up where you left off.</p></article>
+                <article><span></span><strong>Quests</strong><p>Keep your saved missions moving.</p></article>
             </div>
         </div>
 

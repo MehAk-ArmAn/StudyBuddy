@@ -68,7 +68,7 @@
                 @foreach($apps as $app)
                     <a href="{{ url('/apps/'.$app->slug) }}" class="mini-app-card">
                         <img src="{{ $assetUrl($app->hero_image ?? $app->image_path ?? null) }}" alt="{{ $app->name }} artwork">
-                        <span>{{ $app->icon ?? '✨' }}</span>
+                        <span>{{ $app->icon ?? '' }}</span>
                         <strong>{{ $app->name }}</strong>
                         <small>{{ $app->category }}</small>
                     </a>

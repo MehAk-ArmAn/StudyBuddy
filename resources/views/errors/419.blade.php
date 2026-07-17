@@ -1,1 +1,7 @@
-@include('errors.studybuddy-friendly', ['code' => '419', 'title' => 'Your session took a tiny nap.', 'message' => 'Refresh the page and try again. This usually happens when a form stays open for too long.'])
+@include('errors._screen', [
+    'code' => 419,
+    'title' => 'Your secure session has expired.',
+    'message' => 'Refresh the page before trying the action again. Your saved StudyBuddy progress remains safe.',
+    'image' => 'assets/images/errors/session-expired.svg',
+    'imageAlt' => 'StudyBuddy secure session clock',
+])

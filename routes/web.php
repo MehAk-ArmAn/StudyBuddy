@@ -48,12 +48,8 @@ Route::middleware('guest')->group(function (): void {
     Route::post('/register', [UserAccessController::class, 'register'])->name('register.store');
 });
 
-Route::get('/logout', [UserAccessController::class, 'showLogout'])
-    ->name('logout.confirm');
-
 Route::middleware('auth')->group(function (): void {
-    Route::post('/logout', [UserAccessController::class, 'logout'])->name('logout');
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::put('/dashboard/profile', [DashboardController::class, 'updateProfile'])->name('dashboard.profile.update');
     Route::put('/dashboard/password', [DashboardController::class, 'updatePassword'])->name('dashboard.password.update');
 
@@ -115,3 +111,5 @@ require __DIR__ . '/studybuddy_role_dashboard_tools.php';
 require __DIR__ . '/studybuddy_admin_pro_final.php';
 
 // The contact form and admin inbox are registered once near the top of this file.
+
+require __DIR__ . '/studybuddy_logout.php';

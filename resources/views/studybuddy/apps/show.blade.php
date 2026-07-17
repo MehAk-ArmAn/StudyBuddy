@@ -60,7 +60,7 @@
             @if($app->image_url)
                 <img src="{{ str_starts_with($app->image_url, 'http') ? $app->image_url : asset(ltrim($app->image_url, '/')) }}" alt="{{ $app->name }} preview">
             @else
-                <span>{{ $app->icon ?: '✨' }}</span>
+                <span>{{ $app->icon ?: '' }}</span>
             @endif
         </aside>
     </section>
@@ -129,7 +129,7 @@
             <div class="sb-related-grid">
                 @foreach($related as $relatedApp)
                     <a href="{{ route('studybuddy.apps.show', $relatedApp->slug) }}" class="sb-related-card">
-                        <span>{{ $relatedApp->icon ?: '✨' }}</span>
+                        <span>{{ $relatedApp->icon ?: '' }}</span>
                         <strong>{{ $relatedApp->name }}</strong>
                         <small>{{ $relatedApp->category }} · {{ $relatedApp->statusLabel() }}</small>
                     </a>

@@ -264,7 +264,7 @@
                 @forelse($apps as $app)
                     <label>
                         <input type="checkbox" name="favorite_app_slugs[]" value="{{ $app->slug }}" @checked($selectedApps->contains($app->slug))>
-                        <span>{{ $app->icon ?? '✨' }}</span>
+                        <span>{{ $app->icon ?? '' }}</span>
                         <strong>{{ $app->name }}</strong>
                         <small>{{ $app->category }}</small>
                     </label>

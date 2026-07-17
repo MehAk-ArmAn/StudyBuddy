@@ -27,7 +27,7 @@
             <div class="health-check-list">
                 @foreach($groupChecks as $check)
                     <article class="health-check is-{{ $check['status'] }}">
-                        <span aria-hidden="true">{{ $check['status'] === 'pass' ? '✓' : ($check['status'] === 'warn' ? '!' : '×') }}</span>
+                        <span aria-hidden="true">{{ $check['status'] === 'pass' ? '' : ($check['status'] === 'warn' ? '!' : '×') }}</span>
                         <div>
                             <strong>{{ $check['label'] }}</strong>
                             <p>{{ $check['detail'] }}</p>

@@ -60,7 +60,7 @@
         <div class="role-app-grid">
             @forelse($recommendedApps as $app)
                 <a href="{{ url('/apps/'.$app->slug) }}">
-                    <span>{{ $app->icon ?? '✨' }}</span>
+                    <span>{{ $app->icon ?? '' }}</span>
                     <strong>{{ $app->name }}</strong>
                     <small>{{ $app->tagline ?? $app->category ?? 'Learning world' }}</small>
                 </a>

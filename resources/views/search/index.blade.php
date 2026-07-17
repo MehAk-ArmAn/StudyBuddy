@@ -22,7 +22,7 @@
                 @if(!empty($item['image']))
                     <img src="{{ $item['image'] }}" alt="">
                 @else
-                    <span>{{ $item['icon'] ?? '✨' }}</span>
+                    <span>{{ $item['icon'] ?? '' }}</span>
                 @endif
                 <div>
                     <small>{{ $item['type'] ?? 'Result' }}</small>

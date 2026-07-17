@@ -11,10 +11,10 @@
             <p>Choose your role and StudyBuddy will shape the setup around you. Parent accounts connect through child emails, not learning-stage fields.</p>
 
             <div class="sb-auth-flip-grid">
-                <article data-role-preview="student" class="is-active"><span>🎒</span><strong>Students</strong><p>Apps, quests, points, and learning stages.</p></article>
-                <article data-role-preview="parent"><span>🛡️</span><strong>Parents</strong><p>Secure child links and progress support.</p></article>
-                <article data-role-preview="teacher"><span>🏫</span><strong>Teachers</strong><p>Classroom tools and activity planning.</p></article>
-                <article data-role-preview="independent_learner"><span>🚀</span><strong>Independent</strong><p>Self-paced goals and focus routines.</p></article>
+                <article data-role-preview="student" class="is-active"><span></span><strong>Students</strong><p>Apps, quests, points, and learning stages.</p></article>
+                <article data-role-preview="parent"><span></span><strong>Parents</strong><p>Secure child links and progress support.</p></article>
+                <article data-role-preview="teacher"><span></span><strong>Teachers</strong><p>Classroom tools and activity planning.</p></article>
+                <article data-role-preview="independent_learner"><span></span><strong>Independent</strong><p>Self-paced goals and focus routines.</p></article>
             </div>
         </div>
 
@@ -86,7 +86,7 @@
             </div>
 
             <section class="sb-role-dynamic-panel" data-panel="student">
-                <div class="sb-panel-icon">🎒</div>
+                <div class="sb-panel-icon"></div>
                 <div><h2>Student setup</h2><p>Choose what StudyBuddy should help with first.</p></div>
                 <div class="sb-form-grid compact">
                     <label><span>Main goal</span><select name="study_goal"><option value="">Choose one</option><option>Build confidence</option><option>Improve focus</option><option>Practice daily</option><option>Have fun learning</option></select></label>
@@ -95,7 +95,7 @@
             </section>
 
             <section class="sb-role-dynamic-panel is-hidden" data-panel="parent">
-                <div class="sb-panel-icon">🛡️</div>
+                <div class="sb-panel-icon"></div>
                 <div><h2>Parent setup</h2><p>Add your child account emails. They are used for secure approved connections.</p></div>
                 <label class="sb-block-label">
                     <span>Children's email addresses</span>
@@ -109,7 +109,7 @@
             </section>
 
             <section class="sb-role-dynamic-panel is-hidden" data-panel="teacher">
-                <div class="sb-panel-icon">🏫</div>
+                <div class="sb-panel-icon"></div>
                 <div><h2>Teacher setup</h2><p>Set the classroom style so your dashboard shows professional teaching tools.</p></div>
                 <div class="sb-form-grid compact">
                     <label><span>Class level</span><select name="class_level"><option value="">Choose one</option><option>Primary</option><option>Middle school</option><option>High school</option><option>Mixed level</option><option>Tutoring</option></select></label>
@@ -118,7 +118,7 @@
             </section>
 
             <section class="sb-role-dynamic-panel is-hidden" data-panel="independent_learner">
-                <div class="sb-panel-icon">🚀</div>
+                <div class="sb-panel-icon"></div>
                 <div><h2>Independent learner setup</h2><p>Choose a personal learning routine that fits your pace and style.</p></div>
                 <div class="sb-form-grid compact">
                     <label><span>Learning goal</span><select name="independent_goal"><option value="">Choose one</option><option>Daily focus</option><option>Skill building</option><option>Revision routine</option><option>Creative learning</option><option>Career prep</option></select></label>

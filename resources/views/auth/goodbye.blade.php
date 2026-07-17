@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sign out')
+@section('title', 'See you soon')
 
 @push('styles')
 <link
@@ -17,7 +17,7 @@
 
             <img
                 src="{{ asset('assets/images/roles/independent-learner.svg') }}"
-                alt="Independent learner completing a StudyBuddy session"
+                alt="Independent learner ending a successful StudyBuddy session"
             >
         </div>
 
@@ -28,37 +28,35 @@
                     alt=""
                 >
 
-                <span>StudyBuddy account</span>
+                <span>StudyBuddy</span>
             </div>
 
             <p class="sb-system-screen__eyebrow">
-                Secure sign out
+                Session completed
             </p>
 
-            <h1>Finished learning for now?</h1>
+            <h1>
+                See you soon{{ filled($name ?? null) ? ', '.$name : '' }}.
+            </h1>
 
             <p class="sb-system-screen__lead">
-                Your profile, progress, goals, points and app activity
-                will remain saved. You can return whenever you are ready.
+                You have been signed out safely. Your learning progress
+                remains ready for the next time you return.
             </p>
 
             <div class="sb-system-screen__actions">
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <button
-                        type="submit"
-                        class="sb-system-button sb-system-button--primary"
-                    >
-                        Sign out securely
-                    </button>
-                </form>
+                <a
+                    class="sb-system-button sb-system-button--primary"
+                    href="{{ url('/') }}"
+                >
+                    Return to StudyBuddy
+                </a>
 
                 <a
                     class="sb-system-button sb-system-button--secondary"
-                    href="{{ route('dashboard') }}"
+                    href="{{ route('login') }}"
                 >
-                    Return to dashboard
+                    Sign in again
                 </a>
             </div>
         </div>

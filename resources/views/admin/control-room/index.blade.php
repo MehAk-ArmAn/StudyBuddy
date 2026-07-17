@@ -28,10 +28,10 @@
     </div>
 
     <div class="pro-role-strip">
-        <article><span>🎒</span><strong>{{ number_format($stats['students'] ?? 0) }}</strong><small>Students</small></article>
-        <article><span>🛡️</span><strong>{{ number_format($stats['parents'] ?? 0) }}</strong><small>Parents</small></article>
-        <article><span>🏫</span><strong>{{ number_format($stats['teachers'] ?? 0) }}</strong><small>Teachers</small></article>
-        <article><span>🌍</span><strong>{{ number_format($stats['groups'] ?? 0) }}</strong><small>Groups/classes</small></article>
+        <article><span></span><strong>{{ number_format($stats['students'] ?? 0) }}</strong><small>Students</small></article>
+        <article><span></span><strong>{{ number_format($stats['parents'] ?? 0) }}</strong><small>Parents</small></article>
+        <article><span></span><strong>{{ number_format($stats['teachers'] ?? 0) }}</strong><small>Teachers</small></article>
+        <article><span></span><strong>{{ number_format($stats['groups'] ?? 0) }}</strong><small>Groups/classes</small></article>
     </div>
 
     <div class="sb-control-section-head">
