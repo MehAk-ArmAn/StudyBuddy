@@ -730,3 +730,393 @@
     }
 }
 /* === End Role dashboards readability + consent flow upgrade === */
+
+/* ==========================================================================
+   Role dashboard consistency pass
+   One layout system for all four roles. Everything below fixes something that
+   was visibly wrong on a real screen rather than adding decoration.
+   ========================================================================== */
+
+/* Cards used to stretch to the tallest sibling, so a card holding one line of
+   text became a tall empty panel. They now size to their own content. */
+.role-grid {
+    align-items: start;
+}
+
+/* Card headings were up to 2.35rem with line-height 1, which fought the page
+   heading and made every card shout. One scale for all roles. */
+.role-card h2,
+.role-card-head h2 {
+    margin: 0 0 8px;
+    font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+    line-height: 1.25;
+    letter-spacing: -.02em;
+}
+
+.role-kicker {
+    margin: 0 0 4px;
+    font-size: .7rem;
+    font-weight: 850;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.role-card-head {
+    gap: 12px 16px;
+    flex-wrap: wrap;
+}
+
+/* Stat tiles: "ASSIGNMENTS" was clipped inside a fixed four-column grid. */
+.role-passport-stats,
+.metric-grid {
+    grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+}
+
+/* "ASSIGNMENTS" was breaking after "ASSIGNMENT", leaving a lone "S" on the
+   next line. Smaller tracking keeps these labels on one line in a narrow tile. */
+.role-passport-stats span,
+.metric-grid span {
+    font-size: .62rem;
+    letter-spacing: .04em;
+    line-height: 1.3;
+    overflow-wrap: normal;
+    word-break: keep-all;
+}
+
+.role-passport-stats b,
+.metric-grid strong {
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.15;
+}
+
+/* The Connect Code is a single unbroken string. At 3.5rem with wide letter
+   spacing it wrapped mid-word ("TAUISH / PR"), which made it unreadable and
+   easy to mistype. */
+.connect-code-box {
+    display: grid;
+    gap: 12px;
+    justify-items: center;
+}
+
+.connect-code-box span {
+    max-width: 100%;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: clamp(1.3rem, 4vw, 1.9rem);
+    letter-spacing: .16em;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+}
+
+.connect-code-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.connect-code-actions form {
+    margin: 0;
+}
+
+/* Action hierarchy: one clear primary per group, the rest quiet. Four equally
+   loud gradient buttons gave no idea which one mattered. */
+.role-hero-actions a,
+.role-list.buttons a,
+.role-card-head a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 16px;
+    border-radius: 14px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.role-list.buttons a,
+.role-card-head a,
+.role-hero-actions a.soft {
+    border: 1px solid rgba(255, 255, 255, .16);
+    color: #fff;
+    background: rgba(255, 255, 255, .06);
+    background-image: none;
+}
+
+.role-list.buttons a:first-child {
+    border-color: transparent;
+    background-image: linear-gradient(135deg, var(--rd-purple), var(--rd-blue));
+}
+
+.role-list.buttons a:hover,
+.role-card-head a:hover,
+.role-hero-actions a.soft:hover {
+    border-color: rgba(34, 211, 238, .4);
+    background-color: rgba(34, 211, 238, .1);
+}
+
+/* Every interactive thing on a dashboard gets a real target and a visible
+   focus ring — several were 36px or had outline:none. */
+.sb-role-dashboard a,
+.sb-role-dashboard button,
+.sb-role-dashboard input,
+.sb-role-dashboard select,
+.sb-role-dashboard textarea,
+.sb-role-dashboard summary {
+    outline-offset: 2px;
+}
+
+.sb-role-dashboard a:focus-visible,
+.sb-role-dashboard button:focus-visible,
+.sb-role-dashboard input:focus-visible,
+.sb-role-dashboard select:focus-visible,
+.sb-role-dashboard textarea:focus-visible,
+.sb-role-dashboard summary:focus-visible {
+    outline: 3px solid rgba(103, 232, 249, .75);
+}
+
+.sb-role-dashboard button,
+.role-form button,
+.assignment-form button {
+    min-height: 44px;
+}
+
+/* "Remove" sat as a pale pink chip with no border and a 36px target. */
+.child-grid button {
+    min-height: 44px;
+    border: 1px solid rgba(248, 113, 113, .45);
+    border-radius: 12px;
+    padding: 8px 14px;
+    color: #fecaca;
+    background: rgba(248, 113, 113, .16);
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.child-grid button:hover {
+    background: rgba(248, 113, 113, .26);
+}
+
+/* The roster form squeezed its submit button against the right edge, out of
+   line with the two inputs above it. */
+.add-student-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    align-items: end;
+    margin-top: 14px;
+}
+
+.add-student-form button {
+    grid-column: 1 / -1;
+    justify-self: start;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 14px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--rd-purple), var(--rd-blue));
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+/* Empty panels read as one consistent, calm state across all four roles. */
+.empty-role-panel {
+    display: grid;
+    gap: 4px;
+    color: var(--rd-muted);
+    line-height: 1.55;
+}
+
+.empty-role-panel strong {
+    color: #fff;
+    font-weight: 800;
+}
+
+/* Role artwork was rendering at whatever size it liked inside its card. */
+.role-art-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 200px);
+    align-items: center;
+    gap: 20px;
+}
+
+.role-art-card img {
+    width: 100%;
+    max-height: 150px;
+    height: auto;
+    justify-self: end;
+    object-fit: contain;
+}
+
+/* Timestamps and long values must never widen a card. */
+.role-list small,
+.assignment-list small,
+.child-grid small,
+.student-row small {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 680px) {
+    .add-student-form {
+        grid-template-columns: 1fr;
+    }
+
+    .role-art-card {
+        grid-template-columns: 1fr;
+    }
+
+    .role-art-card img {
+        max-width: 180px;
+        justify-self: center;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-role-card],
+    [data-role-card]:hover {
+        transform: none;
+        transition: none;
+    }
+}
+
+/* Connect Code actions */
+.sb-code-copy,
+.sb-code-reset {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 14px;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.sb-code-copy {
+    border: 0;
+    color: #06202b;
+    background: var(--rd-cyan);
+}
+
+.sb-code-reset {
+    border: 1px solid rgba(255, 255, 255, .18);
+    color: #fff;
+    background: rgba(255, 255, 255, .07);
+}
+
+.sb-code-reset:hover {
+    border-color: rgba(34, 211, 238, .4);
+}
+
+.role-fineprint {
+    margin: 12px 0 0;
+    color: var(--rd-muted);
+    font-size: .85rem;
+    line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   Tile layout (app tiles + account tiles)
+
+   These anchors were being laid out as a flex ROW, so the 42px icon sat beside
+   the label and squeezed it into a ~40px column: "Edit profile" rendered as
+   "Edit / prof / ile". They are explicitly a vertical stack, and the tiles are
+   wide enough to hold a label.
+   -------------------------------------------------------------------------- */
+.sb-role-dashboard .role-app-grid,
+.sb-role-dashboard .role-control-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.sb-role-dashboard .role-app-grid > a,
+.sb-role-dashboard .role-control-grid > a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
+    align-content: start;
+    gap: 4px;
+    min-height: 44px;
+}
+
+.sb-role-dashboard .role-app-grid > a > span,
+.sb-role-dashboard .role-control-grid > a > span {
+    flex: 0 0 auto;
+    margin-bottom: 6px;
+}
+
+.sb-role-dashboard .role-app-grid > a > strong,
+.sb-role-dashboard .role-control-grid > a > strong {
+    font-size: .98rem;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.sb-role-dashboard .role-app-grid > a > small,
+.sb-role-dashboard .role-control-grid > a > small {
+    margin-top: 0;
+    font-size: .82rem;
+    line-height: 1.45;
+    overflow-wrap: break-word;
+}
+
+/* The passport always holds exactly three figures — keep them on one row. */
+.sb-role-dashboard .role-passport-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.sb-role-dashboard .role-passport-stats span {
+    font-size: .62rem;
+}
+
+/* Steps and child cards need the same breathing room as the tiles. */
+.sb-role-dashboard .independent-track,
+.sb-role-dashboard .child-grid {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.sb-role-dashboard .independent-track article {
+    display: grid;
+    justify-items: start;
+    gap: 6px;
+    align-content: start;
+}
+
+.sb-role-dashboard .independent-track p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.sb-role-dashboard .child-grid article {
+    display: grid;
+    justify-items: start;
+    gap: 4px;
+    align-content: start;
+}
+
+/* Native date and select controls were painting light-on-light inside the dark
+   dashboard. This makes the browser render them for a dark surface. */
+.sb-role-dashboard {
+    color-scheme: dark;
+}
+
+/* One form, one submit. Full-bleed gradient bars made every form look equally
+   urgent; the action now sizes to its label. */
+.sb-role-dashboard .role-form > button,
+.sb-role-dashboard .assignment-form > button {
+    width: auto;
+    justify-self: start;
+    padding: 11px 22px;
+    border: 0;
+    border-radius: 14px;
+    color: #fff;
+    background: linear-gradient(135deg, var(--rd-purple), var(--rd-blue));
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.sb-role-dashboard .assignment-form > button {
+    grid-column: 1 / -1;
+}

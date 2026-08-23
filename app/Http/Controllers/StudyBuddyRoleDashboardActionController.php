@@ -34,6 +34,11 @@ class StudyBuddyRoleDashboardActionController extends Controller
         $data = $request->validate([
             'child_email' => ['required', 'email', 'max:190'],
             'child_connect_code' => ['required', 'string', 'min:4', 'max:20'],
+        ], [
+            'child_email.required' => 'Enter the email your child signed up with.',
+            'child_email.email' => 'That does not look like an email address.',
+            'child_connect_code.required' => 'Enter the Connect Code from your child\'s dashboard.',
+            'child_connect_code.min' => 'Connect Codes are longer than that. Check it and try again.',
         ]);
 
         $childUser = $this->verifyLearnerConnection($data['child_email'], $data['child_connect_code'], 'child');
@@ -87,6 +92,9 @@ class StudyBuddyRoleDashboardActionController extends Controller
             'organization_name' => ['required', 'string', 'max:190'],
             'organization_email' => ['nullable', 'email', 'max:190'],
             'position_title' => ['nullable', 'string', 'max:140'],
+        ], [
+            'organization_name.required' => 'Add the name of your school or organisation.',
+            'organization_email.email' => 'That does not look like an email address.',
         ]);
 
         $payload = [];
@@ -115,6 +123,9 @@ class StudyBuddyRoleDashboardActionController extends Controller
             'name' => ['required', 'string', 'max:160'],
             'organization_name' => ['nullable', 'string', 'max:190'],
             'description' => ['nullable', 'string', 'max:500'],
+        ], [
+            'name.required' => 'Give the class a name, for example "Year 8 Maths".',
+            'name.max' => 'That class name is too long. Keep it under 160 characters.',
         ]);
 
         DB::table('studybuddy_learning_groups')->insert([
@@ -148,6 +159,11 @@ class StudyBuddyRoleDashboardActionController extends Controller
         $data = $request->validate([
             'student_email' => ['required', 'email', 'max:190'],
             'student_connect_code' => ['required', 'string', 'min:4', 'max:20'],
+        ], [
+            'student_email.required' => 'Enter the email the student signed up with.',
+            'student_email.email' => 'That does not look like an email address.',
+            'student_connect_code.required' => 'Enter the Connect Code from the student\'s dashboard.',
+            'student_connect_code.min' => 'Connect Codes are longer than that. Check it and try again.',
         ]);
 
         $studentUser = $this->verifyLearnerConnection($data['student_email'], $data['student_connect_code'], 'student');

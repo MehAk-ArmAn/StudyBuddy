@@ -108,14 +108,26 @@
                 <p>{{ $promise }}</p>
             </div>
 
+            {{-- Signed-in people were being asked to create an account they
+                 already have. --}}
             <div class="sb-footer-action-card">
-                <span>Ready to start?</span>
-                <h2>Make an account and start playing.</h2>
-                <p>It takes a minute. Pick who you are and we will set the rest up.</p>
-                <div>
-                    <a href="{{ url('/register') }}">Create account</a>
-                    <a class="soft" href="{{ url('/apps') }}">Explore apps</a>
-                </div>
+                @auth
+                    <span>Carry on</span>
+                    <h2>Back to your dashboard.</h2>
+                    <p>Your apps, tasks and points are all waiting there.</p>
+                    <div>
+                        <a href="{{ url('/dashboard') }}">Open dashboard</a>
+                        <a class="soft" href="{{ url('/apps') }}">Browse apps</a>
+                    </div>
+                @else
+                    <span>Ready to start?</span>
+                    <h2>Make an account and start playing.</h2>
+                    <p>It takes a minute. Pick who you are and we will set the rest up.</p>
+                    <div>
+                        <a href="{{ url('/register') }}">Create account</a>
+                        <a class="soft" href="{{ url('/apps') }}">Browse apps</a>
+                    </div>
+                @endauth
             </div>
         </section>
 

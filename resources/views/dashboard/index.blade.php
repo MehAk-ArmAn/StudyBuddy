@@ -12,6 +12,20 @@
     }
 
     $displayRole = ucwords(str_replace('_', ' ', $role));
+
+    // Point rows and assignments carry raw database timestamps. Nobody reading
+    // a dashboard wants "2026-07-15 09:07:10".
+    $humanDate = function ($value): string {
+        if (blank($value)) {
+            return '';
+        }
+
+        try {
+            return \Illuminate\Support\Carbon::parse($value)->diffForHumans();
+        } catch (\Throwable $e) {
+            return (string) $value;
+        }
+    };
 @endphp
 
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-role-dashboards.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-role-dashboards.css')) ? filemtime(public_path('assets/css/studybuddy-role-dashboards.css')) : time() }}">
@@ -23,17 +37,17 @@
             <p class="role-kicker">{{ $displayRole }} Dashboard</p>
 
             @if($role === 'parent')
-                <h1>Guide your child’s learning without taking over.</h1>
-                <p>Track connected child accounts, see learning signals, and support progress from one calm parent dashboard.</p>
+                <h1>See how your child is getting on.</h1>
+                <p>Connect a child with their code, then follow their progress without taking over.</p>
             @elseif($role === 'teacher')
-                <h1>Manage classes, tasks, and quizzes from one teaching space.</h1>
-                <p>Create classes, add students, assign app-based tasks, and keep your organization details ready.</p>
+                <h1>Your classes in one place.</h1>
+                <p>Set up a class, add students with their code, and assign work from the apps.</p>
             @elseif($role === 'independent_learner')
-                <h1>Your self-paced learning cockpit.</h1>
-                <p>Build routines, track points, choose app worlds, and turn progress into a personal learning portfolio.</p>
+                <h1>Learning at your own pace.</h1>
+                <p>Set a focus, pick an app, and keep everything you have done in one place.</p>
             @else
-                <h1>Your learning mission control.</h1>
-                <p>Complete tasks, play app worlds, collect points, and grow your StudyBuddy profile step by step.</p>
+                <h1>Pick something to practise.</h1>
+                <p>Your apps, tasks and points are all here. Start with whatever looks good today.</p>
             @endif
 
             <div class="role-hero-actions">

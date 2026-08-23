@@ -35,7 +35,23 @@
     $sbAppleTouch = $sbIcon('apple_touch');
     $sbSocial = $sbIcon('social', $sbSettings['logo_path'] ?? null);
 
-    $sbTitle = trim($__env->yieldContent('title'));
+    // Section content arrives already escaped, so decode once before this
+    // gets escaped again on output — otherwise "Rewards & Points" reached the
+    // browser as "Rewards &amp;amp; Points".
+    $sbTitle = trim(html_entity_decode(
+        $__env->yieldContent('title'),
+        ENT_QUOTES | ENT_HTML5,
+        'UTF-8'
+    ));
+
+    // The layout owns the brand suffix. A CMS-supplied title that already
+    // carries it (e.g. "Support | StudyBuddy") must not print it twice.
+    $sbTitle = trim((string) preg_replace(
+        '/\s*[|·\x{2014}\x{2013}-]\s*'.preg_quote($sbBrandName, '/').'\s*$/iu',
+        '',
+        $sbTitle
+    ));
+
     $sbFullTitle = $sbTitle !== '' ? $sbTitle.' · '.$sbBrandName : $sbBrandName.' — '.$sbSlogan;
 @endphp
 

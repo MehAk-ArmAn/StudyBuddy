@@ -5,18 +5,18 @@
 <section class="role-grid parent-readable-dashboard">
     <article class="role-card wide role-art-card" data-role-card>
         <div>
-            <p class="role-kicker">Parent overview</p>
-            <h2>Guide your child’s progress safely.</h2>
-            <p>Parents can only connect a child with the child’s StudyBuddy Connect Code. No random linking. No password sharing.</p>
+            <p class="role-kicker">How connecting works</p>
+            <h2>Only with your child's code</h2>
+            <p>You need your child's email and their Connect Code. Nobody can link to an account any other way, and passwords are never shared.</p>
         </div>
-        <img src="{{ $roleImage }}" alt="Parent StudyBuddy path" onerror="this.src='{{ asset('assets/studybuddy-imgs/brand/logo-icon.png') }}'">
+        <img src="{{ $roleImage }}" alt="" aria-hidden="true" loading="lazy" decoding="async" onerror="this.src='{{ asset('assets/studybuddy-imgs/brand/logo-icon.png') }}'">
     </article>
 
     <article class="role-card wide" data-role-card>
         <div class="role-card-head">
             <div>
-                <p class="role-kicker">Progress snapshot</p>
-                <h2>Connected child metrics</h2>
+                <p class="role-kicker">At a glance</p>
+                <h2>How things are going</h2>
             </div>
             <a href="{{ url('/community-guidelines') }}">Safety guide</a>
         </div>
@@ -32,7 +32,7 @@
     <article class="role-card" data-role-card>
         <p class="role-kicker">Verified connection</p>
         <h2>Connect child account</h2>
-        <p class="role-help-text">Ask the learner to open their dashboard and share their current StudyBuddy Connect Code.</p>
+        <p class="role-help-text">Ask your child to open their dashboard and read you the Connect Code shown there.</p>
 
         <form method="POST" action="{{ route('studybuddy.parent.children.store') }}" class="role-form">
             @csrf
@@ -51,7 +51,7 @@
     <article class="role-card wide" data-role-card>
         <div class="role-card-head">
             <div>
-                <p class="role-kicker">Family learning hub</p>
+                <p class="role-kicker">Your family</p>
                 <h2>Connected children</h2>
             </div>
         </div>
@@ -73,14 +73,17 @@
                     @endif
                 </article>
             @empty
-                <div class="empty-role-panel">No child accounts connected yet. Use email + Connect Code to connect safely.</div>
+                <div class="empty-role-panel">
+                    <strong>No children connected yet.</strong>
+                    Use the form above with your child's email and their Connect Code.
+                </div>
             @endforelse
         </div>
     </article>
 
     <article class="role-card wide" data-role-card>
-        <p class="role-kicker">Activity feed</p>
-        <h2>Recent child activity</h2>
+        <p class="role-kicker">Recent</p>
+        <h2>What they've been doing</h2>
 
         <div class="role-list">
             @forelse($parentData['childActivity'] as $activity)
@@ -88,18 +91,21 @@
                     <span>{{ ($activity->points ?? 0) >= 0 ? '+' : '' }}{{ $activity->points ?? 0 }}</span>
                     <div>
                         <strong>{{ $activity->learner_name ?? 'Learner' }}</strong>
-                        <small>{{ $activity->label ?? $activity->reason ?? 'Learning activity' }} • {{ $activity->created_at ?? 'Recently' }}</small>
+                        <small>{{ $activity->label ?? $activity->reason ?? 'Learning activity' }} • {{ $humanDate($activity->created_at ?? null) ?: 'Recently' }}</small>
                     </div>
                 </article>
             @empty
-                <div class="empty-role-panel">Child activity will appear after connected learners earn points.</div>
+                <div class="empty-role-panel">
+                    <strong>Nothing to show yet.</strong>
+                    Activity appears here once a connected child finishes something.
+                </div>
             @endforelse
         </div>
     </article>
 
     <article class="role-card" data-role-card>
-        <p class="role-kicker">Parent tools</p>
-        <h2>Controls</h2>
+        <p class="role-kicker">Your account</p>
+        <h2>Settings and pages</h2>
 
         <div class="role-list buttons">
             <a href="{{ url('/profile') }}">Parent profile</a>

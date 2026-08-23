@@ -287,8 +287,10 @@ class DashboardController extends Controller
                 'assignments' => $assignments->where('status', 'assigned')->count(),
                 'recent_events' => $recentPoints->count(),
             ],
-            'focus' => $profile['current_focus'] ?? $user->learning_stage ?? 'Build confidence',
-            'goal' => $profile['learning_goal'] ?? 'Complete one tiny win today',
+            // Left null when nothing has been set, so the dashboard can say so
+            // instead of presenting invented copy as the learner's own goal.
+            'focus' => $profile['current_focus'] ?? $user->learning_stage ?? null,
+            'goal' => $profile['learning_goal'] ?? null,
         ];
     }
 

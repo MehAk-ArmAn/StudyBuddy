@@ -43,6 +43,10 @@
         >
     @endif
 
+    {{-- A module's own stylesheet loads last so it can style its screen
+         without fighting the shared sheets with !important. --}}
+    @stack('styles-late')
+
 </head>
 
 @php
