@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-labelledby="title desc">
+    <title id="title">StudyBuddy session expired</title>
+    <desc id="desc">A secure StudyBuddy shield beside a clock ready to restart the session.</desc>
+
+    <defs>
+        <linearGradient id="shield" x1="276" y1="138" x2="534" y2="515" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#A855F7"/>
+            <stop offset="1" stop-color="#4F46E5"/>
+        </linearGradient>
+
+        <linearGradient id="clock" x1="496" y1="202" x2="710" y2="458" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#67E8F9"/>
+            <stop offset="1" stop-color="#3B82F6"/>
+        </linearGradient>
+
+        <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+            <feDropShadow dx="0" dy="24" stdDeviation="23" flood-color="#020617" flood-opacity=".32"/>
+        </filter>
+    </defs>
+
+    <ellipse cx="450" cy="568" rx="270" ry="32" fill="#020617" opacity=".23"/>
+
+    <g filter="url(#shadow)">
+        <path d="M378 92l178 65v138c0 130-74 219-178 266-104-47-178-136-178-266V157z" fill="url(#shield)"/>
+
+        <path d="M378 185v276" stroke="#DDD6FE" stroke-width="8" opacity=".45"/>
+        <path d="M286 252h184" stroke="#DDD6FE" stroke-width="8" opacity=".45"/>
+
+        <circle cx="585" cy="346" r="134" fill="#F8FAFC"/>
+        <circle cx="585" cy="346" r="111" fill="url(#clock)"/>
+
+        <path d="M585 280v75l55 37" fill="none" stroke="#F8FAFC" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+
+        <circle cx="585" cy="346" r="13" fill="#F8FAFC"/>
+
+        <path d="M317 315l43 43 82-98" fill="none" stroke="#F8FAFC" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-labelledby="title desc">
+    <title id="title">StudyBuddy repair screen</title>
+    <desc id="desc">StudyBuddy tools repairing a platform panel.</desc>
+
+    <defs>
+        <linearGradient id="gear" x1="250" y1="130" x2="610" y2="500" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#8B5CF6"/>
+            <stop offset="1" stop-color="#2563EB"/>
+        </linearGradient>
+
+        <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+            <feDropShadow dx="0" dy="23" stdDeviation="22" flood-color="#020617" flood-opacity=".32"/>
+        </filter>
+    </defs>
+
+    <ellipse cx="450" cy="571" rx="275" ry="34" fill="#020617" opacity=".22"/>
+
+    <g filter="url(#shadow)">
+        <path d="M445 105l31 54 61-5 18 59 57 23-10 61 47 40-39 48 20 58-54 31-5 61-59 18-23 57-61-10-40 47-48-39-58 20-31-54-61 5-18-59-57-23 10-61-47-40 39-48-20-58 54-31 5-61 59-18 23-57 61 10 40-47 48 39z" fill="url(#gear)"/>
+
+        <circle cx="445" cy="366" r="115" fill="#E0F2FE"/>
+        <circle cx="445" cy="366" r="55" fill="#172033"/>
+
+        <path d="M637 165c31 13 55 37 68 68l-86 86-67-67z" fill="#F59E0B"/>
+        <path d="M552 252l-157 157" stroke="#F59E0B" stroke-width="32" stroke-linecap="round"/>
+        <path d="M384 420l-69 69" stroke="#F59E0B" stroke-width="32" stroke-linecap="round"/>
+    </g>
+</svg>

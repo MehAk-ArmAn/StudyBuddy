@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-labelledby="title desc">
+    <title id="title">StudyBuddy connection unavailable</title>
+    <desc id="desc">A StudyBuddy laptop waiting for the local server connection to return.</desc>
+
+    <defs>
+        <linearGradient id="panel" x1="250" y1="150" x2="650" y2="510" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#334155"/>
+            <stop offset="1" stop-color="#0F172A"/>
+        </linearGradient>
+
+        <linearGradient id="screen" x1="338" y1="222" x2="560" y2="412" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#E0F2FE"/>
+            <stop offset="1" stop-color="#BAE6FD"/>
+        </linearGradient>
+
+        <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+            <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#020617" flood-opacity=".32"/>
+        </filter>
+    </defs>
+
+    <ellipse cx="450" cy="577" rx="270" ry="34" fill="#020617" opacity=".24"/>
+
+    <g filter="url(#shadow)">
+        <rect x="245" y="155" width="410" height="310" rx="34" fill="url(#panel)"/>
+        <rect x="285" y="198" width="330" height="220" rx="20" fill="url(#screen)"/>
+
+        <circle cx="410" cy="294" r="11" fill="#172033"/>
+        <circle cx="490" cy="294" r="11" fill="#172033"/>
+
+        <path d="M402 359c30-24 66-24 96 0" fill="none" stroke="#172033" stroke-width="12" stroke-linecap="round"/>
+
+        <path d="M236 463h428l58 78H178z" fill="#CBD5E1"/>
+        <path d="M336 503h228" stroke="#94A3B8" stroke-width="10" stroke-linecap="round"/>
+
+        <path d="M153 362c-50 0-78 24-78 70" fill="none" stroke="#3B82F6" stroke-width="20" stroke-linecap="round"/>
+        <path d="M747 362c50 0 78 24 78 70" fill="none" stroke="#3B82F6" stroke-width="20" stroke-linecap="round"/>
+
+        <rect x="61" y="419" width="56" height="35" rx="10" fill="#2563EB"/>
+        <rect x="783" y="419" width="56" height="35" rx="10" fill="#2563EB"/>
+
+        <path d="M438 88h24v58h-24z" fill="#F59E0B"/>
+        <circle cx="450" cy="174" r="14" fill="#F59E0B"/>
+
+        <path d="M450 44l82 137H368z" fill="none" stroke="#F59E0B" stroke-width="17" stroke-linejoin="round"/>
+    </g>
+</svg>

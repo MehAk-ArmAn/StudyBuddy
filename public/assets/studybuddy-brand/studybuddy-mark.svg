@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="StudyBuddy logo mark">
+  <defs>
+    <linearGradient id="g" x1="92" y1="90" x2="420" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c3cff"/>
+      <stop offset=".52" stop-color="#246bff"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="book" x1="126" y1="268" x2="390" y2="390">
+      <stop stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#c7d2fe"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000000" flood-opacity=".35"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="126" fill="#08071a"/>
+  <circle cx="386" cy="118" r="56" fill="#22d3ee" opacity=".18"/>
+  <circle cx="132" cy="392" r="76" fill="#7c3cff" opacity=".20"/>
+  <path d="M92 312c62-103 174-139 316-82-68 26-122 67-162 124-62-37-113-51-154-42z" fill="url(#book)" filter="url(#shadow)"/>
+  <path d="M130 302c70-55 157-72 262-52-61 23-111 58-150 104-45-24-82-39-112-52z" fill="#e0f2fe"/>
+  <path d="M230 112c80-9 150 47 163 124 14 86-49 162-135 165-89 3-163-67-164-154-2-73 57-125 136-135z" fill="url(#g)" filter="url(#shadow)"/>
+  <path d="M298 178c43 14 74 53 76 99 35-24 63-25 89-1-28 3-49 14-67 36 0 39-23 71-59 89 20 15 45 27 76 33-70 14-122-3-159-46-28-30-42-67-42-107 0-50 24-88 86-103z" fill="#1aa7ff"/>
+  <circle cx="326" cy="214" r="9" fill="#08111f"/>
+  <path d="M356 235c20 10 39 8 59-6-8 31-25 48-52 51-24 3-42-11-53-38 18 1 33-1 46-7z" fill="#ffffff"/>
+  <path d="M157 362c-30 37-65 50-106 40 37-20 62-49 75-87" fill="#0f87de"/>
+</svg>

@@ -1,0 +1,22 @@
+img[data-independent-learner-image],
+.sb-independent-learner-image {
+    object-fit: contain !important;
+    object-position: center !important;
+    filter:
+        saturate(1.04)
+        drop-shadow(0 22px 34px rgba(2, 6, 23, .24));
+}
+
+[data-role*="independent"]
+img[data-independent-learner-image],
+[data-user-role*="independent"]
+img[data-independent-learner-image],
+[data-audience-role*="independent"]
+img[data-independent-learner-image] {
+    background:
+        radial-gradient(
+            circle,
+            rgba(139, 92, 246, .14),
+            transparent 68%
+        );
+}

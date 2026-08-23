@@ -1,0 +1,120 @@
+:root{
+    --sb-premium-bg:#050816;
+    --sb-premium-panel:rgba(255,255,255,.075);
+    --sb-premium-line:rgba(255,255,255,.13);
+    --sb-premium-text:#f8fbff;
+    --sb-premium-muted:rgba(226,232,240,.72);
+    --sb-premium-cyan:#22d3ee;
+    --sb-premium-purple:#7c3cff;
+    --sb-premium-gold:#facc15;
+}
+
+body{
+    background:
+        radial-gradient(circle at 8% 0%, rgba(34,211,238,.14), transparent 34%),
+        radial-gradient(circle at 90% 8%, rgba(124,60,255,.18), transparent 36%),
+        linear-gradient(180deg,#050816,#081026 46%,#050816) !important;
+}
+
+main[id="main-content"]{
+    position:relative;
+}
+
+main[id="main-content"]::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size:54px 54px;
+    mask-image:linear-gradient(to bottom, transparent, black 18%, black 72%, transparent);
+}
+
+.sb-premium-section,
+.homepage-section,
+.home-section,
+.sb-section,
+section[class*="home"],
+section[class*="hero"]{
+    scroll-margin-top:120px;
+}
+
+.sb-hub-card,
+.profile-form-card,
+.sb-app-card-final,
+.sb-connected-card,
+.sb-auth-form,
+.sb-auth-intro,
+.public-profile-hero,
+.public-profile-apps,
+.public-profile-grid article,
+.community-card{
+    box-shadow:
+        0 24px 72px rgba(2,6,23,.30),
+        inset 0 1px 0 rgba(255,255,255,.06) !important;
+}
+
+a,
+button{
+    transition:transform .22s ease, box-shadow .22s ease, filter .22s ease, border-color .22s ease, background .22s ease;
+}
+
+a:hover,
+button:hover{
+    filter:brightness(1.05);
+}
+
+input,
+select,
+textarea{
+    transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+
+::selection{
+    background:rgba(34,211,238,.32);
+    color:#fff;
+}
+
+@media (prefers-reduced-motion: reduce){
+    *,
+    *::before,
+    *::after{
+        animation:none !important;
+        transition:none !important;
+        scroll-behavior:auto !important;
+    }
+}
+
+/* ==========================================================================
+   Tap targets
+   Inline card links and the footer credit were under 20px tall, which is hard
+   to hit accurately on a phone. Give them real height without changing the
+   visual weight of the type.
+   ========================================================================== */
+
+.what-card a,
+.path-card a,
+.feature-card a,
+.sb-footer-credit a,
+.sb-footer-bottom a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding-block: 4px;
+}
+
+/* The footer credit sits in a dense row, so keep it compact but still hittable. */
+.sb-footer-credit a,
+.sb-footer-bottom a {
+    min-height: 32px;
+}
+
+@media (pointer: coarse) {
+    .sb-footer-credit a,
+    .sb-footer-bottom a {
+        min-height: 44px;
+    }
+}
