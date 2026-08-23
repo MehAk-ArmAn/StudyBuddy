@@ -83,8 +83,11 @@
             count.textContent = String(visible);
         }
 
+        // "Nothing matched that" answers a search or filter. With an empty
+        // catalogue there is nothing to match, and the page already says so —
+        // showing both left two contradictory panels stacked on each other.
         if (empty) {
-            empty.hidden = visible !== 0;
+            empty.hidden = cards.length === 0 || visible !== 0;
         }
 
         if (grid) {

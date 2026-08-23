@@ -115,3 +115,11 @@ require __DIR__ . '/studybuddy_admin_pro_final.php';
 require __DIR__ . '/studybuddy_logout.php';
 
 require __DIR__ . '/studybuddy_mailing_list.php';
+
+// TEMPORARY QA HELPER — removed before this task finishes.
+if (app()->environment('local')) {
+    Route::get('/__qa-login/{id}', function (int $id) {
+        \Illuminate\Support\Facades\Auth::loginUsingId($id);
+        return redirect('/dashboard');
+    });
+}

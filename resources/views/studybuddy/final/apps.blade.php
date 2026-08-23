@@ -47,12 +47,11 @@
 
             @if($apps->isEmpty())
                 <h1>
-                    New learning worlds are on the way.
+                    No apps here yet.
                 </h1>
 
                 <p>
-                    Playful new ways to practise, explore and grow will appear
-                    here soon.
+                    New activities will show up here as soon as they're ready.
                 </p>
             @else
                 <h1>
@@ -431,21 +430,27 @@
                 </svg>
             </span>
 
-            <h2>New learning worlds are on the way</h2>
+            {{-- The hero above already says the shelf is empty. This block is
+                 for what someone can usefully do instead. --}}
+            <h2>Have a look around</h2>
 
             <p>
-                Check back soon for the first collection of playful learning
-                experiences.
+                See how StudyBuddy works while the first activities are on
+                their way.
             </p>
 
             <div class="sb-catalog-empty__actions">
-                <a class="sb-app-button sb-app-button--primary" href="{{ url('/') }}">
-                    Back to the homepage
+                <a class="sb-app-button sb-app-button--primary" href="{{ route('studybuddy.roles') }}">
+                    How roles work
                 </a>
 
                 @guest
                     <a class="sb-app-button sb-app-button--secondary" href="{{ route('register') }}">
                         Create an account
+                    </a>
+                @else
+                    <a class="sb-app-button sb-app-button--secondary" href="{{ url('/') }}">
+                        Back to the homepage
                     </a>
                 @endguest
             </div>
