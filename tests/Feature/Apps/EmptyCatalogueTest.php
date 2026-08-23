@@ -50,9 +50,13 @@ class EmptyCatalogueTest extends TestCase
     {
         $response = $this->get('/apps');
 
+        // The page says the shelf is empty once, then offers somewhere to go.
+        // It must not stack a second "nothing matched your filters" panel on
+        // top of that — there are no filters to have missed.
         $response->assertOk()
-            ->assertSee('New learning worlds are on the way')
-            ->assertSee('Back to the homepage');
+            ->assertSee('No apps here yet.')
+            ->assertSee('Have a look around')
+            ->assertSee('How roles work');
 
         foreach (self::DEMO_NAMES as $name) {
             $response->assertDontSee($name);

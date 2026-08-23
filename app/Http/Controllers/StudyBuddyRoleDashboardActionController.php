@@ -200,6 +200,13 @@ class StudyBuddyRoleDashboardActionController extends Controller
             'due_at' => ['nullable', 'date'],
             'points_reward' => ['nullable', 'integer', 'min:0', 'max:10000'],
             'question_bank' => ['nullable', 'string', 'max:3000'],
+        ], [
+            'title.required' => 'Give this task a title so students know what it is.',
+            'title.max' => 'That title is too long. Keep it under 180 characters.',
+            'type.required' => 'Choose whether this is a task, quiz, practice or project.',
+            'due_at.date' => 'That due date could not be read. Pick one from the calendar.',
+            'points_reward.integer' => 'Points must be a whole number.',
+            'points_reward.max' => 'Keep the points reward at 10000 or below.',
         ]);
 
         $groupId = $data['group_id'] ?? null;
