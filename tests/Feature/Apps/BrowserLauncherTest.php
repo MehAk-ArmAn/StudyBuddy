@@ -145,15 +145,26 @@ class BrowserLauncherTest extends TestCase
             ->assertSee('Play in browser')
             ->assertSee(route('studybuddy.final.web-play', 'launcher-test'));
 
-        // The launcher itself opens and frames our own build.
-        $this->get('/play/launcher-test')
+        // The launcher itself opens and frames our own build. The frame is
+        // same-origin on purpose: a Flutter build cannot start in an opaque
+        // origin (history.pushState throws, and module imports fail CORS).
+        $launcher = $this->get('/play/launcher-test')
             ->assertOk()
             ->assertSee('Launcher Test')
-            ->assertDontSee('allow-same-origin');
+            ->assertSee('allow-same-origin', false)
+            ->assertSee('sandbox', false);
+
+        // What the sandbox must still withhold: a hosted build may never
+        // navigate the StudyBuddy page it is embedded in.
+        $this->assertStringNotContainsString('allow-top-navigation', $launcher->getContent());
+
+        // And it gets no device permissions it has no use for.
+        $this->assertStringNotContainsString('microphone', $launcher->getContent());
+        $this->assertStringNotContainsString('camera', $launcher->getContent());
 
         $launcherScript = File::get($this->originalPublicPath.'/assets/js/studybuddy-launcher-v3.js');
-        $this->assertStringContainsString("event.origin !== 'null'", $launcherScript);
         $this->assertStringContainsString('event.source !== frame.contentWindow', $launcherScript);
+        $this->assertStringContainsString("event.origin !== expectedOrigin", $launcherScript);
     }
 
     public function test_the_published_build_is_actually_served(): void
@@ -168,18 +179,20 @@ class BrowserLauncherTest extends TestCase
         $response = $this->get('/app-builds/launcher-test/index.html');
 
         $response->assertOk();
-        $response->assertHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+
+        // Builds are framed from our own origin, so nothing in one ever needs
+        // to be readable by a third-party document.
+        $response->assertHeader('Cross-Origin-Resource-Policy', 'same-origin');
+        $response->assertHeader('X-Content-Type-Options', 'nosniff');
+
         $cacheControl = (string) $response->headers->get('Cache-Control');
         $this->assertStringContainsString('no-store', $cacheControl);
         $this->assertStringContainsString('must-revalidate', $cacheControl);
         $this->assertStringNotContainsString('immutable', $cacheControl);
 
-        // The asset route streams the file, so the body is empty in tests;
-        // assert on the file it decided to send instead.
-        $this->assertStringContainsString(
-            'Playing',
-            file_get_contents($response->baseResponse->getFile()->getPathname())
-        );
+        // The entry document is rewritten as it is served so its base address
+        // matches the mount, so assert on the body rather than a streamed file.
+        $this->assertStringContainsString('Playing', $response->getContent());
 
         $this->assertFileDoesNotExist(public_path('web-apps/launcher-test/index.html'));
     }

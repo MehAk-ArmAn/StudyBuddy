@@ -217,6 +217,8 @@ class StudyBuddyWebAppAssetController extends Controller
      * file. The Admin draft preview serves the very same folder from a
      * different address, and a slug rename moves a folder without rewriting it,
      * so the value is re-pointed here rather than trusting what is on disk.
+     * This also repairs builds published before any of that existed: they pick
+     * up the launcher bridge on the way out instead of needing a re-upload.
      *
      * @param array<string, string> $headers
      */
@@ -230,18 +232,12 @@ class StudyBuddyWebAppAssetController extends Controller
             abort(404);
         }
 
-        $mount = $this->mountDirectory(basename($candidate));
-
-        $rewritten = preg_replace_callback(
-            '#(<base\b[^>]*\bhref\s*=\s*")[^"]*(")#i',
-            static fn (array $matches): string => $matches[1].$mount.$matches[2],
-            $html,
-            1,
-            $count
-        );
-
         return response(
-            $rewritten !== null && $count === 1 ? $rewritten : $html,
+            StudyBuddyWebAppPublisher::prepareEntryDocument(
+                $html,
+                $this->mountDirectory(basename($candidate)),
+                StudyBuddyWebAppPublisher::hasLocalCanvasKit(dirname($candidate))
+            ),
             200,
             $headers
         );

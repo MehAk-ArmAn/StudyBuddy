@@ -43,11 +43,23 @@ harmless — the suite still exits 0.
   It is security-hardened (path traversal, symlinks, zip bombs, blocked
   executable extensions, atomic swap with rollback). **Do not loosen it or
   put extracted builds back under `public/`.**
-- Hosted builds run in an opaque-origin iframe without `allow-same-origin`.
-  This deliberately prevents access to StudyBuddy sessions and also means a
-  build cannot rely on same-origin `localStorage`. If persistent app storage is
-  required later, use a separately isolated app origin rather than restoring
-  StudyBuddy-origin access.
+- **Publishing rewrites the entry document, never the app's bundles.**
+  `flutter build web` writes `<base href="/">`, which makes an untouched build
+  ask the site root for `flutter_bootstrap.js`, `main.dart.js`, `canvaskit/`
+  and `assets/` — all 404, and the learner sees a white rectangle.
+  `normalizeBaseHref()` re-points it at `/app-builds/<slug>/` and injects a
+  small bridge script (keeps the base right on other mounts, forces local
+  CanvasKit instead of a CDN, posts real readiness on `flutter-first-frame`).
+  `main.dart.js` and `flutter_bootstrap.js` are never touched, so one ZIP can be
+  published under any slug without rebuilding it.
+- Hosted builds run in a **same-origin** iframe (`allow-same-origin` plus
+  `allow-scripts`). Flutter cannot start in an opaque origin: `history.pushState`
+  throws and CanvasKit's dynamic `import()` fails CORS. The sandbox still
+  withholds `allow-top-navigation`, the `allow` list is only what a game needs,
+  and the build's own CSP keeps it on our origin apart from
+  `https://fonts.gstatic.com` (CanvasKit's text fallback). A hosted build is
+  therefore trusted admin-uploaded code with StudyBuddy-origin access — vet what
+  is uploaded, and move builds to a separate origin if that ever stops being true.
 - Routes are split across `routes/web.php` and several `routes/studybuddy*.php`
   files that `web.php` requires. Register new admin routes in the
   `admin/control-room` group in `routes/studybuddy.php`.
@@ -110,6 +122,10 @@ The admin shell is dark: text sitting directly on it needs light colours, while
   `Storage::url()`'s absolute URL — that bakes `APP_URL` into the row.
 - Public pages must only show a platform button when that platform is actually
   configured. `StudyBuddyMiniAppPlatform::availableActions()` is the helper.
+- The launcher must never report an app as running just because the iframe
+  fired `load` — a build that failed to boot fires it too. Readiness comes from
+  the injected bridge's `studybuddy:app-ready` message or from inspecting the
+  frame document; anything else is `Loading app…` then `Couldn't start`.
 
 ## UI conventions
 

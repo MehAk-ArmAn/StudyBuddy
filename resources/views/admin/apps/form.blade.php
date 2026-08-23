@@ -374,7 +374,14 @@
                         @if($app->hasPublishedWebApp())
                             <div class="sb-inline-status is-success">
                                 <strong>Browser version ready</strong>
-                                <span>{{ $app->usesUploadedBuild() ? 'StudyBuddy is serving the uploaded build.' : 'The secure external app is connected.' }}</span>
+                                @php
+                                    $buildStatusLine = $app->usesUploadedBuild()
+                                        ? 'StudyBuddy is serving the uploaded build'
+                                            .($app->web_app_uploaded_at ? ', added '.$app->web_app_uploaded_at->format('j M Y') : '')
+                                            .'.'
+                                        : 'The secure external app is connected.';
+                                @endphp
+                                <span>{{ $buildStatusLine }}</span>
                                 <a href="{{ route('admin.control-room.apps.preview.play', $app) }}" target="_blank" rel="noopener">Test launch</a>
                             </div>
                         @elseif($webEnabled)
@@ -388,7 +395,7 @@
                             <h3>Static web build</h3>
                             <p>Choose a ZIP containing <code>index.html</code>. StudyBuddy validates and publishes it automatically.</p>
                             <label class="sb-field sb-file-field">
-                                <span>Web build (.zip)</span>
+                                <span>{{ (! $isNew && $app->usesUploadedBuild()) ? 'Replace build (.zip)' : 'Web build (.zip)' }}</span>
                                 <input type="file" name="web_app_zip" accept=".zip,application/zip" data-web-zip @error('web_app_zip') aria-invalid="true" @enderror>
                                 <small>Up to 60 MB zipped and 120 MB extracted. Static files only.</small>
                                 @error('web_app_zip')<strong class="sb-error">{{ $message }}</strong>@enderror

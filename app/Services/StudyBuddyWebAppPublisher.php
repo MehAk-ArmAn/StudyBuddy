@@ -20,6 +20,10 @@ class StudyBuddyWebAppPublisher
     private const STAGING_DIRECTORY = 'studybuddy-app-publish';
     private const PACKAGE_DIRECTORY = 'studybuddy-app-packages';
     private const MAX_FILES = 2000;
+
+    /** Marks an entry document that already carries the launcher bridge. */
+    private const BRIDGE_MARKER = 'data-studybuddy-bridge';
+
     private const MAX_UNCOMPRESSED_BYTES = 120 * 1024 * 1024;
 
     /** @var array<int, string> */
@@ -384,7 +388,36 @@ class StudyBuddyWebAppPublisher
             throw new RuntimeException('StudyBuddy could not read index.html from the uploaded web build.');
         }
 
-        $base = '/app-builds/'.$slug.'/';
+        $prepared = self::prepareEntryDocument(
+            $html,
+            '/app-builds/'.$slug.'/',
+            self::hasLocalCanvasKit(dirname($indexPath))
+        );
+
+        if (@file_put_contents($indexPath, $prepared) === false) {
+            throw new RuntimeException('StudyBuddy could not prepare index.html for the browser launcher.');
+        }
+    }
+
+    /** True when the build carries its own CanvasKit and needs no CDN. */
+    public static function hasLocalCanvasKit(string $buildDirectory): bool
+    {
+        return is_file($buildDirectory.DIRECTORY_SEPARATOR.'canvaskit'.DIRECTORY_SEPARATOR.'canvaskit.js');
+    }
+
+    /**
+     * Point an entry document at $base and make sure it carries the bridge.
+     *
+     * Shared with the asset controller so a build published before this
+     * existed is repaired as it is served, rather than needing a re-upload.
+     * Re-running it is safe: the base is simply replaced again, and the bridge
+     * is only added when it is not already there.
+     */
+    public static function prepareEntryDocument(
+        string $html,
+        string $base,
+        bool $hasLocalCanvasKit
+    ): string {
         $tag = '<base href="'.$base.'">';
 
         $replaced = preg_replace(
@@ -400,19 +433,21 @@ class StudyBuddyWebAppPublisher
         }
 
         if ($count === 0) {
-            $replaced = $this->insertIntoHead($html, $tag);
+            $replaced = self::insertIntoHead($html, $tag);
         }
 
-        $bridge = $this->launcherBridgeScript($base, File::exists(dirname($indexPath).DIRECTORY_SEPARATOR.'canvaskit'));
-        $withBridge = $this->insertAfterBaseTag($replaced, $bridge);
-
-        if (@file_put_contents($indexPath, $withBridge) === false) {
-            throw new RuntimeException('StudyBuddy could not prepare index.html for the browser launcher.');
+        if (str_contains($replaced, self::BRIDGE_MARKER)) {
+            return $replaced;
         }
+
+        return self::insertAfterBaseTag(
+            $replaced,
+            self::launcherBridgeScript($base, $hasLocalCanvasKit)
+        );
     }
 
     /** Put a tag inside <head>, falling back sensibly on unusual documents. */
-    private function insertIntoHead(string $html, string $tag): string
+    private static function insertIntoHead(string $html, string $tag): string
     {
         foreach (['#<head\b[^>]*>#i', '#<html\b[^>]*>#i'] as $pattern) {
             $result = preg_replace($pattern, '$0'."\n    ".$tag, $html, 1, $count);
@@ -425,7 +460,7 @@ class StudyBuddyWebAppPublisher
         return $tag."\n".$html;
     }
 
-    private function insertAfterBaseTag(string $html, string $script): string
+    private static function insertAfterBaseTag(string $html, string $script): string
     {
         $result = preg_replace('#<base\b[^>]*>#i', '$0'."\n".$script, $html, 1, $count);
 
@@ -440,14 +475,14 @@ class StudyBuddyWebAppPublisher
      * The injected bridge. Deliberately tiny, dependency-free and generic: it
      * never touches the app's own JavaScript bundles or Dart source.
      */
-    private function launcherBridgeScript(string $base, bool $hasLocalCanvasKit): string
+    private static function launcherBridgeScript(string $base, bool $hasLocalCanvasKit): string
     {
         $encodedBase = json_encode($base, JSON_UNESCAPED_SLASHES);
         $localCanvasKit = $hasLocalCanvasKit ? 'true' : 'false';
 
         return <<<HTML
-    <script>
-    /* Injected by StudyBuddy when this build was published. Do not edit by hand. */
+    <script data-studybuddy-bridge>
+    /* Injected by StudyBuddy so this build runs under the StudyBuddy launcher. */
     (function () {
         'use strict';
 
