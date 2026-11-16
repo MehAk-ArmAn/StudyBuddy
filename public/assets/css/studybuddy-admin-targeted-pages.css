@@ -1,0 +1,1533 @@
+
+/*
+|--------------------------------------------------------------------------
+| StudyBuddy Admin — Targeted Module Polish
+|--------------------------------------------------------------------------
+|
+| NO global Admin redesign.
+|
+| Explicitly NOT targeted:
+| - admin.dashboard
+| - admin.control-room.index
+| - admin.control-room.apps.*
+| - admin.pages.*
+|
+|--------------------------------------------------------------------------
+*/
+
+
+/* ============================================================
+   COMMON MODULE VARIABLES
+============================================================ */
+
+body[data-admin-route] {
+    --sbx-bg: #f6f7fb;
+    --sbx-card: #ffffff;
+    --sbx-soft: #f8f9fd;
+    --sbx-line: #e5e8f1;
+
+    --sbx-text: #181a2b;
+    --sbx-muted: #6c7285;
+
+    --sbx-purple: #6d4aff;
+    --sbx-purple-dark: #5639df;
+    --sbx-purple-soft: #f1eeff;
+
+    --sbx-green: #14815b;
+    --sbx-green-soft: #eaf8f2;
+
+    --sbx-red: #bd3d50;
+    --sbx-red-soft: #fff1f3;
+
+    --sbx-warning: #956409;
+    --sbx-warning-soft: #fff6df;
+
+    --sbx-radius: 16px;
+    --sbx-radius-lg: 20px;
+
+    --sbx-shadow:
+        0 1px 2px rgba(20,24,45,.025),
+        0 9px 28px rgba(20,24,45,.045);
+}
+
+
+/* ============================================================
+   USERS — PEOPLE DIRECTORY FEEL
+============================================================ */
+
+body[data-admin-route^="admin.users."]
+.sb-admin-main,
+body[data-admin-route^="admin.control-room.users."]
+.sb-admin-main {
+    display: grid;
+    gap: 20px;
+}
+
+
+body[data-admin-route^="admin.users."]
+.admin-header,
+body[data-admin-route^="admin.control-room.users."]
+.admin-header {
+    padding: 24px 26px;
+
+    background:
+        radial-gradient(
+            circle at 100% 0,
+            rgba(109,74,255,.11),
+            transparent 42%
+        ),
+        #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 20px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+body[data-admin-route^="admin.users."]
+.admin-header a,
+body[data-admin-route^="admin.control-room.users."]
+.admin-header a {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding: 9px 14px;
+
+    color: #fff;
+
+    background: var(--sbx-purple);
+
+    border-radius: 10px;
+
+    text-decoration: none;
+    font-weight: 750;
+}
+
+
+/* User tables */
+body[data-admin-route$="users.index"]
+table {
+    width: 100%;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-collapse: separate;
+    border-spacing: 0;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+body[data-admin-route$="users.index"]
+thead th {
+    padding: 13px 15px;
+
+    background: var(--sbx-soft);
+
+    color: var(--sbx-muted);
+
+    font-size: .72rem;
+    font-weight: 850;
+
+    letter-spacing: .045em;
+    text-transform: uppercase;
+
+    text-align: left;
+
+    border-bottom: 1px solid var(--sbx-line);
+}
+
+
+body[data-admin-route$="users.index"]
+tbody td {
+    padding: 15px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+body[data-admin-route$="users.index"]
+tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+
+body[data-admin-route$="users.index"]
+tbody tr:hover {
+    background: #fbfbff;
+}
+
+
+/* First column becomes stronger user identity */
+body[data-admin-route$="users.index"]
+tbody td:first-child {
+    font-weight: 750;
+
+    color: var(--sbx-text);
+}
+
+
+/* Keep actions together */
+body[data-admin-route$="users.index"]
+tbody td:last-child {
+    white-space: nowrap;
+}
+
+
+body[data-admin-route$="users.index"]
+tbody td:last-child form {
+    display: inline;
+
+    margin: 0;
+}
+
+
+/* User create/edit form */
+body[data-admin-route$="users.create"]
+.sb-control-form,
+body[data-admin-route$="users.edit"]
+.sb-control-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+
+    padding: 24px;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 18px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+body[data-admin-route$="users.create"]
+.sb-control-form label,
+body[data-admin-route$="users.edit"]
+.sb-control-form label {
+    display: grid;
+
+    gap: 7px;
+
+    color: var(--sbx-text);
+
+    font-weight: 750;
+}
+
+
+body[data-admin-route$="users.create"]
+.sb-control-form input,
+body[data-admin-route$="users.create"]
+.sb-control-form select,
+body[data-admin-route$="users.edit"]
+.sb-control-form input,
+body[data-admin-route$="users.edit"]
+.sb-control-form select {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 10px 12px;
+
+    border: 1px solid #dfe2ec;
+    border-radius: 11px;
+}
+
+
+body[data-admin-route$="users.create"]
+.sb-control-form button,
+body[data-admin-route$="users.edit"]
+.sb-control-form button {
+    width: fit-content;
+
+    min-height: 44px;
+
+    padding: 9px 16px;
+
+    grid-column: 1 / -1;
+}
+
+
+/* ============================================================
+   CONTACT MESSAGES
+============================================================ */
+
+body[data-admin-route^="admin.control-room.contact-messages."]
+.sb-admin-main {
+    display: grid;
+    gap: 19px;
+}
+
+
+body[data-admin-route="admin.control-room.contact-messages.index"]
+table {
+    width: 100%;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-collapse: separate;
+    border-spacing: 0;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+body[data-admin-route="admin.control-room.contact-messages.index"]
+thead th {
+    padding: 13px 14px;
+
+    color: var(--sbx-muted);
+
+    background: var(--sbx-soft);
+
+    border-bottom: 1px solid var(--sbx-line);
+
+    text-align: left;
+
+    font-size: .73rem;
+    font-weight: 850;
+
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+
+body[data-admin-route="admin.control-room.contact-messages.index"]
+tbody td {
+    padding: 14px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+body[data-admin-route="admin.control-room.contact-messages.show"]
+.sb-control-panel {
+    max-width: 900px;
+
+    padding: 24px;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 18px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+/* ============================================================
+   GENERIC CRUD:
+   SETTINGS / MEDIA / NAV / FOOTER / HOMEPAGE SECTIONS
+============================================================ */
+
+body[data-admin-route^="admin.site-settings."]
+.sb-admin-main,
+body[data-admin-route^="admin.control-room.site-settings."]
+.sb-admin-main,
+body[data-admin-route^="admin.media-assets."]
+.sb-admin-main,
+body[data-admin-route^="admin.navigation-items."]
+.sb-admin-main,
+body[data-admin-route^="admin.footer-items."]
+.sb-admin-main,
+body[data-admin-route^="admin.homepage-sections."]
+.sb-admin-main {
+    display: grid;
+
+    gap: 20px;
+}
+
+
+/* Resource tables */
+body[data-admin-route^="admin.site-settings."] table,
+body[data-admin-route^="admin.control-room.site-settings."] table,
+body[data-admin-route^="admin.media-assets."] table,
+body[data-admin-route^="admin.navigation-items."] table,
+body[data-admin-route^="admin.footer-items."] table,
+body[data-admin-route^="admin.homepage-sections."] table {
+    width: 100%;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-collapse: separate;
+    border-spacing: 0;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+body[data-admin-route^="admin.site-settings."] thead th,
+body[data-admin-route^="admin.control-room.site-settings."] thead th,
+body[data-admin-route^="admin.media-assets."] thead th,
+body[data-admin-route^="admin.navigation-items."] thead th,
+body[data-admin-route^="admin.footer-items."] thead th,
+body[data-admin-route^="admin.homepage-sections."] thead th {
+    padding: 12px 14px;
+
+    background: var(--sbx-soft);
+
+    color: var(--sbx-muted);
+
+    font-size: .72rem;
+    font-weight: 850;
+
+    letter-spacing: .04em;
+    text-transform: uppercase;
+
+    text-align: left;
+
+    border-bottom: 1px solid var(--sbx-line);
+}
+
+
+body[data-admin-route^="admin.site-settings."] tbody td,
+body[data-admin-route^="admin.control-room.site-settings."] tbody td,
+body[data-admin-route^="admin.media-assets."] tbody td,
+body[data-admin-route^="admin.navigation-items."] tbody td,
+body[data-admin-route^="admin.footer-items."] tbody td,
+body[data-admin-route^="admin.homepage-sections."] tbody td {
+    padding: 13px 14px;
+
+    border-bottom: 1px solid #edf0f5;
+}
+
+
+/* Resource forms */
+body[data-admin-route^="admin.site-settings."] .sb-control-form,
+body[data-admin-route^="admin.control-room.site-settings."] .sb-control-form,
+body[data-admin-route^="admin.media-assets."] .sb-control-form,
+body[data-admin-route^="admin.navigation-items."] .sb-control-form,
+body[data-admin-route^="admin.footer-items."] .sb-control-form,
+body[data-admin-route^="admin.homepage-sections."] .sb-control-form {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 17px;
+
+    padding: 23px;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 17px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+/* ============================================================
+   HOMEPAGE CMS
+============================================================ */
+
+body[data-admin-route="admin.control-room.homepage-cms.index"]
+.sb-admin-main {
+    display: grid;
+
+    gap: 20px;
+}
+
+
+body[data-admin-route="admin.control-room.homepage-cms.index"]
+.sb-control-section,
+body[data-admin-route="admin.control-room.homepage-cms.index"]
+section {
+    padding: 22px;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 17px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+body[data-admin-route="admin.control-room.homepage-cms.index"]
+.cms-item-form {
+    display: grid;
+
+    gap: 12px;
+
+    margin-top: 12px;
+
+    padding: 16px;
+
+    background: var(--sbx-soft);
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 13px;
+}
+
+
+/* ============================================================
+   CONTENT STUDIO
+============================================================ */
+
+body[data-admin-route="admin.control-room.content-studio"]
+.sb-admin-main {
+    display: grid;
+
+    gap: 20px;
+}
+
+
+body[data-admin-route="admin.control-room.content-studio"]
+.sb-control-inline-editor {
+    display: grid;
+
+    gap: 12px;
+
+    padding: 17px;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 14px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+/* ============================================================
+   FINAL PLATFORM
+============================================================ */
+
+body[data-admin-route="admin.control-room.final-platform"]
+.sb-control-panel {
+    padding: 22px;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 17px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+body[data-admin-route="admin.control-room.final-platform"]
+.sb-control-inline-editor {
+    display: grid;
+
+    gap: 10px;
+
+    padding: 14px;
+
+    background: var(--sbx-soft);
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 12px;
+}
+
+
+/* ============================================================
+   VERIFICATIONS
+============================================================ */
+
+body[data-admin-route^="admin.control-room.verifications"]
+.admin-table-wrap {
+    overflow-x: auto;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 16px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+body[data-admin-route^="admin.control-room.verifications"]
+.admin-table {
+    width: 100%;
+
+    min-width: 900px;
+
+    border-collapse: collapse;
+}
+
+
+body[data-admin-route^="admin.control-room.verifications"]
+.admin-table th {
+    padding: 12px 14px;
+
+    background: var(--sbx-soft);
+
+    color: var(--sbx-muted);
+
+    text-align: left;
+
+    font-size: .72rem;
+    font-weight: 850;
+
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+
+body[data-admin-route^="admin.control-room.verifications"]
+.admin-table td {
+    padding: 14px;
+
+    vertical-align: top;
+
+    border-top: 1px solid #edf0f5;
+}
+
+
+body[data-admin-route^="admin.control-room.verifications"]
+.admin-table form {
+    display: grid;
+
+    gap: 7px;
+
+    min-width: 210px;
+}
+
+
+/* ============================================================
+   HEALTH
+============================================================ */
+
+body[data-admin-route="admin.control-room.health"]
+.sb-admin-main {
+    display: grid;
+
+    gap: 18px;
+}
+
+
+body[data-admin-route="admin.control-room.health"]
+.sb-control-panel,
+body[data-admin-route="admin.control-room.health"]
+section {
+    padding: 20px;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 16px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+/* ============================================================
+   ADMIN ACCOUNT
+============================================================ */
+
+body[data-admin-route^="admin.control-room.account."]
+.sb-control-form {
+    max-width: 850px;
+
+    padding: 23px;
+
+    background: #fff;
+
+    border: 1px solid var(--sbx-line);
+    border-radius: 17px;
+
+    box-shadow: var(--sbx-shadow);
+}
+
+
+/* ============================================================
+   COMMON FOCUS / FORM QUALITY
+============================================================ */
+
+body[data-admin-route] input:focus,
+body[data-admin-route] select:focus,
+body[data-admin-route] textarea:focus {
+    outline: none;
+
+    border-color: rgba(109,74,255,.62);
+
+    box-shadow: 0 0 0 4px rgba(109,74,255,.09);
+}
+
+
+body[data-admin-route] button:focus-visible,
+body[data-admin-route] a:focus-visible {
+    outline: 3px solid rgba(109,74,255,.24);
+
+    outline-offset: 2px;
+}
+
+
+/* ============================================================
+   RESPONSIVE — ONLY TARGETED ROUTES
+============================================================ */
+
+@media (max-width: 800px) {
+
+
+    body[data-admin-route^="admin.users."]
+    .sb-control-form,
+    body[data-admin-route^="admin.control-room.users."]
+    .sb-control-form,
+
+    body[data-admin-route^="admin.site-settings."]
+    .sb-control-form,
+    body[data-admin-route^="admin.control-room.site-settings."]
+    .sb-control-form,
+    body[data-admin-route^="admin.media-assets."]
+    .sb-control-form,
+    body[data-admin-route^="admin.navigation-items."]
+    .sb-control-form,
+    body[data-admin-route^="admin.footer-items."]
+    .sb-control-form,
+    body[data-admin-route^="admin.homepage-sections."]
+    .sb-control-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    body[data-admin-route] * {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+    }
+}
+
+/* ============================================================
+   Shared resource workspace  (.sb-res)
+   Powers People, Media, Navigation, Footer, Homepage Sections,
+   Pages and Site Settings so the generic CRUD screens sit in the
+   same design system as the Apps CMS.
+   ============================================================ */
+
+.sb-res {
+    --r-ink: var(--sb-admin-text, #192134);
+    --r-soft: var(--sb-admin-muted, #687287);
+    --r-line: var(--sb-admin-border, #e1e5ed);
+    --r-line-strong: var(--sb-admin-border-strong, #cbd2df);
+    --r-surface: var(--sb-admin-surface, #fff);
+    --r-surface-2: var(--sb-admin-surface-muted, #f9fafc);
+    --r-accent: var(--sb-admin-primary, #6753d8);
+    --r-accent-hover: var(--sb-admin-primary-hover, #5642c4);
+    --r-accent-soft: var(--sb-admin-primary-soft, #f0edff);
+    --r-good: var(--sb-admin-success, #16845b);
+    --r-good-soft: #eaf8f2;
+    --r-bad: var(--sb-admin-danger, #c2414b);
+    --r-bad-soft: #fff0f1;
+    --r-radius-sm: var(--sb-admin-radius-sm, 10px);
+    --r-radius: var(--sb-admin-radius-md, 14px);
+    --r-shadow: var(--sb-admin-shadow-sm, 0 5px 16px rgba(25, 33, 52, .05));
+
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: var(--r-ink);
+}
+
+.sb-res *,
+.sb-res *::before,
+.sb-res *::after { box-sizing: border-box; }
+
+/* ---- Header ---- */
+
+.sb-res__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.sb-res__header h1 {
+    margin: 0;
+    font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+    line-height: 1.2;
+    letter-spacing: -.02em;
+    color: var(--r-ink);
+}
+
+.sb-res__header p {
+    margin: 6px 0 0;
+    max-width: 62ch;
+    color: var(--r-soft);
+    font-size: .9rem;
+    line-height: 1.55;
+}
+
+.sb-res__crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    color: var(--r-soft);
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+.sb-res__crumbs a { color: inherit; text-decoration: none; }
+.sb-res__crumbs a:hover { color: var(--r-accent); text-decoration: underline; }
+
+/* ---- Buttons ---- */
+
+.sb-res__btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 17px;
+    border: 1px solid var(--r-line);
+    border-radius: 11px;
+    color: var(--r-ink);
+    background: var(--r-surface);
+    font: inherit;
+    font-size: .85rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color .14s ease, border-color .14s ease, box-shadow .14s ease;
+}
+
+.sb-res__btn:hover { border-color: var(--r-line-strong); box-shadow: var(--r-shadow); }
+.sb-res__btn:focus-visible { outline: 3px solid var(--r-accent); outline-offset: 2px; }
+
+.sb-res__btn--primary {
+    border-color: transparent;
+    color: #fff;
+    background: var(--r-accent);
+}
+
+.sb-res__btn--primary:hover { background: var(--r-accent-hover); }
+
+.sb-res__btn--small { min-height: 36px; padding: 0 12px; font-size: .8rem; }
+
+.sb-res__btn--danger { color: var(--r-bad); }
+.sb-res__btn--danger:hover { border-color: #efc1c6; background: var(--r-bad-soft); }
+
+/* ---- Notices ---- */
+
+.sb-res__note {
+    padding: 14px 16px;
+    border: 1px solid var(--r-line);
+    border-radius: var(--r-radius);
+    background: var(--r-surface);
+    font-size: .9rem;
+}
+
+.sb-res__note p { margin: 4px 0 0; }
+.sb-res__note ul { margin: 8px 0 0; padding-left: 20px; }
+.sb-res__note--good { border-color: #b8e5d3; background: var(--r-good-soft); color: #0d5c40; }
+.sb-res__note--bad  { border-color: #efc1c6; background: var(--r-bad-soft); color: #8a2b34; }
+
+/* ---- Card + table ---- */
+
+.sb-res__card {
+    border: 1px solid var(--r-line);
+    border-radius: var(--sb-admin-radius-lg, 20px);
+    background: var(--r-surface);
+    box-shadow: var(--r-shadow);
+    overflow: hidden;
+}
+
+.sb-res__card-head { padding: 20px 22px 0; }
+.sb-res__card-head h2 { margin: 0; font-size: 1.02rem; letter-spacing: -.01em; }
+
+.sb-res__table-wrap { width: 100%; overflow-x: auto; }
+
+.sb-res__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .88rem;
+}
+
+.sb-res__table thead th {
+    padding: 13px 16px;
+    text-align: left;
+    background: var(--r-surface-2);
+    border-bottom: 1px solid var(--r-line);
+    color: var(--r-soft);
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.sb-res__table tbody th,
+.sb-res__table tbody td {
+    padding: 13px 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--r-line);
+    font-weight: 400;
+}
+
+.sb-res__table tbody tr:last-child th,
+.sb-res__table tbody tr:last-child td { border-bottom: 0; }
+.sb-res__table tbody tr:hover { background: var(--r-surface-2); }
+
+.sb-res__cell {
+    display: block;
+    max-width: 34ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sb-res__muted { color: var(--r-soft); }
+.sb-res__self { font-size: .78rem; }
+
+/* ---- Badges ---- */
+
+.sb-res__badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid var(--r-line);
+    border-radius: 999px;
+    background: var(--r-surface-2);
+    color: var(--r-soft);
+    font-size: .74rem;
+    font-weight: 750;
+    white-space: nowrap;
+}
+
+.sb-res__badge.is-on   { border-color: #b8e5d3; background: var(--r-good-soft); color: var(--r-good); }
+.sb-res__badge.is-off  { border-color: var(--r-line); background: var(--r-surface-2); color: var(--r-soft); }
+.sb-res__badge.is-role { border-color: #d8d1ff; background: var(--r-accent-soft); color: var(--r-accent); }
+
+/* ---- Thumbnails ---- */
+
+.sb-res__thumb {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 40px;
+    border: 1px solid var(--r-line);
+    border-radius: 8px;
+    background: var(--r-surface-2);
+    overflow: hidden;
+}
+
+.sb-res__thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.sb-res__thumb.is-missing::after {
+    content: "?";
+    color: var(--r-soft);
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+/* ---- Row actions ---- */
+
+.sb-res__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.sb-res__actions form { margin: 0; }
+
+/* ---- People ---- */
+
+.sb-people__identity { display: flex; align-items: center; gap: 12px; min-width: 0; }
+
+.sb-people__avatar {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--r-accent-soft);
+    color: var(--r-accent);
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.sb-people__names { display: flex; flex-direction: column; min-width: 0; }
+.sb-people__names strong { font-weight: 700; }
+.sb-people__names small { color: var(--r-soft); font-size: .79rem; word-break: break-all; }
+
+/* ---- Empty state ---- */
+
+.sb-res__empty {
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    padding: 60px 24px;
+    text-align: center;
+    border: 1px dashed var(--r-line-strong);
+    border-radius: var(--sb-admin-radius-lg, 20px);
+    background: var(--r-surface);
+}
+
+.sb-res__empty-mark {
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 16px;
+    background: var(--r-accent-soft);
+    color: var(--r-accent);
+}
+
+.sb-res__empty h2 { margin: 4px 0 0; font-size: 1.12rem; }
+.sb-res__empty p { margin: 0 0 8px; max-width: 44ch; color: var(--r-soft); font-size: .9rem; }
+
+/* ---- Forms ---- */
+
+.sb-res__form { display: flex; flex-direction: column; gap: 20px; }
+
+.sb-res__card > .sb-res__grid { padding: 20px 22px 22px; }
+
+.sb-res__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    padding: 20px 22px 22px;
+}
+
+.sb-res__field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.sb-res__field--wide { grid-column: 1 / -1; }
+.sb-res__field > span { font-size: .84rem; font-weight: 700; }
+
+.sb-res__field input,
+.sb-res__field textarea,
+.sb-res__field select {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid var(--r-line);
+    border-radius: var(--r-radius-sm);
+    background: var(--r-surface);
+    color: var(--r-ink);
+    font: inherit;
+    font-size: .9rem;
+}
+
+.sb-res__field textarea { resize: vertical; line-height: 1.6; }
+.sb-res__field input:focus-visible,
+.sb-res__field textarea:focus-visible {
+    outline: 3px solid var(--r-accent);
+    outline-offset: 1px;
+    border-color: var(--r-accent);
+}
+
+.sb-res__field [aria-invalid="true"] { border-color: var(--r-bad); background: var(--r-bad-soft); }
+.sb-res__field small { color: var(--r-soft); font-size: .8rem; }
+.sb-res__error { color: var(--r-bad); font-size: .8rem; font-weight: 700; }
+
+.sb-res__toggle {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    min-height: 44px;
+    padding: 12px 14px;
+    border: 1px solid var(--r-line);
+    border-radius: var(--r-radius-sm);
+    background: var(--r-surface-2);
+    cursor: pointer;
+}
+
+.sb-res__toggle input { width: 20px; height: 20px; margin: 1px 0 0; flex: 0 0 auto; accent-color: var(--r-accent); cursor: pointer; }
+.sb-res__toggle input:focus-visible { outline: 3px solid var(--r-accent); outline-offset: 2px; }
+.sb-res__toggle span { display: flex; flex-direction: column; gap: 2px; }
+.sb-res__toggle strong { font-size: .86rem; font-weight: 700; }
+.sb-res__toggle small { color: var(--r-soft); font-size: .78rem; }
+
+.sb-res__advanced {
+    border: 1px solid var(--r-line);
+    border-radius: var(--r-radius);
+    background: var(--r-surface);
+    overflow: hidden;
+}
+
+.sb-res__advanced > summary {
+    padding: 15px 18px;
+    cursor: pointer;
+    font-size: .88rem;
+    font-weight: 750;
+    list-style: none;
+}
+
+.sb-res__advanced > summary::-webkit-details-marker { display: none; }
+.sb-res__advanced > summary::before { content: "▸ "; color: var(--r-soft); }
+.sb-res__advanced[open] > summary::before { content: "▾ "; }
+.sb-res__advanced > summary:focus-visible { outline: 3px solid var(--r-accent); outline-offset: -3px; }
+
+.sb-res__advanced-hint {
+    margin: 0;
+    padding: 0 18px;
+    color: var(--r-soft);
+    font-size: .82rem;
+    line-height: 1.5;
+}
+
+.sb-res__form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    padding-top: 2px;
+}
+
+.sb-res__pagination { display: flex; justify-content: center; }
+
+/* ---- Small screens: tables become labelled cards ---- */
+
+@media (max-width: 820px) {
+    .sb-res__header { align-items: stretch; }
+    .sb-res__header .sb-res__btn { width: 100%; }
+
+    .sb-res__card { border: 0; background: transparent; box-shadow: none; overflow: visible; }
+    .sb-res__table-wrap { overflow: visible; }
+    .sb-res__table, .sb-res__table tbody { display: block; }
+    .sb-res__table thead { display: none; }
+
+    .sb-res__table tbody tr {
+        display: block;
+        margin-bottom: 12px;
+        padding: 4px 2px;
+        border: 1px solid var(--r-line);
+        border-radius: var(--r-radius);
+        background: var(--r-surface);
+        box-shadow: var(--r-shadow);
+    }
+
+    .sb-res__table tbody th,
+    .sb-res__table tbody td {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+    }
+
+    .sb-res__table tbody td::before {
+        content: attr(data-label);
+        flex: 0 0 auto;
+        color: var(--r-soft);
+        font-size: .72rem;
+        font-weight: 800;
+        letter-spacing: .06em;
+        text-transform: uppercase;
+    }
+
+    .sb-res__table tbody th { justify-content: flex-start; }
+    .sb-res__table tbody tr td:last-child { border-bottom: 0; }
+    .sb-res__cell { max-width: 20ch; }
+    .sb-res__form-actions .sb-res__btn { flex: 1 1 auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sb-res * { transition: none !important; }
+}
+
+/* ------------------------------------------------------------
+   Reset legacy global rules that leak into these components.
+   admin.css sets `th { color: cyan; text-transform: uppercase }`
+   globally, which mangles row headers and person names.
+   ------------------------------------------------------------ */
+
+.sb-res .sb-visually-hidden,
+.sb-res caption.sb-visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.sb-res__table tbody th {
+    color: var(--r-ink);
+    font-size: .88rem;
+    letter-spacing: normal;
+    text-transform: none;
+}
+
+.sb-res__table tbody th a,
+.sb-res__table tbody th strong {
+    color: inherit;
+    text-transform: none;
+    letter-spacing: normal;
+}
+
+.sb-res__table thead th { color: var(--r-soft); }
+
+.sb-res__table td,
+.sb-res__table th { background: transparent; }
+
+/* ------------------------------------------------------------
+   Sidebar footer
+   The sidebar scrolls, and the footer block sat over the last
+   nav item ("Platform") with a translucent background, so it
+   read as a clipped/broken row. Pin it properly and give the
+   nav room to scroll clear underneath.
+   ------------------------------------------------------------ */
+
+.sb-admin-sidebar__footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    margin-top: auto;
+    background: var(--sb-admin-sidebar, #0b1229);
+    box-shadow: 0 -10px 20px -12px rgba(0, 0, 0, .55);
+}
+
+.sb-simple-admin-nav {
+    /* The sidebar is `overflow: hidden` and the nav was taller than the space
+       available, so the last item ("Platform") was clipped and unreachable.
+       Let the nav scroll on its own; `min-height: 0` is what allows a flex
+       child to shrink below its content height. */
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(148, 163, 184, .3) transparent;
+}
+
+.sb-simple-admin-nav::-webkit-scrollbar { width: 8px; }
+.sb-simple-admin-nav::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: rgba(148, 163, 184, .28);
+}
+
+/* admin.css sets `td { color:#dbeafe }` for a dark theme, which leaves
+   these light-surface tables almost unreadable. */
+.sb-res__table td,
+.sb-res__table td .sb-res__cell {
+    color: var(--r-ink);
+}
+
+.sb-res__table td .sb-res__muted { color: var(--r-soft); }
+
+/* Compact the sidebar so the whole menu fits a 900px-tall viewport without
+   scrolling, while keeping 44px tap targets. */
+
+.sb-admin-nav__group + .sb-admin-nav__group { margin-top: 9px; }
+
+.sb-simple-admin-nav .sb-admin-nav__group > a { margin: 1px 0; }
+
+.sb-simple-admin-brand { min-height: 66px; padding: 11px 16px; }
+
+/* ============================================================
+   Content Studio — collapsible rows
+   Seven full editors stacked on one page made it impossible to
+   scan. Each record is now a row you open to edit, and the raw
+   JSON sits behind its own disclosure.
+   ============================================================ */
+
+.sb-studio-row {
+    border: 1px solid var(--sb-admin-border, #e1e5ed);
+    border-radius: var(--sb-admin-radius-md, 14px);
+    background: var(--sb-admin-surface, #fff);
+    overflow: hidden;
+}
+
+.sb-studio-row + .sb-studio-row { margin-top: 10px; }
+.sb-studio-row[open] { box-shadow: var(--sb-admin-shadow-sm, 0 5px 16px rgba(25, 33, 52, .05)); }
+
+.sb-studio-row > summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    min-height: 56px;
+    padding: 12px 16px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.sb-studio-row > summary::-webkit-details-marker { display: none; }
+
+.sb-studio-row > summary::before {
+    content: "▸";
+    flex: 0 0 auto;
+    color: var(--sb-admin-muted, #687287);
+    font-size: .8rem;
+}
+
+.sb-studio-row[open] > summary::before { content: "▾"; }
+.sb-studio-row > summary:hover { background: var(--sb-admin-surface-muted, #f9fafc); }
+.sb-studio-row > summary:focus-visible { outline: 3px solid var(--sb-admin-primary, #6753d8); outline-offset: -3px; }
+
+.sb-studio-row__title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-size: .95rem;
+    font-weight: 750;
+    color: var(--sb-admin-text, #192134);
+}
+
+.sb-studio-row__path {
+    flex: 0 0 auto;
+    color: var(--sb-admin-muted, #687287);
+    font-size: .78rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.sb-studio-row__state {
+    flex: 0 0 auto;
+    padding: 3px 10px;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 800;
+}
+
+.sb-studio-row__state.is-on  { border-color: #b8e5d3; background: #eaf8f2; color: #16845b; }
+.sb-studio-row__state.is-off { border-color: var(--sb-admin-border, #e1e5ed); background: #f4f5f8; color: #687287; }
+
+.sb-studio-row > form {
+    padding: 4px 16px 18px;
+    border-top: 1px solid var(--sb-admin-border, #e1e5ed);
+}
+
+.sb-studio-publish {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 44px;
+    margin: 12px 0 4px;
+    font-size: .86rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.sb-studio-publish input { width: 19px; height: 19px; accent-color: var(--sb-admin-primary, #6753d8); }
+
+.sb-studio-advanced {
+    grid-column: 1 / -1;
+    border: 1px solid var(--sb-admin-border, #e1e5ed);
+    border-radius: var(--sb-admin-radius-sm, 10px);
+    background: var(--sb-admin-surface-muted, #f9fafc);
+}
+
+.sb-studio-advanced > summary {
+    padding: 12px 14px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: .84rem;
+    font-weight: 750;
+    list-style: none;
+}
+
+.sb-studio-advanced > summary::-webkit-details-marker { display: none; }
+.sb-studio-advanced > summary::before { content: "▸ "; color: var(--sb-admin-muted, #687287); margin-right: 6px; }
+.sb-studio-advanced[open] > summary::before { content: "▾ "; }
+.sb-studio-advanced > summary:focus-visible { outline: 3px solid var(--sb-admin-primary, #6753d8); outline-offset: -3px; }
+
+.sb-studio-advanced__hint {
+    margin: 0 14px 8px;
+    color: var(--sb-admin-muted, #687287);
+    font-size: .8rem;
+}
+
+.sb-studio-advanced label { display: block; padding: 0 14px 14px; }
+
+@media (max-width: 640px) {
+    .sb-studio-row__path { flex-basis: 100%; order: 3; }
+}
+
+/* ------------------------------------------------------------
+   Legacy control-room panels: responsive + tap-target repairs
+   ------------------------------------------------------------ */
+
+/* `.sb-control-bottom-grid` used minmax(320px, …) for its second column, which
+   forced the Platform page 742px wide inside a 375px viewport. */
+@media (max-width: 900px) {
+    .sb-control-bottom-grid { grid-template-columns: 1fr !important; }
+    .sb-control-form-grid { grid-template-columns: 1fr !important; }
+}
+
+.sb-control-panel { min-width: 0; max-width: 100%; }
+.sb-control-bottom-grid > * { min-width: 0; }
+
+/* Buttons in the legacy panels rendered at 15–24px tall. */
+.sb-control-save-row button,
+.sb-control-save-row a,
+.sb-control-row-actions button,
+.sb-control-row-actions a,
+.sb-control-top-actions button,
+.sb-control-top-actions a,
+.sb-control-inline-editor button[type="submit"],
+.sb-control-empty a,
+.sb-res__crumbs a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+    line-height: 1;
+}
+
+.sb-res__crumbs a { padding: 0 4px; }
+
+/* Homepage CMS preview strip should not push the page wider than the screen. */
+.cms-preview-stack,
+.cms-visual-grid {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.cms-preview-stack img { max-width: 100%; height: auto; }
+
+/* Long emails were widening the People table on small screens. */
+.sb-people__names small { overflow-wrap: anywhere; word-break: break-word; }
+.sb-res, .sb-res__card, .sb-res__table-wrap { min-width: 0; max-width: 100%; }
+
+/* ------------------------------------------------------------
+   Final admin polish: tap targets + overflow containment
+   ------------------------------------------------------------ */
+
+/* Legacy panels use bare <button class="primary"> with no sizing, which
+   rendered 24px tall. Give every admin action a real target. */
+.sb-simple-admin-content button,
+.sb-simple-admin-content .sb-control-panel a.primary,
+.sb-admin-content button,
+.sb-admin-content .sb-control-panel a.primary {
+    min-height: 44px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Checkboxes, radios and icon-only toggles keep their own size. */
+.sb-simple-admin-content button[type="checkbox"],
+.sb-simple-admin-content input,
+.sb-simple-admin-content .sb-toast__close,
+.sb-simple-admin-content [data-admin-tab],
+.sb-simple-admin-content details > summary button {
+    min-height: revert;
+    padding-top: revert;
+    padding-bottom: revert;
+}
+
+.sb-simple-admin-content .sb-toast__close { min-height: 44px; }
+
+/* Nothing in the admin content area may push the page sideways. */
+.sb-simple-admin-content,
+.sb-admin-content,
+.sb-control-resource,
+.sb-control-resource > *,
+.sb-control-panel,
+.sb-control-panel > *,
+.sb-homepage-cms,
+.sb-homepage-cms > * {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.sb-control-table-wrap,
+.cms-image-preview {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.cms-image-preview img { max-width: 100%; height: auto; }
+
+/* Stat strips and card grids collapse rather than forcing a minimum width. */
+@media (max-width: 900px) {
+    .sb-control-stat-grid,
+    .sb-control-card-grid,
+    .sb-admin-app-editor-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* A table switched to `display:block` still sizes to its widest content, so it
+   has to be pinned to the container width once it becomes a card stack. */
+@media (max-width: 820px) {
+    .sb-res__table,
+    .sb-res__table tbody,
+    .sb-res__table tbody tr,
+    .sb-res__table tbody th,
+    .sb-res__table tbody td {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .sb-res__table tbody th,
+    .sb-res__table tbody td { flex-wrap: wrap; }
+    .sb-res__cell { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+    .sb-people__identity { max-width: 100%; }
+}
+
+/* A `display:block` table still sizes to its widest cell content, so pin the
+   whole chain and let the flex cells shrink. Containment sits on the wrapper
+   as a backstop so nothing can ever push the page sideways. */
+@media (max-width: 820px) {
+    .sb-res__table-wrap { overflow-x: hidden; }
+
+    .sb-res__table { display: block; width: 100%; max-width: 100%; table-layout: fixed; }
+    .sb-res__table tbody { display: block; width: auto; }
+    .sb-res__table tbody tr { display: block; width: auto; }
+
+    .sb-res__table tbody th,
+    .sb-res__table tbody td { width: auto; overflow: hidden; }
+
+    .sb-people__identity,
+    .sb-people__names { min-width: 0; flex-shrink: 1; }
+    .sb-people__names strong { overflow-wrap: anywhere; }
+}
+
+/* On mobile each row is already its own card, so the wrapper around them is a
+   redundant second box. */
+@media (max-width: 820px) {
+    .sb-res__card {
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible;
+    }
+}
+
+/* Monospace belongs to structured data, not to the prose an editor writes. */
+.sb-res__advanced textarea,
+.sb-studio-advanced textarea {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .82rem;
+    line-height: 1.5;
+}

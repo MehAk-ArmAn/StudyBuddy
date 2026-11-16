@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650" role="img" aria-labelledby="title desc">
+    <title id="title">StudyBuddy page not found</title>
+    <desc id="desc">A map showing a StudyBuddy path leading back to the platform.</desc>
+
+    <defs>
+        <linearGradient id="map" x1="220" y1="120" x2="690" y2="540" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#E0F2FE"/>
+            <stop offset="1" stop-color="#C4B5FD"/>
+        </linearGradient>
+
+        <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%">
+            <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#020617" flood-opacity=".3"/>
+        </filter>
+    </defs>
+
+    <ellipse cx="450" cy="572" rx="278" ry="33" fill="#020617" opacity=".22"/>
+
+    <g filter="url(#shadow)">
+        <path d="M190 170l164-58 184 58 172-58v356l-172 58-184-58-164 58z" fill="url(#map)"/>
+
+        <path d="M354 112v356M538 170v356" stroke="#94A3B8" stroke-width="7" opacity=".7"/>
+
+        <path d="M252 391c46-98 126-63 160-142 33-76 116-51 158-104 29-37 65-35 89-16" fill="none" stroke="#7C3AED" stroke-width="16" stroke-linecap="round" stroke-dasharray="24 22"/>
+
+        <circle cx="253" cy="391" r="24" fill="#22D3EE"/>
+        <circle cx="659" cy="129" r="24" fill="#EC4899"/>
+
+        <path d="M659 91c50 0 78 36 78 80 0 58-78 132-78 132s-78-74-78-132c0-44 28-80 78-80z" fill="#8B5CF6"/>
+        <circle cx="659" cy="169" r="28" fill="#F8FAFC"/>
+
+        <path d="M623 446h72" stroke="#172033" stroke-width="12" stroke-linecap="round"/>
+        <path d="M659 410v72" stroke="#172033" stroke-width="12" stroke-linecap="round"/>
+    </g>
+</svg>

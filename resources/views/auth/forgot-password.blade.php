@@ -1,0 +1,4 @@
+@extends('layouts.app')
+@section('title', 'Recover your account')
+@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}">@endpush
+@section('content')<div class="sb-school-shell"><p class="sb-next-eyebrow">ACCOUNT SECURITY</p><h1>Let's get you back in.</h1><p class="school-intro">Enter your account email. If it exists, we'll send a secure, time-limited reset link.</p>@if(session('status'))<div class="sb-school-notice success">{{ session('status') }}</div>@endif @error('email')<div class="sb-school-notice error">{{ $message }}</div>@enderror<form class="sb-school-form" method="POST" action="{{ route('password.email') }}">@csrf<label>Email address<input name="email" type="email" required autocomplete="email" value="{{ old('email') }}"></label><button type="submit" class="sb-next-button primary">Send reset link →</button></form></div>@endsection

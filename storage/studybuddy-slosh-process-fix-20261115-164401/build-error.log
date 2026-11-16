@@ -1,0 +1,11 @@
+vite v6.4.6 building for production...
+transforming...
+✓ 1 modules transformed.
+✗ Build failed in 17ms
+error during build:
+Could not resolve "./interface.css" from "src/studybuddy-official-slosh/entry.jsx"
+file: /Users/mehakarman/Desktop/StudyBuddy-main/studybuddy-reactbits/src/studybuddy-official-slosh/entry.jsx
+    at getRollupError (file:///Users/mehakarman/Desktop/StudyBuddy-main/studybuddy-reactbits/node_modules/rollup/dist/es/shared/parseAst.js:355:41)
+    at error (file:///Users/mehakarman/Desktop/StudyBuddy-main/studybuddy-reactbits/node_modules/rollup/dist/es/shared/parseAst.js:351:42)
+    at ModuleLoader.handleInvalidResolvedId (file:///Users/mehakarman/Desktop/StudyBuddy-main/studybuddy-reactbits/node_modules/rollup/dist/es/shared/node-entry.js:23514:24)
+    at file:///Users/mehakarman/Desktop/StudyBuddy-main/studybuddy-reactbits/node_modules/rollup/dist/es/shared/node-entry.js:23474:26

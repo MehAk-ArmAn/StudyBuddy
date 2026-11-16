@@ -1,0 +1,21 @@
+/* Only the real React Bits gauge and its text block. Scoped to #sb-live-curiosity-root. */
+#sb-live-curiosity-root .sb-live-meter {display:flex;align-items:center;gap:clamp(18px,3vw,36px);width:100%;min-height:246px;color:#fff;}
+#sb-live-curiosity-root .sb-live-meter__gauge {position:relative;display:flex;flex:none;justify-content:center;width:clamp(135px,17vw,180px);padding:8px;}
+#sb-live-curiosity-root .sb-live-meter__gauge .slosh-gauge {flex:none;box-shadow:inset 0 0 22px #a9a3fa28, 0 18px 45px #05041977;border:1px solid #aaa9f94a;}
+#sb-live-curiosity-root .sb-live-meter__gauge .slosh-gauge__value {font-weight:900;font-size:23px;letter-spacing:-.04em;color:#fff;}
+#sb-live-curiosity-root .sb-live-meter__gauge .slosh-gauge__liquid .slosh-gauge__value {color:#161645;}
+#sb-live-curiosity-root .sb-live-meter__hand {position:absolute;bottom:9px;right:-2px;color:#abece3;font-weight:900;font-size:23px;animation:sb-live-hand 1.6s ease-in-out infinite;pointer-events:none;}
+#sb-live-curiosity-root .sb-live-meter__readout {flex:1;min-width:0;display:flex;align-items:flex-start;flex-direction:column;gap:8px;}
+#sb-live-curiosity-root .sb-live-meter__ready {display:inline-flex;font:900 10px/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:.12em;color:#9af8d0;background:#255e5850;border:1px solid #9af8d044;border-radius:100px;padding:7px 10px;}
+#sb-live-curiosity-root .sb-live-meter__eyebrow {font-size:10px;font-weight:800;letter-spacing:.14em;color:#c7bffa;}
+#sb-live-curiosity-root .sb-live-meter__number {font-size:clamp(35px,4vw,58px);font-weight:950;letter-spacing:-.07em;line-height:1.05;color:#fff;}
+#sb-live-curiosity-root .sb-live-meter__number small {font-size:.5em;color:#aaf5ed;}
+#sb-live-curiosity-root p {margin:0;max-width:34ch;color:#eeebff;font-size:14px;line-height:1.45;}
+#sb-live-curiosity-root .sb-live-meter__buttons {display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;}
+#sb-live-curiosity-root .sb-live-meter__buttons button {cursor:pointer;color:white;font:750 12px/1.1 ui-sans-serif,system-ui,sans-serif;border:1px solid #d2cdff60;background:#ffffff15;padding:9px 11px;border-radius:999px;transition:background .2s,transform .2s;}
+#sb-live-curiosity-root .sb-live-meter__buttons button:is(:hover,:focus-visible) {background:#8a63ff70;transform:translateY(-2px);outline:2px solid #a8f4ff;outline-offset:2px;}
+#sb-live-curiosity-root .sb-live-meter__disclaimer {font-size:10px;color:#bdb9dc;}
+@keyframes sb-live-hand {50% {transform:translateY(-5px);opacity:.62;}}
+@media(max-width:670px) {#sb-live-curiosity-root .sb-live-meter {gap:10px;}.sb-live-meter__gauge {width:115px!important;}#sb-live-curiosity-root .sb-live-meter__buttons button {padding:8px 9px;font-size:11px;}}
+@media(max-width:425px) {#sb-live-curiosity-root .sb-live-meter {flex-direction:column;gap:0;}#sb-live-curiosity-root .sb-live-meter__readout {align-items:center;text-align:center;margin-top:8px;}#sb-live-curiosity-root .sb-live-meter__buttons {justify-content:center;} }
+@media(prefers-reduced-motion:reduce) {#sb-live-curiosity-root .sb-live-meter__hand {animation:none;}#sb-live-curiosity-root button {transition:none!important;}}

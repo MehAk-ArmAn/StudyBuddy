@@ -1,0 +1,39 @@
+/* StudyBuddy W5 – transitions.dev-inspired free motion layer.
+   Scoped, opt-out friendly, CSS-only animations; no route or authorization changes. */
+:root{--sb-motion-ease:cubic-bezier(.22,1,.36,1);--sb-motion-spring:cubic-bezier(.2,1.35,.35,1);--sb-motion-fast:180ms;--sb-motion-normal:360ms;--sb-motion-slow:700ms}
+html.sb-motion-ready{scroll-behavior:smooth}
+/* Do not animate initial page content when JavaScript is blocked. */
+.sb-motion-ready [data-sbm-reveal]{opacity:1;transform:none}
+.sb-motion-ready [data-sbm-reveal].sbm-pending{opacity:0;transform:translate3d(0,22px,0) scale(.986)}
+.sb-motion-ready [data-sbm-reveal].sbm-revealed{opacity:1;transform:translate3d(0,0,0) scale(1)}
+.sb-motion-ready [data-sbm-reveal].sbm-pending,.sb-motion-ready [data-sbm-reveal].sbm-revealed{transition:opacity var(--sb-motion-slow) var(--sb-motion-ease), transform var(--sb-motion-slow) var(--sb-motion-ease);transition-delay:var(--sbm-delay,0ms)}
+/* Meaningful interactive targets only: no giant opaque cards and no layout shifts. */
+.sb-motion-ready :is(.sbw4-role-pathways__card,.sb7-what__card,.sb7-app-card,.sbw3-cardrail__item,[data-sbm-card]){transition:transform var(--sb-motion-normal) var(--sb-motion-ease),box-shadow var(--sb-motion-normal) ease,border-color var(--sb-motion-normal) ease!important;transform-origin:center center}
+@media(hover:hover){.sb-motion-ready :is(.sbw4-role-pathways__card,.sb7-what__card,.sb7-app-card,.sbw3-cardrail__item,[data-sbm-card]):hover{transform:translateY(-5px) scale(1.012)!important;box-shadow:0 22px 55px rgba(5,12,41,.18)!important}}
+.sb-motion-ready :is(.sb7-button,.sbw3-action,.sbw4-role-pathways__card a,[data-sbm-press]){transition:transform var(--sb-motion-fast) var(--sb-motion-spring),filter var(--sb-motion-fast) ease!important}
+.sb-motion-ready :is(.sb7-button,.sbw3-action,[data-sbm-press]):active{transform:scale(.965)!important}
+.sb-motion-ready :is(.sb7-button,.sbw3-action,.sbw4-role-pathways__card a,[data-sbm-press]):focus-visible{outline:3px solid #4bded1!important;outline-offset:4px!important}
+/* A visual-first role scene using ORIGINAL brand art already present in StudyBuddy. */
+.sbw4-page .sbw4-role-pathways{gap:14px}
+.sbw4-page .sbw4-role-pathways__card{position:relative;isolation:isolate;overflow:hidden;min-height:330px;padding:24px 19px 22px;justify-content:flex-end!important;background:#162042!important;border-color:rgba(194,209,255,.24)!important}
+.sbw4-page .sbw4-role-pathways__card::before{content:"";position:absolute;inset:0;z-index:-2;background-position:center 24%;background-repeat:no-repeat;background-size:cover;transform:scale(1.01);transition:transform .75s var(--sb-motion-ease),filter .5s ease}
+.sbw4-page .sbw4-role-pathways__card:nth-child(1)::before{background-image:url('/assets/studybuddy-brand/pages/path-apps.webp')}
+.sbw4-page .sbw4-role-pathways__card:nth-child(2)::before{background-image:url('/assets/studybuddy-brand/pages/path-parents.webp')}
+.sbw4-page .sbw4-role-pathways__card:nth-child(3)::before{background-image:url('/assets/studybuddy-brand/pages/path-teachers.webp')}
+.sbw4-page .sbw4-role-pathways__card:nth-child(4)::before{background-image:url('/assets/studybuddy-brand/pages/path-support.webp')}
+.sbw4-page .sbw4-role-pathways__card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,12,37,.03) 15%,rgba(5,12,37,.65) 48%,rgba(5,12,37,.98) 95%);pointer-events:none}
+.sbw4-page .sbw4-role-pathways__card :is(strong,p,span:last-child){position:relative;z-index:1;color:#fff!important;text-shadow:0 1px 4px rgba(0,0,0,.2)}
+.sbw4-page .sbw4-role-pathways__card strong{font-size:clamp(1.26rem,1.5vw,1.62rem)}
+.sbw4-page .sbw4-role-pathways__card p{font-size:.9rem;line-height:1.53;color:#e7ecff!important}
+.sbw4-page .sbw4-role-pathways__card span:last-child{color:#aff6e7!important}
+.sbw4-page .sbw4-role-pathways__icon{display:none!important}
+@media(hover:hover){.sbw4-page .sbw4-role-pathways__card:hover::before{transform:scale(1.09)}}
+/* Roles and app galleries must be visually compelling without hiding text. */
+.sbw4-page .sbw3-fluid-gallery{overflow:hidden;border-radius:20px}
+.sbw4-page .sbw3-fluid-gallery--roles{height:clamp(280px,29vw,370px)!important}
+.sbw4-page .sbw4-role-pathways__card :is(p,strong){opacity:1!important}
+/* Transition the theme but preserve contrast of all essential text. */
+.sbw4-page :is(.sbw4-chapter,.sbw4-role-pathways__card,.sbw3-selected,.sbw4-personal-wrap){transition-property:background-color,border-color,color,box-shadow,transform;transition-duration:.3s;transition-timing-function:ease}
+@media(max-width:880px){.sbw4-page .sbw4-role-pathways{grid-template-columns:repeat(2,minmax(0,1fr))!important}.sbw4-page .sbw4-role-pathways__card{min-height:290px}}
+@media(max-width:560px){.sbw4-page .sbw4-role-pathways{grid-template-columns:1fr!important}.sbw4-page .sbw4-role-pathways__card{min-height:260px}.sb-motion-ready [data-sbm-reveal].sbm-pending{transform:translateY(12px)}}
+@media(prefers-reduced-motion:reduce){html.sb-motion-ready{scroll-behavior:auto!important}.sb-motion-ready [data-sbm-reveal],.sb-motion-ready [data-sbm-reveal].sbm-pending,.sb-motion-ready [data-sbm-reveal].sbm-revealed{opacity:1!important;transform:none!important;transition:none!important}.sb-motion-ready :is(.sbw4-role-pathways__card,.sb7-what__card,.sb7-app-card,.sbw3-cardrail__item,[data-sbm-card],.sb7-button,.sbw3-action,[data-sbm-press]){transform:none!important;transition:none!important}.sbw4-page .sbw4-role-pathways__card::before{transition:none!important;transform:none!important}}

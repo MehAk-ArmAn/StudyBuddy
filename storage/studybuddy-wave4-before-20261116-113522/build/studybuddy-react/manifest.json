@@ -1,0 +1,26 @@
+{
+  "resources/js/studybuddy-react/components/StudyBuddyWave3/Lanyard.jsx": {
+    "file": "assets/Lanyard-BSn0W0Fn.js",
+    "name": "Lanyard",
+    "src": "resources/js/studybuddy-react/components/StudyBuddyWave3/Lanyard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/studybuddy-react/entry.jsx"
+    ],
+    "css": [
+      "assets/Lanyard-BdRMAztH.css"
+    ]
+  },
+  "resources/js/studybuddy-react/entry.jsx": {
+    "file": "assets/entry-8LDTZutX.js",
+    "name": "entry",
+    "src": "resources/js/studybuddy-react/entry.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/studybuddy-react/components/StudyBuddyWave3/Lanyard.jsx"
+    ],
+    "css": [
+      "assets/entry-BYLHOc6u.css"
+    ]
+  }
+}

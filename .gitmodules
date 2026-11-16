@@ -1,0 +1,3 @@
+[submodule "public/assets/studybuddy-imgs"]
+	path = public/assets/studybuddy-imgs
+	url = https://github.com/MehAk-ArmAn/StudyBuddy-Imgs.git

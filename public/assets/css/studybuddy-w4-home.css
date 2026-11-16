@@ -1,0 +1,116 @@
+/* StudyBuddy W4 · Wonderverse homepage | scoped to V7/W2/W3 only.
+   Laravel, auth, CMS, schools, and other routes are intentionally untouched. */
+html[data-sb-color-theme="dark"] .sbw4-page {
+ --sbw4-bg:#091128;--sbw4-panel:#141f3d;--sbw4-panel2:#202c50;
+ --sbw4-ink:#f8faff;--sbw4-muted:#cbd5f1;--sbw4-accent:#baa5ff;
+ --sbw4-edge:rgba(187,203,255,.24);--sbw4-focus:#8ff7e6;
+ --sb7-text:#f8faff;--sb7-muted:#cbd5f1;
+ color:var(--sbw4-ink)
+}
+html[data-sb-color-theme="light"] .sbw4-page {
+ --sbw4-bg:#f5f7ff;--sbw4-panel:#fff;--sbw4-panel2:#edf2ff;
+ --sbw4-ink:#182341;--sbw4-muted:#425372;--sbw4-accent:#6347c7;
+ --sbw4-edge:rgba(39,52,94,.2);--sbw4-focus:#006c7c;
+ --sb7-text:#182341;--sb7-muted:#425372;
+ color:var(--sbw4-ink)
+}
+.sbw4-page{--sbw4-bg:var(--s7-bg,#091128);--sbw4-panel:var(--s7-panel,#151d3d);--sbw4-panel2:var(--s7-soft,#202c50);--sbw4-ink:var(--s7-text,#f8faff);--sbw4-muted:var(--s7-muted,#cbd5f1);--sbw4-accent:var(--s7-accent,#baa5ff);--sbw4-edge:var(--s7-edge,#bccbff3d);--sbw4-focus:#8ff7e6;background:var(--sbw4-bg);overflow-x:clip}
+.sbw4-page,.sbw4-page *{min-width:0}
+.sbw4-page :is(a,button,input,select,summary,[tabindex]):focus-visible{outline:3px solid var(--sbw4-focus)!important;outline-offset:4px}
+.sbw4-page :is(.sb7-heading p,.sb7-path p,.sb7-school p,.sb7-more p,.sb7-last p,.sb7-what p,.sb7-hero__subcopy,.sb7-hero__intro){color:var(--sbw4-muted)!important}
+.sbw4-page :is(h1,h2,h3,h4,strong),.sbw4-page .sbw3-app-experience,.sbw4-page .sbw3-personal-corner{color:var(--sbw4-ink)}
+/* 01: hero — preserve actual CMS headline, buttons and authentic dolphin mark. */
+.sbw4-page .sb7-hero{min-height:min(780px,95svh);background:radial-gradient(ellipse at 80% 43%,rgba(125,98,250,.18),transparent 48%),radial-gradient(ellipse at 23% 70%,rgba(45,188,211,.11),transparent 55%),var(--sbw4-bg)}
+.sbw4-page .sb7-hero__grid{padding-block:clamp(82px,9vw,128px) clamp(75px,9vw,108px);min-height:min(770px,91svh);grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);align-items:center}
+.sbw4-page .sb7-hero__content{position:relative;max-width:680px}
+.sbw4-page .sb7-hero__headline{font-size:clamp(3.5rem,6.5vw,6.65rem)!important;letter-spacing:-.075em!important;line-height:1.02!important;max-width:710px!important}
+.sbw4-page .sb7-hero__intro{font-size:clamp(1.08rem,1.7vw,1.28rem)!important;line-height:1.55!important;max-width:52ch}
+.sbw4-page .sb7-hero__subcopy{max-width:57ch;line-height:1.7!important}
+.sbw4-page .sb7-hero__mascot{width:min(98%,560px);filter:drop-shadow(0 30px 55px rgba(78,80,196,.28))}
+.sbw4-page .sb7-hero__float{display:none!important}
+.sbw4-page .sb7-hero__orb{opacity:.55}
+.sbw4-page .sb7-hero__orbit{opacity:.38}
+.sbw4-page .sb12-intro-brand{margin-bottom:clamp(20px,3vw,32px)}
+.sbw4-page .sb7-button{min-height:48px}
+/* Story chapter titles */
+.sbw4-page .sb7-section{position:relative;isolation:isolate;padding-block:clamp(68px,8vw,120px)}
+.sbw4-page .sb7-heading h2,.sbw4-page .sb7-path h2,.sbw4-page .sb7-school h2,.sbw4-page .sb7-last h2{font-size:clamp(2.35rem,5vw,4.6rem)!important;line-height:1.06!important;letter-spacing:-.065em!important}
+.sbw4-page .sb7-heading>div>p:last-child{max-width:65ch;line-height:1.65!important}
+.sbw4-page .sb7-kicker{color:var(--sbw4-accent)!important;letter-spacing:.18em!important;font-weight:850}
+.sbw4-page :is(.sb7-text-link,.sbw3-quiet-link){color:var(--sbw4-accent)!important;opacity:1!important}
+/* 02: React Bits FlexCarousel is images only: all useful text sits on stable HTML surfaces. */
+.sbw4-chapter{width:min(1160px,calc(100% - 40px));margin:0 auto;padding:0 0 18px}
+.sbw4-chapter__kicker{font-size:.74rem;letter-spacing:.16em;color:var(--sbw4-accent)!important;font-weight:900;margin:0 0 9px}
+.sbw4-chapter h2{font-size:clamp(2.15rem,4.3vw,4.1rem)!important;letter-spacing:-.065em;line-height:1.06;margin:0 0 10px}
+.sbw4-chapter p{color:var(--sbw4-muted)!important;max-width:70ch;line-height:1.6}
+.sbw4-page .sb7-apps{padding-top:clamp(70px,7vw,115px)}
+.sbw4-page .sb7-apps .sb7-heading{margin-top:0}
+.sbw4-page .sbw3-app-experience{--sbw3-ink:var(--sbw4-ink);--sbw3-muted:var(--sbw4-muted);background:linear-gradient(135deg,rgba(130,107,230,.09),rgba(57,199,199,.06)),var(--sbw4-panel)!important;border:1px solid var(--sbw4-edge)!important;border-radius:30px;box-shadow:0 18px 46px rgba(12,17,46,.06);padding:clamp(18px,3.2vw,36px);margin:24px 0}
+.sbw4-page .sbw3-app-experience :is(.sbw3-gallery-controls__left small,.sbw3-selected__name small,.sbw3-gallery-bottom small,.sbw3-shelf p){color:var(--sbw4-muted)!important;opacity:1!important;font-size:.88rem!important}
+.sbw4-page .sbw3-gallery-controls__left strong{font-size:clamp(1.25rem,2.1vw,1.75rem)}
+.sbw4-page .sbw3-fluid-gallery{height:clamp(315px,40vw,460px);border-radius:22px;isolation:isolate}
+.sbw4-page .sbw3-fluid-gallery .flex-carousel__caption{color:var(--sbw4-ink)!important;background:var(--sbw4-panel);border:1px solid var(--sbw4-edge);border-radius:15px;padding:10px 14px;left:50%;right:auto;transform:translateX(-50%);width:min(370px,86%);top:auto;bottom:5px;box-shadow:0 8px 25px rgba(4,8,29,.1)}
+.sbw4-page .flex-carousel__title{font-size:1rem!important;font-weight:800!important;color:var(--sbw4-ink)!important}
+.sbw4-page .flex-carousel__subtitle{opacity:1!important;color:var(--sbw4-muted)!important;font-size:.8rem}
+.sbw4-page .flex-carousel__count{opacity:1!important;color:var(--sbw4-muted)!important}
+.sbw4-page .sbw3-selected{margin-top:16px;border:1px solid var(--sbw4-edge);background:var(--sbw4-panel2);padding:16px 18px;border-radius:17px;min-height:84px}
+.sbw4-page .sbw3-selected__name strong{font-size:1.18rem}
+.sbw4-page .sbw3-selected__name small{line-height:1.5}
+.sbw4-page .sbw3-action{background:#70e5d4;color:#132b40!important;min-height:42px}
+.sbw4-page .sbw3-cardrail__item{border-color:var(--sbw4-edge);background:var(--sbw4-panel)}
+.sbw4-page .sbw3-cardrail__copy :is(strong,small){color:var(--sbw4-ink)!important}
+/* The old Blade app grid remains accessible if the React component fails. */
+body.sbw4-world-mounted .sbw4-page .sb7-app-grid{display:none!important}
+/* 03: Roles — visible readable descriptions outside distorted WebGL images. */
+.sbw4-page .sbw3-role-experience{max-width:1160px;padding:0 0 18px;margin:0 auto}
+.sbw4-page .sbw3-role-experience h2{font-size:clamp(2.3rem,4.5vw,4.3rem)!important;line-height:1.05;margin:12px 0}
+.sbw4-page .sbw3-role-experience .sbw3-intro{color:var(--sbw4-muted)!important;font-size:1rem!important;max-width:62ch}
+.sbw4-page .sbw3-fluid-gallery--roles{height:clamp(270px,35vw,405px)}
+.sbw4-page .sbw3-fluid-gallery--roles .flex-carousel__caption{display:none!important}
+.sbw4-role-pathways{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;max-width:1160px;margin:0 auto clamp(34px,5vw,60px)}
+.sbw4-role-pathways__card{display:flex;flex-direction:column;gap:9px;padding:23px 20px;min-height:215px;border-radius:22px;background:var(--sbw4-panel);border:1px solid var(--sbw4-edge);color:var(--sbw4-ink)!important;text-decoration:none!important;transition:transform .25s,box-shadow .25s,border-color .25s}
+.sbw4-role-pathways__card:hover{transform:translateY(-5px);box-shadow:0 18px 32px rgba(0,0,0,.11);border-color:var(--sbw4-accent)}
+.sbw4-role-pathways__card strong{font-size:1.22rem;color:var(--sbw4-ink)!important;letter-spacing:-.025em}
+.sbw4-role-pathways__card p{color:var(--sbw4-muted)!important;font-size:.91rem;line-height:1.58;margin:0}
+.sbw4-role-pathways__card span:last-child{margin-top:auto;color:var(--sbw4-accent)!important;font-weight:800}
+.sbw4-role-pathways__icon{display:grid;place-items:center;width:49px;height:49px;border-radius:15px;background:var(--sbw4-panel2);font-size:24px}
+/* Old tabbed selector is retained as a fallback, hidden only when real React roles mount. */
+body.sbw4-roles-mounted .sbw4-page .sb7-path{display:none!important}
+/* 04: real CMS feature stories, not mock capabilities. */
+.sbw4-page .sb7-what{background:radial-gradient(ellipse at 10% 30%,rgba(115,91,250,.08),transparent 50%),var(--sbw4-bg)}
+.sbw4-page .sb7-what__grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.sbw4-page .sb7-what__card{padding:clamp(20px,3.3vw,33px)!important;min-height:285px;border-radius:25px!important;background:var(--sbw4-panel)!important;border:1px solid var(--sbw4-edge)!important;box-shadow:0 14px 37px rgba(18,24,64,.07);display:flex;flex-direction:column;align-items:flex-start}
+.sbw4-page .sb7-what__card:nth-child(3n+1){background:linear-gradient(140deg,rgba(116,94,255,.09),transparent 80%),var(--sbw4-panel)!important}
+.sbw4-page .sb7-what__card:nth-child(3n+2){background:linear-gradient(140deg,rgba(42,196,192,.09),transparent 80%),var(--sbw4-panel)!important}
+.sbw4-page .sb7-what__icon{width:61px;height:61px;border:1px solid var(--sbw4-edge);display:grid;place-items:center;border-radius:19px;background:var(--sbw4-panel2);margin-bottom:20px}
+.sbw4-page .sb7-what__card h3{color:var(--sbw4-ink)!important;font-size:clamp(1.23rem,2vw,1.55rem)!important;letter-spacing:-.035em;margin:0 0 10px}
+.sbw4-page .sb7-what__card p{color:var(--sbw4-muted)!important;font-size:.94rem!important;line-height:1.65;margin:0 0 20px}
+.sbw4-page .sb7-what__card a{color:var(--sbw4-accent)!important;margin-top:auto;font-weight:850}
+/* 05: Personalization — real local-only interactions, no invented scores or school records. */
+.sbw4-personal-wrap{width:min(1160px,calc(100% - 40px));margin:clamp(24px,5vw,66px) auto}
+.sbw4-personal-wrap .sbw3-personal-corner{max-width:100%;margin:0;--sbw3-ink:var(--sbw4-ink);--sbw3-muted:var(--sbw4-muted);background:var(--sbw4-panel)!important;border:1px solid var(--sbw4-edge)!important}
+.sbw4-page .sbw3-personal-main p,.sbw4-page .sbw3-personal-goals>small,.sbw4-page .sbw3-role-picker label,.sbw4-page .sbw3-personal-goals strong{color:var(--sbw4-muted)!important;opacity:1!important}
+.sbw4-page .sbw3-personal-goals{background:var(--sbw4-panel2)!important;border-color:var(--sbw4-edge)!important}
+.sbw4-page .sbw3-personal-goals strong,.sbw4-page .sbw3-personal-goals label{color:var(--sbw4-ink)!important;opacity:1!important}
+.sbw4-page .sbw3-goal{border-color:var(--sbw4-edge)!important}
+.sbw4-personal-note{padding:12px 18px;color:var(--sbw4-muted);font-size:.83rem;line-height:1.55}
+/* 06: School journey, existing Laravel route & restrictions retained. */
+.sbw4-page .sb7-school{padding-block:clamp(78px,8vw,128px);background:radial-gradient(ellipse at 15% 70%,rgba(38,178,209,.1),transparent 46%),var(--sbw4-panel)}
+.sbw4-page .sb7-school__copy p{line-height:1.75!important;color:var(--sbw4-muted)!important}
+.sbw4-page .sb7-school__copy small{color:var(--sbw4-muted)!important;display:block;margin-top:16px;opacity:1!important}
+.sbw4-page .sb7-school__art img{max-width:100%;height:auto;object-fit:contain}
+/* 07: Learn more + final invitation. */
+.sbw4-page .sb7-more__item{background:var(--sbw4-panel);border-color:var(--sbw4-edge);border-radius:20px}
+.sbw4-page .sb7-more__item summary{color:var(--sbw4-ink)!important;font-size:1.05rem}
+.sbw4-page .sb7-more__tile{background:var(--sbw4-panel2);border-color:var(--sbw4-edge);border-radius:17px}
+.sbw4-page .sb7-more__tile h3{color:var(--sbw4-ink)!important}
+.sbw4-page .sb7-more__tile p{color:var(--sbw4-muted)!important}
+.sbw4-page .sb7-more__tile a{color:var(--sbw4-accent)!important}
+.sbw4-page .sb7-last{background:radial-gradient(ellipse at 50% 20%,rgba(121,95,255,.15),transparent 60%),var(--sbw4-bg);padding-block:clamp(100px,11vw,155px)}
+.sbw4-page .sb7-last__inner{max-width:860px;margin-inline:auto}
+.sbw4-page .sb7-last p{color:var(--sbw4-muted)!important}
+/* Responsive: readable, reachable controls, no clipped words or cards. */
+@media(max-width:1100px){.sbw4-role-pathways{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:790px){.sbw4-page .sb7-hero{min-height:unset}.sbw4-page .sb7-hero__grid{grid-template-columns:1fr;min-height:unset;padding-block:56px 65px}.sbw4-page .sb7-hero__content{max-width:650px}.sbw4-page .sb7-hero__visual{min-height:340px}.sbw4-page .sb7-hero__headline{font-size:clamp(3rem,8vw,4.8rem)!important}.sbw4-page .sb7-what__grid{grid-template-columns:repeat(2,minmax(0,1fr))}.sbw4-page .sbw3-fluid-gallery{height:355px}}
+@media(max-width:560px){.sbw4-page .sb7-hero__grid{padding-block:40px 53px}.sbw4-page .sb7-hero__headline{font-size:clamp(2.75rem,11.6vw,3.65rem)!important}.sbw4-page .sb7-hero__visual{min-height:285px}.sbw4-page .sb7-heading h2,.sbw4-page .sb7-path h2,.sbw4-page .sb7-school h2,.sbw4-page .sb7-last h2{font-size:clamp(2.15rem,9vw,3.2rem)!important}.sbw4-page .sb7-what__grid{grid-template-columns:1fr}.sbw4-role-pathways{grid-template-columns:1fr;gap:10px}.sbw4-role-pathways__card{min-height:155px;padding:19px}.sbw4-page .sbw3-app-experience{padding:16px;border-radius:22px}.sbw4-page .sbw3-selected{gap:10px}.sbw4-page .sbw3-fluid-gallery{height:295px}.sbw4-page .sbw3-fluid-gallery--roles{height:250px}.sbw4-page .sb7-section{padding-block:66px}}
+@media(prefers-reduced-motion:reduce){.sbw4-page *,.sbw4-page *::before,.sbw4-page *::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.sbw4-role-pathways__card:hover{transform:none}}

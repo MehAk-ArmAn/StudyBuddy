@@ -1,0 +1,247 @@
+.roles-universe {
+    min-height: 100vh;
+    color: #f8fbff;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(34,211,238,.18), transparent 34%),
+        radial-gradient(circle at 100% 0%, rgba(124,60,255,.22), transparent 36%),
+        linear-gradient(180deg, #050816, #081026 52%, #050816);
+    padding-bottom: 90px;
+}
+
+.roles-hero,
+.roles-tabs-card,
+.roles-content-grid,
+.roles-journey,
+.roles-final-cta {
+    width: min(100% - 24px, 1180px);
+    margin-inline: auto;
+}
+
+.roles-hero {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(320px,.42fr);
+    gap: 28px;
+    align-items: center;
+    padding: clamp(44px, 8vw, 100px) 0 32px;
+}
+
+.roles-kicker,
+.roles-live-panel p {
+    color: #67e8f9;
+    font-size: .78rem;
+    font-weight: 950;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+}
+
+.roles-hero h1,
+.roles-live-panel h2,
+.roles-content-grid h2,
+.roles-journey h2,
+.roles-final-cta h2 {
+    color: white;
+    line-height: .9;
+    letter-spacing: -.075em;
+    text-wrap: balance;
+}
+
+.roles-hero h1 {
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    margin: 0;
+}
+
+.roles-hero p,
+.roles-live-panel span,
+.roles-content-grid p,
+.roles-journey p,
+.roles-final-cta p,
+.roles-content-grid li {
+    color: rgba(226,232,240,.78);
+    line-height: 1.75;
+}
+
+.roles-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.roles-hero-actions a {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    padding: 10px 16px;
+    color: white;
+    text-decoration: none;
+    font-weight: 950;
+    background: linear-gradient(135deg, #7c3cff, #246bff);
+}
+
+.roles-hero-actions a.soft {
+    background: rgba(255,255,255,.10);
+    border: 1px solid rgba(255,255,255,.14);
+}
+
+.roles-hero-visual,
+.roles-live-panel figure {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 36px;
+    overflow: hidden;
+    background: rgba(255,255,255,.075);
+    box-shadow: 0 28px 80px rgba(2,6,23,.38);
+}
+
+.roles-hero-visual img,
+.roles-live-panel figure img {
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    object-fit: cover;
+    display: block;
+}
+
+.roles-tabs-card,
+.roles-content-grid article,
+.roles-journey,
+.roles-final-cta {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 36px;
+    background: rgba(255,255,255,.075);
+    box-shadow: 0 28px 80px rgba(2,6,23,.32);
+}
+
+.roles-tabs-card {
+    padding: clamp(18px, 3vw, 30px);
+}
+
+.roles-tab-buttons {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.roles-tab-buttons button {
+    border: 1px solid rgba(255,255,255,.13);
+    border-radius: 22px;
+    padding: 16px;
+    background: rgba(255,255,255,.06);
+    text-align: left;
+    cursor: pointer;
+}
+
+.roles-tab-buttons button.active,
+.roles-tab-buttons button:hover {
+    background: rgba(34,211,238,.13);
+    border-color: rgba(34,211,238,.44);
+    transform: translateY(-2px);
+}
+
+.roles-tab-buttons span {
+    display: block;
+    color: white;
+    font-weight: 950;
+}
+
+.roles-tab-buttons small {
+    color: rgba(226,232,240,.68);
+}
+
+.roles-live-panel {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(280px,.4fr);
+    gap: 24px;
+    align-items: center;
+    padding: clamp(18px, 3vw, 34px);
+    border-radius: 30px;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(34,211,238,.10), transparent 36%),
+        rgba(3,7,18,.30);
+}
+
+.roles-live-panel h2,
+.roles-content-grid h2,
+.roles-journey h2,
+.roles-final-cta h2 {
+    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    margin: 0;
+}
+
+.roles-tool-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.roles-tool-list strong {
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 999px;
+    padding: 8px 11px;
+    color: #e0faff;
+    background: rgba(34,211,238,.10);
+}
+
+.roles-content-grid {
+    display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    gap: 18px;
+    margin-top: 26px;
+}
+
+.roles-content-grid article,
+.roles-journey,
+.roles-final-cta {
+    padding: clamp(22px, 4vw, 42px);
+}
+
+.roles-content-grid ul {
+    padding-left: 20px;
+}
+
+.roles-journey {
+    margin-top: 26px;
+}
+
+.roles-journey > div {
+    display: grid;
+    grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: 14px;
+    margin-top: 22px;
+}
+
+.roles-journey article {
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 26px;
+    padding: 18px;
+    background: rgba(255,255,255,.055);
+}
+
+.roles-journey span {
+    color: #67e8f9;
+    font-weight: 950;
+}
+
+.roles-journey strong {
+    display: block;
+    color: white;
+    margin-top: 8px;
+}
+
+.roles-final-cta {
+    margin-top: 26px;
+    text-align: center;
+}
+
+@media(max-width: 960px) {
+    .roles-hero,
+    .roles-live-panel,
+    .roles-content-grid,
+    .roles-journey > div,
+    .roles-tab-buttons {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,18 @@
+/* Scoped landing-page section. Never overrides previous StudyBuddy layout or CMS styles. */
+#sb-one-live-section {position:relative;isolation:isolate;background:#090d29;color:white;padding:clamp(24px,4vw,48px) 20px;border-top:1px solid #ffffff1c;border-bottom:1px solid #9f92ff35;}
+#sb-one-live-section, #sb-one-live-section * {box-sizing:border-box;}
+#sb-one-live-section .sb-live-section__inner {max-width:1150px;margin:0 auto;display:grid;grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);gap:clamp(18px,4vw,52px);align-items:center;}
+#sb-one-live-section .sb-live-section__eyebrow {font:900 11px/1.4 ui-sans-serif,system-ui,sans-serif;letter-spacing:.16em;color:#82fbe2;margin:0 0 13px;}
+#sb-one-live-section h2 {color:#fff!important;font-size:clamp(34px,5vw,64px)!important;line-height:1.04!important;letter-spacing:-.06em;font-weight:900!important;margin:0 0 12px!important;}
+#sb-one-live-section h2 span {display:block;color:#b0a3ff;}
+#sb-one-live-section .sb-live-section__copy>p:not(.sb-live-section__eyebrow) {font:450 15px/1.6 ui-sans-serif,system-ui,sans-serif;color:#d9d8ef;margin:0 0 18px;max-width:44ch;}
+#sb-one-live-section .sb-live-section__link {display:inline-flex;gap:8px;align-items:center;color:#10142a!important;background:#9bf4e2;text-decoration:none;font-weight:850;font-size:13px;padding:12px 16px;border-radius:99px;}
+#sb-one-live-section .sb-live-section__link:hover {background:#c3ffef;}
+#sb-one-live-section .sb-live-section__stage {position:relative;min-width:0;min-height:262px;border:1px solid #afa9ff40;border-radius:26px;background:radial-gradient(circle at 75% 20%,#5f43bd45 0,transparent 48%),linear-gradient(130deg,#202057,#111337);box-shadow:0 18px 48px #0004;overflow:hidden;padding:clamp(12px,2vw,26px);}
+#sb-one-live-section .sb-live-section__stamp {position:absolute;right:17px;top:14px;color:#c6bffc;font-size:10px;letter-spacing:.14em;font-weight:900;z-index:1;pointer-events:none;}
+#sb-live-curiosity-root {width:100%;min-height:235px;display:flex;align-items:center;}
+#sb-live-curiosity-root .sb-live-section__fallback {display:flex;gap:15px;align-items:center;color:#ded8ff;font-size:13px;}
+#sb-live-curiosity-root .sb-live-section__fallback-meter {position:relative;display:block;flex:none;width:75px;height:150px;border-radius:16px;border:1px solid #a8a1ff44;background:linear-gradient(to top,#8ff8e5 62%,#211b50 62%);}
+#sb-live-curiosity-root[data-sb-react-error="true"] .sb-live-section__fallback {color:#ffb3b3;}
+@media(max-width:780px){#sb-one-live-section .sb-live-section__inner{grid-template-columns:1fr;}#sb-one-live-section .sb-live-section__stage{max-width:760px;width:100%;}}
+@media(prefers-reduced-motion:reduce){#sb-one-live-section *, #sb-one-live-section *::before, #sb-one-live-section *::after{scroll-behavior:auto!important;}}

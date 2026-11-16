@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520" role="img" aria-label="Concept artwork for Wordwhirl Academy">
+      <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a4398f"/><stop offset="1" stop-color="#f9afcb"/></linearGradient><radialGradient id="glow"><stop stop-color="#fff" stop-opacity=".48"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+      <rect width="760" height="520" rx="42" fill="url(#bg)"/>
+      <circle cx="555" cy="88" r="260" fill="url(#glow)"/><circle cx="110" cy="417" r="200" fill="url(#glow)"/>
+      <g fill="#fff" opacity=".79"><path d="M95 81l7 21 21 7-21 7-7 21-7-21-21-7 21-7z"/><path d="M633 140l5 14 14 5-14 5-5 14-5-14-14-5 14-5z"/><circle cx="674" cy="310" r="6"/><circle cx="118" cy="326" r="4"/></g>
+      <rect x="180" y="130" width="390" height="240" rx="38" fill="#ffebfb" opacity=".28" transform="rotate(-6 340 260)"/><text x="207" y="300" font-size="124" font-weight="900" fill="#fff">A B C</text>
+      <rect x="38" y="32" width="198" height="35" rx="17.5" fill="#fff" opacity=".20"/><text x="55" y="55" font-family="system-ui, sans-serif" font-weight="800" font-size="14" fill="#fff" letter-spacing="1.5">DESIGN PREVIEW</text>
+      <rect x="32" y="411" width="696" height="83" rx="25" fill="#1a1458" opacity=".48"/><text x="58" y="444" font-family="system-ui, sans-serif" font-size="15" font-weight="750" fill="#fff" letter-spacing="2">WORD MAGIC</text><text x="58" y="477" font-family="system-ui, sans-serif" font-size="30" font-weight="900" fill="#fff">Wordwhirl Academy</text>
+    </svg>

@@ -1,0 +1,9 @@
+EXISTS|resources/views/home.blade.php
+ABSENT|resources/views/partials/studybuddy-imageworks-landing.blade.php
+ABSENT|public/assets/css/studybuddy-imageworks.css
+ABSENT|public/assets/js/studybuddy-imageworks.js
+ABSENT|public/assets/studybuddy-imageworks/hero-dolphin-book.webp
+ABSENT|public/assets/studybuddy-imageworks/path-apps.webp
+ABSENT|public/assets/studybuddy-imageworks/path-parents.webp
+ABSENT|public/assets/studybuddy-imageworks/path-teachers.webp
+ABSENT|public/assets/studybuddy-imageworks/path-support.webp

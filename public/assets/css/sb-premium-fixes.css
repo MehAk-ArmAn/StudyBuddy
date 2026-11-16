@@ -1,0 +1,126 @@
+:root,
+body.sb-theme-cosmic-dolphin {
+  --sb-theme-bg: radial-gradient(circle at top, rgba(56, 189, 248, .22), transparent 34%), linear-gradient(135deg, #070b2d, #12113f 46%, #2b145f);
+  --sb-theme-card: rgba(13, 23, 55, .78);
+  --sb-theme-border: rgba(125, 211, 252, .28);
+  --sb-theme-glow: rgba(34, 211, 238, .24);
+  --sb-theme-accent: #67e8f9;
+  --sb-theme-accent-2: #a78bfa;
+}
+
+body.sb-theme-bts-purple-galaxy {
+  --sb-theme-bg: radial-gradient(circle at 20% 10%, rgba(236, 72, 153, .22), transparent 30%), linear-gradient(135deg, #12061f, #321063 48%, #6d28d9);
+  --sb-theme-card: rgba(38, 12, 75, .82);
+  --sb-theme-border: rgba(216, 180, 254, .35);
+  --sb-theme-glow: rgba(168, 85, 247, .3);
+  --sb-theme-accent: #d8b4fe;
+  --sb-theme-accent-2: #f0abfc;
+}
+
+body.sb-theme-ocean-focus {
+  --sb-theme-bg: radial-gradient(circle at 80% 10%, rgba(45, 212, 191, .24), transparent 32%), linear-gradient(135deg, #032f3c, #075985 50%, #0f172a);
+  --sb-theme-card: rgba(6, 78, 92, .78);
+  --sb-theme-border: rgba(94, 234, 212, .34);
+  --sb-theme-glow: rgba(45, 212, 191, .26);
+  --sb-theme-accent: #5eead4;
+  --sb-theme-accent-2: #38bdf8;
+}
+
+body.sb-theme-candy-pop {
+  --sb-theme-bg: radial-gradient(circle at 25% 10%, rgba(251, 207, 232, .32), transparent 34%), linear-gradient(135deg, #701a75, #be185d 50%, #f97316);
+  --sb-theme-card: rgba(131, 24, 67, .78);
+  --sb-theme-border: rgba(251, 207, 232, .4);
+  --sb-theme-glow: rgba(244, 114, 182, .3);
+  --sb-theme-accent: #f9a8d4;
+  --sb-theme-accent-2: #fde68a;
+}
+
+body.sb-theme-forest-calm {
+  --sb-theme-bg: radial-gradient(circle at 20% 20%, rgba(134, 239, 172, .22), transparent 34%), linear-gradient(135deg, #052e16, #14532d 52%, #0f172a);
+  --sb-theme-card: rgba(20, 83, 45, .76);
+  --sb-theme-border: rgba(134, 239, 172, .35);
+  --sb-theme-glow: rgba(74, 222, 128, .24);
+  --sb-theme-accent: #86efac;
+  --sb-theme-accent-2: #bef264;
+}
+
+body.sb-theme-night-study {
+  --sb-theme-bg: radial-gradient(circle at 70% 12%, rgba(129, 140, 248, .18), transparent 32%), linear-gradient(135deg, #020617, #111827 48%, #312e81);
+  --sb-theme-card: rgba(15, 23, 42, .86);
+  --sb-theme-border: rgba(129, 140, 248, .32);
+  --sb-theme-glow: rgba(99, 102, 241, .22);
+  --sb-theme-accent: #c7d2fe;
+  --sb-theme-accent-2: #818cf8;
+}
+
+body.sb-theme-solar-gold {
+  --sb-theme-bg: radial-gradient(circle at 50% 8%, rgba(253, 224, 71, .28), transparent 34%), linear-gradient(135deg, #451a03, #92400e 50%, #1f2937);
+  --sb-theme-card: rgba(92, 45, 7, .78);
+  --sb-theme-border: rgba(253, 224, 71, .36);
+  --sb-theme-glow: rgba(251, 191, 36, .28);
+  --sb-theme-accent: #fde68a;
+  --sb-theme-accent-2: #fb923c;
+}
+
+body.sb-theme-neon-gamer {
+  --sb-theme-bg: radial-gradient(circle at 80% 12%, rgba(34, 211, 238, .22), transparent 34%), linear-gradient(135deg, #020617, #111827 44%, #3b0764);
+  --sb-theme-card: rgba(2, 6, 23, .82);
+  --sb-theme-border: rgba(34, 211, 238, .36);
+  --sb-theme-glow: rgba(217, 70, 239, .28);
+  --sb-theme-accent: #22d3ee;
+  --sb-theme-accent-2: #d946ef;
+}
+
+body[class*="sb-theme-"] {
+  background: var(--sb-theme-bg) fixed !important;
+}
+
+body[class*="sb-theme-"] .site-shell,
+body[class*="sb-theme-"] .dashboard-card,
+body[class*="sb-theme-"] .app-card,
+body[class*="sb-theme-"] .content-card,
+body[class*="sb-theme-"] .auth-panel {
+  border-color: var(--sb-theme-border) !important;
+  box-shadow: 0 24px 80px var(--sb-theme-glow) !important;
+}
+
+body[class*="sb-theme-"] .btn,
+body[class*="sb-theme-"] button[type="submit"],
+body[class*="sb-theme-"] .nav-link:hover {
+  box-shadow: 0 16px 44px var(--sb-theme-glow) !important;
+}
+
+[data-mission-modal][hidden],
+.mission-modal[hidden],
+.mission-preview-modal[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+}
+
+[data-mission-modal].is-open,
+.mission-modal.is-open,
+.mission-preview-modal.is-open {
+  display: grid !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+body.sb-modal-open {
+  overflow: hidden;
+}
+
+.mission-status {
+  margin: 12px 0 0;
+  color: var(--sb-theme-accent, #67e8f9);
+  font-weight: 800;
+}
+
+.mission-status.is-visible {
+  animation: sbPulse .6s ease both;
+}
+
+@keyframes sbPulse {
+  from { transform: translateY(4px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

@@ -1,0 +1,10 @@
+PaperCrumple: official source retrieved
+GradientWaves: official source retrieved
+WebThreads: official source retrieved
+LiquidEther: official source retrieved
+Antigravity: official source retrieved
+MagicRings: official source retrieved
+Sources: https://reactbits.dev/
+License: https://github.com/DavidHDev/react-bits/blob/main/LICENSE.md
+
+NOTE: Optional interactive sources disabled because their dependencies or build failed. Original V8 gallery remains.

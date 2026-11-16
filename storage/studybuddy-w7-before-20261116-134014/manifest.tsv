@@ -1,0 +1,5 @@
+EXISTS|resources/views/home.blade.php
+EXISTS|resources/views/layouts/app.blade.php
+ABSENT|resources/views/partials/studybuddy-w7-landing.blade.php
+ABSENT|public/assets/css/studybuddy-w7.css
+ABSENT|public/assets/js/studybuddy-w7.js

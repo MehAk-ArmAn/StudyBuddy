@@ -1,0 +1,22 @@
+/* Self-contained styling for the authentic React Bits SloshGauge. No global resets. */
+#sb-react-bits-meter-v11 {width:100%;max-width:100%;min-height:240px;position:relative;isolation:isolate;display:block!important;visibility:visible!important;opacity:1!important;}
+#sb-react-bits-meter-v11 .sb-real-react {display:grid;grid-template-columns:minmax(125px,.8fr) minmax(0,1.2fr);gap:clamp(12px,2vw,30px);align-items:center;min-height:244px;padding:12px;color:#fff;}
+#sb-react-bits-meter-v11 .sb-real-react__meter {display:flex;justify-content:center;min-width:0;}
+#sb-react-bits-meter-v11 .slosh-gauge {border:2px solid #c3b7ff9e; box-shadow:0 14px 36px #05051aaa,0 0 36px #8458e544;}
+#sb-react-bits-meter-v11 .slosh-gauge__value {font-size:20px;font-weight:850;color:#fff}
+#sb-react-bits-meter-v11 .slosh-gauge__liquid .slosh-gauge__value {color:#17213c}
+#sb-react-bits-meter-v11 .sb-real-react__content{display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-width:0;}
+#sb-react-bits-meter-v11 .sb-real-react__live{font:850 11px/1.2 system-ui,sans-serif;letter-spacing:.07em;color:#0a302b;background:#9cfce8;border:1px solid #d1fff4;border-radius:999px;padding:8px 11px;box-shadow:0 0 20px #7fe7d533;}
+#sb-react-bits-meter-v11 .sb-real-react__live span{color:#16856f}
+#sb-react-bits-meter-v11 .sb-real-react__eyebrow{font:800 11px/1.25 system-ui,sans-serif;letter-spacing:.14em;color:#d2c4ff;margin-top:3px}
+#sb-react-bits-meter-v11 .sb-real-react__value{font:900 clamp(36px,5vw,72px)/1 system-ui,sans-serif;letter-spacing:-.06em;color:#fff;font-variant-numeric:tabular-nums}
+#sb-react-bits-meter-v11 .sb-real-react__value span{font-size:.5em;color:#9bfce6}
+#sb-react-bits-meter-v11 .sb-real-react__content p{font:500 13px/1.5 system-ui,sans-serif;color:#eceafd;margin:0}
+#sb-react-bits-meter-v11 .sb-real-react__actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+#sb-react-bits-meter-v11 .sb-real-react__actions button{font:750 12px/1.25 system-ui,sans-serif;border-radius:999px;padding:9px 11px;background:#ffffff1f;color:#fff;border:1px solid #ffffff65;cursor:pointer;transition:transform .2s,background .2s;min-height:36px}
+#sb-react-bits-meter-v11 .sb-real-react__actions button:is(:hover,:focus-visible){background:#7d56e9;transform:translateY(-2px);outline:2px solid #9af9e8;outline-offset:2px}
+#sb-react-bits-meter-v11 .sb-real-react__actions button:active{transform:translateY(1px)}
+#sb-react-bits-meter-v11 .sb-real-react__content small{font:450 11px/1.4 system-ui,sans-serif;color:#cbc8e7}
+#sb-react-bits-meter-v11 .sb-real-react__error{font:600 15px/1.5 system-ui,sans-serif;padding:18px;background:#fa444424;border:1px solid #fa444488;border-radius:14px;color:#fff}
+@media(max-width:720px){#sb-react-bits-meter-v11 .sb-real-react {grid-template-columns:1fr;gap:16px;text-align:center}#sb-react-bits-meter-v11 .sb-real-react__content{align-items:center}#sb-react-bits-meter-v11 .sb-real-react__actions{justify-content:center}}
+@media(prefers-reduced-motion:reduce){#sb-react-bits-meter-v11 button{transition:none!important}}

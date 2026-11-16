@@ -1,0 +1,15 @@
+@extends('layouts.app')
+@section('title', 'Apply for a school workspace')
+@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-next-chapter.css')) }}">@endpush
+@section('content')
+<div class="sb-school-shell"><a class="school-back" href="{{ route('schools.info') }}">← For schools</a><p class="sb-next-eyebrow">INSTITUTIONAL ACCESS</p><h1>Bring your school to StudyBuddy.</h1><p class="school-intro">Schools are reviewed before activation. This is an application, not instant access.</p>
+@if(session('status'))<div class="sb-school-notice success" role="status">{{ session('status') }}</div>@endif
+@if($existing)<div class="sb-school-notice"><strong>Most recent request: {{ $existing->name }}</strong><p>Status: {{ ucfirst($existing->status) }}. @if($existing->status === 'approved') Your school workspace is ready. <a href="{{ route('schools.workspace', $existing) }}">Open school workspace →</a>@else Await a response from the StudyBuddy team. @endif</p></div>@endif
+@if($errors->any())<div class="sb-school-notice error" role="alert"><strong>Please check your details:</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+<form class="sb-school-form" method="POST" action="{{ route('schools.store') }}">@csrf
+<div class="school-form-grid"><label>School / organization name <input type="text" name="name" maxlength="190" required value="{{ old('name') }}" placeholder="Official registered school name"></label><label>School domain <input type="text" name="domain" maxlength="190" required value="{{ old('domain') }}" placeholder="school.edu.ae"></label><label>Official school email <input type="email" name="official_email" maxlength="190" required value="{{ old('official_email') }}" placeholder="you@school.edu.ae"></label><label>Official website (optional) <input type="url" name="website" value="{{ old('website') }}" placeholder="https://school.edu.ae"></label><label>City <input type="text" name="city" required maxlength="120" value="{{ old('city', 'Dubai') }}"></label><label>Country <input type="text" name="country" required maxlength="120" value="{{ old('country', 'United Arab Emirates') }}"></label></div>
+<label>How will your school use StudyBuddy? <textarea name="purpose" maxlength="2500" minlength="20" required rows="5" placeholder="Tell us about your learners, team and pilot goals.">{{ old('purpose') }}</textarea></label>
+<label class="school-check"><input type="checkbox" name="confirm_authorized" value="1" required> <span>I am authorized to discuss a school pilot. I understand that submitting a request doesn't verify or approve my organization.</span></label>
+<button type="submit" class="sb-next-button primary">Submit school request <span aria-hidden="true">↗</span></button>
+</form><p class="school-footnote">Please do not upload child data, staff ID documents or student rosters in this form. Our team will arrange approved verification separately.</p></div>
+@endsection

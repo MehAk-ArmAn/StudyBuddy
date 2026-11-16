@@ -1,0 +1,7 @@
+EXISTS|resources/views/home.blade.php
+ABSENT|public/assets/css/studybuddy-w6-landing.css
+ABSENT|public/assets/js/studybuddy-w6-landing.js
+ABSENT|public/assets/studybuddy-w6/art/path-apps.webp
+ABSENT|public/assets/studybuddy-w6/art/path-parents.webp
+ABSENT|public/assets/studybuddy-w6/art/path-teachers.webp
+ABSENT|public/assets/studybuddy-w6/art/path-support.webp

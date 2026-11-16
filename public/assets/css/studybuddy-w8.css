@@ -1,0 +1,30 @@
+/* W8: translucent purple Galaxy + true React Bits Antigravity; W7 landing stays Laravel-rendered. */
+.sbw7 { isolation:isolate; --sbw8-purple:#997cf2; }
+.sbw7 > section { position:relative; z-index:1; }
+.sbw8-galaxy-layer{position:sticky;top:0;left:0;width:100%;height:100vh;margin-bottom:-100vh;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(ellipse at 75% 40%,rgba(118,85,231,.1),transparent 65%)}
+.sbw8-galaxy-layer .sbw8-galaxy-slot,.sbw8-hero-layer .sbw8-hero-slot,.sbw8-galaxy-layer .sbw8-fx,.sbw8-hero-layer .sbw8-fx{width:100%;height:100%;position:absolute;inset:0}
+.sbw8-fx canvas{display:block;width:100%;height:100%}
+.sbw8-galaxy-tone{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 53% 42% at 70% 26%,rgba(129,94,232,.14),transparent 75%),radial-gradient(ellipse 43% 38% at 10% 74%,rgba(96,66,205,.13),transparent 78%)}
+.sbw7 :is(.sbw7-worlds,.sbw7-story,.sbw7-paths,.sbw7-feature,.sbw7-personal,.sbw7-school,.sbw7-details,.sbw7-end){background:transparent!important}
+.sbw7 .sbw7-hero{background:radial-gradient(ellipse 60% 75% at 50% 64%,rgba(98,58,183,.25),transparent 78%),linear-gradient(180deg,rgba(6,9,27,.91),rgba(20,13,53,.84) 64%,rgba(11,19,48,.96))!important}
+.sbw8-hero-layer{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none;mask-image:linear-gradient(180deg,transparent 1%,#000 18%,#000 85%,transparent 100%)}
+.sbw8-hero-layer::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,transparent 36%,rgba(7,9,25,.38) 95%);pointer-events:none}
+.sbw7-hero .sbw7-hero__inner{z-index:2}
+.sbw7-hero__ambient{opacity:.32}
+.sbw8-role-host{position:relative;z-index:3;margin-top:30px;min-height:460px}
+.sbw8-role-host[data-sbw8-ready="1"]+.sbw7-paths__gallery{display:none!important}
+.sbw8-role-host:not([data-sbw8-ready="1"]){display:none!important}
+.sbw8-role-gallery{width:100%;min-width:0}
+.sbw8-role-gallery .ag-panel{border:1px solid rgba(190,175,251,.24)!important;box-shadow:0 24px 80px rgba(4,9,30,.22)}
+.sbw8-role-hint{margin:16px auto 0!important;text-align:center;font-size:.88rem!important;color:var(--iw-soft)!important}
+.sbw8-bounce-host{position:absolute;inset:0;display:grid;place-items:center;z-index:3}
+.sbw8-feature-bounce{width:100%;display:grid;place-items:center;overflow:visible}
+.sbw8-bounce-host[data-sbw8-ready="1"]~img{visibility:hidden}
+.sbw8-bounce-host:not([data-sbw8-ready="1"]){display:none}
+.sbw7 :is(.sbw7-feature__point,.sbw7-details__item){background:rgba(11,18,46,.09)}
+.sbw7 :is(.sbw7-feature__copy,.sbw7-school__copy,.sbw7-personal__intro,.sbw7-heading){text-shadow:0 1px 0 rgba(3,7,25,.12)}
+html[data-sb-color-theme="light"] .sbw8-galaxy-tone,html[data-theme="light"] .sbw8-galaxy-tone,html.light .sbw8-galaxy-tone{background:radial-gradient(ellipse 55% 40% at 65% 30%,rgba(139,106,246,.095),transparent 80%),radial-gradient(ellipse 42% 34% at 18% 65%,rgba(120,105,200,.065),transparent 80%)}
+html[data-sb-color-theme="light"] .sbw7 :is(.sbw7-feature__point,.sbw7-details__item),html[data-theme="light"] .sbw7 :is(.sbw7-feature__point,.sbw7-details__item),html.light .sbw7 :is(.sbw7-feature__point,.sbw7-details__item){background:rgba(255,255,255,.35)}
+@media(max-width:900px){.sbw8-role-host{min-height:395px}.sbw8-role-gallery .accordion-gallery{height:370px!important}}
+@media(max-width:600px){.sbw8-role-host{min-height:380px}.sbw8-role-gallery .accordion-gallery{height:auto!important;min-height:360px}.sbw8-role-gallery .ag-panel{min-height:95px!important}.sbw8-role-hint{max-width:38ch}.sbw8-feature-bounce{max-width:100%}.sbw8-galaxy-layer{opacity:.7}}
+@media(prefers-reduced-motion:reduce){.sbw8-galaxy-layer,.sbw8-hero-layer{display:none!important}.sbw8-role-host{display:none!important}.sbw8-role-host[data-sbw8-ready="1"]+.sbw7-paths__gallery{display:grid!important}}

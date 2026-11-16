@@ -1,0 +1,10 @@
+package.json
+package-lock.json
+vite.studybuddy-react.config.mjs
+resources/js/studybuddy-react/entry.jsx
+resources/js/studybuddy-react/studybuddy-react.css
+resources/js/studybuddy-react/components/SloshGauge.jsx
+resources/js/studybuddy-react/components/SloshGauge.css
+resources/views/partials/studybuddy-react-assets.blade.php
+resources/views/partials/studybuddy-react-widget.blade.php
+tools/STUDYBUDDY_REACT_CORE_STATUS.txt

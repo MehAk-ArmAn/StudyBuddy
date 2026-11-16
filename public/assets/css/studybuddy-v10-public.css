@@ -1,0 +1,22 @@
+
+/* StudyBuddy V10: public editorial hierarchy and theme consistency. Visual-only. */
+:root {--sb10-ink:#24203a;--sb10-muted:#605b76;--sb10-surface:rgba(255,255,255,.90);--sb10-border:rgba(98,79,155,.20);--sb10-accent:#6243e8}
+:root[data-sb-color-theme="dark"]{--sb10-ink:#f8f6ff;--sb10-muted:#c4c3da;--sb10-surface:rgba(24,29,57,.92);--sb10-border:rgba(159,158,218,.28);--sb10-accent:#9777ff}
+:root[data-sb-color-theme="light"]{--sb10-ink:#24203a;--sb10-muted:#605b76;--sb10-surface:rgba(255,255,255,.94);--sb10-border:rgba(98,79,155,.20);--sb10-accent:#6243e8}
+body.studybuddy-site {color:var(--sb10-ink)}
+.sb7-hero__headline,.sb7-heading h2,.sb-catalog-v3__intro h1,.sb-schools-copy h1{color:var(--sb10-ink)!important;text-shadow:none!important}
+.sb7-hero__intro,.sb7-hero__subcopy,.sb7-heading p,.sb-schools-copy>p,.sb-catalog-v3__intro>p{color:var(--sb10-muted)!important}
+.sb7-hero__headline em,.sb7-heading h2 em{color:var(--sb10-accent);-webkit-text-fill-color:currentColor}
+.sb7-hero__visual{isolation:isolate}
+.sb7-hero__visual .sb7-hero__mascot{filter:drop-shadow(0 14px 44px rgba(85,54,181,.15))}
+.sb7-hero__orb{opacity:.55}
+.sb7-hero__star{opacity:.64}
+.sb8-orbit-section{background:var(--sb10-surface)!important;border-color:var(--sb10-border)!important;color:var(--sb10-ink)!important}
+.sb8-orbit-header,.sb8-orbit-header h2{color:var(--sb10-ink)!important}
+.sb8-orbit-header p,.sb8-orbit-eyebrow{color:var(--sb10-muted)!important}
+.sb8-showcase-holo {min-height:260px}
+.sb8-showcase-label strong{color:var(--sb10-ink)}
+.sb8-showcase-label span{color:var(--sb10-muted)}
+.sb-catalog-v3__toolbar,.sb-catalog-v3__hero{isolation:isolate}
+.sb10-school-gallery,.sb10-public-role,.sb10-bento-shell{color:var(--sb10-ink)}
+@media(max-width:760px){.sb7-hero__headline,.sb-catalog-v3__intro h1{font-size:clamp(42px,11vw,70px)!important;overflow-wrap:break-word}}

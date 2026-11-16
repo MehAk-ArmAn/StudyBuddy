@@ -1,0 +1,8 @@
+ONE VISIBLE REACT BITS COMPONENT INSTALLED BY STAGED VITE BUILD.
+Component: SloshGauge (actual original user-supplied React Bits JS + CSS)
+Page: / (directly below hero, before the app catalogue)
+DOM proof: #sb-live-curiosity-root[data-sb-react-mounted="true"]
+Visible in UI after React mounts: ● REACT IS RUNNING
+Interaction: drag liquid, keyboard arrows, or click Chill / Explore / Super curious
+WebGL2: NOT REQUIRED. Reduced motion: supported by component.
+Content: old hero, CMS links, pages, and app grid preserved.

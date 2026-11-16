@@ -1,0 +1,20 @@
+/*
+ * Compatibility asset retained for existing StudyBuddy layout references.
+ * Current homepage presentation is controlled by the active homepage styles.
+ */
+
+/* Homepage app strip: generated tiles keep cards distinct when an app has no
+   artwork uploaded yet. */
+.app-card__art {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 18px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--sb-a, #7c3cff), var(--sb-b, #22d3ee));
+}
+
+.app-card__art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.app-card__art em { font-style: normal; font-size: 2rem; font-weight: 800; color: #fff; }

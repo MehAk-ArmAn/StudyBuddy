@@ -1,0 +1,24 @@
+/* Scoped design tokens so React islands never restyle Laravel Blade pages. */
+.sbreact-hero-slot { width:100%; min-height:225px; isolation:isolate; }
+.sbreact-meter, .sbreact-meter * { box-sizing:border-box; }
+.sbreact-meter { color:#f9f8ff; font-family:ui-sans-serif,system-ui,-apple-system,sans-serif; width:100%; }
+.sbreact-meter__status { display:inline-flex;align-items:center;gap:8px;background:#103d36;border:1px solid #63e6bd90;padding:8px 12px;border-radius:99px;font-size:11px;font-weight:800;letter-spacing:.08em;color:#b4ffec; }
+.sbreact-meter__signal { width:8px;height:8px;border-radius:50%;background:#7afaca;box-shadow:0 0 12px #7afaca; }
+.sbreact-meter__body { margin-top:12px;display:flex;align-items:center;justify-content:center;gap:clamp(18px,3vw,38px);min-height:206px; }
+.sbreact-meter__details { flex:1;min-width:0;max-width:440px; }
+.sbreact-meter__details strong { font-size:clamp(18px,2vw,26px);font-weight:850;letter-spacing:-.04em;color:#fff; }
+.sbreact-meter__details p { font-size:13px;line-height:1.6;color:#d9dafa;margin:8px 0 14px; }
+.sbreact-meter__details small { display:block;color:#aca9de;margin-top:12px;font-size:11px; }
+.sbreact-meter__presets { display:flex;flex-wrap:wrap;gap:8px; }
+.sbreact-meter__presets button { padding:9px 12px;border-radius:99px;color:#eeeaff;background:#38315e;border:1px solid #7772b8;cursor:pointer;font-size:12px;font-weight:750;transition:transform .2s ease,background .2s ease; }
+.sbreact-meter__presets button:hover { background:#594da0;transform:translateY(-2px); }
+.sbreact-meter__presets button:active { transform:scale(.96); }
+.sbreact-meter__presets button[aria-pressed="true"] { background:#8af4dd;color:#0e1b29;border-color:#8af4dd; }
+.sbreact-meter__presets button:focus-visible { outline:3px solid #f8ffad;outline-offset:3px; }
+.sbreact-error { background:rgba(95,48,101,.12);border:1px solid currentColor;border-radius:14px;padding:16px;color:inherit; }
+@media(max-width:580px) { .sbreact-meter__body {gap:14px;justify-content:flex-start;} .sbreact-meter__details p {font-size:12px;} .sbreact-meter__presets button {padding:8px;} }
+@media(prefers-reduced-motion:reduce) { .sbreact-meter__presets button {transition:none;} }
+
+/* Legacy proof placeholders disappear only after this real React root reports mounted. */
+#sb-one-live-section:has(#sb-react-native-curiosity[data-sb-react-active="mounted"]) #sb-live-curiosity-root,
+#sb-one-live-section:has(#sb-react-native-curiosity[data-sb-react-active="mounted"]) #sb-live-curiosity-direct-mount { display:none !important; }

@@ -1,0 +1,248 @@
+/* StudyBuddy Laravel React bridge — one reusable entry for all Blade layouts.
+   This does NOT take over routes, authentication or server-rendered pages. */
+import React, { Component, createElement, useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
+import SloshGauge from './components/SloshGauge.jsx';
+import './studybuddy-react.css';
+
+/* SB_FREE_BITS_IMPORTS_START */
+import { SBHeroMotion, SBGradientNote, SBHeroShapeGrid, SBCounter, SBArtworkWall } from './components/StudyBuddyFree/StudyBuddyWidgets.jsx';
+/* SB_FREE_BITS_IMPORTS_END */
+
+/* SB_LANDING_WAVE2_IMPORT */
+import SBLogoSequence from './components/StudyBuddyLanding/SBLogoSequence.jsx';
+import SBDiscoveryTicker from './components/StudyBuddyLanding/SBDiscoveryTicker.jsx';
+/* SB_LANDING_WAVE2_IMPORT_END */
+
+/* SB_WAVE3_IMPORTS: additions only, no Laravel routing changes */
+import { SBAppFlexGallery, SBRoleFlexGallery, SBFeatureFlexGallery, SBPersonalCorner } from './components/StudyBuddyWave3/StudyBuddyWave3.jsx';
+import Crosshair from './components/StudyBuddyWave3/Crosshair.jsx';
+import { lazy as sbw3Lazy, Suspense as SBW3Suspense } from 'react';
+const SBW3LanyardLazy = sbw3Lazy(() => import('./components/StudyBuddyWave3/Lanyard.jsx'));
+function SBW3Lanyard(props) { return <SBW3Suspense fallback={null}><SBW3LanyardLazy {...props}/></SBW3Suspense>; }
+/* SB_WAVE3_IMPORTS_END */
+
+/* SB_WAVE8_IMPORTS: real React Bits, all lazy-loaded through the existing Laravel bridge */
+import { SBW8Antigravity, SBW8Galaxy, SBW8RoleGallery, SBW8FeatureBounce, SBW8FlexCarousel, SBW8CircularGallery, SBW8DepthCarousel, SBW8OptionWheel } from './components/StudyBuddyWave8/StudyBuddyWave8.jsx';
+
+const REGISTRY = new Map();
+const ROOTS = new WeakMap();
+const TRACKED = new Set();
+const VERSION = '2026.11.15';
+
+function CuriosityMeter({ initialLevel = 60, title = 'Curiosity Meter' }) {
+  const [level, setLevel] = useState(Number.isFinite(+initialLevel) ? Math.min(100, Math.max(0, +initialLevel)) : 60);
+  return (
+    <div className="sbreact-meter" aria-label="Interactive curiosity demonstration">
+      <div className="sbreact-meter__status"><span className="sbreact-meter__signal" /> REACT BITS IS LIVE</div>
+      <div className="sbreact-meter__body">
+        <SloshGauge
+          value={level}
+          onChange={setLevel}
+          interactive
+          showValue
+          liquidColor="#8AF4DD"
+          glassColor="#20203F"
+          width={94}
+          height={186}
+          radius={20}
+          ticks={4}
+          viscosity={0.15}
+          tilt={0.45}
+          splash={0.42}
+          unit="%"
+          ariaLabel="Curiosity level"
+        />
+        <div className="sbreact-meter__details">
+          <strong>{title}</strong>
+          <p>Drag the liquid or use the keyboard arrows. This is a working React Bits component, not a static mockup.</p>
+          <div className="sbreact-meter__presets" aria-label="Curiosity presets">
+            {[['Chill', 25], ['Explore', 60], ['Super curious', 100]].map(([label, amount]) => (
+              <button type="button" key={label} onClick={() => setLevel(amount)} aria-pressed={level === amount}>{label}</button>
+            ))}
+          </div>
+          <small>Interactive demo only · Not saved to student progress</small>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+REGISTRY.set('CuriosityMeter', CuriosityMeter);
+REGISTRY.set('SloshGauge', SloshGauge);
+/* SB_WAVE8_REGISTRY: no alternate React root or duplicate page script */
+REGISTRY.set('SBW8Antigravity', SBW8Antigravity);
+REGISTRY.set('SBW8Galaxy', SBW8Galaxy);
+REGISTRY.set('SBW8RoleGallery', SBW8RoleGallery);
+REGISTRY.set('SBW8FeatureBounce', SBW8FeatureBounce);
+REGISTRY.set('SBW8FlexCarousel', SBW8FlexCarousel);
+REGISTRY.set('SBW8CircularGallery', SBW8CircularGallery);
+REGISTRY.set('SBW8DepthCarousel', SBW8DepthCarousel);
+REGISTRY.set('SBW8OptionWheel', SBW8OptionWheel);
+
+/* SB_WAVE3_REGISTRY */
+REGISTRY.set('SBAppFlexGallery', SBAppFlexGallery);
+REGISTRY.set('SBRoleFlexGallery', SBRoleFlexGallery);
+REGISTRY.set('SBFeatureFlexGallery', SBFeatureFlexGallery);
+REGISTRY.set('SBPersonalCorner', SBPersonalCorner);
+REGISTRY.set('SBCrosshair', Crosshair);
+REGISTRY.set('SBLanyard', SBW3Lanyard);
+
+/* SB_LANDING_WAVE2_REGISTRY */
+REGISTRY.set('SBLogoSequence', SBLogoSequence);
+REGISTRY.set('SBDiscoveryTicker', SBDiscoveryTicker);
+/* SB_FREE_BITS_REGISTRY_START */
+REGISTRY.set('SBHeroMotion', SBHeroMotion);
+REGISTRY.set('SBGradientNote', SBGradientNote);
+REGISTRY.set('SBHeroShapeGrid', SBHeroShapeGrid);
+REGISTRY.set('SBCounter', SBCounter);
+REGISTRY.set('SBArtworkWall', SBArtworkWall);
+/* SB_FREE_BITS_REGISTRY_END */
+
+
+class WidgetErrorBoundary extends Component {
+  constructor(props) { super(props); this.state = { failed: false }; }
+  static getDerivedStateFromError() { return { failed: true }; }
+  componentDidCatch(error) { console.error('[StudyBuddy React] component render failed', error); }
+  render() {
+    if (this.state.failed) return (
+      <div className="sbreact-error" role="status">This interactive element is temporarily unavailable. The rest of the page still works.</div>
+    );
+    return this.props.children;
+  }
+}
+
+function Ready({ node, children }) {
+  useEffect(() => {
+    node.dataset.sbReactActive = 'mounted';
+    document.dispatchEvent(new CustomEvent('studybuddy:react-mounted', { detail: { component: node.dataset.sbReact } }));
+    if (node.id === 'sb-react-native-curiosity') {
+      const stage = node.closest('.sb-live-section__stage');
+      if (stage) {
+        for (const child of stage.children) {
+          if (child === node || child.classList.contains('sb-live-section__stamp')) continue;
+          // Hide only old SloshGauge proof placeholders, after a real React mount succeeds.
+          if (child.id?.startsWith('sb-live-curiosity') || child.classList.contains('sb-one-live-fallback') || child.textContent?.includes('React component not mounted')) child.hidden = true;
+        }
+      }
+    }
+    return () => { node.dataset.sbReactActive = 'unmounted'; };
+  }, [node]);
+  return children;
+}
+
+function propsFor(node) {
+  try { const value = JSON.parse(node.getAttribute('data-sb-react-props') || '{}'); return value && typeof value === 'object' && !Array.isArray(value) ? value : {}; }
+  catch (error) { console.warn('[StudyBuddy React] Invalid data-sb-react-props', error); return {}; }
+}
+
+function mount(node) {
+  if (!(node instanceof Element) || ROOTS.has(node)) return false;
+  const componentName = node.getAttribute('data-sb-react');
+  const Widget = REGISTRY.get(componentName);
+  if (!Widget) { console.warn('[StudyBuddy React] Unregistered component', componentName); return false; }
+  try {
+    node.dataset.sbReactActive = 'loading';
+    const root = createRoot(node);
+    ROOTS.set(node, root);
+    TRACKED.add(node);
+    root.render(createElement(WidgetErrorBoundary, null,
+      createElement(Ready, { node }, createElement(Widget, propsFor(node)))
+    ));
+    return true;
+  } catch (error) {
+    node.dataset.sbReactActive = 'error';
+    console.error('[StudyBuddy React] mount failed', error);
+    return false;
+  }
+}
+
+function placeHomepageDemo() {
+  const section = document.getElementById('sb-one-live-section');
+  const stage = section?.querySelector('.sb-live-section__stage');
+  if (!stage) return;
+  if (document.getElementById('sb-react-native-curiosity')) return;
+  const host = document.createElement('div');
+  host.id = 'sb-react-native-curiosity';
+  host.dataset.sbReact = 'CuriosityMeter';
+  host.dataset.sbReactProps = '{"initialLevel":60}';
+  host.className = 'sbreact-hero-slot';
+  stage.appendChild(host);
+}
+
+
+/* SB_WAVE3_PAGE_DISCOVERY: only append mounts to existing pages. */
+function sbw3AdditionalMounts() {
+  const path = location.pathname.replace(/\/$/, '') || '/';
+  const main = document.querySelector('main');
+  if (!main) return;
+  if (path === '/apps' && !document.getElementById('sbw3-apps-page')) {
+    const cards = Array.from(main.querySelectorAll('a[href]')).filter(a => {
+      const img = a.querySelector('img[src]');
+      if (!img) return false;
+      try {const p = new URL(a.getAttribute('href'), location.href);return p.origin === location.origin && p.pathname.startsWith('/apps/') && p.pathname !== '/apps/';}catch{return false;}
+    });
+    const unique = new Map();
+    cards.forEach(a => {
+      const img=a.querySelector('img[src]');
+      const title=a.querySelector('h2,h3,h4,[class*="title"]')?.textContent?.trim() || img?.getAttribute('alt')?.trim();
+      const url=a.getAttribute('href');
+      if(!title || !url || !img) return;
+      const full=new URL(url,location.href);
+      unique.set(full.pathname,{src:img.currentSrc || img.src,alt:img.alt||title,title,subtitle:a.querySelector('[class*="category"],[class*="tagline"]')?.textContent?.trim()||'',url:full.pathname});
+    });
+    const items=[...unique.values()].slice(0,18);
+    if(items.length>=3){
+      const shell=document.createElement('section');shell.id='sbw3-apps-page';shell.className='sbw3-dashboard-insertion';
+      shell.innerHTML='<h2 style="margin:15px 0;letter-spacing:-.035em">Explore visually <span aria-hidden="true">✦</span></h2>';
+      const widget=document.createElement('div');widget.dataset.sbReact='SBAppFlexGallery';widget.dataset.sbReactProps=JSON.stringify({items});shell.appendChild(widget);
+      const ref=cards[0].closest('section, .grid, [class*="grid"], [class*="list"]')||cards[0];
+      ref.parentElement?.insertBefore(shell,ref);
+    }
+  }
+  if(path==='/roles' && !document.getElementById('sbw3-roles-page')){
+    const slot=document.createElement('div');slot.id='sbw3-roles-page';slot.dataset.sbReact='SBRoleFlexGallery';
+    main.prepend(slot);
+  }
+  // Public learning preferences are device-local and never touch Laravel grades or permissions.
+  if(/\/(?:student|parent|teacher)(?:\/|$)/.test(path) && /dashboard|home|overview/.test(path) && !document.getElementById('sbw3-dashboard-corner')){
+    const section=document.createElement('div');section.id='sbw3-dashboard-corner';section.className='sbw3-dashboard-insertion';
+    section.dataset.sbReact='SBPersonalCorner';section.dataset.sbReactProps=JSON.stringify({context:'dashboard'});
+    const heading=main.querySelector('h1');if(heading?.parentElement===main)heading.insertAdjacentElement('afterend',section);else main.prepend(section);
+  }
+}
+
+function scan() {
+  sbw3AdditionalMounts();
+  /* W3: old test-only CuriosityMeter is not auto-mounted on the homepage. */
+  document.querySelectorAll('[data-sb-react]').forEach(mount);
+  window.StudyBuddyReactBridge.status = 'loaded';
+  window.StudyBuddyReactBridge.mounted = [...TRACKED].filter(node => node.dataset.sbReactActive === 'mounted').length;
+}
+
+window.StudyBuddyReactBridge = {
+  version: VERSION,
+  status: 'booting',
+  mounted: 0,
+  available: () => [...REGISTRY.keys()],
+  register(name, component) {
+    if (typeof name !== 'string' || !name.trim() || !component) throw new Error('register requires a name and React component');
+    REGISTRY.set(name, component);
+    scan();
+  },
+  mount,
+  scan
+};
+
+let queued = false;
+function queueScan() {
+  if (queued) return;
+  queued = true;
+  queueMicrotask(() => { queued = false; scan(); });
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', queueScan, { once: true });
+else queueScan();
+new MutationObserver(mutations => {
+  if (mutations.some(item => [...item.addedNodes].some(node => node.nodeType === 1 && (node.matches?.('[data-sb-react],#sb-one-live-section') || node.querySelector?.('[data-sb-react]'))))) queueScan();
+}).observe(document.documentElement, { childList: true, subtree: true });
+console.info('[StudyBuddy React] Laravel + Vite bridge loaded', VERSION);

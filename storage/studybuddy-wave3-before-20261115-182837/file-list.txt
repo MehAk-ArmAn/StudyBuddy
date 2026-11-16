@@ -1,0 +1,9 @@
+EXISTS resources/views/home.blade.php
+EXISTS resources/js/studybuddy-react/entry.jsx
+EXISTS package.json
+EXISTS package-lock.json
+ABSENT components.json
+ABSENT tools/STUDYBUDDY_WAVE3_GUIDE.md
+ABSENT tools/studybuddy_fetch_free_micro.py
+ABSENT tools/studybuddy_apply_wave3.py
+ABSENT tools/studybuddy_pro_registry_setup.py

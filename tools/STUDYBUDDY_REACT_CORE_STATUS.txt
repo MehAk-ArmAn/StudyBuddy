@@ -1,0 +1,8 @@
+StudyBuddy Laravel + React core is installed.
+Official Laravel Vite entry: resources/js/studybuddy-react/entry.jsx
+Built manifest: public/build/studybuddy-react/manifest.json
+Blade API: @include('partials.studybuddy-react-widget', ['name'=>'CuriosityMeter'])
+Register new React Bits components in resources/js/studybuddy-react/entry.jsx.
+Rebuild after future changes: npm run build:studybuddy-react
+Browser inspect: window.StudyBuddyReactBridge
+No Laravel routes, controllers, permissions or migrations changed.

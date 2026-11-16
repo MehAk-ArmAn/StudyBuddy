@@ -1,0 +1,11 @@
+{
+  "resources/js/studybuddy-react/entry.jsx": {
+    "file": "assets/entry-DcFgj4G5.js",
+    "name": "entry",
+    "src": "resources/js/studybuddy-react/entry.jsx",
+    "isEntry": true,
+    "css": [
+      "assets/entry-DYfIpVaP.css"
+    ]
+  }
+}

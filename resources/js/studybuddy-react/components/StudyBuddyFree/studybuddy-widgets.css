@@ -1,0 +1,31 @@
+/* StudyBuddy Free React Bits extras: small touches only, never cover CMS headlines. */
+.sbfb-hero-words{display:flex;flex-wrap:wrap;align-items:center;gap:.48em;font-family:inherit;font-size:clamp(.83rem,1.4vw,1.06rem);font-weight:850;letter-spacing:.095em;color:#47327c;max-width:100%;margin:1rem 0 1.25rem;min-height:2em}
+.sbfb-hero-words__fixed{white-space:nowrap}
+.sbfb-hero-words__rotating{color:#6b47b6;display:inline-flex;line-height:1.45;min-width:6em;font-weight:900}
+.sbfb-hero-words__clip{display:block;overflow:hidden;line-height:1.45;padding:.08em .03em}
+.sbfb-hero-words__spark{color:#bb52b7}
+.sbfb-gradient-note{display:inline-block;font-size:clamp(.78rem,1vw,.98rem);font-weight:850;letter-spacing:.05em;min-height:1.4rem;color:#47327c}
+.sbfb-hero-grid{position:absolute;inset:4% 0 2%;z-index:0;pointer-events:none;overflow:hidden;border-radius:inherit;opacity:.46}
+.sbfb-hero-grid>div,.sbfb-hero-grid canvas{width:100%!important;height:100%!important}
+.sbfb-artwall{width:100%;height:280px;min-height:220px;position:relative;overflow:hidden;border-radius:1.4rem;isolation:isolate}
+.sbfb-counter-slot{font:inherit;display:inline-flex;vertical-align:baseline;min-width:1ch;font-variant-numeric:tabular-nums}
+.sbfb-counter-slot>.sbreact-widget__fallback{font:inherit}
+.sbfb-counter-slot [class*="counter"]{font:inherit}
+html[data-sb-color-theme="dark"] .sbfb-hero-words,html[data-sb-color-theme="dark"] .sbfb-gradient-note,body.sb-u-dark .sbfb-hero-words{color:#f3eaff}
+html[data-sb-color-theme="dark"] .sbfb-hero-words__rotating,body.sb-u-dark .sbfb-hero-words__rotating{color:#dbafff}
+@media(max-width:650px){.sbfb-hero-words{gap:.4em;min-height:2.5em;margin:.6rem 0 1rem}.sbfb-hero-grid{opacity:.2}}
+@media(prefers-reduced-motion:reduce){.sbfb-hero-grid{display:none}.sbfb-hero-words__spark{animation:none}}
+html.sb-u-motion-off .sbfb-hero-grid,[data-sb-motion="off"] .sbfb-hero-grid{display:none}
+.sbfb-hero-grid-mount{position:absolute;inset:0;z-index:0;overflow:hidden;border-radius:inherit;pointer-events:none}
+.sbfb-hero-grid-mount>.sbreact-widget{width:100%;height:100%;display:block}
+.sbfb-hero-grid-mount>.sbreact-widget>.sbfb-hero-grid{width:100%;height:100%}
+.sbfb-hero-words-shell{position:relative;z-index:2}
+.sbfb-cta-note{display:flex;justify-content:center;position:relative;z-index:1;margin:.25rem auto .5rem}
+.sbfb-cta-note .sbreact-widget__fallback{font-size:.9rem;font-weight:800;letter-spacing:.07em}
+
+/* Keep Laravel's real number visible if React fails, even inside the error boundary. */
+.sbfb-stat-shell{font:inherit;font-variant-numeric:tabular-nums}
+.sbfb-stat-react{display:none}
+.sbfb-stat-shell:has(.sbfb-ready-num)>.sbfb-stat-static{display:none}
+.sbfb-stat-shell:has(.sbfb-ready-num)>.sbfb-stat-react{display:inline-flex;vertical-align:baseline}
+.sbfb-stat-shell .sbfb-ready-num{display:inline-flex;align-items:baseline;font:inherit}

@@ -1,0 +1,13 @@
+{
+  "resources/js/studybuddy-react/entry.jsx": "file",
+  "resources/js/studybuddy-react/components/StudyBuddyFree": "missing",
+  "resources/views/home.blade.php": "file",
+  "resources/views/studybuddy/final/apps.blade.php": "file",
+  "resources/views/dashboard/partials/parent-dashboard.blade.php": "file",
+  "resources/views/dashboard/partials/teacher-dashboard.blade.php": "file",
+  "resources/views/admin/dashboard.blade.php": "file",
+  "resources/views/admin/control-room/index.blade.php": "file",
+  "package.json": "file",
+  "package-lock.json": "file",
+  "public/build/studybuddy-react": "dir"
+}

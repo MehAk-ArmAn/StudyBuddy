@@ -1,0 +1,3 @@
+EXISTS resources/views/home.blade.php
+ABSENT public/assets/css/studybuddy-w5-motion.css
+ABSENT public/assets/js/studybuddy-w5-motion.js

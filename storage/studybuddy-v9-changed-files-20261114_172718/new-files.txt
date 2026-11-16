@@ -1,0 +1,14 @@
+public/assets/css/studybuddy-v9-design.css
+public/assets/js/studybuddy-v9-design.js
+public/assets/studybuddy-v9/brand-orbit.svg
+resources/views/layouts/dashboard.blade.php
+studybuddy-reactbits/components.json
+studybuddy-reactbits/postcss.config.cjs
+studybuddy-reactbits/src/lib/utils.ts
+studybuddy-reactbits/src/pro/ProGallery.jsx
+studybuddy-reactbits/src/pro/premiumAdapters.jsx
+studybuddy-reactbits/src/pro/studybuddy-pro.css
+studybuddy-reactbits/src/styles/globals.css
+studybuddy-reactbits/tailwind.config.cjs
+studybuddy-reactbits/tsconfig.json
+tools/Install_StudyBuddy_Pro_Galleries.sh

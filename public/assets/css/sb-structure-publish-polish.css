@@ -1,0 +1,35 @@
+:root {
+    --studybuddy-logo-blue: #16c9ff;
+    --studybuddy-logo-purple: #7c3cff;
+    --studybuddy-logo-deep: #050816;
+}
+
+.studybuddy-site img,
+.sb-control-admin-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+.sb-consistent-brand img,
+.sb-consistent-footer-brand > img,
+.sb-control-brand img {
+    object-fit: contain !important;
+}
+
+.studybuddy-site a:focus-visible,
+.studybuddy-site button:focus-visible,
+.sb-control-admin-body a:focus-visible,
+.sb-control-admin-body button:focus-visible,
+.sb-control-admin-body input:focus-visible,
+.sb-control-admin-body textarea:focus-visible,
+.sb-control-admin-body select:focus-visible {
+    outline: 3px solid rgba(34, 211, 238, .85);
+    outline-offset: 3px;
+}
+
+.studybuddy-site p,
+.studybuddy-site li,
+.sb-control-admin-body p,
+.sb-control-admin-body li {
+    line-height: 1.65;
+}

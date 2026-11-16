@@ -1,0 +1,82 @@
+
+/* V10 component-first responsive surfaces. Original React Bits styles are bundled by Vite. */
+.sb8-flex-shell:not([data-ready="true"]), .sb8-orbit-section:not([data-ready="true"]) {display:block!important;}
+/* Visual replacement only after the actual carousel has become ready.
+   CMS cards stay in the Blade DOM and reappear whenever effects are unavailable. */
+.sb8-flex-shell:not([data-sb10-live="true"]) ~ .sb7-app-grid {display:grid!important;}
+.sb8-flex-shell[data-sb10-live="true"] ~ .sb7-app-grid {display:none!important;}
+.sb8-flex-shell {position:relative;margin:22px 0 30px!important; padding:18px!important; background:transparent!important; box-shadow:none!important; border:0!important; overflow:visible!important}
+.sb8-flex-mount {min-height:0}
+.sb10-flex-viewport {position:relative;width:100%;height:390px;}
+.sb10-orbit-viewport {position:relative;height:325px;width:100%;}
+.sb10-caption {display:flex;align-items:center;justify-content:space-between;gap:22px;padding:8px 5% 14px;color:var(--sb10-ink,#27213b)}
+.sb10-caption>div {display:flex;flex-direction:column;gap:5px;min-width:0}
+.sb10-caption strong{font-size:clamp(20px,3vw,34px);line-height:1.15;letter-spacing:-.035em;overflow-wrap:anywhere}
+.sb10-caption span{font-size:11px;letter-spacing:.13em;font-weight:850;color:var(--sb10-muted,#5e5775)}
+.sb10-caption small{font-size:13px;color:var(--sb10-muted,#5e5775)}
+.sb10-link{display:inline-flex;flex-shrink:0;align-items:center;justify-content:center;padding:12px 18px;border-radius:999px;background:var(--sb10-accent,#663aff);color:white!important;font-weight:800;text-decoration:none;transition:transform .22s ease}
+.sb10-link:hover {transform:translateY(-3px)}
+.sb10-holo{display:flex;flex-direction:column;align-items:center;gap:12px;}
+/* Hide content only after the interactive replacement actually mounts. */
+.sb8-flex-shell:not([data-sb10-live="true"]) .sb8-flex-mount,
+.sb8-orbit-section:not([data-sb10-live="true"]) .sb8-circle-mount,
+[data-sb10-gallery-shell]:not([data-sb10-live="true"]) [data-sb10-component],
+[data-sb10-bento-shell]:not([data-sb10-live="true"]) [data-sb10-component]{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;}
+/* Mount must be measurable to render WebGL. Keep virtual container visible but visually lower in stacking. */
+.sb8-flex-shell:not([data-sb10-live="true"]) .sb8-flex-mount,
+.sb8-orbit-section:not([data-sb10-live="true"]) .sb8-circle-mount,
+[data-sb10-gallery-shell]:not([data-sb10-live="true"]) [data-sb10-component]{position:absolute;inset:0 auto auto 0;width:100%;height:340px!important;overflow:visible;opacity:0;pointer-events:none;}
+[data-sb10-bento-shell]:not([data-sb10-live="true"]) {height:0;min-height:0;margin:0!important;}
+[data-sb10-bento-shell]:not([data-sb10-live="true"]) [data-sb10-component]{position:absolute;left:0;top:0;width:100%;opacity:0;pointer-events:none;}
+.sb8-orbit-section:not([data-sb10-live="true"]) .sb8-circle-mount {position:absolute;top:0;left:0;width:100%;height:340px;opacity:0;pointer-events:none;}
+/* The original featured app grid remains visible below the interactive carousel: no CMS entries vanish. */
+[data-sb10-bento-shell][data-sb10-live="true"] + .sb7-what__grid {display:none!important;}
+[data-sb10-gallery-shell][data-sb10-live="true"] .sb10-gallery-fallback, .sb8-orbit-section[data-sb10-live="true"] .sb10-gallery-fallback{display:none!important;}
+.sb10-gallery-fallback {display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;padding:18px 0;}
+.sb10-gallery-fallback a {display:grid;gap:8px;text-decoration:none;color:inherit;background:var(--sb10-surface,#fff);border:1px solid var(--sb10-border,#dcd8ed);border-radius:24px;padding:12px;transition:transform .2s ease;}
+.sb10-gallery-fallback a:hover{transform:translateY(-3px)}
+.sb10-gallery-fallback img{width:100%;aspect-ratio:4/3;object-fit:contain;border-radius:14px;}
+.sb10-gallery-fallback strong{font-size:14px;}
+.sb10-gallery-fallback small{font-size:11px;color:var(--sb10-muted,#5e5775)}
+.sb10-bento-shell{width:100%;position:relative;margin:20px 0;}
+.sb10-bento-shell:not([data-sb10-live="true"]) {min-height:0;}
+/* MagicBento's demo uses an asymmetrical six-tile grid; CMS may have one to four items. */
+.sb10-magic-scope .card-grid{max-width:none;width:100%;font-family:inherit;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+.sb10-magic-scope .magic-bento-card:nth-child(n){grid-column:auto;grid-row:auto;min-height:195px;aspect-ratio:auto;}
+@media(min-width:680px) and (max-width:1040px){.sb10-magic-scope .card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:679px){.sb10-magic-scope .card-grid{grid-template-columns:minmax(0,1fr);width:100%;padding:0}}
+
+.sb10-magic-scope .magic-bento-card{background:var(--sb10-surface,#fff)!important;color:var(--sb10-ink,#27213b)!important;border-color:var(--sb10-border,#dcd8ed);border-radius:24px}
+.sb10-magic-scope .magic-bento-card__header,.sb10-magic-scope .magic-bento-card__content{color:inherit!important}
+.sb10-magic-scope .magic-bento-card__title{font-weight:850!important;font-size:clamp(18px,2vw,24px);line-height:1.2}
+.sb10-magic-scope .magic-bento-card__description{opacity:.85!important;font-size:14px!important;line-height:1.5!important}
+.sb10-bento-link{font-size:13px;font-weight:750;color:var(--sb10-accent,#663aff);text-decoration:none;display:inline-block;margin-top:14px}
+.sb10-bento-link:hover{text-decoration:underline}
+.sb10-bento-shell .magic-bento-card{min-height:210px;}
+.sb10-public-role,.sb10-school-gallery{max-width:1160px;margin:45px auto;padding:24px 20px;border-radius:32px;background:var(--sb10-surface,#fff);border:1px solid var(--sb10-border,#ded9ef)}
+.sb10-public-role h2,.sb10-school-gallery h2{font-size:clamp(27px,4vw,52px);line-height:1.05;letter-spacing:-.05em;margin:6px 0 12px;color:var(--sb10-ink,#25203c)}
+.sb10-public-role p,.sb10-school-gallery p{color:var(--sb10-muted,#5e5775);max-width:64ch}
+.sb10-public-role [data-sb10-component],.sb10-school-gallery [data-sb10-component] {min-height:340px;}
+@media(max-width:750px){.sb10-flex-viewport{height:300px}.sb10-orbit-viewport{height:265px}.sb10-caption{padding:8px 10px;gap:10px}.sb10-link{padding:10px 12px}.sb10-public-role,.sb10-school-gallery{margin:20px 10px;padding:18px 10px}}
+:root.sb-u-motion-off .sb8-flex-shell,
+:root.sb-u-motion-off .sb8-orbit-section { display:block!important; }
+:root.sb-u-motion-off .sb8-flex-mount,
+:root.sb-u-motion-off .sb8-circle-mount,
+:root.sb-u-motion-off [data-sb10-component]{display:none!important}
+:root.sb-u-motion-off .sb8-flex-shell ~ .sb7-app-grid,:root.sb-u-motion-off .sb8-orbit-section .sb10-gallery-fallback,:root.sb-u-motion-off [data-sb10-gallery-shell] .sb10-gallery-fallback,:root.sb-u-motion-off [data-sb10-bento-shell] + .sb7-what__grid{display:grid!important}
+/* A visitor can disable effects after a gallery mounts. Never leave an empty slot. */
+:root:is(.sb-u-motion-off,[data-sb-effects="off"],[data-sb-motion="off"]) [data-sb10-gallery-shell] [data-sb10-component],
+:root:is(.sb-u-motion-off,[data-sb-effects="off"],[data-sb-motion="off"]) [data-sb10-bento-shell] [data-sb10-component] {display:none!important}
+:root:is(.sb-u-motion-off,[data-sb-effects="off"],[data-sb-motion="off"]) [data-sb10-gallery-shell] .sb10-gallery-fallback,
+:root:is(.sb-u-motion-off,[data-sb-effects="off"],[data-sb-motion="off"]) [data-sb10-bento-shell] + .sb7-what__grid {display:grid!important}
+:root:is(.sb-u-motion-off,[data-sb-effects="off"],[data-sb-motion="off"]) .sb8-flex-shell ~ .sb7-app-grid {display:grid!important}
+@media(prefers-reduced-motion:reduce){
+ .sb10-link,.sb10-gallery-fallback a{transition:none}
+ [data-sb10-gallery-shell] [data-sb10-component], [data-sb10-bento-shell] [data-sb10-component], .sb8-flex-mount,.sb8-circle-mount {display:none!important}
+ [data-sb10-gallery-shell] .sb10-gallery-fallback,[data-sb10-bento-shell] + .sb7-what__grid,.sb8-flex-shell ~ .sb7-app-grid {display:grid!important}
+}
+
+
+:root:is(.sb-u-motion-off,[data-sb-effects="off"],[data-sb-motion="off"]) [data-sb8-holo-host] [data-sb8-component]{display:none!important}
+:root:is(.sb-u-motion-off,[data-sb-effects="off"],[data-sb-motion="off"]) [data-sb8-holo-host] .sb8-holo-fallback{display:block!important}
+@media(prefers-reduced-motion:reduce){[data-sb8-holo-host] [data-sb8-component]{display:none!important}[data-sb8-holo-host] .sb8-holo-fallback{display:block!important}}

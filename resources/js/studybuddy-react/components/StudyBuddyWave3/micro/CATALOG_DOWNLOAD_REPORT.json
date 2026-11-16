@@ -1,0 +1,53 @@
+{
+  "downloaded": [
+    "SpringCheck",
+    "GlideSelect",
+    "SwipeToast",
+    "JellyRadio",
+    "SquishSwitch",
+    "PulseHeart",
+    "Shredder",
+    "PaperCrumple",
+    "TearTicket",
+    "FlipCard",
+    "BranchedMenu",
+    "FolderFloat",
+    "RefineFrame",
+    "ThoughtLine",
+    "VoicePill",
+    "SloshGauge",
+    "PromptBar",
+    "SlingButton",
+    "BellToggle",
+    "CallChip",
+    "StatusMark",
+    "SwipeRow",
+    "CometDial",
+    "WakeSlider",
+    "CodeSlots",
+    "DodgeField",
+    "LatticeLoader",
+    "ScrubField",
+    "FuseButton",
+    "WarmTooltip",
+    "SlideCommit",
+    "RubberSegment",
+    "PeekRating",
+    "HoldButton"
+  ],
+  "skipped": [],
+  "required": [
+    "SpringCheck",
+    "GlideSelect",
+    "SwipeToast",
+    "JellyRadio",
+    "SquishSwitch",
+    "PulseHeart"
+  ],
+  "required_dependencies": [
+    "@hugeicons/core-free-icons@^4.3.3",
+    "@hugeicons/react@^1.1.10",
+    "motion@^12.23.12"
+  ],
+  "upstream": "https://reactbits.dev/c/micro"
+}
