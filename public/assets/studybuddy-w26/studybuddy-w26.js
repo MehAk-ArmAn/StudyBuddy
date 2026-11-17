@@ -132,8 +132,11 @@
     const main=document.querySelector('main')||document.querySelector('#main')||document.querySelector('[role="main"]');
     if(!main) return;
     const path=location.pathname.replace(/\/$/,'')||'/';
+    // The existing Blade pages already own their own hero, content and layout.
+    // Do not asynchronously inject a second banner into Roles/Schools/Apps/Auth/
+    // Dashboard: it shifts sections after paint and produces inconsistent pages.
+    // Retain only the pre-existing Home illustration section.
     if(path==='/') addHome(main);
-    else addRoute(main,path);
     const section=document.querySelector('#sb26-visual-worlds,#sb26-route-art');
     // Reveal only when visible. Honor reduced-motion accessibility.
     if(section && !motionReduced() && 'IntersectionObserver' in window) {

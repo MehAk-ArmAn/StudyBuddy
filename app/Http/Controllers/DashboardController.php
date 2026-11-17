@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
+use App\Support\StudyBuddyLearningSnapshot;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
 
@@ -43,6 +44,8 @@ class DashboardController extends Controller
             'parentData' => $this->parentData($user),
             'teacherData' => $this->teacherData($user),
             'learnerData' => $this->learnerData($user, $profile, $recentPoints, $assignments),
+            'learningSnapshot' => in_array($role, ['student', 'independent_learner'], true)
+                ? StudyBuddyLearningSnapshot::forUser((int) $user->id) : null,
         ]);
     }
 

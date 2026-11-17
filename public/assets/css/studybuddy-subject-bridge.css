@@ -1,0 +1,17 @@
+/* P0: academic subject discovery uses W34 assignments in the canonical Apps catalogue. */
+.sb-subject-bridge{max-width:1190px;margin:35px auto 38px;padding:24px clamp(16px,3vw,32px);border-radius:24px;border:1px solid rgba(134,152,238,.28);background:linear-gradient(120deg,rgba(68,56,139,.32),rgba(30,64,121,.2));color:#f4f3ff}
+.sb-subject-bridge__heading{display:flex;align-items:end;justify-content:space-between;gap:24px}
+.sb-subject-bridge__eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;color:#aac7ff}
+.sb-subject-bridge h2{font-size:clamp(25px,3.3vw,40px);line-height:1.16;margin:9px 0 12px;color:#f9f7ff}
+.sb-subject-bridge h2 em{color:#b7a6ff}
+.sb-subject-bridge__heading p{line-height:1.5;color:#cbcee5;max-width:660px}
+.sb-subject-bridge__all{display:inline-flex;flex-shrink:0;align-items:center;min-height:42px;padding:10px 14px;border-radius:999px;background:#4c4a9c;color:#fff;text-decoration:none;font-size:13px;font-weight:700}
+.sb-subject-bridge__links{display:flex;flex-wrap:wrap;gap:10px;margin-top:21px}
+.sb-subject-bridge__links a{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:13px;border:1px solid #6a69a9;background:#292751;color:#fff;text-decoration:none;font-weight:700;font-size:13px}
+.sb-subject-bridge__links a:hover,.sb-subject-bridge__links a:focus-visible{background:#3b3974;border-color:#adbdff}
+.sb-subject-bridge__links small{font-size:10px;color:#acc8ff;font-weight:600}
+.sb-subject-bridge__empty{color:#c6c7e2;font-size:13px;line-height:1.55;margin-top:16px}
+.sb-app-card-v3 .sb-subject-bridge__card-tag{display:inline-flex;align-items:center;flex-wrap:wrap;gap:5px;text-decoration:none;padding:5px 9px;border-radius:999px;border:1px solid rgba(134,143,245,.38);color:#c1c2ff;background:rgba(95,88,189,.19);font-size:11px;font-weight:700;margin:0 0 8px}
+.sb-app-card-v3 .sb-subject-bridge__card-tag span{opacity:.8}
+.sb-app-card-v3 .sb-subject-bridge__card-tag:hover{border-color:#9dc5ff;color:#d9e9ff}
+@media(max-width:760px){.sb-subject-bridge__heading{align-items:start;flex-direction:column}.sb-subject-bridge{margin:22px 10px 28px}}

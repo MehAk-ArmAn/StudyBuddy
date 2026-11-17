@@ -51,6 +51,7 @@ class StudyBuddyFinalPlatformController extends Controller
 
         $allApps = StudyBuddyMiniAppPlatform::query()
             ->active()
+            ->with('subjectAssignment')
             ->ordered()
             ->get();
 
@@ -90,6 +91,9 @@ class StudyBuddyFinalPlatformController extends Controller
                             $app->tagline,
                             $app->description,
                             $app->preview_text,
+                            $app->subjectAssignment?->topics,
+                            $app->subjectAssignment?->learning_outcome,
+                            config('studybuddy_w34_subjects.subjects.'.($app->subjectAssignment?->primary_subject ?? '').'.label', ''),
                         ])
                     );
 
@@ -100,6 +104,21 @@ class StudyBuddyFinalPlatformController extends Controller
                 }
             )
             ->values();
+
+        // Only academic subjects with actual published apps visible in this catalogue.
+        // Reuse W34's canonical 28-subject taxonomy and assignment relation.
+        $subjectCounts = $apps
+            ->filter(fn (StudyBuddyMiniAppPlatform $app): bool =>
+                $app->subjectAssignment !== null
+                && ! str_starts_with((string) $app->slug, 'demo-next-'))
+            ->countBy(fn (StudyBuddyMiniAppPlatform $app) => $app->subjectAssignment->primary_subject);
+        $subjectLinks = collect(config('studybuddy_w34_subjects.subjects', []))
+            ->filter(fn ($item, $slug) => ($subjectCounts[$slug] ?? 0) > 0)
+            ->map(fn ($item, $slug) => [
+                'slug' => $slug,
+                'label' => $item['label'],
+                'count' => $subjectCounts[$slug],
+            ])->values();
 
         $roles = [
             'student' => 'Learners',
@@ -117,7 +136,8 @@ class StudyBuddyFinalPlatformController extends Controller
                 'roles',
                 'role',
                 'category',
-                'search'
+                'search',
+                'subjectLinks'
             )
         );
     }

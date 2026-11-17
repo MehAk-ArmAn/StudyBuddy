@@ -19,13 +19,15 @@
       <span class="sb25-mark"><img src="{{ asset('assets/studybuddy-base44-exact/logo.png') }}" alt="" width="42" height="42"></span>
       <span class="sb25-brand-text"><strong>StudyBuddy</strong><small>Learn · Play · Grow</small></span>
     </a>
-    <div class="sb25-primary" data-sb25-react-host data-sb25-active="{{ $sb25Current }}">
+    <div class="sb25-primary" data-sb25-active="{{ $sb25Current }}">
       <nav class="sb25-links-fallback" aria-label="Main navigation">
         <a href="{{ url('/apps') }}" @if($sb25Current==='apps') aria-current="page" @endif>Apps</a>
         <a href="{{ url('/roles') }}" @if($sb25Current==='roles') aria-current="page" @endif>Roles</a>
         <a href="{{ url('/for-schools') }}" @if($sb25Current==='schools') aria-current="page" @endif>For schools</a>
         <a href="{{ url('/#story') }}">How it works</a>
       </nav>
+      {{-- One visible navbar at a time: SSR links remain until the React enhancement is ready. --}}
+      <div class="sb25-react-slot" data-sb25-react-host data-sb25-active="{{ $sb25Current }}" aria-hidden="true" inert></div>
     </div>
     <div class="sb25-actions">
       <button class="sb25-icon-button sb25-search-open" type="button" data-sb25-search-open aria-label="Search StudyBuddy" aria-expanded="false" aria-controls="sb25-search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg></button>

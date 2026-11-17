@@ -8,6 +8,9 @@
     if (/^\/admin(?:\/|$)/.test(location.pathname)) return;
     const header = [...document.querySelectorAll('header')].find(h => h.querySelector('a[href="/"]') && /StudyBuddy/i.test(h.textContent));
     if (!header) return;
+    // W25 is the canonical Laravel public header. Never restyle or hide its
+    // server-rendered navigation while React is becoming ready.
+    if (header.hasAttribute('data-sb25-header')) return;
     header.classList.add('sb27-header');
     const brand = header.querySelector('a[href="/"]');
     brand?.classList.add('sb27-brand');
@@ -34,6 +37,14 @@
     requestAnimationFrame(() => { queued = false; patchHeader(); });
   };
   function init() {
+    // All current Laravel public routes share W25: don't observe or rewrite it.
+    // W27 stays available solely for any real legacy header that still exists.
+    if (document.querySelector('[data-sb25-header]')) {
+      window.StudyBuddyStability27 = {
+        diagnostics: async () => ({version:'W27', skipped:'W25 canonical public navbar'})
+      };
+      return;
+    }
     patchHeader();
     // Only monitor the header, because React mounts GooeyNav asynchronously.
     const h = document.querySelector('header');

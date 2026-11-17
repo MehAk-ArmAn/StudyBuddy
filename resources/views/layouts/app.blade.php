@@ -133,6 +133,8 @@
     <link rel="stylesheet" href="{{ asset('assets/studybuddy-w29/header.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w29/header.css') }}">
 @endif
 {{-- STUDYBUDDY W29 HEADER END --}}
+{{-- Single final public design layer, after all W-era CSS. The admin layout remains separate. --}}
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-page-consistency.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-page-consistency.css') }}">
 </head>
 @php
   $sbUniverseZone = match (true) {
@@ -223,11 +225,11 @@
 <!-- STUDYBUDDY W25 SHARED JS END -->
 
 <!---- STUDYBUDDY W26 JS START ---->
-<script defer src="{{ asset('assets/studybuddy-w26/studybuddy-w26.js') }}?v=26.1"></script>
+<script defer src="{{ asset('assets/studybuddy-w26/studybuddy-w26.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w26/studybuddy-w26.js') }}"></script>
 <!---- STUDYBUDDY W26 JS END ---->
 
 <!-- STUDYBUDDY W27 JS START -->
-<script defer src="{{ asset('assets/studybuddy-w27/stable.js') }}?v=27.1"></script>
+<script defer src="{{ asset('assets/studybuddy-w27/stable.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w27/stable.js') }}"></script>
 <!-- STUDYBUDDY W27 JS END -->
 
 <!-- STUDYBUDDY W19 START -->

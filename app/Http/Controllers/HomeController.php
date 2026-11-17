@@ -13,20 +13,28 @@ class HomeController extends Controller
 {
     public function index(): View
     {
+        // One canonical, published Apps CMS collection powers the hero count and real game shelf.
+        // Explicit demo concepts are previews, not published educational games.
+        $catalogue = StudyBuddyMiniAppPlatform::query()->active()->ordered()->get()
+            ->filter(fn (StudyBuddyMiniAppPlatform $app): bool =>
+                ! str_starts_with((string) $app->slug, 'demo-next-')
+                && $app->visibleForRole(auth()->user()?->role))
+            ->values();
+
+        $ageMin = $catalogue->pluck('age_min')->filter(fn ($age) => is_numeric($age) && $age > 0)->min();
+        $ageMax = $catalogue->pluck('age_max')->filter(fn ($age) => is_numeric($age) && $age > 0)->max();
+        $publicAgeRange = $ageMin !== null && $ageMax !== null && $ageMin <= $ageMax
+            ? $ageMin.'–'.$ageMax : null;
+
         return view('home', [
+            'publicAppCount' => $catalogue->count(),
+            'publicAgeRange' => $publicAgeRange,
             // The homepage app strip comes from the real catalogue, so a newly
             // published app appears here with no template edit. When there is
             // nothing published the strip hides itself rather than showing
             // empty cards.
-            'featuredApps' => StudyBuddyMiniAppPlatform::query()
-                ->active()
-                ->ordered()
-                ->take(4)
-                ->get(),
-            // CMS-driven discovery carousel, including explicit local-only demo cards if seeded.
-            'discoveryApps' => StudyBuddyMiniAppPlatform::query()->active()->ordered()->get()
-                ->filter(fn ($app) => $app->visibleForRole(auth()->user()?->role))
-                ->take(12),
+            'featuredApps' => $catalogue->take(4),
+            'discoveryApps' => $catalogue->take(12),
             'settings' => SiteSetting::query()->pluck('value', 'key')->toArray(),
             'navigationItems' => NavigationItem::query()
                 ->where('is_enabled', true)

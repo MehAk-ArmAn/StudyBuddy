@@ -1,0 +1,77 @@
+/* StudyBuddy public pages — ONE finishing stylesheet for existing Laravel/Blade pages.
+   The admin layout, student records, form handling and routes are intentionally untouched.
+   Scoped overrides resolve older W-series selector conflicts without re-implementing components. */
+:root { --sb-page-indigo:#7166e8;--sb-page-violet:#927cf2;--sb-page-blue:#75b5f7;--sb-page-max:1220px; }
+body.studybuddy-site #main-content{min-width:0}
+body.studybuddy-site #main-content > :is(section,div){min-width:0}
+body.studybuddy-site :is(.sb-schools,.sb-roles-clean-page,.sb-catalog-v3,.sb10-school-gallery,.sb10-public-role){overflow-wrap:normal;word-break:normal}
+
+/* The Schools experience is deliberately an ivory-themed section even when the site shell is dark.
+   Its background and ink must remain paired; previous global v6/v10 rules changed only the ink. */
+html[data-sb-color-theme] body.studybuddy-site .sb-schools{color:#282241!important;background:#f8f7ff!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-hero{color:#282241!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-copy h1{color:#292244!important;-webkit-text-fill-color:initial!important;text-shadow:none!important;letter-spacing:-.055em;line-height:1.07}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-copy h1 em{color:#7255e8!important;-webkit-text-fill-color:initial!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-copy>p:not(.sb-next-eyebrow){color:#514b70!important;line-height:1.7}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-next-eyebrow{color:#624aca!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-disclaimer{color:#635e82!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-preview{color:#292242!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-preview :is(.school-preview-greet,.school-preview-card strong){color:#282241!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .school-preview-card small{color:#635d7f!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-value{color:#292242!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-value :is(h2,h3){color:#292242!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-value p{color:#575071!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-steps{color:#fff!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-steps :is(h2,h3,strong){color:#fff!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-steps p{color:#e4dbf7!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-cta{color:#292242!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-cta h2{color:#292242!important}
+html[data-sb-color-theme] body.studybuddy-site .sb-schools .sb-schools-cta p{color:#575071!important}
+
+/* Role/School gallery: captions must not join together or break mid-letter, on any page. */
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role){min-width:0;max-width:min(1160px,calc(100% - 32px));overflow:hidden}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-gallery-fallback{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:16px}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-gallery-fallback a{min-width:0;display:flex;flex-direction:column;gap:7px;justify-content:flex-start;overflow:hidden;line-height:1.35}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-gallery-fallback :is(strong,small){display:block;white-space:normal!important;overflow-wrap:break-word;word-break:normal;line-height:1.4}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-gallery-fallback strong{font-size:14px;font-weight:800}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-gallery-fallback small{font-size:12px;opacity:.88}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-caption{min-height:102px;align-items:center;gap:16px;flex-wrap:wrap}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-caption>div{flex:1 1 240px;min-width:0}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-caption :is(strong,small){white-space:normal;overflow-wrap:break-word;word-break:normal;line-height:1.35}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-caption strong{font-size:clamp(18px,2.1vw,28px)}
+body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-link{flex:none}
+
+/* One comfortable content width and readable wrapping for route-specific layouts. */
+body.studybuddy-site .sb-roles-clean-hero{align-items:flex-start;flex-wrap:wrap}
+body.studybuddy-site .sb-roles-clean-hero h1{overflow-wrap:normal;word-break:normal;line-height:1.12}
+body.studybuddy-site .sb-role-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+body.studybuddy-site .sb-role-clean-card{min-width:0}
+body.studybuddy-site .sb-role-card-content{min-width:0}
+body.studybuddy-site .sb-role-card-content :is(h2,p,dd){overflow-wrap:break-word;word-break:normal}
+body.studybuddy-site .sb-school-shell{color:#292242}
+body.studybuddy-site .sb-school-shell :is(h1,h2,h3){color:#292242}
+body.studybuddy-site .sb-school-shell :is(input,select,textarea){max-width:100%}
+body.studybuddy-site .sb-catalog-v3{max-width:100%}
+
+@media (max-width:900px){
+ body.studybuddy-site .sb-schools .sb-schools-hero{grid-template-columns:minmax(0,1fr);gap:36px;padding:clamp(32px,5vw,56px) 24px}
+ body.studybuddy-site .sb-schools .sb-schools-hero>*{min-width:0}
+ body.studybuddy-site .sb-schools .sb-schools-preview{transform:none;max-width:640px;width:100%}
+ body.studybuddy-site .sb10-caption{align-items:stretch}
+}
+@media (max-width:680px){
+ body.studybuddy-site .sb-role-card-grid{grid-template-columns:minmax(0,1fr)}
+ body.studybuddy-site .sb-schools .sb-schools-hero{padding:32px 20px 56px}
+ body.studybuddy-site .sb-schools .sb-schools-copy h1{font-size:clamp(38px,10vw,62px)!important}
+ body.studybuddy-site .sb-schools .sb-schools-preview{padding:16px}
+ body.studybuddy-site .sb-schools .school-preview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role){max-width:calc(100% - 24px);padding:18px}
+ body.studybuddy-site .sb10-caption .sb10-link{align-self:flex-start}
+}
+@media (max-width:400px){
+ body.studybuddy-site .sb-schools .school-preview-grid{grid-template-columns:minmax(0,1fr)}
+ body.studybuddy-site .sb-schools .sb-next-actions a{max-width:100%;white-space:normal}
+}
+@media (prefers-reduced-motion: reduce){
+ body.studybuddy-site :is(.sb10-school-gallery,.sb10-public-role) .sb10-gallery-fallback a{transition:none}
+}

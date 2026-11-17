@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-wave10-features.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-wave10-features.css') }}">
 @endpush
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-learning-snapshot.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-learning-snapshot.css') }}">
+@endpush
+
 @section('content')
 @php
     $photoUrl = null;
@@ -84,6 +88,10 @@
             <div class="role-progress"><i style="width: {{ $completion }}%"></i></div>
         </aside>
     </section>
+
+    @if($learningSnapshot !== null)
+        @include('dashboard.partials.studybuddy-learning-snapshot', ['snapshot' => $learningSnapshot])
+    @endif
 
     @if(session('status'))
         <section class="role-status-good">{{ session('status') }}</section>

@@ -41,3 +41,16 @@ body.sb-admin-body{font-family:'Plus Jakarta Sans',sans-serif}
 /* Defensive guard for legacy W9-W24 overlays if they are injected by cached scripts. */
 body.studybuddy-site .sb-advanced-shell,body.studybuddy-site .sb-u-toolbar,body.studybuddy-site .sb-u-world-panel{display:none!important}
 body.studybuddy-site [data-sb24-gooey-host],body.studybuddy-site [data-sb-w24-gooey]{display:none!important}
+
+/* Canonical progressive-enhancement handshake for the existing W25 public navigation.
+   Only the server-rendered links are visible until the existing React GooeyNav is ready. */
+.sb25-primary{position:relative;isolation:isolate;white-space:nowrap}
+.sb25-primary .sb25-links-fallback{font-size:14px;line-height:1.2;gap:4px;padding:6px;border-color:rgba(137,145,249,.28);background:linear-gradient(112deg,rgba(99,92,214,.11),rgba(84,139,229,.10)),rgba(23,25,52,.90);box-shadow:0 9px 28px -19px rgba(93,102,214,.40)}
+.sb25-primary .sb25-links-fallback a{font-size:14px;font-weight:500;line-height:1.2;padding:9px 16px;letter-spacing:normal}
+.sb25-primary .sb25-links-fallback a[aria-current=page]{background:linear-gradient(110deg,#7166e8,#709ce9);box-shadow:0 3px 14px rgba(101,119,238,.28)}
+.sb25-primary .sb25-react-slot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);visibility:hidden;opacity:0;pointer-events:none;white-space:nowrap;z-index:1}
+.sb25-primary[data-sb25-ready=true]>.sb25-links-fallback{visibility:hidden!important;pointer-events:none!important}
+.sb25-primary[data-sb25-ready=true]>.sb25-react-slot{visibility:visible;opacity:1;pointer-events:auto}
+.sb25-primary .sb25-react-slot .gooey-nav{max-width:none}
+@media(min-width:921px) and (max-width:1180px){.sb25-primary .sb25-links-fallback a{padding:8px 12px;font-size:13px}}
+@media(max-width:920px){.sb25-primary .sb25-react-slot{display:none!important}}

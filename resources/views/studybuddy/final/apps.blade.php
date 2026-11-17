@@ -56,6 +56,7 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-wave10-features.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-wave10-features.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-subject-bridge.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-subject-bridge.css') }}">
 @endpush
 
 @section('content')
@@ -78,7 +79,7 @@
             <div class="sb-catalog-v3__stats" aria-label="Current catalogue overview">
                 <div><strong class="sbfb-stat-shell"><span class="sbfb-stat-static">{{ $apps->count() }}</span><span class="sbfb-stat-react" data-sb-react="SBCounter" data-sb-react-props='@json(["value" => $apps->count()])'></span></strong><span>{{ \Illuminate\Support\Str::plural('Catalogue entry', $apps->count()) }}</span></div>
                 @if($readyApps > 0)<div><strong class="sbfb-stat-shell"><span class="sbfb-stat-static">{{ $readyApps }}</span><span class="sbfb-stat-react" data-sb-react="SBCounter" data-sb-react-props='@json(["value" => $readyApps])'></span></strong><span>Browser playable</span></div>@endif
-                @if($categories->count() > 0)<div><strong class="sbfb-stat-shell"><span class="sbfb-stat-static">{{ $categories->count() }}</span><span class="sbfb-stat-react" data-sb-react="SBCounter" data-sb-react-props='@json(["value" => $categories->count()])'></span></strong><span>{{ \Illuminate\Support\Str::plural('Subject', $categories->count()) }}</span></div>@endif
+                @if($categories->count() > 0)<div><strong class="sbfb-stat-shell"><span class="sbfb-stat-static">{{ $categories->count() }}</span><span class="sbfb-stat-react" data-sb-react="SBCounter" data-sb-react-props='@json(["value" => $categories->count()])'></span></strong><span>{{ \Illuminate\Support\Str::plural('Catalogue category', $categories->count()) }}</span></div>@endif
             </div>
             <div class="sb-catalog-v3__hero-actions">
                 <a class="sb-app-button sb-app-button--primary sb-v6-chromatic" href="#sb-v6-catalog-filters">Explore the catalogue <span aria-hidden="true">↗</span></a>
@@ -114,6 +115,30 @@
     @elseif(count($sb8GalleryItems) > 0)
         <script type="application/json" id="sb8-apps-gallery">@json($sb8GalleryItems)</script>
     @endif
+
+    {{-- The academic subject atlas is a view over the SAME published apps, not another store. --}}
+    <section class="sb-subject-bridge" aria-labelledby="sb-subject-bridge-heading">
+      <div class="sb-subject-bridge__heading">
+        <div>
+          <span class="sb-subject-bridge__eyebrow">THE ACADEMIC ATLAS</span>
+          <h2 id="sb-subject-bridge-heading">Discover by <em>learning subject.</em></h2>
+          <p>Subject labels come from each game’s learning details. Only subjects with published games appear below.</p>
+        </div>
+        <a class="sb-subject-bridge__all" href="{{ route('studybuddy.w34.subjects.index') }}">Explore the subject atlas ↗</a>
+      </div>
+      @if($subjectLinks->isNotEmpty())
+        <nav class="sb-subject-bridge__links" aria-label="Browse published games by academic subject">
+          @foreach($subjectLinks as $subjectLink)
+            <a href="{{ route('studybuddy.w34.subjects.show', $subjectLink['slug']) }}">
+              <span>{{ $subjectLink['label'] }}</span>
+              <small>{{ $subjectLink['count'] }} {{ $subjectLink['count'] === 1 ? 'game' : 'games' }}</small>
+            </a>
+          @endforeach
+        </nav>
+      @else
+        <p class="sb-subject-bridge__empty">No games have an academic subject assigned yet. The atlas will fill automatically when the team classifies published games.</p>
+      @endif
+    </section>
 
     @if($apps->isNotEmpty())
     <section class="sb-v5-world-chooser" aria-label="Browse by subject">
@@ -294,6 +319,9 @@
                         $app->description,
                         $app->preview_text,
                         $roles->implode(' '),
+                        $app->subjectAssignment?->topics,
+                        $app->subjectAssignment?->learning_outcome,
+                        config('studybuddy_w34_subjects.subjects.'.($app->subjectAssignment?->primary_subject ?? '').'.label', ''),
                     ])
                 );
             @endphp
@@ -339,6 +367,15 @@
                     </div>
 
                     <div class="sb-app-card-v3__copy">
+                        @php($learningSubject = $app->subjectAssignment?->primary_subject)
+                        @if($learningSubject && config('studybuddy_w34_subjects.subjects.'.$learningSubject))
+                            <a class="sb-subject-bridge__card-tag" href="{{ route('studybuddy.w34.subjects.show', $learningSubject) }}">
+                                ✦ {{ config('studybuddy_w34_subjects.subjects.'.$learningSubject.'.label') }}
+                                @if($app->subjectAssignment?->learning_stage)
+                                    <span>· {{ \Illuminate\Support\Str::headline($app->subjectAssignment->learning_stage) }}</span>
+                                @endif
+                            </a>
+                        @endif
                         <h2>
                             <a href="{{ route('studybuddy.apps.show', $app->slug) }}">
                                 {{ $app->name }}

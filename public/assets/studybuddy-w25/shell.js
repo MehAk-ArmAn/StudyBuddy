@@ -4,6 +4,44 @@
   const $ = (s, root=document) => root.querySelector(s);
   const header = $('[data-sb25-header]');
   if (!header) return;
+  // One visible public navigation at all times. The server-rendered Blade menu
+  // stays interactive until the existing W25 React GooeyNav has really mounted.
+  // A separate React slot avoids the old root replacement flash on every page.
+  const gooeySlot = $('[data-sb25-react-host]', header);
+  const navRegion = gooeySlot?.closest('.sb25-primary');
+  const bladeLinks = navRegion?.querySelector('.sb25-links-fallback');
+  if (gooeySlot && navRegion && bladeLinks) {
+    let scheduled = false;
+    let mounted = false;
+    let observer;
+    const revealNav = () => {
+      if (mounted || scheduled || !gooeySlot.isConnected) return;
+      const nav = gooeySlot.querySelector('.gooey-nav');
+      if (!nav || navRegion.getBoundingClientRect().width < 1) return;
+      scheduled = true;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        scheduled = false;
+        const live = gooeySlot.querySelector('.gooey-nav');
+        if (!live || !gooeySlot.isConnected || !bladeLinks.isConnected) return;
+        const bounds = live.getBoundingClientRect();
+        const backupBounds = bladeLinks.getBoundingClientRect();
+        if (bounds.width < 200 || bounds.height < 28 || backupBounds.width < 200) return;
+        navRegion.style.minWidth = Math.ceil(Math.max(bounds.width, backupBounds.width)) + 'px';
+        bladeLinks.inert = true;
+        bladeLinks.setAttribute('aria-hidden', 'true');
+        gooeySlot.inert = false;
+        gooeySlot.removeAttribute('aria-hidden');
+        navRegion.dataset.sb25Ready = 'true';
+        mounted = true;
+        observer?.disconnect();
+        window.removeEventListener('resize', revealNav);
+      }));
+    };
+    observer = new MutationObserver(revealNav);
+    observer.observe(gooeySlot, { childList:true, subtree:true });
+    window.addEventListener('resize', revealNav, { passive:true });
+    revealNav();
+  }
   const mobile = $('[data-sb25-mobile-toggle]', header);
   const menu = $('#sb25-mobile-menu', header);
   const searchButton = $('[data-sb25-search-open]', header);
@@ -56,7 +94,7 @@
       universeToolbarCount: document.querySelectorAll('.sb-u-toolbar').length,
       homeTabInMainNav: [...document.querySelectorAll('[data-sb25-react-host] a')].some(a => /^(home)$/i.test(a.textContent.trim())),
       current: header.getAttribute('data-sb25-current'),
-      gooeyMounted: !!header.querySelector('.gooey-nav-container')
+      gooeyMounted: !!header.querySelector('[data-sb25-react-host] .gooey-nav')
     })
   };
 })();
