@@ -1,0 +1,10 @@
+{
+  "existing": [
+    "resources/views/dashboard/my-quest.blade.php"
+  ],
+  "files": [
+    "resources/views/dashboard/my-quest.blade.php",
+    "public/assets/studybuddy-w16/quests.css",
+    "public/assets/studybuddy-w16/quests.js"
+  ]
+}

@@ -59,6 +59,10 @@
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13.css') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13.css')) }}">
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13-style.css') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-style.css')) }}">
 <!-- W13 ASSETS END -->
+
+<!-- STUDYBUDDY W19 START -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w19/w19-style.css') }}?v=19.1">
+<!-- STUDYBUDDY W19 END -->
 </head>
 
 @php
@@ -404,5 +408,9 @@
 <!-- W13 REACT START -->
 <script type="module" src="{{ asset('assets/studybuddy-w13/w13-react.js') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-react.js')) }}"></script>
 <!-- W13 REACT END -->
+
+<!-- STUDYBUDDY W19 START -->
+<script type="module" src="{{ asset('assets/studybuddy-w19/w19-react.js') }}?v=20.0"></script>
+<!-- STUDYBUDDY W19 END -->
 </body>
 </html>

@@ -1,0 +1,10 @@
+{
+  "root": "/Users/mehakarman/Desktop/StudyBuddy-main",
+  "files": {
+    "studybuddy-reactbits/w19/vite.config.mjs": "1c8c0773cf62c8aa3ae9e44d3a3247845133ee234eb1f2ea9c911cfd75e7ec7d",
+    "public/assets/studybuddy-base44-exact/home.html": "46c6511b263db621fc22a81fc4fb5b2377190e9b7c2bf3aa56af6d704ff232bc",
+    "resources/views/layouts/app.blade.php": "3d6e4c0cf81137fdd3bde872bd7358b575c54c5f2ebec3c756075dde5f9c9323",
+    "resources/views/layouts/admin.blade.php": "985512caa369fe71857657664c291b06882645262d9b81faffad95a70708c9e8"
+  },
+  "built": "public/assets/studybuddy-w19"
+}

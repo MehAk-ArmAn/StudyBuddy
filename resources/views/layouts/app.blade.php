@@ -99,6 +99,10 @@
 <!-- W13 ASSETS END -->
 <!-- W14 PARITY CSS -->
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w14/parity.css') }}?v={{ filemtime(public_path('assets/studybuddy-w14/parity.css')) }}">
+
+<!-- STUDYBUDDY W19 START -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w19/w19-style.css') }}?v=19.1">
+<!-- STUDYBUDDY W19 END -->
 </head>
 @php
   $sbUniverseZone = match (true) {
@@ -176,5 +180,9 @@
 <!-- W13 REACT START -->
 <script type="module" src="{{ asset('assets/studybuddy-w13/w13-react.js') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-react.js')) }}"></script>
 <!-- W13 REACT END -->
+
+<!-- STUDYBUDDY W19 START -->
+<script type="module" src="{{ asset('assets/studybuddy-w19/w19-react.js') }}?v=20.0"></script>
+<!-- STUDYBUDDY W19 END -->
 </body>
 </html>
