@@ -23,6 +23,11 @@
         return asset(ltrim($path, '/'));
     };
 
+    // STUDYBUDDY W33 CATALOGUE DESKTOP: one batched metadata query, no per-card N+1.
+    $sb33ShotCounts = \Illuminate\Support\Facades\DB::table('studybuddy_w33_screenshots')
+        ->selectRaw('app_id, COUNT(*) as total')->groupBy('app_id')->pluck('total', 'app_id');
+    $sb33NativeIds = \Illuminate\Support\Facades\DB::table('studybuddy_w33_desktop_packages')->pluck('app_id')->all();
+
     $readyApps = $apps->filter(
         fn ($app) => $app->hasPublishedWebApp()
     )->count();
@@ -394,6 +399,9 @@
                         @endforeach
                     </div>
 
+                    @if(($sb33ShotCounts[$app->id] ?? 0) > 0)
+                    <p class="sb33-catalog-metadata">📷 {{ $sb33ShotCounts[$app->id] }} real screenshots</p>
+                    @endif
                     <div class="sb-app-card-v3__actions">
                         {{-- The card shows the single best real action; the
                              detail page lists every platform. --}}
@@ -422,6 +430,11 @@
                         >
                             Details
                         </a>
+                        @if($app->is_web_enabled && $app->usesUploadedBuild() && $app->hasPublishedWebApp())
+                        <a class="sb-app-button sb-app-button--secondary" href="{{ route('studybuddy.w33.desktop.install', $app->slug) }}" target="_blank" rel="noopener" aria-label="Install {{ $app->name }} on desktop">🖥 Install</a>
+                        @elseif($app->is_download_enabled && in_array($app->id, $sb33NativeIds))
+                        <a class="sb-app-button sb-app-button--secondary" href="{{ route('studybuddy.apps.show', $app->slug) }}#desktop">🖥 Desktop</a>
+                        @endif
                     </div>
                 </div>
             </article>

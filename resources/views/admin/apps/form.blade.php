@@ -77,6 +77,13 @@
     </header>
 
     @include('admin.apps.partials.flash')
+    {{-- STUDYBUDDY W33 ADMIN LINK --}}
+    @unless($isNew)
+    <div style="margin:15px 0 25px;padding:19px;border:1px solid #6862a8;border-radius:17px;background:linear-gradient(110deg,#282048,#132e49);color:#f4efff;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div><strong>✨ W33 · Showcase & Desktop</strong><p style="margin:5px 0 0;color:#d3cdeb">Screenshots, release notes, highlights, installable web app and tested desktop installers.</p></div>
+      <a style="display:inline-block;background:linear-gradient(100deg,#9b69fb,#43c5dd);padding:11px 17px;border-radius:12px;text-decoration:none;color:#101326;font-weight:750" href="{{ route('studybuddy.w33.admin.edit', $app) }}">Manage showcase →</a>
+    </div>
+    @endunless
 
     <form id="app-editor-form" class="sb-form sb-app-editor__form" method="POST" enctype="multipart/form-data"
           action="{{ $isNew ? route('admin.control-room.apps.store') : route('admin.control-room.apps.update', $app) }}"

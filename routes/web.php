@@ -101,6 +101,9 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
 */
 require __DIR__.'/studybuddy.php';
 
+// STUDYBUDDY W33 SHOWCASE + DESKTOP
+require __DIR__ . '/studybuddy_w33.php';
+
 // Final StudyBuddy dashboard/profile routes
 require __DIR__ . '/studybuddy_dashboard_profile_final.php';
 

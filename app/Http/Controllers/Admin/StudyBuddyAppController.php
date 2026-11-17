@@ -257,6 +257,8 @@ class StudyBuddyAppController extends Controller
         $name = $app->name;
 
         $publisher->remove($app);
+        // STUDYBUDDY W33 DELETE OWN MEDIA — no orphaned private screenshot/installer files.
+        \App\Services\StudyBuddyW33Cleanup::forApp($app);
         $this->deleteUploadedArtwork($app->hero_image);
         $this->deleteUploadedArtwork($app->image_url);
         $app->delete();

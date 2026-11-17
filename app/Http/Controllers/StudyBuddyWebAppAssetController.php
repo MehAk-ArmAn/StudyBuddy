@@ -19,6 +19,13 @@ class StudyBuddyWebAppAssetController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
+        // STUDYBUDDY W33 PWA ASSETS: synthetic, scoped to this one published build.
+        if ($path === 'studybuddy-w33-manifest.webmanifest' || $path === 'studybuddy-w33-sw.js') {
+            abort_unless($app->is_web_enabled && $app->usesUploadedBuild() && $app->hasPublishedWebApp(), 404);
+            return $path === 'studybuddy-w33-manifest.webmanifest'
+                ? \App\Services\StudyBuddyW33Pwa::manifest($app)
+                : \App\Services\StudyBuddyW33Pwa::serviceWorker($app);
+        }
         return $this->serve($app, $path, false);
     }
 
@@ -232,15 +239,18 @@ class StudyBuddyWebAppAssetController extends Controller
             abort(404);
         }
 
-        return response(
-            StudyBuddyWebAppPublisher::prepareEntryDocument(
-                $html,
-                $this->mountDirectory(basename($candidate)),
-                StudyBuddyWebAppPublisher::hasLocalCanvasKit(dirname($candidate))
-            ),
-            200,
-            $headers
+        // STUDYBUDDY W33 PUBLIC ENTRY: only decorate public app-build mounts.
+        $prepared = StudyBuddyWebAppPublisher::prepareEntryDocument(
+            $html,
+            $this->mountDirectory(basename($candidate)),
+            StudyBuddyWebAppPublisher::hasLocalCanvasKit(dirname($candidate))
         );
+        if (str_starts_with($this->mountDirectory(basename($candidate)), '/app-builds/')) {
+            $existingWorker = is_file(dirname($candidate).'/flutter_service_worker.js')
+                || is_file(dirname($candidate).'/service_worker.js');
+            $prepared = \App\Services\StudyBuddyW33Pwa::decorate($prepared, $existingWorker);
+        }
+        return response($prepared, 200, $headers);
     }
 
     /** The URL directory this request is serving the build from. */

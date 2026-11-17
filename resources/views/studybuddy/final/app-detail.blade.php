@@ -223,6 +223,9 @@
         </section>
     @endif
 
+    {{-- STUDYBUDDY W33 SHOWCASE --}}
+    @include('studybuddy.w33.showcase')
+
     <section class="sb-app-detail-v3__content">
         <article>
             <p class="sb-app-detail-v3__eyebrow">
