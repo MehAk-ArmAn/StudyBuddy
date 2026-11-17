@@ -39,9 +39,9 @@
     ];
 @endphp
 
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? filemtime(public_path('assets/css/studybuddy-dashboard-system.css')) : time() }}">
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? filemtime(public_path('assets/css/studybuddy-profile-customizer.css')) : time() }}">
-<script src="{{ asset('assets/js/studybuddy-profile-customizer.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-profile-customizer.js')) ? filemtime(public_path('assets/js/studybuddy-profile-customizer.js')) : time() }}" defer></script>
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-dashboard-system.css') : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-profile-customizer.css') : time() }}">
+<script src="{{ asset('assets/js/studybuddy-profile-customizer.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-profile-customizer.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-profile-customizer.js') : time() }}" defer></script>
 
 <div class="sb-user-hub">
     <section class="sb-page-hero compact">

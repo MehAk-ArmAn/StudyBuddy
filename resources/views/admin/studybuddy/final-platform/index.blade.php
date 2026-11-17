@@ -17,7 +17,7 @@
 @endphp
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-app-publisher.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-app-publisher.css')) ? filemtime(public_path('assets/css/studybuddy-admin-app-publisher.css')) : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-app-publisher.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-app-publisher.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-admin-app-publisher.css') : time() }}">
 @endpush
 
 @section('content')

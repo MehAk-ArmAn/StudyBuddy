@@ -3,7 +3,7 @@
 @section('title', 'Contact us')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-contact-form-final.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-contact-form-final.css')) ? filemtime(public_path('assets/css/studybuddy-contact-form-final.css')) : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-contact-form-final.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-contact-form-final.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-contact-form-final.css') : time() }}">
 
 <div class="sb-contact-final">
     <section class="sb-contact-final-hero">

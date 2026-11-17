@@ -5,6 +5,9 @@
     $sb33Highlights = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', $sb33Extras->highlights ?? ''))));
     $sb33Hosted = $app->is_active && $app->is_web_enabled && $app->usesUploadedBuild() && $app->hasPublishedWebApp();
 @endphp
+{{-- W34 subject metadata: one assignment per app, no duplicate app listing. --}}
+@include('studybuddy.w34.subject-badge')
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w34/subjects.css') }}?v=34.1">
 <div class="sb33-showcase" data-sb33-showcase>
     @if($sb33Shots->isNotEmpty())
     <section class="sb33-showcase-section" aria-label="Real app screenshots">

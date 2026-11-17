@@ -3,8 +3,8 @@
 @section('title', 'Apps')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-apps.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-apps.css')) ? filemtime(public_path('assets/css/studybuddy-admin-apps.css')) : time() }}">
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-apps-library.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-apps-library.css')) ? filemtime(public_path('assets/css/studybuddy-admin-apps-library.css')) : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-apps.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-apps.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-admin-apps.css') : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-apps-library.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-apps-library.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-admin-apps-library.css') : time() }}">
 @endpush
 
 @section('content')
@@ -313,5 +313,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('assets/js/studybuddy-admin-apps.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-admin-apps.js')) ? filemtime(public_path('assets/js/studybuddy-admin-apps.js')) : time() }}" defer></script>
+<script src="{{ asset('assets/js/studybuddy-admin-apps.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-admin-apps.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-admin-apps.js') : time() }}" defer></script>
 @endpush

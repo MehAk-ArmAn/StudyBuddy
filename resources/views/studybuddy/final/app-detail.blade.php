@@ -3,14 +3,14 @@
 @section('title', $app->name)
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-sparkle-discovery.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-sparkle-discovery.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-sparkle-discovery.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-sparkle-discovery.css') }}">
 <link
     rel="stylesheet"
-    href="{{ asset('assets/css/studybuddy-apps-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-apps-v3.css')) ? filemtime(public_path('assets/css/studybuddy-apps-v3.css')) : time() }}"
+    href="{{ asset('assets/css/studybuddy-apps-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-apps-v3.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-apps-v3.css') : time() }}"
 >
 <link
     rel="stylesheet"
-    href="{{ asset('assets/css/studybuddy-launcher-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-launcher-v3.css')) ? filemtime(public_path('assets/css/studybuddy-launcher-v3.css')) : time() }}"
+    href="{{ asset('assets/css/studybuddy-launcher-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-launcher-v3.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-launcher-v3.css') : time() }}"
 >
 @endpush
 

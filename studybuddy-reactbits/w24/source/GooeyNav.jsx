@@ -115,7 +115,13 @@ void main() {
   vec2 grad = vec2(dFdx(d), -dFdy(d));
   vec2 n = length(grad) > 0.0001 ? normalize(grad) : vec2(0.0, 1.0);
   float rim = (1.0 - smoothstep(0.0, 1.6, -d)) * max(0.0, -n.y) * 0.3;
-  vec3 fill = mix(shape.rgb, vec3(1.0), rim) * (1.0 - 0.06 * max(0.0, n.y) * (1.0 - smoothstep(0.0, 6.0, -d)));
+  // Continuous jewel-tone gradient across the traveling pill. Particle colors remain distinct.
+  float along = clamp(p.x / max(uSize.x, 1.0), 0.0, 1.0);
+  vec3 gradient = mix(vec3(0.43, 0.36, 0.90), vec3(0.44, 0.63, 0.94), smoothstep(0.06, 0.94, along));
+  gradient = mix(gradient, vec3(0.54, 0.49, 0.92), 0.08 * (0.5 + 0.5 * sin(along * 6.2831853)));
+  float particleBlend = clamp(length(shape.rgb - uPill) * 3.2, 0.0, 1.0);
+  vec3 multicolorFill = mix(gradient, shape.rgb, particleBlend);
+  vec3 fill = mix(multicolorFill, vec3(1.0), rim) * (1.0 - 0.06 * max(0.0, n.y) * (1.0 - smoothstep(0.0, 6.0, -d)));
 
   float lifted = field(p - vec2(0.0, 3.0)).w;
   float shadow = (1.0 - smoothstep(-3.0, 9.0, lifted)) * uShadow * (1.0 - body);
@@ -223,7 +229,10 @@ const GooeyNav = ({
   style
 }) => {
   const [innerIndex, setInnerIndex] = useState(initialActiveIndex);
-  const current = Math.min(Math.max(0, activeIndex ?? innerIndex), Math.max(0, items.length - 1));
+  // -1 means no active page (e.g. homepage); do not force-highlight Apps.
+  const requestedIndex = activeIndex ?? innerIndex;
+  const current = Number.isInteger(requestedIndex) && requestedIndex >= 0 && items.length
+    ? Math.min(requestedIndex, items.length - 1) : -1;
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
   const listRef = useRef(null);
@@ -305,7 +314,9 @@ const GooeyNav = ({
         canvas.height = height;
       }
       rects = Array.from(list.children).map(item => {
-        const rect = item.getBoundingClientRect();
+        // Measure the actual clickable link, not an outer wrapper.
+        // This keeps the active highlight aligned with its visible label.
+        const rect = (item.querySelector('.gooey-nav__link') || item).getBoundingClientRect();
         return { x: rect.left - box.left, y: rect.top - box.top, w: rect.width, h: rect.height };
       });
     };
@@ -381,7 +392,7 @@ const GooeyNav = ({
       const ey = rect.y + rect.h / 2 + (Math.random() - 0.5) * rect.h * 0.2;
       const base = Math.max(0.15, s.animationTime / 1000);
       const variance = (Math.random() - 0.5) * (Math.max(0, s.timeVariance) / 1000);
-      const duration = Math.max(0.15, base * (0.62 + Math.random() * 0.32) + variance * 0.6);
+      const duration = Math.max(0.15, base * (0.78 + Math.random() * 0.30) + variance * 0.6);
       const out = Math.random() * Math.PI * 2;
       const into = Math.random() * Math.PI * 2;
       const burst = reach * (0.7 + Math.random() * 0.6);
@@ -579,7 +590,7 @@ const GooeyNav = ({
       }
 
       const zeta = reduced ? 1 : 1 - 0.72 * clamp01(s.wobble);
-      const omega = 26;
+      const omega = reduced ? 26 : Math.max(12, Math.min(26, 21000 / Math.max(600, s.animationTime)));
       const steps = Math.max(1, Math.ceil(dt / (1 / 240)));
       const h = dt / steps;
       for (const [index, state] of pills) {
@@ -606,21 +617,22 @@ const GooeyNav = ({
       render();
 
       const host = pills.get(target);
-      const resting =
-        drops.length === 0 &&
-        pills.size === 1 &&
-        host &&
-        Math.abs(host.mass - host.scale) < 0.0008 &&
-        Math.abs(host.velocity) < 0.004;
+      const resting = target < 0
+        ? (drops.length === 0 && pills.size === 0)
+        : (drops.length === 0 && pills.size === 1 && host &&
+           Math.abs(host.mass - host.scale) < 0.0008 &&
+           Math.abs(host.velocity) < 0.004);
       const hoverRect = rects[hover.index];
       const hovering =
         Math.abs(hoverGoal - hover.alpha) > 0.003 ||
         (hoverRect && Math.abs(hoverRect.x + hoverRect.w / 2 - hover.x) + Math.abs(hoverRect.w - hover.w) > 0.1);
       if (!resting || hovering) raf = requestAnimationFrame(frame);
       else {
-        host.mass = 1;
-        host.scale = 1;
-        host.velocity = 0;
+        if (host) {
+          host.mass = 1;
+          host.scale = 1;
+          host.velocity = 0;
+        }
         hover.alpha = hoverGoal;
         render();
       }
@@ -636,10 +648,12 @@ const GooeyNav = ({
       pills.clear();
       drops.length = 0;
       target = index;
-      const state = pill(index);
-      state.mass = 1;
-      state.scale = 1;
-      state.velocity = 0;
+      if (index >= 0 && rects[index]) {
+        const state = pill(index);
+        state.mass = 1;
+        state.scale = 1;
+        state.velocity = 0;
+      }
       render();
     };
 
@@ -759,7 +773,28 @@ const GooeyNav = ({
         className: 'gooey-nav__link',
         'aria-current': index === current ? 'page' : undefined,
         onClick: event => {
-          if (!item.href || item.href === '#') event.preventDefault();
+          if (!item.href || item.href === '#') {
+            event.preventDefault();
+            select(index);
+            return;
+          }
+          // Native browser behaviors (keyboard, new tab, modifiers, external links)
+          // always win. For ordinary internal pointer clicks, keep the page alive
+          // briefly so the actual goo movement can be seen before navigation.
+          if (!event.defaultPrevented && event.button === 0 && event.detail > 0 &&
+              !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey &&
+              !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+            const destination = new URL(item.href, window.location.href);
+            if (destination.origin === window.location.origin && destination.href !== window.location.href) {
+              event.preventDefault();
+              select(index);
+              const host = event.currentTarget.closest('.gooey-nav');
+              if (host?.__studybuddyNavTimer) clearTimeout(host.__studybuddyNavTimer);
+              const timer = window.setTimeout(() => window.location.assign(destination.href), 950);
+              if (host) host.__studybuddyNavTimer = timer;
+              return;
+            }
+          }
           select(index);
         }
       };

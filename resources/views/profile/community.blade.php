@@ -3,10 +3,10 @@
 @section('title', 'Community')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? filemtime(public_path('assets/css/studybuddy-dashboard-system.css')) : time() }}">
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? filemtime(public_path('assets/css/studybuddy-profile-customizer.css')) : time() }}">
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-living-platform.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-living-platform.css')) ? filemtime(public_path('assets/css/studybuddy-living-platform.css')) : time() }}">
-<script src="{{ asset('assets/js/studybuddy-living-platform.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-living-platform.js')) ? filemtime(public_path('assets/js/studybuddy-living-platform.js')) : time() }}" defer></script>
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-dashboard-system.css') : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-profile-customizer.css') : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-living-platform.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-living-platform.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-living-platform.css') : time() }}">
+<script src="{{ asset('assets/js/studybuddy-living-platform.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-living-platform.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-living-platform.js') : time() }}" defer></script>
 
 <div class="sb-user-hub sb-community-living">
     <section class="sb-page-hero">

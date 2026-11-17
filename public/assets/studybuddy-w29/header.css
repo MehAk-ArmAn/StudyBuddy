@@ -3,7 +3,7 @@ body .sb27-header, body header.sb-advanced-shell, body header[data-shell] {isola
 body .sb27-header .sb27-center {flex:1 1 auto;justify-content:center;}
 body .sb27-header .sb27-actions {flex:0 0 auto;}
 body .sb27-header .sb27-brand img,body header[data-shell] .sb-nav-brand img{object-fit:contain!important;}
-body header .gooey-nav__canvas {filter:brightness(0) saturate(100%) invert(38%) sepia(81%) saturate(2406%) hue-rotate(232deg) brightness(103%) contrast(102%);}
+body header .gooey-nav__canvas { filter:none; /* Show the original WebGL particle hues and gradient pill. */ }
 body header a:focus-visible,body header button:focus-visible{outline:2px solid #56e0ff;outline-offset:3px;}
 /* Don't let a wide desktop nav squeeze account controls on compact viewports. */
 @media(max-width:1050px){body .sb27-header .sb27-center .gooey-nav{--gn-x:10px;--gn-font:12px;}}

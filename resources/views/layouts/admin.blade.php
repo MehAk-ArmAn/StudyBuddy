@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="{{ asset('assets/js/studybuddy-v5-theme-boot.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-v5-theme-boot.js')) }}"></script>
+    <script src="{{ asset('assets/js/studybuddy-v5-theme-boot.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-v5-theme-boot.js') }}"></script>
     <title>@yield('title', 'Control Room') · {{ config('studybuddy.brand.name') }} Admin</title>
 
     @php
@@ -15,7 +15,7 @@
                 return null;
             }
 
-            return asset($path).'?v='.filemtime(public_path($path));
+            return asset($path).'?v='.\App\Support\StudyBuddyAssetVersion::for($path);
         };
     @endphp
 
@@ -26,21 +26,21 @@
     <meta name="robots" content="noindex, nofollow">
 
     @if(file_exists(public_path('assets/css/admin.css')))
-        <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}?v={{ filemtime(public_path('assets/css/admin.css')) }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/admin.css') }}">
     @endif
     @if(file_exists(public_path('assets/css/studybuddy-admin-simple.css')))
-        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-simple.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-simple.css')) }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-simple.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-admin-simple.css') }}">
     @endif
 
     @stack('styles')
 
-    <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-control-room.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-control-room.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-admin-control-room.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-admin-control-room.css') }}">
 
 
     @if(file_exists(public_path('assets/css/studybuddy-admin-targeted-pages.css')))
         <link
             rel="stylesheet"
-            href="{{ asset('assets/css/studybuddy-admin-targeted-pages.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-admin-targeted-pages.css')) }}"
+            href="{{ asset('assets/css/studybuddy-admin-targeted-pages.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-admin-targeted-pages.css') }}"
         >
     @endif
 
@@ -48,19 +48,19 @@
          without fighting the shared sheets with !important. --}}
     @stack('styles-late')
 
-    <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-universe-v4.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-universe-v4.css')) }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-v5-atmosphere.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-v5-atmosphere.css')) }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-v6-reactivity.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-v6-reactivity.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-universe-v4.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-universe-v4.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-v5-atmosphere.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-v5-atmosphere.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-v6-reactivity.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-v6-reactivity.css') }}">
 
     {{-- SB_LARAVEL_REACT_CORE_START --}}
     @include('partials.studybuddy-react-assets')
     {{-- SB_LARAVEL_REACT_CORE_END --}}
 <!-- W13 ASSETS START -->
-<link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13.css') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13.css')) }}">
-<link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13-style.css') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-style.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w13/w13.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13-style.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w13/w13-style.css') }}">
 <!-- W13 ASSETS END -->
 <!-- STUDYBUDDY W25 ADMIN SHARED TOKENS -->
-<link rel="stylesheet" href="{{ asset('assets/studybuddy-w25/shell.css') }}?v={{ filemtime(public_path('assets/studybuddy-w25/shell.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w25/shell.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w25/shell.css') }}">
 
 <!-- STUDYBUDDY W19 START -->
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w19/w19-style.css') }}?v=19.1">
@@ -400,15 +400,15 @@
         <symbol id="sb-admin-icon-warning" viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4z"></path><path d="M12 9v4M12 17h.01"></path></symbol>
     </svg>
 
-    <script src="{{ asset('assets/js/studybuddy-admin-simple.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-admin-simple.js')) }}" defer></script>
+    <script src="{{ asset('assets/js/studybuddy-admin-simple.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-admin-simple.js') }}" defer></script>
     @stack('scripts')
 
 
-    <script src="{{ asset('assets/js/studybuddy-universe-v4.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-universe-v4.js')) }}" defer></script>
-    <script src="{{ asset('assets/js/studybuddy-v5-atmosphere.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-v5-atmosphere.js')) }}" defer></script>
-    <script src="{{ asset('assets/js/studybuddy-v6-reactivity.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-v6-reactivity.js')) }}" defer></script>
+    <script src="{{ asset('assets/js/studybuddy-universe-v4.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-universe-v4.js') }}" defer></script>
+    <script src="{{ asset('assets/js/studybuddy-v5-atmosphere.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-v5-atmosphere.js') }}" defer></script>
+    <script src="{{ asset('assets/js/studybuddy-v6-reactivity.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-v6-reactivity.js') }}" defer></script>
 <!-- W13 REACT START -->
-<script type="module" src="{{ asset('assets/studybuddy-w13/w13-react.js') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-react.js')) }}"></script>
+<script type="module" src="{{ asset('assets/studybuddy-w13/w13-react.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w13/w13-react.js') }}"></script>
 <!-- W13 REACT END -->
 
 <!-- STUDYBUDDY W19 START -->

@@ -4,10 +4,18 @@ namespace App\Models;
 
 use App\Services\StudyBuddyWebAppPublisher;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class StudyBuddyMiniAppPlatform extends Model
 {
     protected $table = 'studybuddy_mini_app_platforms';
+
+    /** One canonical app record, with optional academic metadata. */
+    public function subjectAssignment(): HasOne
+    {
+        return $this->hasOne(StudyBuddySubjectAssignment::class, 'app_id');
+    }
+
 
     protected $fillable = [
         // `long_description`, `image_url` and `age_range` were missing here, so the

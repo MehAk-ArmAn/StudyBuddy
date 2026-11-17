@@ -9,7 +9,7 @@
             <h2>Only with a student's code</h2>
             <p>You need each student's email and their Connect Code. That keeps your roster to people who agreed to join.</p>
         </div>
-        <img src="{{ $roleImage }}" alt="" aria-hidden="true" loading="lazy" decoding="async" onerror="this.src='{{ asset('assets/studybuddy-imgs/brand/logo-icon.png') }}'">
+        <img src="{{ $roleImage }}" alt="" aria-hidden="true" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='{{ asset('assets/studybuddy-brand/studybuddy-logo-mark.svg') }}'">
     </article>
 
     <article class="role-card wide" data-role-card>

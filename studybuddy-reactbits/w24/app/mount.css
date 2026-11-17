@@ -11,7 +11,7 @@
 .sb24-nav-host .gooey-nav__list--active { z-index:2; }
 .sb24-nav-host nav:focus-within { isolation:isolate; }
 html.dark .sb24-nav-host .gooey-nav--framed,
-[data-theme="dark"] .sb24-nav-host .gooey-nav--framed { background:rgba(15,15,38,.58); }
+[data-theme="dark"] .sb24-nav-host .gooey-nav--framed { background:linear-gradient(110deg,rgba(103,89,215,.17),rgba(91,151,230,.13)),rgba(15,15,38,.58); }
 .sb24-nav-host .gooey-nav__link { text-underline-offset:3px; }
 /* The snapshot header must keep its mobile menu; don't force a desktop GooeyNav on phones/tablets. */
 @media(max-width:979px) {

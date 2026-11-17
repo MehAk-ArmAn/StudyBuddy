@@ -3,10 +3,10 @@
 @section('title', 'Apps')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-sparkle-discovery.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-sparkle-discovery.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-sparkle-discovery.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-sparkle-discovery.css') }}">
 <link
     rel="stylesheet"
-    href="{{ asset('assets/css/studybuddy-apps-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-apps-v3.css')) ? filemtime(public_path('assets/css/studybuddy-apps-v3.css')) : time() }}"
+    href="{{ asset('assets/css/studybuddy-apps-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-apps-v3.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-apps-v3.css') : time() }}"
 >
 @endpush
 
@@ -38,10 +38,13 @@
         'teacher' => 'Teachers',
         'independent_learner' => 'Independent',
     ];
-    $sb8GalleryItems = $apps->filter(fn ($app) => filled($app->safeHeroImage()))->take(12)->map(function ($app) use ($imageUrl) {
+    // Catalogue artwork must use the same card-image contract as the app cards.
+    // Detail/hero images are reserved for /apps/{slug}; otherwise a detail-only
+    // cover leaks into the catalogue's animated gallery and changes fallback order.
+    $sb8GalleryItems = $apps->filter(fn ($app) => filled($app->cardImage()))->take(12)->map(function ($app) use ($imageUrl) {
         $demo = str_starts_with((string) $app->slug, 'demo-next-');
         return [
-            'src' => $imageUrl($app->safeHeroImage()),
+            'src' => $imageUrl($app->cardImage()),
             'alt' => 'Artwork for '.(string) $app->name,
             'title' => (string) $app->name,
             'subtitle' => $demo ? 'DEMO · NOT PLAYABLE' : (string) ($app->category ?: 'Learning activity'),
@@ -52,7 +55,7 @@
 @endphp
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-wave10-features.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-wave10-features.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-wave10-features.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-wave10-features.css') }}">
 @endpush
 
 @section('content')
@@ -454,6 +457,7 @@
 
             {{-- The hero above already says the shelf is empty. This block is
                  for what someone can usefully do instead. --}}
+            <p class="sb-catalog-empty__eyebrow">No apps here yet.</p>
             <h2>Have a look around</h2>
 
             <p>
@@ -479,6 +483,7 @@
         </section>
     @endif
 
+    @if($apps->isNotEmpty())
     <section
         class="sb-app-empty-v3"
         data-app-empty
@@ -503,6 +508,7 @@
             Show every app
         </button>
     </section>
+    @endif
 
     @if(auth()->user()?->is_admin)
         <aside class="sb-app-admin-v3">
@@ -527,7 +533,7 @@
 
 @push('scripts')
 <script
-    src="{{ asset('assets/js/studybuddy-apps-v3.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-apps-v3.js')) ? filemtime(public_path('assets/js/studybuddy-apps-v3.js')) : time() }}"
+    src="{{ asset('assets/js/studybuddy-apps-v3.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-apps-v3.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-apps-v3.js') : time() }}"
     defer
 ></script>
 @endpush
@@ -535,24 +541,24 @@
 @push('styles')
 <link
     rel="stylesheet"
-    href="{{ asset('assets/css/studybuddy-apps-roles-color.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-apps-roles-color.css')) ? filemtime(public_path('assets/css/studybuddy-apps-roles-color.css')) : time() }}"
+    href="{{ asset('assets/css/studybuddy-apps-roles-color.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-apps-roles-color.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-apps-roles-color.css') : time() }}"
 >
 @endpush
 
 @push('scripts')
 <script
-    src="{{ asset('assets/js/studybuddy-apps-roles-color.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-apps-roles-color.js')) ? filemtime(public_path('assets/js/studybuddy-apps-roles-color.js')) : time() }}"
+    src="{{ asset('assets/js/studybuddy-apps-roles-color.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-apps-roles-color.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-apps-roles-color.js') : time() }}"
     defer
 ></script>
 @endpush
 
 @push('styles')
 @if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.css')))
-<link rel="stylesheet" href="{{ asset('assets/studybuddy-reactbits/reactbits.css') }}?v={{ filemtime(public_path('assets/studybuddy-reactbits/reactbits.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-reactbits/reactbits.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-reactbits/reactbits.css') }}">
 @endif
 @endpush
 @push('scripts')
 @if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.js')))
-<script src="{{ asset('assets/studybuddy-reactbits/reactbits.js') }}?v={{ filemtime(public_path('assets/studybuddy-reactbits/reactbits.js')) }}" defer></script>
+<script src="{{ asset('assets/studybuddy-reactbits/reactbits.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-reactbits/reactbits.js') }}" defer></script>
 @endif
 @endpush

@@ -22,7 +22,7 @@
 
         foreach ([$override, config('studybuddy.icons.'.$key)] as $candidate) {
             if ($candidate && file_exists(public_path(ltrim($candidate, '/')))) {
-                return asset(ltrim($candidate, '/')).'?v='.filemtime(public_path(ltrim($candidate, '/')));
+                return asset(ltrim($candidate, '/')).'?v='.\App\Support\StudyBuddyAssetVersion::for(ltrim($candidate, '/'));
             }
         }
 

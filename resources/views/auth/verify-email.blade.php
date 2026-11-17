@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('title', 'Verify your email')
-@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-next-chapter.css')) }}">@endpush
+@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-next-chapter.css') }}">@endpush
 @section('content')<div class="sb-school-shell"><p class="sb-next-eyebrow">ACCOUNT SECURITY</p><h1>One tiny step to protect your space.</h1><p class="school-intro">We sent a verification link to <strong>{{ auth()->user()->email }}</strong>. Verify your address before requesting institutional access.</p>@if(session('status'))<div class="sb-school-notice success">{{ session('status') }}</div>@endif<form method="POST" action="{{ route('verification.send') }}">@csrf<button type="submit" class="sb-next-button primary">Resend verification link →</button></form><a class="school-back" href="{{ route('dashboard') }}">Return to dashboard</a></div>@endsection

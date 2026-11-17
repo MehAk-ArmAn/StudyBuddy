@@ -11,6 +11,12 @@
   </div>
   @if(session('status'))<div class="sb33-notice">{{ session('status') }}</div>@endif
   @if($errors->any())<div class="sb33-error" role="alert"><strong>Please review:</strong><ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul></div>@endif
+  {{-- W34: subject classification belongs to this single app editor. --}}
+  <aside class="sb34-editor-shortcut">
+    <a href="{{ route('studybuddy.w34.admin.edit', $app) }}">📚 Manage learning subject →</a>
+    <p>Set one primary subject and an accurate learning objective.</p>
+  </aside>
+  <link rel="stylesheet" href="{{ asset('assets/studybuddy-w34/subjects.css') }}?v=34.1">
   <section class="sb33-panel"><div class="sb33-panel-head"><div><span class="sb33-kicker">01 • THE STORY</span><h2>More than a store listing</h2></div><span class="sb33-subtle">Visible on the published app detail page</span></div>
     <form method="POST" action="{{ route('studybuddy.w33.admin.update', $app) }}" class="sb33-admin-form">@csrf
       <div class="sb33-fieldgrid"><label>Release version<input type="text" name="version" maxlength="40" placeholder="1.2.0" value="{{ old('version', $showcase->version ?? '') }}"></label>

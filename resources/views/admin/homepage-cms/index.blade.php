@@ -5,7 +5,7 @@
 @push('styles-late')
 <link
     rel="stylesheet"
-    href="{{ asset('assets/css/studybuddy-admin-homepage-cms.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-homepage-cms.css')) ? filemtime(public_path('assets/css/studybuddy-admin-homepage-cms.css')) : time() }}"
+    href="{{ asset('assets/css/studybuddy-admin-homepage-cms.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-admin-homepage-cms.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-admin-homepage-cms.css') : time() }}"
 >
 @endpush
 
@@ -301,5 +301,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/js/studybuddy-homepage-cms.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-homepage-cms.js')) ? filemtime(public_path('assets/js/studybuddy-homepage-cms.js')) : time() }}" defer></script>
+    <script src="{{ asset('assets/js/studybuddy-homepage-cms.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-homepage-cms.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-homepage-cms.js') : time() }}" defer></script>
 @endpush

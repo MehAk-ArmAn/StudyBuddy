@@ -104,6 +104,9 @@ require __DIR__.'/studybuddy.php';
 // STUDYBUDDY W33 SHOWCASE + DESKTOP
 require __DIR__ . '/studybuddy_w33.php';
 
+// W34 academic subjects: classified apps from the existing CMS, no second catalogue.
+require __DIR__ . '/studybuddy_w34.php';
+
 // Final StudyBuddy dashboard/profile routes
 require __DIR__ . '/studybuddy_dashboard_profile_final.php';
 

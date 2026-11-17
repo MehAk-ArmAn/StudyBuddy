@@ -1,0 +1,35 @@
+<?php
+
+// StudyBuddy editorial categories, not a claim of curriculum accreditation.
+return [
+    'subjects' => [
+        'early-education' => ['label' => 'Early Education', 'group' => 'Foundations', 'summary' => 'Play-based early communication, counting, colours, shapes and first learning experiences.'],
+        'english' => ['label' => 'English', 'group' => 'Academic', 'summary' => 'Phonics, reading, spelling, vocabulary, grammar and comprehension.'],
+        'mathematics' => ['label' => 'Mathematics', 'group' => 'Academic', 'summary' => 'Counting, number operations, geometry, measurement and mathematical reasoning.'],
+        'science' => ['label' => 'Science', 'group' => 'Academic', 'summary' => 'Nature, living things, habitats, forces, materials and scientific observation.'],
+        'geography' => ['label' => 'Geography', 'group' => 'Academic', 'summary' => 'Countries, flags, maps, environments, continents and places.'],
+        'history' => ['label' => 'History', 'group' => 'Academic', 'summary' => 'Chronology, communities of the past, events and historical evidence.'],
+        'social-studies' => ['label' => 'Social Studies', 'group' => 'Academic', 'summary' => 'Communities, cultures, heritage and civic life.'],
+        'arabic' => ['label' => 'Arabic', 'group' => 'Academic', 'summary' => 'Arabic sounds, letters, reading, vocabulary and comprehension.'],
+        'world-languages' => ['label' => 'World Languages', 'group' => 'Academic', 'summary' => 'Learning additional languages through vocabulary, speaking and listening.'],
+        'computing' => ['label' => 'Computing', 'group' => 'Technology', 'summary' => 'Programming, algorithms, sequencing, data and computational ideas.'],
+        'digital-literacy' => ['label' => 'Digital Literacy', 'group' => 'Technology', 'summary' => 'Using digital tools safely, evaluating information and communicating responsibly.'],
+        'design-technology' => ['label' => 'Design Technology', 'group' => 'Technology', 'summary' => 'Designing, testing and improving practical solutions.'],
+        'engineering' => ['label' => 'Engineering', 'group' => 'Technology', 'summary' => 'Structures, machines, mechanics and applied problem-solving.'],
+        'environmental-education' => ['label' => 'Environmental Education', 'group' => 'Technology', 'summary' => 'Nature, ecosystems, resources, sustainability and conservation.'],
+        'visual-arts' => ['label' => 'Visual Arts', 'group' => 'Creative', 'summary' => 'Drawing, colour, shape, composition and visual expression.'],
+        'music' => ['label' => 'Music', 'group' => 'Creative', 'summary' => 'Rhythm, melody, listening, instruments and musical creativity.'],
+        'drama' => ['label' => 'Drama', 'group' => 'Creative', 'summary' => 'Storytelling, role-play, expression and performance.'],
+        'physical-education' => ['label' => 'Physical Education', 'group' => 'Wellbeing', 'summary' => 'Movement, coordination, sport and physical activities.'],
+        'health-education' => ['label' => 'Health Education', 'group' => 'Wellbeing', 'summary' => 'Healthy choices, nutrition, hygiene, sleep and body knowledge.'],
+        'personal-development' => ['label' => 'Personal Development', 'group' => 'Wellbeing', 'summary' => 'Empathy, communication, emotional awareness and self-management.'],
+        'islamic-education' => ['label' => 'Islamic Education', 'group' => 'Values', 'summary' => 'Islamic learning, foundational knowledge, respectful values and practices.'],
+        'moral-education' => ['label' => 'Moral Education', 'group' => 'Values', 'summary' => 'Fairness, ethics, respect, responsibility and everyday decisions.'],
+        'citizenship' => ['label' => 'Citizenship', 'group' => 'Values', 'summary' => 'Community participation, rights, responsibilities and civic knowledge.'],
+        'global-perspectives' => ['label' => 'Global Perspectives', 'group' => 'Values', 'summary' => 'Cultural understanding, inquiry and different world viewpoints.'],
+        'study-skills' => ['label' => 'Study Skills', 'group' => 'Skills', 'summary' => 'Revision, planning, organisation, attention and self-checking habits.'],
+        'critical-thinking' => ['label' => 'Critical Thinking', 'group' => 'Skills', 'summary' => 'Reasoning, logic, evidence, patterns and thoughtful choices.'],
+        'financial-literacy' => ['label' => 'Financial Literacy', 'group' => 'Skills', 'summary' => 'Saving, budgeting, spending, needs and basic financial decisions.'],
+        'life-skills' => ['label' => 'Life Skills', 'group' => 'Skills', 'summary' => 'Safety, routines, time management and everyday practical decisions.'],
+    ],
+];

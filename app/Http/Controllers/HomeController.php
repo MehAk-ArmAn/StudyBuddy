@@ -24,7 +24,9 @@ class HomeController extends Controller
                 ->take(4)
                 ->get(),
             // CMS-driven discovery carousel, including explicit local-only demo cards if seeded.
-            'discoveryApps' => StudyBuddyMiniAppPlatform::query()->active()->ordered()->take(12)->get(),
+            'discoveryApps' => StudyBuddyMiniAppPlatform::query()->active()->ordered()->get()
+                ->filter(fn ($app) => $app->visibleForRole(auth()->user()?->role))
+                ->take(12),
             'settings' => SiteSetting::query()->pluck('value', 'key')->toArray(),
             'navigationItems' => NavigationItem::query()
                 ->where('is_enabled', true)

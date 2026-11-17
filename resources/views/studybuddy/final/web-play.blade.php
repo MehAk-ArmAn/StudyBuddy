@@ -5,7 +5,7 @@
 @push('styles')
 <link
     rel="stylesheet"
-    href="{{ asset('assets/css/studybuddy-launcher-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-launcher-v3.css')) ? filemtime(public_path('assets/css/studybuddy-launcher-v3.css')) : time() }}"
+    href="{{ asset('assets/css/studybuddy-launcher-v3.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-launcher-v3.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-launcher-v3.css') : time() }}"
 >
 @endpush
 
@@ -286,7 +286,7 @@
 
 @push('scripts')
 <script
-    src="{{ asset('assets/js/studybuddy-launcher-v3.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-launcher-v3.js')) ? filemtime(public_path('assets/js/studybuddy-launcher-v3.js')) : time() }}"
+    src="{{ asset('assets/js/studybuddy-launcher-v3.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-launcher-v3.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-launcher-v3.js') : time() }}"
     defer
 ></script>
 @endpush

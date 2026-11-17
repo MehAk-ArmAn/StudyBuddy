@@ -1,6 +1,21 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head><script src="{{ asset('assets/js/studybuddy-v5-theme-boot.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-v5-theme-boot.js')) }}"></script>
+<head>
+    @php
+        // Error pages must also render when public assets are unavailable.
+        // An exception handler must never turn a valid 404 into a 500.
+        $sbErrorAsset = static function (string $relative): ?string {
+            $fullPath = public_path($relative);
+            if (! is_file($fullPath)) {
+                return null;
+            }
+            $mtime = \App\Support\StudyBuddyAssetVersion::for($relative);
+            return asset($relative).($mtime === false ? '' : '?v='.$mtime);
+        };
+    @endphp
+    @if($themeBoot = $sbErrorAsset('assets/js/studybuddy-v5-theme-boot.js'))
+        <script src="{{ $themeBoot }}"></script>
+    @endif
     <meta charset="utf-8">
     <meta
         name="viewport"
@@ -24,11 +39,12 @@
     @if($u = $sbErrIcon('apple_touch'))<link rel="apple-touch-icon" sizes="180x180" href="{{ $u }}">@endif
     <meta name="theme-color" content="{{ config('studybuddy.brand.theme_color') }}">
 
-    <link
-        rel="stylesheet"
-        href="{{ asset('assets/css/studybuddy-system-screens.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-system-screens.css')) ? filemtime(public_path('assets/css/studybuddy-system-screens.css')) : time() }}"
-    >
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-universe-v4.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-universe-v4.css')) }}"><link rel="stylesheet" href="{{ asset('assets/css/studybuddy-v5-atmosphere.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-v5-atmosphere.css')) }}"><link rel="stylesheet" href="{{ asset('assets/css/studybuddy-v6-reactivity.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-v6-reactivity.css')) }}"></head>
+    @foreach(['assets/css/studybuddy-system-screens.css', 'assets/css/studybuddy-universe-v4.css', 'assets/css/studybuddy-v5-atmosphere.css', 'assets/css/studybuddy-v6-reactivity.css'] as $errorCss)
+        @if($errorCssUrl = $sbErrorAsset($errorCss))
+            <link rel="stylesheet" href="{{ $errorCssUrl }}">
+        @endif
+    @endforeach
+</head>
 <body data-sb-universe-zone="auth" class="sb-system-body">@include('partials.studybuddy-v5-theme-switch')
     <main class="sb-system-screen">
         <section class="sb-system-screen__panel">
@@ -90,5 +106,10 @@
             </div>
         </section>
     </main>
-<script src="{{ asset('assets/js/studybuddy-universe-v4.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-universe-v4.js')) }}" defer></script><script src="{{ asset('assets/js/studybuddy-v5-atmosphere.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-v5-atmosphere.js')) }}" defer></script><script src="{{ asset('assets/js/studybuddy-v6-reactivity.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-v6-reactivity.js')) }}" defer></script></body>
+    @foreach(['assets/js/studybuddy-universe-v4.js', 'assets/js/studybuddy-v5-atmosphere.js', 'assets/js/studybuddy-v6-reactivity.js'] as $errorJs)
+        @if($errorJsUrl = $sbErrorAsset($errorJs))
+            <script src="{{ $errorJsUrl }}" defer></script>
+        @endif
+    @endforeach
+</body>
 </html>

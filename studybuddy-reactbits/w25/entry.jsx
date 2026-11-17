@@ -17,15 +17,18 @@ if (mount) {
     createRoot(mount).render(
       <GooeyNav
         items={items}
-        particleCount={12}
+        particleCount={20}
         particleDistances={[90, 10]}
         particleR={100}
+        spread={90}
+        gooeyness={0.6}
+        wobble={0.42}
         initialActiveIndex={Number.isInteger(selected) ? selected : -1}
-        animationTime={600}
-        timeVariance={300}
-        colors={['#5227FF','#FF9FFC','#B497CF','#50d6ff']}
+        animationTime={1500}
+        timeVariance={260}
+        colors={['#7166E8','#927CF2','#75B5F7','#A8B8FF']}
       
-    color="#875cf7"
+    color="#7166e8"
 
     activeTextColor="#ffffff"
 />

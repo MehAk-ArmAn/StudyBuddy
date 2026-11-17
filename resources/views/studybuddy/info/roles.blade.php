@@ -3,7 +3,7 @@
 @section('title', 'Roles')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-roles-clean.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-roles-clean.css')) ? filemtime(public_path('assets/css/studybuddy-roles-clean.css')) : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-roles-clean.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-roles-clean.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-roles-clean.css') : time() }}">
 @endpush
 
 @section('content')
@@ -120,20 +120,20 @@ $sb10RoleItems=collect($roleCards ?? [])->map(function ($role) use ($roleImages)
 @push('styles')
 <link
     rel="stylesheet"
-    href="{{ asset('assets/css/studybuddy-apps-roles-color.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-apps-roles-color.css')) ? filemtime(public_path('assets/css/studybuddy-apps-roles-color.css')) : time() }}"
+    href="{{ asset('assets/css/studybuddy-apps-roles-color.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-apps-roles-color.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-apps-roles-color.css') : time() }}"
 >
 @endpush
 
 @push('scripts')
 <script
-    src="{{ asset('assets/js/studybuddy-apps-roles-color.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-apps-roles-color.js')) ? filemtime(public_path('assets/js/studybuddy-apps-roles-color.js')) : time() }}"
+    src="{{ asset('assets/js/studybuddy-apps-roles-color.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-apps-roles-color.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-apps-roles-color.js') : time() }}"
     defer
 ></script>
 @endpush
 
 @push('styles')
-@if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.css')))<link rel="stylesheet" href="{{ asset('assets/studybuddy-reactbits/reactbits.css') }}?v={{ filemtime(public_path('assets/studybuddy-reactbits/reactbits.css')) }}">@endif
+@if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.css')))<link rel="stylesheet" href="{{ asset('assets/studybuddy-reactbits/reactbits.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-reactbits/reactbits.css') }}">@endif
 @endpush
 @push('scripts')
-@if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.js')))<script defer src="{{ asset('assets/studybuddy-reactbits/reactbits.js') }}?v={{ filemtime(public_path('assets/studybuddy-reactbits/reactbits.js')) }}"></script>@endif
+@if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.js')))<script defer src="{{ asset('assets/studybuddy-reactbits/reactbits.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-reactbits/reactbits.js') }}"></script>@endif
 @endpush

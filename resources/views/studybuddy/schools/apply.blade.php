@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Apply for a school workspace')
-@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-next-chapter.css')) }}">@endpush
+@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-next-chapter.css') }}">@endpush
 @section('content')
 <div class="sb-school-shell"><a class="school-back" href="{{ route('schools.info') }}">← For schools</a><p class="sb-next-eyebrow">INSTITUTIONAL ACCESS</p><h1>Bring your school to StudyBuddy.</h1><p class="school-intro">Schools are reviewed before activation. This is an application, not instant access.</p>
 @if(session('status'))<div class="sb-school-notice success" role="status">{{ session('status') }}</div>@endif

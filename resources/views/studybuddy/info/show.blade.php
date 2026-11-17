@@ -3,8 +3,8 @@
 @section('title', $pageData['title'])
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-info-pages.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-info-pages.css')) ? filemtime(public_path('assets/css/studybuddy-info-pages.css')) : time() }}">
-<script src="{{ asset('assets/js/studybuddy-info-pages.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-info-pages.js')) ? filemtime(public_path('assets/js/studybuddy-info-pages.js')) : time() }}" defer></script>
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-info-pages.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-info-pages.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-info-pages.css') : time() }}">
+<script src="{{ asset('assets/js/studybuddy-info-pages.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-info-pages.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-info-pages.js') : time() }}" defer></script>
 
 <div class="sb-info-page sb-info-{{ $pageData['slug'] }}">
     <section class="sb-info-hero" data-info-card>

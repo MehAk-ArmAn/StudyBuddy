@@ -3,7 +3,7 @@
 @section('title', 'Search')
 
 @section('content')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-living-platform.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-living-platform.css')) ? filemtime(public_path('assets/css/studybuddy-living-platform.css')) : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-living-platform.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-living-platform.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-living-platform.css') : time() }}">
 
 <div class="sb-search-page">
     <section class="sb-search-hero">

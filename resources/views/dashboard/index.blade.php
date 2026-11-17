@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-wave10-features.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-wave10-features.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-wave10-features.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-wave10-features.css') }}">
 @endpush
 
 @section('content')
@@ -32,8 +32,8 @@
     };
 @endphp
 
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-role-dashboards.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-role-dashboards.css')) ? filemtime(public_path('assets/css/studybuddy-role-dashboards.css')) : time() }}">
-<script src="{{ asset('assets/js/studybuddy-role-dashboards.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-role-dashboards.js')) ? filemtime(public_path('assets/js/studybuddy-role-dashboards.js')) : time() }}" defer></script>
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-role-dashboards.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-role-dashboards.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-role-dashboards.css') : time() }}">
+<script src="{{ asset('assets/js/studybuddy-role-dashboards.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-role-dashboards.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-role-dashboards.js') : time() }}" defer></script>
 
 <div class="sb-role-dashboard role-{{ $role }}">
     @include('dashboard.partials.studybuddy-wave10-quick-actions')

@@ -56,15 +56,15 @@ function StudyBuddyGooey({ items, initial, onMounted, locationKind }) {
     theme={theme}
     size="md"
     frame={true}
-    color="#7651df"
+    color="#7166e8"
     activeTextColor="#ffffff"
-    colors={['#5227FF','#FF9FFC','#B497CF']}
-    particleCount={15}
-    spread={56}
-    animationTime={600}
-    timeVariance={300}
-    gooeyness={0.5}
-    wobble={0.5}
+    colors={['#7166E8','#927CF2','#75B5F7','#A8B8FF']}
+    particleCount={20}
+    spread={90}
+    animationTime={1500}
+    timeVariance={260}
+    gooeyness={0.6}
+    wobble={0.42}
     hoverEffect={true}
     className={`sb24-gooey sb24-gooey--${locationKind}`}
   />;
@@ -105,6 +105,8 @@ function enhance(original, type) {
 
 function boot(){
   if(location.pathname.startsWith('/admin')) return;
+  // The current W25 header owns navigation. W24 only enhances a legacy header.
+  if (document.querySelector('[data-sb25-react-host]')) return;
   const base44=document.querySelector('header nav[aria-label="Main"]');
   const laravel=document.querySelector('header .sb-nav-links');
   if(base44) enhance(base44,'snapshot');

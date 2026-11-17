@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'School Workspace')
-@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-next-chapter.css')) }}">@endpush
+@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-next-chapter.css') }}">@endpush
 @section('content')
 <div class="sb-school-shell"><p class="sb-next-eyebrow">PRIVATE SCHOOL WORKSPACE</p><h1>{{ $organization->name }}</h1><p class="school-intro">An approved workspace for verified StudyBuddy members. The school content and classroom analytics modules are being built separately.</p>
 @if(session('status'))<div class="sb-school-notice success" role="status">{{ session('status') }}</div>@endif

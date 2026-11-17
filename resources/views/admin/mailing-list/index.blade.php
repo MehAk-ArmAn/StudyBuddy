@@ -5,7 +5,7 @@
 @push('styles')
 <link
     rel="stylesheet"
-    href="{{ asset('assets/css/studybuddy-mailing-list.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-mailing-list.css')) ? filemtime(public_path('assets/css/studybuddy-mailing-list.css')) : time() }}"
+    href="{{ asset('assets/css/studybuddy-mailing-list.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-mailing-list.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-mailing-list.css') : time() }}"
 >
 @endpush
 

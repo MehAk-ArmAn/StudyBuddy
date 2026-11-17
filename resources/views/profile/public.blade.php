@@ -18,15 +18,15 @@
     }
 
     $assetUrl = function ($path) {
-        if (!$path) return asset('assets/studybuddy-imgs/brand/logo-icon.png');
+        if (!$path) return asset('assets/studybuddy-brand/studybuddy-logo-mark.svg');
         if (preg_match('/^https?:\/\//i', $path)) return $path;
         $clean = ltrim($path, '/');
-        return file_exists(public_path($clean)) ? asset($clean) : asset('assets/studybuddy-imgs/brand/logo-icon.png');
+        return file_exists(public_path($clean)) ? asset($clean) : asset('assets/studybuddy-brand/studybuddy-logo-mark.svg');
     };
 @endphp
 
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? filemtime(public_path('assets/css/studybuddy-dashboard-system.css')) : time() }}">
-<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? filemtime(public_path('assets/css/studybuddy-profile-customizer.css')) : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-dashboard-system.css') : time() }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-profile-customizer.css') : time() }}">
 
 <div class="sb-public-profile theme-{{ $theme }} frame-{{ $frame }} color-{{ $color }} shape-{{ $shape }}">
     <section class="public-profile-hero custom-public-hero">

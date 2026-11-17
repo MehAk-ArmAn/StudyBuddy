@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Create your StudyBuddy account')
+@section('title', 'Create your account')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/studybuddy-w22/register.css') }}?v={{ filemtime(public_path('assets/studybuddy-w22/register.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w22/register.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w22/register.css') }}">
 @endpush
 
 @section('content')
@@ -105,7 +105,7 @@
                 </section>
 
                 <section class="sb-role-dynamic-panel is-hidden" data-panel="teacher" aria-label="Teacher setup">
-                    <div class="sb-panel-icon" aria-hidden="true">▣</div><div><h3>Teacher setup</h3><p>Teaching and school privileges still require admin verification.</p></div>
+                    <div class="sb-panel-icon" aria-hidden="true">▣</div><div><h3>Teacher setup</h3><p>Teaching and school access are reviewed before approval.</p></div>
                     <div class="sb-form-grid compact">
                         <label><span>Class level</span><select name="class_level"><option value="">Choose one</option>@foreach (['Primary','Middle school','High school','Mixed level','Tutoring'] as $level)<option @selected(old('class_level') === $level)>{{ $level }}</option>@endforeach</select></label>
                         <label><span>Teaching focus</span><input name="teaching_focus" value="{{ old('teaching_focus') }}" maxlength="190" placeholder="Reading, science, quiz prep..."></label>
@@ -151,5 +151,5 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('assets/studybuddy-w22/register.js') }}?v={{ filemtime(public_path('assets/studybuddy-w22/register.js')) }}" defer></script>
+<script src="{{ asset('assets/studybuddy-w22/register.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w22/register.js') }}" defer></script>
 @endpush

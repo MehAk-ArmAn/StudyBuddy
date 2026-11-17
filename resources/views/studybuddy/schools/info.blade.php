@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title', 'For Schools — StudyBuddy')
-@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-next-chapter.css')) }}">@endpush
+@push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-next-chapter.css') }}">@endpush
 @section('content')
 <div class="sb-schools" id="school-top">
     <section class="sb-schools-hero">
@@ -34,14 +34,14 @@ $sb10SchoolItems=[
  <script type="application/json" id="sb10-school-gallery">@json($sb10SchoolItems)</script>
  <div class="sb10-gallery-fallback">@foreach($sb10SchoolItems as $item)<a href="{{ $item['url'] }}"><img src="{{ $item['src'] }}" alt=""><strong>{{ $item['title'] }}</strong><small>{{ $item['subtitle'] }}</small></a>@endforeach</div>
 </section>
-    <section class="sb-schools-steps"><div><p class="sb-next-eyebrow">Join the pilot</p><h2>A thoughtful way in.</h2><p>No random “I'm a school admin” checkbox. Every organization must pass a real review.</p></div><ol><li><b>01</b><span><strong>Create an adult account</strong><small>Use your real work details and verify your email.</small></span></li><li><b>02</b><span><strong>Apply for your school</strong><small>Provide the official domain, institution email and intended use.</small></span></li><li><b>03</b><span><strong>Human verification</strong><small>Our admin checks institutional authorization outside the public website.</small></span></li><li><b>04</b><span><strong>Invite approved colleagues</strong><small>Use the private workspace after approval; staff invitations expire.</small></span></li></ol></section>
+    <section class="sb-schools-steps"><div><p class="sb-next-eyebrow">Join the pilot</p><h2>A thoughtful way in.</h2><p>No instant school-access checkbox. Every organization must pass a real review. Every organization must pass a real review.</p></div><ol><li><b>01</b><span><strong>Create an adult account</strong><small>Use your real work details and verify your email.</small></span></li><li><b>02</b><span><strong>Apply for your school</strong><small>Provide the official domain, institution email and intended use.</small></span></li><li><b>03</b><span><strong>Human verification</strong><small>Our team reviews school authorization before granting access.</small></span></li><li><b>04</b><span><strong>Invite approved colleagues</strong><small>Use the private workspace after approval; staff invitations expire.</small></span></li></ol></section>
     <section class="sb-schools-cta"><span aria-hidden="true">✦</span><h2>Ready to make learning<br>feel different?</h2><p>Let's build a safer, brighter space for your school.</p><a class="sb-next-button primary" href="{{ auth()->check() ? route('schools.apply') : route('register') }}">Begin school onboarding <span aria-hidden="true">↗</span></a></section>
 </div>
 @endsection
 
 @push('styles')
-@if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.css')))<link rel="stylesheet" href="{{ asset('assets/studybuddy-reactbits/reactbits.css') }}?v={{ filemtime(public_path('assets/studybuddy-reactbits/reactbits.css')) }}">@endif
+@if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.css')))<link rel="stylesheet" href="{{ asset('assets/studybuddy-reactbits/reactbits.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-reactbits/reactbits.css') }}">@endif
 @endpush
 @push('scripts')
-@if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.js')))<script defer src="{{ asset('assets/studybuddy-reactbits/reactbits.js') }}?v={{ filemtime(public_path('assets/studybuddy-reactbits/reactbits.js')) }}"></script>@endif
+@if(file_exists(public_path('assets/studybuddy-reactbits/reactbits.js')))<script defer src="{{ asset('assets/studybuddy-reactbits/reactbits.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-reactbits/reactbits.js') }}"></script>@endif
 @endpush

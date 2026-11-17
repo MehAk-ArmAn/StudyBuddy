@@ -3,11 +3,11 @@
 @section('title', 'My Quest · StudyBuddy')
 
 @push('styles')
-<link rel="stylesheet" href="{{ asset('assets/studybuddy-w16/quests.css') }}?v={{ filemtime(public_path('assets/studybuddy-w16/quests.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w16/quests.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w16/quests.css') }}">
 @endpush
 
 @push('scripts')
-<script defer src="{{ asset('assets/studybuddy-w16/quests.js') }}?v={{ filemtime(public_path('assets/studybuddy-w16/quests.js')) }}"></script>
+<script defer src="{{ asset('assets/studybuddy-w16/quests.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-w16/quests.js') }}"></script>
 @endpush
 
 @section('content')
