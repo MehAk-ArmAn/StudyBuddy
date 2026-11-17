@@ -279,6 +279,9 @@
         </section>
     @endif
 </div>
+
+{{-- STUDYBUDDY_W31_CONNECTED_LAUNCHER --}}
+@include('learning.w31.launcher-widget')
 @endsection
 
 @push('scripts')
@@ -286,4 +289,12 @@
     src="{{ asset('assets/js/studybuddy-launcher-v3.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-launcher-v3.js')) ? filemtime(public_path('assets/js/studybuddy-launcher-v3.js')) : time() }}"
     defer
 ></script>
+@endpush
+
+{{-- STUDYBUDDY_W31_CONNECTED_ASSETS --}}
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w31/connected.css') }}?v=31.0">
+@endpush
+@push('scripts')
+<script src="{{ asset('assets/studybuddy-w31/connected.js') }}?v=31.0" defer></script>
 @endpush

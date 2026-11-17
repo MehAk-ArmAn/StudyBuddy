@@ -127,3 +127,15 @@ require __DIR__.'/studybuddy_schools.php';
 
 // STUDYBUDDY W24 FAMILY ROUTES
 require __DIR__ . '/studybuddy_family_learners.php';
+
+
+/* STUDYBUDDY_W30_ACTIVITY_ROUTES */
+require __DIR__.'/studybuddy_learning_activity.php';
+
+
+/* STUDYBUDDY_W31_CONNECTED_PROGRESS */
+require __DIR__.'/studybuddy_connected_progress.php';
+
+
+/* STUDYBUDDY_W32_MATH_SPRINT */
+require __DIR__.'/studybuddy_w32_math_sprint.php';

@@ -110,4 +110,11 @@
         @include('dashboard.partials.student-dashboard')
     @endif
 </div>
+
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w30/activity.css') }}?v=30">
+@endpush
+{{-- STUDYBUDDY_W30_ACTIVITY_CARD --}}
+@include('dashboard.partials.studybuddy-w30-activity-card')
+
 @endsection
