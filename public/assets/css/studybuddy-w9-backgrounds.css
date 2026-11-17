@@ -1,0 +1,20 @@
+/* StudyBuddy W9: positional shells ONLY. Original React Bits component sources are not restyled or edited. */
+.sb-imageworks .iw-discover,
+.sb-imageworks .iw-story,
+.sb-imageworks .iw-ending { position: relative; isolation: isolate; }
+.sb-imageworks .iw-w9-effect { position:absolute; z-index:0; overflow:hidden; inset:0; pointer-events:auto; background:transparent; }
+.sb-imageworks .iw-w9-effect > * { width:100%; height:100%; }
+.sb-imageworks .iw-discover > .iw-shell,
+.sb-imageworks .iw-story > .iw-shell,
+.sb-imageworks .iw-ending > .iw-shell { position:relative; z-index:2; }
+.sb-imageworks .iw-w9-effect--spiral { inset:0 auto 0 0; width:min(58%,810px); }
+.sb-imageworks .iw-w9-effect--glimmer { inset:0; }
+.sb-imageworks .iw-w9-effect--fading { inset:0; }
+/* Keep readable content above moving effects; transparent decorative mounting containers do not obscure actions. */
+.sb-imageworks :is(.iw-story__copy,.iw-gallery,.iw-gallery-bar,.iw-ending__content,.iw-section-head) { position:relative; z-index:3; }
+@media(max-width:800px) {
+  .sb-imageworks .iw-w9-effect--spiral {width:100%; opacity:.45;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .sb-imageworks .iw-w9-effect { pointer-events:none; }
+}

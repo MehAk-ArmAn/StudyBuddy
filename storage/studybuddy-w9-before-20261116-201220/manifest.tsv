@@ -1,0 +1,7 @@
+EXISTS|resources/views/home.blade.php
+EXISTS|resources/views/partials/studybuddy-imageworks-landing.blade.php
+ABSENT|public/assets/css/studybuddy-w9-backgrounds.css
+ABSENT|tools/sbw9.vite.config.mjs
+ABSENT|resources/js/studybuddy-react/sbw9-pro-entry.jsx
+ABSENT|public/assets/studybuddy-w9/sbw9-official-pro.js
+ABSENT|public/assets/studybuddy-w9/sbw9-official-pro.css

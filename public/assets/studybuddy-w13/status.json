@@ -1,0 +1,50 @@
+{
+  "version": "W13",
+  "builtOriginalComponents": [
+    "FlexCarousel",
+    "CircularCarousel",
+    "HoloCard",
+    "Galaxy",
+    "Antigravity",
+    "GradientWaves",
+    "MagicRings",
+    "WebThreads",
+    "LiquidEther",
+    "SloshGauge",
+    "BranchedMenu"
+  ],
+  "skippedBuilds": {},
+  "missingSource": [
+    "ScrollStack",
+    "CardSwap",
+    "AnimatedList",
+    "Dock",
+    "MagicBento",
+    "StaggeredMenu",
+    "BubbleMenu",
+    "HelixGallery",
+    "DepthRibbon",
+    "SpiralFunnel",
+    "GlimmerWrap",
+    "FadingStars",
+    "CelebrationCursor",
+    "FanGallery",
+    "TopographicFlow",
+    "TopographicTerrain",
+    "LiquidGlassOrb",
+    "FractalGlass",
+    "ChromaticButton"
+  ],
+  "regions": [
+    "W12 home",
+    "apps",
+    "roles",
+    "schools",
+    "learning hub",
+    "dashboard",
+    "my-quest",
+    "general Laravel layouts"
+  ],
+  "homeSnapshotUnmodifiedExceptInclude": true,
+  "notes": "Licensed originals installed only when present in project. No paid source copied, no database or auth edits."
+}

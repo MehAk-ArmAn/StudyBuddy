@@ -1,0 +1,11 @@
+/* Source fidelity: original stylesheet is kept byte-for-byte in base44-original.css. */
+html[data-studybuddy-exact] { scroll-behavior: smooth; }
+html[data-studybuddy-exact] [data-sb-reveal] { transition: opacity .72s ease, transform .72s ease, filter .72s ease; }
+html[data-studybuddy-exact] [data-sb-reveal="visible"] { opacity: 1 !important; transform: none !important; filter: none !important; }
+html[data-studybuddy-exact] [data-sb-snapshot-image] {display:block;height:100%;width:100%;object-fit:inherit;}
+html[data-studybuddy-exact] .sb44-mobile-panel {position:fixed; z-index:100; top:74px;left:12px;right:12px; padding:16px; border-radius:22px;border:1px solid rgba(170,162,245,.3);background:#111129;color:#f7f7ff;box-shadow:0 15px 80px #0008; display:grid;gap:6px;}
+html[data-studybuddy-exact] .sb44-mobile-panel[hidden]{display:none!important}
+html[data-studybuddy-exact] .sb44-mobile-panel a{padding:13px 15px;border-radius:12px;font-weight:600;}
+html[data-studybuddy-exact] .sb44-mobile-panel a:hover,html[data-studybuddy-exact] .sb44-mobile-panel a:focus-visible{background:#31305b}
+html[data-studybuddy-exact] a:focus-visible,html[data-studybuddy-exact] button:focus-visible{outline:2px solid #5eead4;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){html[data-studybuddy-exact],html[data-studybuddy-exact] *{scroll-behavior:auto!important;transition:none!important;animation:none!important}}

@@ -55,6 +55,10 @@
     {{-- SB_LARAVEL_REACT_CORE_START --}}
     @include('partials.studybuddy-react-assets')
     {{-- SB_LARAVEL_REACT_CORE_END --}}
+<!-- W13 ASSETS START -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13.css') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13-style.css') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-style.css')) }}">
+<!-- W13 ASSETS END -->
 </head>
 
 @php
@@ -397,5 +401,8 @@
     <script src="{{ asset('assets/js/studybuddy-universe-v4.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-universe-v4.js')) }}" defer></script>
     <script src="{{ asset('assets/js/studybuddy-v5-atmosphere.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-v5-atmosphere.js')) }}" defer></script>
     <script src="{{ asset('assets/js/studybuddy-v6-reactivity.js') }}?v={{ filemtime(public_path('assets/js/studybuddy-v6-reactivity.js')) }}" defer></script>
+<!-- W13 REACT START -->
+<script type="module" src="{{ asset('assets/studybuddy-w13/w13-react.js') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-react.js')) }}"></script>
+<!-- W13 REACT END -->
 </body>
 </html>

@@ -29,6 +29,7 @@
   </section>
 
   <section class="iw-discover iw-section" id="iw-discover" aria-labelledby="iw-discover-title">
+    <div class="iw-w9-effect iw-w9-effect--glimmer" data-sbw9-pro="glimmer-wrap" aria-hidden="true"></div>
     <div class="iw-shell">
       <div class="iw-section-head"><div><p class="iw-kicker">01 / THE DISCOVERY COLLECTION</p><h2 id="iw-discover-title">Find a world. <em>Follow the wonder.</em></h2></div><p>Choose an adventure that fits you. Every world leads to more than just a pretty picture.</p></div>
       <div class="iw-gallery" data-iw-gallery tabindex="0" role="region" aria-label="Learning world gallery: scroll horizontally or use the arrow controls">
@@ -54,6 +55,7 @@
   </section>
 
   <section class="iw-story iw-section" id="iw-story" aria-labelledby="iw-story-title">
+    <div class="iw-w9-effect iw-w9-effect--spiral" data-sbw9-pro="spiral-funnel" aria-hidden="true"></div>
     <div class="iw-shell iw-story__layout">
       <div class="iw-story__art"><div class="iw-story__halo" aria-hidden="true"></div><img data-iw-image="0" class="is-active" src="{{ asset($iwArt.'path-apps.webp') }}" alt="" loading="lazy"><img data-iw-image="1" src="{{ asset($iwArt.'path-parents.webp') }}" alt="" loading="lazy"><img data-iw-image="2" src="{{ asset($iwArt.'path-teachers.webp') }}" alt="" loading="lazy"><span class="iw-story__counter" data-iw-counter>01 / 03</span></div>
       <div class="iw-story__copy">
@@ -79,5 +81,6 @@
     <div class="iw-schools__art"><img src="{{ asset($iwArt.'path-teachers.webp') }}" alt="Illustration of a learning world for educators" loading="lazy"></div>
   </div></section>
 
-  <section class="iw-ending iw-section" id="iw-end"><div class="iw-shell iw-ending__content"><img src="{{ asset($iwArt.'hero-dolphin-book.webp') }}" alt="" loading="lazy" width="380" height="380"><p class="iw-kicker">EVERY ADVENTURE STARTS SOMEWHERE</p><h2>{{ $iwCta?->title ?: 'Your next little adventure is waiting.' }}</h2><p>{{ $iwCta?->subtitle ?: 'Try an activity, follow your curiosity, and grow your way.' }}</p><a class="iw-button iw-button--light" href="{{ $iwCta?->button_url ?: url('/apps') }}">{{ $iwCta?->button_label ?: 'Explore learning apps' }} ↗</a></div></section>
+  <section class="iw-ending iw-section" id="iw-end">
+    <div class="iw-w9-effect iw-w9-effect--fading" data-sbw9-pro="fading-stars" aria-hidden="true"></div><div class="iw-shell iw-ending__content"><img src="{{ asset($iwArt.'hero-dolphin-book.webp') }}" alt="" loading="lazy" width="380" height="380"><p class="iw-kicker">EVERY ADVENTURE STARTS SOMEWHERE</p><h2>{{ $iwCta?->title ?: 'Your next little adventure is waiting.' }}</h2><p>{{ $iwCta?->subtitle ?: 'Try an activity, follow your curiosity, and grow your way.' }}</p><a class="iw-button iw-button--light" href="{{ $iwCta?->button_url ?: url('/apps') }}">{{ $iwCta?->button_label ?: 'Explore learning apps' }} ↗</a></div></section>
 </main>

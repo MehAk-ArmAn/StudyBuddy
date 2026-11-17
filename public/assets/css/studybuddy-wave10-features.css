@@ -1,0 +1,34 @@
+/* Isolated Phase 2 UI: original Laravel routes, views and account state stay authoritative. */
+.sbx-dash{color:#f7f7ff;background:linear-gradient(135deg,#101333,#1d2250 55%,#103a50);border:1px solid #a9adf34a;border-radius:25px;padding:clamp(20px,3vw,36px);margin:24px 0 34px;box-shadow:0 25px 60px #14102c29}
+.sbx-dash *{box-sizing:border-box}
+.sbx-dash__headline{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}
+.sbx-dash__kicker{font-size:10px!important;letter-spacing:.2em;color:#c9aeff!important;font-weight:800;margin:0 0 12px!important}
+.sbx-dash__headline h2{font:400 clamp(27px,3vw,42px)/1.09 Georgia,serif!important;margin:0 0 12px!important;color:#fff!important}
+.sbx-dash__headline h2 em{background:linear-gradient(105deg,#bb91ff,#5addf2);color:transparent;-webkit-background-clip:text;background-clip:text}
+.sbx-dash__headline p:not(.sbx-dash__kicker){margin:0;color:#d5d6ea;line-height:1.6;font-size:13px}
+.sbx-dash__mascot{width:116px;flex:none}.sbx-dash__mascot img{display:block;width:100%;height:auto}
+.sbx-dash__links{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.sbx-dash__links a{position:relative;min-height:148px;display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:#161c3cbd;color:#fff!important;border:1px solid #b3b8ed3c;border-radius:17px;padding:17px;text-decoration:none!important;transition:transform .25s,background .25s}
+.sbx-dash__links a:hover{transform:translateY(-4px);background:#302753}
+.sbx-dash__links a:focus-visible,.sbx-dash input:focus-visible,.sbx-dash button:focus-visible{outline:3px solid #7ce6fc;outline-offset:3px}
+.sbx-dash__links a>span{display:grid;place-items:center;width:34px;height:34px;border-radius:12px;background:#a392ef34;color:#c3b3ff;font-size:22px}
+.sbx-dash__links a strong{font-size:15px;color:#fff}.sbx-dash__links a small{font-size:12px;line-height:1.4;color:#ced0e6}.sbx-dash__links a>b{position:absolute;right:15px;top:14px;color:#bcb0fa}
+.sbx-dash__composer{margin-top:20px;padding:20px;border:1px solid #b7b2eb3c;border-radius:17px;background:#1117358f}
+.sbx-dash__composer label{display:block;font-weight:800;color:#fff;font-size:15px;margin-bottom:7px}
+.sbx-dash__composer p{font-size:12px;color:#d6d9ef;line-height:1.5;margin:0 0 12px}
+.sbx-dash__formrow{display:flex;gap:10px}
+.sbx-dash__formrow input{width:100%;min-width:0;flex:1;border:1px solid #8f99be9c;border-radius:12px;background:#0d1837;color:#fff;font-size:14px;padding:13px}
+.sbx-dash__formrow input::placeholder{color:#b8c0de;opacity:1}
+.sbx-dash__formrow button{border:0;border-radius:12px;background:#9e85fb;color:#11122a;font-size:13px;font-weight:850;padding:13px 20px;cursor:pointer}
+/* App catalogue: image-led typography, current Laravel filter JS remains untouched. */
+.sbx-catalog-upgraded .sb-catalog-v3__hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 70% 40%,#40306c,#101b40 60%,#090f28);border:1px solid #aaa4e342;border-radius:28px;color:#fff}
+.sbx-catalog-upgraded .sb-catalog-v3__intro h1{font-family:Georgia,serif;font-size:clamp(35px,5vw,66px);font-weight:400;letter-spacing:-.04em;line-height:1.1;color:#fff}
+.sbx-catalog-upgraded .sb-catalog-v3__intro p{color:#e3e4f6;line-height:1.7}
+.sbx-catalog-upgraded .sb-app-card-v3{overflow:hidden;border-radius:21px;transition:transform .26s,box-shadow .26s}
+.sbx-catalog-upgraded .sb-app-card-v3:hover{transform:translateY(-6px);box-shadow:0 16px 35px #13164438}
+.sbx-catalog-upgraded .sb-app-card-v3__media{overflow:hidden;display:block}
+.sbx-catalog-upgraded .sb-app-card-v3__media img{object-fit:cover;transition:transform .45s}
+.sbx-catalog-upgraded .sb-app-card-v3:hover .sb-app-card-v3__media img{transform:scale(1.045)}
+@media(max-width:900px){.sbx-dash__links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:500px){.sbx-dash__links{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.sbx-dash__links a{padding:13px;min-height:140px}.sbx-dash__mascot{width:85px}.sbx-dash__formrow{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.sbx-dash__links a,.sbx-catalog-upgraded .sb-app-card-v3{transition:none!important;transform:none!important}}

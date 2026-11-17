@@ -46,9 +46,13 @@
     })->values()->all();
 @endphp
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-wave10-features.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-wave10-features.css')) }}">
+@endpush
+
 @section('content')
 <div
-    class="sb-catalog-v3"
+    class="sb-catalog-v3 sbx-catalog-upgraded"
     data-app-catalog
 >
     <div class="sb-v5-catalog-heading"><span class="sb-v5-pill"><span class="sb-v5-pill__dot"></span> THE DISCOVERY UNIVERSE</span><span class="sb-v5-catalog-heading__right">EXPLORE · EXPERIMENT · LEARN</span></div>

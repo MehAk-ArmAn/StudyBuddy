@@ -2,6 +2,10 @@
 
 @section('title', 'Dashboard')
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-wave10-features.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-wave10-features.css')) }}">
+@endpush
+
 @section('content')
 @php
     $photoUrl = null;
@@ -32,6 +36,7 @@
 <script src="{{ asset('assets/js/studybuddy-role-dashboards.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-role-dashboards.js')) ? filemtime(public_path('assets/js/studybuddy-role-dashboards.js')) : time() }}" defer></script>
 
 <div class="sb-role-dashboard role-{{ $role }}">
+    @include('dashboard.partials.studybuddy-wave10-quick-actions')
     <section class="role-dash-hero" data-role-card>
         <div>
             <p class="role-kicker">{{ $displayRole }} Dashboard</p>
