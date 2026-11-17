@@ -1,0 +1,28 @@
+/* StudyBuddy W24 — only the navbar enhancement. Original source CSS is unchanged. */
+.sb24-nav-host { display:none; align-items:center; flex:0 1 auto; min-width:0; position:relative; z-index:56; }
+.sb24-nav-replaced { /* hidden only on sufficiently wide screens; tablet/mobile fallback remains intact */ }
+.sb24-nav-host[data-sb24-ready="true"] { display:flex; }
+.sb24-nav-host .gooey-nav { font-family:inherit; isolation:isolate; --gn-font:13px; --gn-x:13px; --gn-y:9px; --gn-gap:2px; }
+.sb24-nav-host .gooey-nav--framed { border:1px solid rgba(162,131,255,.14); }
+.sb24-nav-host .gooey-nav__link { font-size:inherit; font-weight:600; line-height:1.2; }
+.sb24-nav-host .gooey-nav__canvas { z-index:0; }
+.sb24-nav-host .gooey-nav__fallback { z-index:0; }
+.sb24-nav-host .gooey-nav__list { z-index:1; }
+.sb24-nav-host .gooey-nav__list--active { z-index:2; }
+.sb24-nav-host nav:focus-within { isolation:isolate; }
+html.dark .sb24-nav-host .gooey-nav--framed,
+[data-theme="dark"] .sb24-nav-host .gooey-nav--framed { background:rgba(15,15,38,.58); }
+.sb24-nav-host .gooey-nav__link { text-underline-offset:3px; }
+/* The snapshot header must keep its mobile menu; don't force a desktop GooeyNav on phones/tablets. */
+@media(max-width:979px) {
+ .sb24-nav-host { display:none!important; }
+}
+@media(min-width:980px) {
+ .sb24-nav-replaced { display:none!important; }
+}
+@media(min-width:980px) and (max-width:1300px) {
+ .sb24-nav-host .gooey-nav { --gn-font:12px; --gn-x:10px; --gn-y:8px; --gn-gap:1px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .sb24-nav-host .gooey-nav__link {transition:none!important;}
+}

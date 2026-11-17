@@ -1,0 +1,11 @@
+{
+  "root": "/Users/mehakarman/Desktop/StudyBuddy-main",
+  "files": {
+    "public/assets/studybuddy-base44-exact/home.html": "de8aefdd2db222f10214013ace99f38a8ea13006af97f4b557a420a5090c7e03",
+    "resources/views/layouts/app.blade.php": "a289bac7e86878a6d3a0f8337c7020c288499eb655b1b0f7d4bc5981f1151c2d"
+  },
+  "dirs": {
+    "studybuddy-reactbits/w24": false,
+    "public/assets/studybuddy-w24": false
+  }
+}

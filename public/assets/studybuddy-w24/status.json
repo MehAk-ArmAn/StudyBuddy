@@ -1,0 +1,10 @@
+{
+  "version": "W24",
+  "component": "GooeyNav",
+  "source": "user-supplied JavaScript+CSS",
+  "routes": "existing Laravel links extracted from nav DOM",
+  "base44OriginalPreserved": true,
+  "cssSha256": "a09428954a4e7f2b3ae977c4f277c4c27eebdf78f0c66c8dae3c7f593f0e3eb2",
+  "jsSha256": "b7b02ac4838e3746ea9a5b1575b4b39abdb57ff5eaebefb7188a4b5cf0566c85",
+  "reactBitsSourceSha256": "beedd905beb6a8739b5ba6040407152bfc18b6940d29f29d51ff9c2025495b9c"
+}

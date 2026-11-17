@@ -111,7 +111,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isPowerRole(): bool
     {
-        return in_array($this->normalizedRole(), ['parent', 'teacher', 'independent_learner', 'admin'], true) || (bool) $this->is_admin;
+        return in_array($this->normalizedRole(), ['parent', 'teacher', 'admin'], true)
+            || ($this->normalizedRole() === 'independent_learner' && $this->isAdult())
+            || (bool) $this->is_admin;
     }
 
     public function canUseAdultControls(): bool
@@ -120,7 +122,8 @@ class User extends Authenticatable implements MustVerifyEmail
             return true;
         }
 
-        return in_array($this->normalizedRole(), ['parent', 'teacher', 'independent_learner'], true)
+        return $this->isAdult()
+            && in_array($this->normalizedRole(), ['parent', 'teacher', 'independent_learner'], true)
             && in_array($this->role_verification_status, ['verified', 'approved'], true)
             && in_array($this->adult_verification_status, ['verified', 'approved'], true);
     }
@@ -130,7 +133,8 @@ class User extends Authenticatable implements MustVerifyEmail
         $role = $this->role ?? 'student';
         $status = $this->adult_verification_status ?? 'not_required';
 
-        return in_array($role, ['parent', 'teacher', 'independent_learner'], true)
+        return (in_array($role, ['parent', 'teacher'], true)
+            || ($role === 'independent_learner' && $this->isAdult()))
             && !in_array($status, ['approved', 'verified', 'not_required'], true);
     }
 
@@ -139,7 +143,8 @@ class User extends Authenticatable implements MustVerifyEmail
         $role = $this->role ?? 'student';
         $status = $this->role_verification_status ?? 'not_required';
 
-        return in_array($role, ['parent', 'teacher', 'independent_learner'], true)
+        return (in_array($role, ['parent', 'teacher'], true)
+            || ($role === 'independent_learner' && $this->isAdult()))
             && !in_array($status, ['approved', 'verified', 'not_required'], true);
     }
 }

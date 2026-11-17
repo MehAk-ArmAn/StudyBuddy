@@ -103,6 +103,12 @@
 <!-- STUDYBUDDY W19 START -->
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w19/w19-style.css') }}?v=19.1">
 <!-- STUDYBUDDY W19 END -->
+    <!-- STUDYBUDDY W23 CONSISTENT PUBLIC SHELL -->
+    <link rel="stylesheet" href="{{ asset('assets/studybuddy-w23/consistency.css') }}?v={{ filemtime(public_path('assets/studybuddy-w23/consistency.css')) }}">
+
+<!-- STUDYBUDDY W24 GOOEYNAV CSS START -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w24/studybuddy-gooey.css') }}?v=24.0">
+<!-- STUDYBUDDY W24 GOOEYNAV CSS END -->
 </head>
 @php
   $sbUniverseZone = match (true) {
@@ -184,5 +190,9 @@
 <!-- STUDYBUDDY W19 START -->
 <script type="module" src="{{ asset('assets/studybuddy-w19/w19-react.js') }}?v=20.0"></script>
 <!-- STUDYBUDDY W19 END -->
+
+<!-- STUDYBUDDY W24 GOOEYNAV JS START -->
+<script type="module" src="{{ asset('assets/studybuddy-w24/studybuddy-gooey.js') }}?v=24.0"></script>
+<!-- STUDYBUDDY W24 GOOEYNAV JS END -->
 </body>
 </html>

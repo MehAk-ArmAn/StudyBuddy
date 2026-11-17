@@ -1,0 +1,91 @@
+/* StudyBuddy W21 — viewport-fit + cinematic scroll journey.
+   Scoped to the saved Base44 homepage; does NOT modify original Base44 CSS,
+   React Bits Galaxy, StarBorder, Laravel layouts, or user data. */
+html[data-studybuddy-exact] { scroll-padding-top: 76px; }
+html[data-studybuddy-exact] .sb21-journey-track { position: relative; isolation: isolate; }
+html[data-studybuddy-exact] .sb21-hero { position: relative; isolation: isolate; overflow: hidden; }
+html[data-studybuddy-exact] #worlds { scroll-margin-top: 76px; }
+html[data-studybuddy-exact] .sb21-hero-grid { position: relative; z-index: 3; }
+html[data-studybuddy-exact] .sb21-hero-grid > :first-child,
+html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { transform-origin: 50% 50%; backface-visibility: hidden; }
+html[data-studybuddy-exact] .sb21-hero-grid > :first-child { transform: translate3d(0,var(--sb21-copy-y,0px),0) scale(var(--sb21-copy-scale,1)) !important; opacity:var(--sb21-copy-opacity,1); }
+html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { transform: translate3d(0,var(--sb21-art-y,0px),0) scale(var(--sb21-art-scale,1)) !important; opacity:var(--sb21-art-opacity,1); }
+html[data-studybuddy-exact] .sb21-hero .sb21-portal { position:absolute; inset:0; pointer-events:none; z-index:5; opacity:var(--sb21-portal-opacity,0); background: radial-gradient(ellipse 30% 42% at 55% 51%,rgba(76,210,249,.29),rgba(139,92,246,.19) 31%,rgba(10,11,32,.19) 61%,transparent 88%); mix-blend-mode:screen; transform:scale(var(--sb21-portal-scale,.45)); transform-origin: 55% 51%; }
+html[data-studybuddy-exact] .sb21-hero .sb21-portal:before, html[data-studybuddy-exact] .sb21-hero .sb21-portal:after { content:""; position:absolute; left:55%; top:51%; width:clamp(180px,34vw,500px); aspect-ratio:1; border-radius:50%; transform:translate(-50%,-50%); border:1px solid rgba(148,208,255,.24); box-shadow: 0 0 100px rgba(96,102,248,.15), inset 0 0 90px rgba(45,214,241,.06); }
+html[data-studybuddy-exact] .sb21-hero .sb21-portal:after { width:clamp(120px,23vw,340px); border-color:rgba(210,162,255,.3); }
+html[data-studybuddy-exact] .sb21-hero .sb21-portal-fade { position:absolute; inset:0; background:radial-gradient(ellipse at 55% 51%,rgba(13,16,42,.10),rgba(9,9,27,.67) 75%); opacity:var(--sb21-fade-opacity,0); z-index:4; pointer-events:none; }
+html[data-studybuddy-exact] .sb21-hero .sb21-scroll-progress { position:absolute; bottom:0;left:0; width:100%;height:2px; z-index:7; transform:scaleX(var(--sb21-progress,0)); transform-origin:left center; background:linear-gradient(90deg,#8b5cf6,#5eead4); opacity:var(--sb21-progress-opacity,0); pointer-events:none; }
+html[data-studybuddy-exact] .sb21-hero .sb21-cue { pointer-events:none; }
+html[data-studybuddy-exact] .sb21-hero .sb21-cue > div { opacity:var(--sb21-cue-opacity,1); }
+/* The first view always belongs to the screen, not to a fixed pixel height. */
+@media (min-width:900px) and (min-height:620px) and (prefers-reduced-motion:no-preference) {
+  html[data-studybuddy-exact] .sb21-journey-track { height:171svh; }
+  html[data-studybuddy-exact] .sb21-hero { position:sticky; top:0; height:100svh; min-height:0; padding:74px 0 21px !important; display:flex; flex-direction:column; justify-content:center; }
+  html[data-studybuddy-exact] .sb21-hero-grid { width:100%; flex:1 1 auto; min-height:0; align-items:center; grid-template-columns:minmax(0,1.06fr) minmax(0,.94fr); gap:clamp(18px,3vw,48px) !important; padding-top:clamp(10px,2.7svh,26px); padding-bottom:clamp(20px,3svh,33px); }
+  html[data-studybuddy-exact] .sb21-hero h1 { font-size:clamp(3.05rem, min(6.3vw, 8.45svh), 5.6rem) !important; line-height:.97; margin-top:clamp(13px,2.2svh,25px) !important; }
+  html[data-studybuddy-exact] .sb21-hero-grid > :first-child > div.mt-7 { margin-top:clamp(12px,2.1svh,25px) !important; font-size:clamp(13px,1.18vw,17px) !important; line-height:1.5; }
+  html[data-studybuddy-exact] .sb21-hero-grid > :first-child > div.mt-9 { margin-top:clamp(16px,2.7svh,33px) !important; }
+  html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 { margin-top:clamp(20px,4svh,44px) !important; gap:clamp(11px,2.1vw,38px) !important; }
+  html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl dd { font-size:clamp(22px,2.35svh,30px) !important; }
+  html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { max-width:min(44vw,59svh,540px) !important; }
+  html[data-studybuddy-exact] .sb21-cue { position:absolute; bottom:clamp(10px,2.3svh,22px); left:0; width:100%; margin-top:0 !important; }
+}
+/* Tablet landscape still gets a complete, balanced two-column first view. */
+@media (min-width:740px) and (max-width:899px) {
+ html[data-studybuddy-exact] .sb21-hero { min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding-top:90px!important; padding-bottom:34px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid { grid-template-columns:minmax(0,1.04fr) minmax(0,.96fr); align-items:center; gap:20px!important; }
+ html[data-studybuddy-exact] .sb21-hero h1 { font-size:clamp(3rem,5.4vw,4rem)!important; line-height:.99; margin-top:18px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > div.mt-7 { margin-top:16px!important; font-size:14px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > div.mt-9 { margin-top:18px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 { margin-top:24px!important; gap:14px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { max-width:min(42vw,420px)!important; }
+}
+/* Tall desktop / medium height: avoid oversized typography and wasted spacing. */
+@media (min-width:900px) and (max-height:710px) {
+ html[data-studybuddy-exact] .sb21-hero { padding-top:70px!important; padding-bottom:10px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid { padding-top:8px; padding-bottom:8px; }
+ html[data-studybuddy-exact] .sb21-hero h1 { font-size:clamp(2.85rem,min(6vw,7.9svh),4.8rem)!important; margin-top:10px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 { margin-top:15px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > div.mt-9 { margin-top:14px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { max-width:min(40vw,56svh,450px)!important; }
+ html[data-studybuddy-exact] .sb21-cue { bottom:8px; }
+}
+/* Compact stats stay on one line at the exact 1085px DevTools viewport. */
+@media (min-width:900px) and (max-width:1199px) {
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 { flex-wrap:nowrap!important; column-gap:clamp(7px,1.1vw,15px)!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 > div { gap:4px!important; flex-shrink:0; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 span.text-xs { font-size:9px!important; letter-spacing:.07em!important; white-space:nowrap; }
+}
+/* Phones: don't pin a tall two-column scene or hide content below the fold. */
+@media (max-width:739px) {
+ html[data-studybuddy-exact] .sb21-hero { min-height:100svh; display:flex; flex-direction:column; justify-content:center; padding-top:86px !important; padding-bottom:30px !important; }
+ html[data-studybuddy-exact] .sb21-hero-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:clamp(10px,2svh,20px)!important; padding-left:clamp(17px,5vw,28px)!important; padding-right:clamp(17px,5vw,28px)!important; }
+ html[data-studybuddy-exact] .sb21-hero h1 { font-size:clamp(2.45rem,9.2vw,3.7rem)!important; line-height:.98; margin-top:clamp(10px,1.5svh,17px)!important; max-width:14ch; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > div.mt-7 { margin-top:clamp(12px,1.8svh,20px)!important; font-size:clamp(12px,3.5vw,15px)!important; line-height:1.45; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > div.mt-9 { margin-top:clamp(13px,1.8svh,20px)!important; gap:9px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > div.mt-9 a { padding:11px 15px!important; font-size:12px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 { margin-top:clamp(13px,2svh,20px)!important; gap:10px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 span.text-xs { font-size:9px!important; letter-spacing:.10em!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child > dl.mt-14 dd { font-size:22px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { max-width:min(58vw,26svh,260px)!important; justify-self:center; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) .t-reveal.absolute { display:none!important; }
+ html[data-studybuddy-exact] .sb21-hero .sb21-portal { display:none; }
+}
+@media (max-width:420px) and (max-height:740px) {
+ html[data-studybuddy-exact] .sb21-hero { justify-content:flex-start; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { max-width:min(52vw,175px)!important; }
+ html[data-studybuddy-exact] .sb21-hero h1 { font-size:clamp(2.25rem,9vw,3.1rem)!important; }
+}
+@media (max-height:619px) and (min-width:740px) {
+ html[data-studybuddy-exact] .sb21-hero { min-height:100svh; padding-top:82px!important; padding-bottom:24px!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid { display:grid; grid-template-columns:1.08fr .92fr; align-items:center; gap:24px!important; }
+ html[data-studybuddy-exact] .sb21-hero h1 { font-size:clamp(2.7rem, min(5.5vw,8svh),4rem)!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { max-width:min(37vw,50svh)!important; }
+}
+/* Respect user accessibility preferences: no pinned page, transforms or forced animation. */
+@media (prefers-reduced-motion:reduce) {
+ html[data-studybuddy-exact] .sb21-journey-track { height:auto!important; }
+ html[data-studybuddy-exact] .sb21-hero { position:relative!important;height:auto!important;min-height:100svh!important; }
+ html[data-studybuddy-exact] .sb21-hero-grid > :first-child, html[data-studybuddy-exact] .sb21-hero-grid > :nth-child(2) { transform:none!important;opacity:1!important; }
+ html[data-studybuddy-exact] .sb21-hero .sb21-portal, html[data-studybuddy-exact] .sb21-hero .sb21-portal-fade, html[data-studybuddy-exact] .sb21-hero .sb21-scroll-progress { display:none!important; }
+}

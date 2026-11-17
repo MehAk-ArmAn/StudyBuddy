@@ -1,0 +1,37 @@
+{
+  "root": "/Users/mehakarman/Desktop/StudyBuddy-main",
+  "files": {
+    "public/assets/studybuddy-base44-exact/home.html": {
+      "exists": true,
+      "sha256": "feb84c8fbf554b0a6b5726d44782e68de62cfab38999d4bb7873c15b0599f68c"
+    },
+    "public/assets/studybuddy-w22/antigravity.js": {
+      "exists": false,
+      "sha256": null
+    },
+    "public/assets/studybuddy-w22/antigravity.css": {
+      "exists": false,
+      "sha256": null
+    },
+    "resources/js/studybuddy-antigravity/Antigravity.jsx": {
+      "exists": false,
+      "sha256": null
+    },
+    "resources/js/studybuddy-antigravity/Antigravity.css": {
+      "exists": false,
+      "sha256": null
+    },
+    "resources/js/studybuddy-antigravity/entry.jsx": {
+      "exists": false,
+      "sha256": null
+    },
+    "resources/js/studybuddy-antigravity/mount.css": {
+      "exists": false,
+      "sha256": null
+    },
+    "resources/js/studybuddy-antigravity/vite.config.mjs": {
+      "exists": false,
+      "sha256": null
+    }
+  }
+}

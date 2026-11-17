@@ -1,0 +1,28 @@
+/* StudyBuddy W22: only a decorative React Bits layer behind the original artwork. */
+html[data-studybuddy-exact] .sb22-mascot-host { isolation: isolate; }
+html[data-studybuddy-exact] .sb22-antigravity-host {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%,-50%);
+  width: min(115%, 580px);
+  height: min(400px, 90%);
+  min-height: 180px;
+  z-index: 0;
+  opacity: .84;
+  pointer-events: none;
+  overflow: hidden;
+  /* Keep the particles soft behind the dolphin without hiding the Base44 artwork. */
+  -webkit-mask-image: radial-gradient(ellipse at 50% 50%, #000 18%, #000 62%, transparent 98%);
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 18%, #000 62%, transparent 98%);
+}
+html[data-studybuddy-exact] .sb22-antigravity-host, 
+html[data-studybuddy-exact] .sb22-antigravity-host canvas { pointer-events:none!important; }
+/* Existing original image & the sample progress notes stay in front of the effect. */
+html[data-studybuddy-exact] .sb22-mascot-host > .relative.aspect-square { position: relative; z-index:1; pointer-events:none; }
+html[data-studybuddy-exact] .sb22-mascot-host > .t-reveal { z-index:2; }
+@media (max-width:739px) {
+  html[data-studybuddy-exact] .sb22-antigravity-host { width:115%;height:min(260px,90%);opacity:.67; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-studybuddy-exact] .sb22-antigravity-host { opacity:.30; }
+}

@@ -1,0 +1,17 @@
+{
+  "root": "/Users/mehakarman/Desktop/StudyBuddy-main",
+  "files": {
+    "public/assets/studybuddy-base44-exact/home.html": {
+      "exists": true,
+      "sha256": "19274c6d8774a5f1b34951b11f109ecc03935350eb4cc0aef6f5d7f23333ff5e"
+    },
+    "public/assets/studybuddy-w21/studybuddy-w21.css": {
+      "exists": false,
+      "sha256": null
+    },
+    "public/assets/studybuddy-w21/studybuddy-w21.js": {
+      "exists": false,
+      "sha256": null
+    }
+  }
+}

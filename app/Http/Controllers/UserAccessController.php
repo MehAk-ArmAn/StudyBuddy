@@ -76,7 +76,7 @@ class UserAccessController extends Controller
             'real_name' => ['nullable', 'string', 'max:160'],
             'email' => ['required', 'email:rfc', 'max:190', Rule::unique('users', 'email')],
             'role' => ['required', Rule::in(['student', 'parent', 'teacher', 'independent_learner'])],
-            'date_of_birth' => ['required_if:role,parent,teacher,independent_learner', 'nullable', 'date', 'before:today', 'after:1900-01-01'],
+            'date_of_birth' => ['required', 'date', 'before:today', 'after:1900-01-01'], // STUDYBUDDY_W22_ACCOUNTS: prevent unaged child accounts
             'country' => ['nullable', 'string', 'max:90'],
             'guardian_email' => ['nullable', 'email:rfc', 'max:190'],
             'learning_stage' => ['nullable', 'string', 'max:120'],
@@ -102,30 +102,56 @@ class UserAccessController extends Controller
         $dob = !empty($data['date_of_birth']) ? Carbon::parse($data['date_of_birth']) : null;
         $age = $dob?->age;
 
-        if ($dob && in_array($role, ['parent', 'teacher', 'independent_learner'], true) && $age < 18) {
+        if ($dob && in_array($role, ['parent', 'teacher'], true) && $age < 18) {
             throw ValidationException::withMessages([
                 'date_of_birth' => 'Adult account roles must be 18+.',
             ]);
         }
 
-        if ($dob && $role === 'student' && $age < 13 && empty($data['guardian_email'])) {
+        // Independent learning is also available to teenagers; it is not an adult privilege.
+        // Younger children use Student + guardian safeguards instead.
+        if ($role === 'independent_learner' && $age < 13) {
             throw ValidationException::withMessages([
-                'guardian_email' => 'Learners under 13 need a parent or guardian email.',
+                'date_of_birth' => 'Independent learning is available from age 13. Younger learners can choose Student with a guardian.',
+            ]);
+        }
+
+        if ($dob && $role === 'student' && $age < 13 && (empty($data['guardian_email']) || Str::lower(trim($data['guardian_email'])) === $email)) {
+            throw ValidationException::withMessages([
+                'guardian_email' => 'Learners under 13 need a parent or guardian email different from their own.',
             ]);
         }
 
         $childEmails = $this->parseEmailList($data['child_emails_text'] ?? '');
 
-        $roleProfile = array_filter([
-            'study_goal' => $data['study_goal'] ?? null,
-            'favorite_subjects' => $data['favorite_subjects'] ?? null,
-            'parent_goal' => $data['parent_goal'] ?? null,
-            'child_age_range' => $data['child_age_range'] ?? null,
-            'class_level' => $data['class_level'] ?? null,
-            'teaching_focus' => $data['teaching_focus'] ?? null,
-            'independent_goal' => $data['independent_goal'] ?? null,
-            'daily_time' => $data['daily_time'] ?? null,
-        ], fn ($value) => filled($value));
+        // Keep preferences role-specific and expose the same learning_goal key
+        // already read by DashboardController and Profile Studio.
+        $roleProfile = array_filter(match ($role) {
+            'student' => [
+                'study_goal' => $data['study_goal'] ?? null,
+                'learning_goal' => $data['study_goal'] ?? null,
+                'favorite_subjects' => $data['favorite_subjects'] ?? null,
+                'current_focus' => $data['learning_stage'] ?? null,
+            ],
+            'parent' => [
+                'parent_goal' => $data['parent_goal'] ?? null,
+                'child_age_range' => $data['child_age_range'] ?? null,
+            ],
+            'teacher' => [
+                'class_level' => $data['class_level'] ?? null,
+                'teaching_focus' => $data['teaching_focus'] ?? null,
+            ],
+            'independent_learner' => [
+                'independent_goal' => $data['independent_goal'] ?? null,
+                'learning_goal' => $data['independent_goal'] ?? null,
+                'daily_time' => $data['daily_time'] ?? null,
+                'current_focus' => $data['learning_stage'] ?? null,
+            ],
+        }, fn ($value) => filled($value));
+
+        // An independent teen remains a learner and must never gain adult-only permissions.
+        $requiresAdultReview = in_array($role, ['parent', 'teacher'], true)
+            || ($role === 'independent_learner' && $age >= 18);
 
         $payload = [
             'name' => trim($data['name']),
@@ -136,22 +162,22 @@ class UserAccessController extends Controller
             'role' => $role,
             'date_of_birth' => $dob?->toDateString(),
             'country' => $data['country'] ?? null,
-            'guardian_email' => $data['guardian_email'] ?? null,
+            'guardian_email' => $role === 'student' && $age !== null && $age < 13 ? Str::lower(trim($data['guardian_email'])) : null,
             'learning_stage' => $role === 'parent' ? null : ($data['learning_stage'] ?? null),
             'child_emails' => $role === 'parent' ? $childEmails : null,
             'role_profile' => $roleProfile ?: null,
-            'organization_name' => $data['organization_name'] ?? null,
-            'organization_email' => $data['organization_email'] ?? null,
-            'position_title' => $data['position_title'] ?? null,
+            'organization_name' => $role === 'teacher' ? ($data['organization_name'] ?? null) : null,
+            'organization_email' => $role === 'teacher' ? ($data['organization_email'] ?? null) : null,
+            'position_title' => $role === 'teacher' ? ($data['position_title'] ?? null) : null,
             'avatar_style' => $this->defaultAvatar($role),
             'cosmic_points' => $this->startingPoints($role),
             'is_admin' => false,
             'age_verified_at' => $dob && $age >= 18 ? now() : null,
-            'role_verification_status' => $this->initialVerificationStatus($role),
-            'adult_verification_status' => in_array($role, ['parent', 'teacher', 'independent_learner'], true) ? 'pending_review' : 'not_required',
-            'adult_verification_consent_at' => in_array($role, ['parent', 'teacher', 'independent_learner'], true) ? now() : null,
+            'role_verification_status' => $role === 'independent_learner' && $age < 18 ? 'not_required' : $this->initialVerificationStatus($role),
+            'adult_verification_status' => $requiresAdultReview ? 'pending_review' : 'not_required',
+            'adult_verification_consent_at' => $requiresAdultReview ? now() : null,
             'safeguarding_agreed_at' => now(),
-            'verification_submitted_at' => in_array($role, ['teacher', 'independent_learner'], true) ? now() : null,
+            'verification_submitted_at' => ($role === 'teacher' || ($role === 'independent_learner' && $age >= 18)) ? now() : null,
         ];
 
         $user = new User();
