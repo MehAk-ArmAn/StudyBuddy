@@ -108,17 +108,12 @@ class UserAccessController extends Controller
             ]);
         }
 
-        // Independent learning is also available to teenagers; it is not an adult privilege.
-        // Younger children use Student + guardian safeguards instead.
-        if ($role === 'independent_learner' && $age < 13) {
+        // Children of any age can learn through a parent-managed family profile.
+        // An unverified guardian email is not parental approval. Do not create
+        // direct-login under-13 accounts through the public signup form.
+        if ($age !== null && $age < 13 && in_array($role, ['student', 'independent_learner'], true)) {
             throw ValidationException::withMessages([
-                'date_of_birth' => 'Independent learning is available from age 13. Younger learners can choose Student with a guardian.',
-            ]);
-        }
-
-        if ($dob && $role === 'student' && $age < 13 && (empty($data['guardian_email']) || Str::lower(trim($data['guardian_email'])) === $email)) {
-            throw ValidationException::withMessages([
-                'guardian_email' => 'Learners under 13 need a parent or guardian email different from their own.',
+                'date_of_birth' => 'For learners under 13, a parent or guardian first creates a family-managed learner profile from their StudyBuddy account. No separate child login is needed.',
             ]);
         }
 
@@ -143,6 +138,7 @@ class UserAccessController extends Controller
             ],
             'independent_learner' => [
                 'independent_goal' => $data['independent_goal'] ?? null,
+                'favorite_subjects' => $data['favorite_subjects'] ?? null,
                 'learning_goal' => $data['independent_goal'] ?? null,
                 'daily_time' => $data['daily_time'] ?? null,
                 'current_focus' => $data['learning_stage'] ?? null,
@@ -162,7 +158,7 @@ class UserAccessController extends Controller
             'role' => $role,
             'date_of_birth' => $dob?->toDateString(),
             'country' => $data['country'] ?? null,
-            'guardian_email' => $role === 'student' && $age !== null && $age < 13 ? Str::lower(trim($data['guardian_email'])) : null,
+            'guardian_email' => null, // W24: direct signup never treats a typed address as parental approval
             'learning_stage' => $role === 'parent' ? null : ($data['learning_stage'] ?? null),
             'child_emails' => $role === 'parent' ? $childEmails : null,
             'role_profile' => $roleProfile ?: null,

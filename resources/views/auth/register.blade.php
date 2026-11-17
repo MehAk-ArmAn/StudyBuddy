@@ -17,7 +17,7 @@
             <div class="sb22-route-choices" role="group" aria-label="Account type">
                 <button type="button" data-role-preview="student" class="sb22-role" aria-pressed="false">
                     <span class="sb22-role-icon" aria-hidden="true">✦</span>
-                    <span><strong>Student</strong><small>Apps, quests and learning goals</small></span>
+                    <span><strong>Student</strong><small>Learn with your own goals from age 13</small></span>
                 </button>
                 <button type="button" data-role-preview="parent" class="sb22-role" aria-pressed="false">
                     <span class="sb22-role-icon" aria-hidden="true">♡</span>
@@ -29,10 +29,10 @@
                 </button>
                 <button type="button" data-role-preview="independent_learner" class="sb22-role" aria-pressed="false">
                     <span class="sb22-role-icon" aria-hidden="true">✧</span>
-                    <span><strong>Independent Learner</strong><small>Learn at your pace — teens welcome</small></span>
+                    <span><strong>Independent Learner</strong><small>Self-paced learning from age 13</small></span>
                 </button>
             </div>
-            <p class="sb22-age-callout"><span aria-hidden="true">✧</span> Independent learners can be teenagers too. Your age helps us apply the right protections.</p>
+            <p class="sb22-age-callout"><span aria-hidden="true">✧</span> All ages belong in StudyBuddy. Ages 0–12 start with a parent-managed learner profile; teens can have their own accounts.</p>
             <p class="sb22-trust"><span aria-hidden="true">✳</span> Your data and learning progress stay in the real StudyBuddy account system. School access requires separate approval.</p>
         </aside>
 
@@ -73,7 +73,7 @@
                     <label><span>Date of birth *</span><input type="date" name="date_of_birth" value="{{ old('date_of_birth') }}" min="1900-01-02" max="{{ now()->subDay()->toDateString() }}" autocomplete="bday" required>@error('date_of_birth')<small>{{ $message }}</small>@enderror</label>
                     <label class="full"><span>Country (optional)</span><input name="country" value="{{ old('country') }}" maxlength="90" placeholder="Where you are learning from">@error('country')<small>{{ $message }}</small>@enderror</label>
                 </div>
-                <p class="sb22-policy" data-sb22-age-notice aria-live="polite">Students under 13 need a guardian email. Independent learning is open from age 13; Parent and Teacher roles require age 18+.</p>
+                <p class="sb22-policy" data-sb22-age-notice aria-live="polite">For ages 0–12, your parent creates a family-managed profile first. Ages 13–17 can join as students or independent learners. Adult-only roles require age 18+.</p>
             </section>
 
             <section class="sb22-step" data-sb22-step="1" aria-label="Learning preferences">
@@ -92,7 +92,7 @@
                             <button type="button" data-subject="{{ $subject }}" aria-pressed="false">{{ $subject }}</button>
                         @endforeach
                     </div>
-                    <label class="sb22-guardian" data-sb22-guardian><span>Parent or guardian email <span data-sb22-guardian-required>(needed for learners under 13)</span></span><input type="email" name="guardian_email" value="{{ old('guardian_email') }}" maxlength="190" placeholder="guardian@example.com">@error('guardian_email')<small>{{ $message }}</small>@enderror</label>
+                    <p class="sb24-under13-path">Under 13? A parent creates your own learning space from their account. <a href="{{ route('register') }}?role=parent">Start with a parent account</a>.</p>
                 </section>
 
                 <section class="sb-role-dynamic-panel is-hidden" data-panel="parent" aria-label="Parent setup">
@@ -119,6 +119,7 @@
                     <div class="sb-panel-icon" aria-hidden="true">✧</div><div><h3>Independent learning</h3><p>Your learning, your pace. Open to teenagers aged 13–17 and adults 18+.</p></div>
                     <div class="sb-form-grid compact">
                         <label><span>Learning focus</span><input name="learning_stage" value="{{ old('learning_stage') }}" maxlength="120" placeholder="Study, professional skills, languages..."></label>
+                        <label><span>Favorite subjects</span><input name="favorite_subjects" value="{{ old('favorite_subjects') }}" maxlength="190" placeholder="Languages, science, art..."></label>
                         <label><span>Main goal</span><select name="independent_goal"><option value="">Choose a goal</option>@foreach (['Daily focus','Skill building','Revision routine','Creative learning','Career prep'] as $goal)<option @selected(old('independent_goal') === $goal)>{{ $goal }}</option>@endforeach</select></label>
                         <label class="full"><span>Daily study time</span><select name="daily_time"><option value="">Choose a routine</option>@foreach (['5-10 minutes','15-20 minutes','30 minutes','1 hour+','Flexible'] as $duration)<option @selected(old('daily_time') === $duration)>{{ $duration }}</option>@endforeach</select></label>
                     </div>
@@ -135,7 +136,7 @@
                 <p id="sb22-password-tip" class="sb22-password-tip" aria-live="polite">Strength: not entered</p>
                 <label class="sb-check-row"><input type="checkbox" name="safe_use_confirmed" value="1" required @checked(old('safe_use_confirmed'))><span>I agree to use StudyBuddy safely and respectfully.</span></label>
                 <label class="sb-check-row"><input type="checkbox" name="accuracy_confirmed" value="1" required @checked(old('accuracy_confirmed'))><span>I confirm the information I entered is accurate.</span></label>
-                <p class="sb22-policy">Email verification is required. Parent, teacher and adult independent accounts retain their existing verification rules. Teen independent accounts have learner-only permissions. <a href="{{ url('/privacy-policy') }}">Privacy information</a></p>
+                <p class="sb22-policy">Learner accounts from age 13 require email verification. Younger learners join through family-managed profiles. Adult and teacher privileges never unlock through points or age alone. <a href="{{ url('/privacy-policy') }}">Privacy information</a></p>
             </section>
 
             <div class="sb22-navigation" data-sb22-controls>

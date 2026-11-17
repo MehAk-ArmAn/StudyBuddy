@@ -1,0 +1,43 @@
+/* W25 — one StudyBuddy public shell. Scoped so the admin Control Room is unaffected. */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+:root{--sb25-ink:#f7f5ff;--sb25-muted:#aaa7c1;--sb25-bg:#080b1d;--sb25-border:rgba(181,169,245,.19);--sb25-violet:#9368fc;--sb25-cyan:#28c9ec;--sb25-h:74px}
+.sb25-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.sb25-header,.sb25-header *{box-sizing:border-box}
+.sb25-header{position:fixed!important;inset:0 0 auto!important;height:var(--sb25-h);z-index:9998!important;color:var(--sb25-ink);background:linear-gradient(110deg,rgba(19,18,45,.87),rgba(10,20,38,.88));backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border-bottom:1px solid rgba(195,179,255,.11);font-family:'Plus Jakarta Sans',sans-serif}
+.sb25-header-inner{height:100%;max-width:1220px;padding:0 23px;margin:0 auto;display:grid;grid-template-columns:minmax(164px,1fr) minmax(340px,auto) minmax(164px,1fr);align-items:center;gap:14px}
+.sb25-brand{display:flex;align-items:center;gap:11px;color:#fff!important;text-decoration:none!important;max-width:240px;min-width:0}
+.sb25-mark{width:42px;height:42px;flex:none;display:grid;place-items:center;overflow:hidden;background:#0e1530;border:1px solid rgba(171,154,251,.32);border-radius:14px;box-shadow:0 0 22px rgba(128,84,245,.19)}.sb25-mark img{width:100%;height:100%;object-fit:cover}
+.sb25-brand-text{display:flex;flex-direction:column;gap:3px;min-width:0}.sb25-brand-text strong{font-size:14px;font-weight:800;line-height:1.15;letter-spacing:-.035em}.sb25-brand-text small{font-size:9px;text-transform:uppercase;letter-spacing:.16em;white-space:nowrap;color:#bbb4d2}
+.sb25-primary{justify-self:center;min-width:0;display:flex;align-items:center;justify-content:center}
+.sb25-links-fallback{display:flex;align-items:center;gap:2px;border:1px solid var(--sb25-border);padding:6px;border-radius:999px;background:rgba(20,20,43,.9)}.sb25-links-fallback a{display:block;white-space:nowrap;border-radius:100px;padding:10px 14px;color:#d5cee8!important;text-decoration:none!important;font-size:12px;font-weight:600}.sb25-links-fallback a:hover,.sb25-links-fallback a[aria-current]{background:linear-gradient(135deg,var(--sb25-violet),#684bda);color:#fff!important}
+.sb25-primary .gooey-nav-container{position:relative!important;inset:auto!important;z-index:1!important;max-width:100%;margin:0!important;padding:0!important;transform:none!important}
+.sb25-primary .gooey-nav-container nav,.sb25-primary .gooey-nav-container .gooey-nav{max-width:100%;margin:0!important}
+.sb25-primary .gooey-nav-container a{text-decoration:none!important}
+.sb25-primary[data-sb25-active=none] .gooey-nav-container li.active{background:transparent}
+.sb25-actions{justify-self:end;display:flex;align-items:center;justify-content:flex-end;gap:9px;min-width:0}
+.sb25-icon-button,.sb25-mobile-toggle{appearance:none;border:1px solid var(--sb25-border);color:#e9e7ff;background:rgba(24,26,51,.76);border-radius:50%;width:38px;height:38px;display:grid;place-items:center;cursor:pointer}
+.sb25-icon-button svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:1.8}
+.sb25-login,.sb25-join{white-space:nowrap;text-decoration:none!important;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:10px 14px;font-weight:700;font-size:12px;min-height:36px;color:#fff!important}
+.sb25-login{background:rgba(124,119,178,.16);border:1px solid var(--sb25-border)}.sb25-join{background:linear-gradient(120deg,#8d50fa,#586eff);box-shadow:0 6px 22px rgba(110,74,230,.27)}
+.sb25-header .sb-v6-appearance{position:relative;flex:none}.sb25-header .sb-v6-appearance__trigger{white-space:nowrap;font-size:11px;min-height:36px;border:1px solid var(--sb25-border)!important;background:rgba(24,26,51,.75)!important;color:#fff!important;border-radius:999px!important;padding:0 10px!important}
+.sb25-header .sb-v6-appearance__menu{position:absolute!important;top:calc(100% + 10px)!important;right:0!important;z-index:10002!important;min-width:180px}
+.sb25-account{position:relative}.sb25-account-button{display:flex;gap:7px;align-items:center;cursor:pointer;padding:4px 9px 4px 5px;max-width:190px;border:1px solid var(--sb25-border);border-radius:999px;color:#fff;background:rgba(54,54,85,.57)}.sb25-avatar{display:grid;place-items:center;background:linear-gradient(135deg,var(--sb25-cyan),var(--sb25-violet));width:31px;height:31px;border-radius:50%;font-size:13px;font-weight:800;overflow:hidden;flex:none}.sb25-avatar img{width:100%;height:100%;object-fit:cover}.sb25-account-copy{display:flex;flex-direction:column;text-align:left;min-width:0}.sb25-account-copy strong{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:104px}.sb25-account-copy small{font-size:10px;color:#bdb9cd}
+.sb25-account-menu,.sb25-search-box,.sb25-mobile-menu{background:#12142d;border:1px solid rgba(187,167,241,.3);box-shadow:0 20px 60px rgba(0,0,0,.46);border-radius:20px;backdrop-filter:blur(24px)}
+.sb25-account-menu{position:absolute;right:0;top:calc(100% + 11px);min-width:206px;z-index:10006;padding:9px}.sb25-account-menu[hidden],.sb25-search-box[hidden],.sb25-mobile-menu[hidden]{display:none!important}.sb25-account-menu a,.sb25-account-menu button{display:block;width:100%;padding:10px 11px;text-align:left;background:none;border:0;color:#eeeafa;font-size:12px;text-decoration:none!important;cursor:pointer;border-radius:10px}.sb25-account-menu a:hover,.sb25-account-menu button:hover{background:rgba(150,112,238,.18)}
+.sb25-search-box{position:absolute;right:max(16px,calc((100vw - 1180px)/2));top:calc(var(--sb25-h) + 8px);z-index:10005;display:flex;padding:11px;gap:8px;width:min(420px,calc(100vw - 32px))}.sb25-search-box input{min-width:0;flex:1;border:1px solid var(--sb25-border);border-radius:12px;background:#0c132d;color:#fff;font-size:13px;padding:11px 12px}.sb25-search-box button{border:0;border-radius:12px;color:#050d1e;background:var(--sb25-cyan);font-weight:800;padding:0 16px}
+.sb25-mobile-toggle{display:none;flex-direction:column;gap:4px}.sb25-mobile-toggle span{height:2px;width:16px;background:#fff;border-radius:8px}.sb25-mobile-menu{position:absolute;top:calc(var(--sb25-h) + 6px);right:14px;left:14px;z-index:10003;padding:13px}.sb25-mobile-menu a{display:block;padding:12px;color:#fff!important;font-size:14px;text-decoration:none!important;border-radius:10px}.sb25-mobile-menu a:hover{background:rgba(144,107,242,.17)}
+.sb25-header :focus-visible{outline:2px solid #30d5eb!important;outline-offset:3px}
+/* Unified public typography/atmosphere, without rewriting page-specific content/components. */
+body.studybuddy-site{font-family:'Plus Jakarta Sans',sans-serif;background-color:var(--sb25-bg)}
+body.studybuddy-site :is(.display-xl,.sb-display,.sb-display-title,.sb-hero-serif){font-family:'Instrument Serif',Georgia,serif}
+body.studybuddy-site #main-content{padding-top:var(--sb25-h)}
+body.studybuddy-site #main-content :is(.sb-catalog-v3,.sb-role-dashboard,.sb-auth-stage){scroll-margin-top:calc(var(--sb25-h) + 20px)}
+/* The Admin Control Room keeps its own administrative navigation. */
+body.sb-admin-body{font-family:'Plus Jakarta Sans',sans-serif}
+@media(max-width:1180px){.sb25-header-inner{grid-template-columns:minmax(135px,1fr) minmax(300px,auto) minmax(125px,1fr);gap:8px;padding:0 18px}.sb25-brand-text small{letter-spacing:.1em}.sb25-header .sb-v6-appearance__label{display:none}.sb25-actions{gap:6px}.sb25-login{padding:9px}.sb25-join{padding:9px 12px}.sb25-account-copy{display:none}}
+@media(max-width:920px){.sb25-header-inner{grid-template-columns:1fr auto auto;gap:12px}.sb25-primary{display:none!important}.sb25-mobile-toggle{display:flex}.sb25-actions{justify-self:end}.sb25-brand-text small{display:none}.sb25-header .sb-v6-appearance{display:none}.sb25-login,.sb25-join{display:none}}
+@media(max-width:520px){:root{--sb25-h:66px}.sb25-header-inner{padding:0 14px}.sb25-mark{width:38px;height:38px}.sb25-brand-text strong{font-size:13px}.sb25-actions .sb25-account-copy{display:none}}
+@media(prefers-reduced-motion:reduce){.sb25-header *, .sb25-header *::after,.sb25-header *::before{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+/* Defensive guard for legacy W9-W24 overlays if they are injected by cached scripts. */
+body.studybuddy-site .sb-advanced-shell,body.studybuddy-site .sb-u-toolbar,body.studybuddy-site .sb-u-world-panel{display:none!important}
+body.studybuddy-site [data-sb24-gooey-host],body.studybuddy-site [data-sb-w24-gooey]{display:none!important}

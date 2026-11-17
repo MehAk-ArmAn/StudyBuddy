@@ -124,3 +124,6 @@ require __DIR__ . '/studybuddy_mailing_list.php';
 
 // School tenancy and approval are strictly separate from learner accounts.
 require __DIR__.'/studybuddy_schools.php';
+
+// STUDYBUDDY W24 FAMILY ROUTES
+require __DIR__ . '/studybuddy_family_learners.php';

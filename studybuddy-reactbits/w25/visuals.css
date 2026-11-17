@@ -1,0 +1,40 @@
+/* W25 is purposefully scoped. No changes to W19/W22 starfield or Base44 hero. */
+#studybuddy-w25-root { display: block; width: 100%; clear: both; position: relative; isolation: isolate; }
+#studybuddy-w25-root *, #studybuddy-w25-root *::before, #studybuddy-w25-root *::after { box-sizing: border-box; }
+#studybuddy-w25-root .sb25-shell { position: relative; width: 100%; overflow: clip; background: linear-gradient(180deg,#090a1e,#100b26 55%,#090a1e); color: #fbfaff; border-top:1px solid rgba(184,163,255,.11); }
+#studybuddy-w25-root .sb25-container { width: min(1180px,calc(100% - 40px)); margin:auto; padding:40px 0 72px; }
+#studybuddy-w25-root .sb25-section { padding:38px 0 54px; max-width:100%; }
+#studybuddy-w25-root .sb25-eyebrow { color:#c8b5ff; font-size:10px; letter-spacing:.24em; font-weight:750; margin-bottom:13px; }
+#studybuddy-w25-root .sb25-title { color:#fff; font-family:'Instrument Serif',Georgia,serif; font-weight:400; letter-spacing:-.025em; line-height:1.06; font-size:clamp(31px,4.8vw,58px); margin:0 0 26px; text-wrap:balance; }
+#studybuddy-w25-root .sb25-caption { color:#b7b2ce; line-height:1.6; font-size:14px; max-width:620px; margin:14px 0; }
+#studybuddy-w25-root .sb25-link { display:inline-flex; align-items:center; gap:10px; padding:10px 15px; background:linear-gradient(120deg,#9466ed,#67cce8); border-radius:999px; color:#071022; font-weight:750; text-decoration:none; margin-top:10px; }
+#studybuddy-w25-root .sb25-link:focus-visible {outline:3px solid white; outline-offset:4px;}
+#studybuddy-w25-root .sb25-depth { position:relative; height:455px; width:100%; }
+#studybuddy-w25-root .sb25-discovery { display:grid; grid-template-columns:minmax(235px,.6fr) minmax(0,1fr); gap:20px; align-items:center; margin:0 0 30px; }
+#studybuddy-w25-root .sb25-wheel { width:100%; height:300px; overflow:clip; position:relative; border-radius:22px; background:rgba(74,47,127,.2); border:1px solid rgba(188,160,254,.17); }
+#studybuddy-w25-root .sb25-active-card { display:grid; grid-template-columns:150px 1fr; gap:22px; padding:18px; min-width:0; border-radius:22px; border:1px solid rgba(184,154,252,.23); background:rgba(34,25,64,.6); }
+#studybuddy-w25-root .sb25-active-card>img { width:100%; height:200px; object-fit:cover; border-radius:14px; }
+#studybuddy-w25-root .sb25-active-detail h3 { font-size:clamp(17px,2vw,25px); line-height:1.25; color:#fff; margin:0; overflow-wrap:anywhere; }
+#studybuddy-w25-root .sb25-save {display:flex; gap:12px; align-items:center; margin-top:16px; flex-wrap:wrap;}
+#studybuddy-w25-root .sb25-save small {font-size:11px; color:#bbb6d1;}
+#studybuddy-w25-root .sb25-list-wrap { margin-top:24px; }
+#studybuddy-w25-root .sb25-flip-row {display:flex;flex-wrap:wrap;gap:18px;}
+#studybuddy-w25-root .sb25-flip-face {height:100%; width:100%; padding:26px 24px; display:flex; flex-direction:column; justify-content:space-between;}
+#studybuddy-w25-root .sb25-flip-front {background:radial-gradient(circle at 78% 20%,rgba(91,211,238,.3),transparent 56%),linear-gradient(135deg,#3d236f,#15112d);}
+#studybuddy-w25-root .sb25-flip-back {background:radial-gradient(circle at 30% 40%,rgba(152,91,247,.28),transparent 64%),#15112d;}
+#studybuddy-w25-root .sb25-flip-face>span {font-size:10px;letter-spacing:.16em; color:#c5b4fe;}
+#studybuddy-w25-root .sb25-flip-face h3 {font-family:'Instrument Serif',Georgia,serif; font-weight:400; font-size:35px;line-height:1.15;color:#fff;margin:4px 0;}
+#studybuddy-w25-root .sb25-flip-face p {font-size:14px;color:#dad4eb;line-height:1.55;}
+#studybuddy-w25-root .sb25-flip-face a {position:relative;z-index:4;color:#aee8ff;font-weight:700;text-decoration:underline;text-underline-offset:4px;}
+#studybuddy-w25-root .magic-bento {width:100%;}
+@media(max-width:760px) {
+  #studybuddy-w25-root .sb25-container {width:calc(100% - 28px);padding:20px 0 40px;}
+  #studybuddy-w25-root .sb25-section {padding:25px 0 35px;}
+  #studybuddy-w25-root .sb25-discovery {grid-template-columns:1fr;}
+  #studybuddy-w25-root .sb25-wheel {height:235px;}
+  #studybuddy-w25-root .sb25-depth {height:390px;}
+  #studybuddy-w25-root .sb25-active-card {grid-template-columns:98px 1fr;gap:12px;}
+  #studybuddy-w25-root .sb25-active-card>img {height:130px;}
+  #studybuddy-w25-root .sb25-flip-row {justify-content:center;}
+}
+@media(prefers-reduced-motion:reduce) { #studybuddy-w25-root * {scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important;} }

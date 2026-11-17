@@ -109,6 +109,21 @@
 <!-- STUDYBUDDY W24 GOOEYNAV CSS START -->
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w24/studybuddy-gooey.css') }}?v=24.0">
 <!-- STUDYBUDDY W24 GOOEYNAV CSS END -->
+
+<!-- STUDYBUDDY W24 SHARED LIFELONG LEARNING -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w24/universe.css') }}?v={{ filemtime(public_path('assets/studybuddy-w24/universe.css')) }}">
+
+<!-- STUDYBUDDY W25 VISUALS CSS START -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w25/studybuddy-visuals.css') }}?v=25.0">
+<!-- STUDYBUDDY W25 VISUALS CSS END -->
+<!-- STUDYBUDDY W25 SHARED CSS START -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w25/gooey.css') }}?v={{ filemtime(public_path('assets/studybuddy-w25/gooey.css')) }}">
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w25/shell.css') }}?v={{ filemtime(public_path('assets/studybuddy-w25/shell.css')) }}">
+<!-- STUDYBUDDY W25 SHARED CSS END -->
+
+<!---- STUDYBUDDY W26 CSS START ---->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w26/studybuddy-w26.css') }}?v=26.1">
+<!---- STUDYBUDDY W26 CSS END ---->
 </head>
 @php
   $sbUniverseZone = match (true) {
@@ -122,8 +137,7 @@
 @endphp
 <body data-sb-universe-zone="{{ $sbUniverseZone }}" id="top" class="studybuddy-site {{ $studyBuddyThemeClass }} route-{{ \Illuminate\Support\Str::slug($currentRouteName) }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     <a class="sb-skip-link" href="#main-content">Skip to content</a>
-    @include('partials.navbar', ['settings' => $settings ?? [], 'navigationItems' => $navigationItems ?? collect()])
-    @include('partials.studybuddy-universe-navigation')
+    @include('partials.studybuddy-w25-header')
     <main id="main-content" tabindex="-1">
         @include('partials.studybuddy-universe-atmosphere')
         @yield('content')
@@ -194,5 +208,17 @@
 <!-- STUDYBUDDY W24 GOOEYNAV JS START -->
 <script type="module" src="{{ asset('assets/studybuddy-w24/studybuddy-gooey.js') }}?v=24.0"></script>
 <!-- STUDYBUDDY W24 GOOEYNAV JS END -->
+
+<!-- STUDYBUDDY W25 VISUALS JS START -->
+<script type="module" src="{{ asset('assets/studybuddy-w25/studybuddy-visuals.js') }}?v=25.0"></script>
+<!-- STUDYBUDDY W25 VISUALS JS END -->
+<!-- STUDYBUDDY W25 SHARED JS START -->
+<script src="{{ asset('assets/studybuddy-w25/shell.js') }}?v={{ filemtime(public_path('assets/studybuddy-w25/shell.js')) }}" defer></script>
+<script type="module" src="{{ asset('assets/studybuddy-w25/gooey.js') }}?v={{ filemtime(public_path('assets/studybuddy-w25/gooey.js')) }}"></script>
+<!-- STUDYBUDDY W25 SHARED JS END -->
+
+<!---- STUDYBUDDY W26 JS START ---->
+<script defer src="{{ asset('assets/studybuddy-w26/studybuddy-w26.js') }}?v=26.1"></script>
+<!---- STUDYBUDDY W26 JS END ---->
 </body>
 </html>

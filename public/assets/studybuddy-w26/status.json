@@ -1,0 +1,26 @@
+{
+  "version": "W26",
+  "imageCount": 28,
+  "originalSources": "user provided archive (WebP web-optimized)",
+  "w25AliasFilesRepaired": [
+    "studybuddy-visuals.js",
+    "studybuddy-visuals.css"
+  ],
+  "w25BuiltFilesPresent": {
+    "studybuddy-visuals.js": true,
+    "studybuddy-visuals.css": true
+  },
+  "untouched": [
+    "auth",
+    "routes",
+    "controllers",
+    "CMS",
+    "database",
+    "school permissions",
+    "W19 Galaxy",
+    "W21 scroll zoom",
+    "W22 Antigravity",
+    "W24 GooeyNav",
+    "React source"
+  ]
+}

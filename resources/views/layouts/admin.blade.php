@@ -63,6 +63,8 @@
 <!-- STUDYBUDDY W19 START -->
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w19/w19-style.css') }}?v=19.1">
 <!-- STUDYBUDDY W19 END -->
+<!-- STUDYBUDDY W25 ADMIN SHARED TOKENS -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w25/shell.css') }}?v={{ filemtime(public_path('assets/studybuddy-w25/shell.css')) }}">
 </head>
 
 @php

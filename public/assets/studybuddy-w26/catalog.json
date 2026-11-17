@@ -1,0 +1,230 @@
+{
+  "version": "W26",
+  "count": 28,
+  "images": [
+    {
+      "id": "dolphin-starlight",
+      "src": "/assets/studybuddy-w26/images/dolphin-starlight.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_19_15 PM-1.png",
+      "bytes": 258356,
+      "sha256": "3c822dda2b1223e7d131fc19e10f5d5e6d34638446a42a90734de28d7419b1ab"
+    },
+    {
+      "id": "dolphin-numbers",
+      "src": "/assets/studybuddy-w26/images/dolphin-numbers.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_19_17 PM-2.png",
+      "bytes": 326424,
+      "sha256": "fd774f73dbe52e83e8d2eee37552026f494feedf3eca4e603bc2d3e6352c4269"
+    },
+    {
+      "id": "fox-storybook",
+      "src": "/assets/studybuddy-w26/images/fox-storybook.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_19_18 PM-3.png",
+      "bytes": 283388,
+      "sha256": "3654e09a1449eb78e7d9ab8f1c3f8be37497e8db5534e095df9e5bb0be2b9f47"
+    },
+    {
+      "id": "globe-explorer",
+      "src": "/assets/studybuddy-w26/images/globe-explorer.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_19_21 PM-4.png",
+      "bytes": 309578,
+      "sha256": "da69c12c08f4595acb031ac5f2f432088116933b068940fbd870c21a840d1150"
+    },
+    {
+      "id": "dolphin-mountain",
+      "src": "/assets/studybuddy-w26/images/dolphin-mountain.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_19_22 PM-5.png",
+      "bytes": 328316,
+      "sha256": "be03515bfd87dd5a83cdaa36d1c000dc8755799e4d60a57f920bf6f5308e7d34"
+    },
+    {
+      "id": "family-shield",
+      "src": "/assets/studybuddy-w26/images/family-shield.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_19_24 PM-6.png",
+      "bytes": 252148,
+      "sha256": "3c540453fb6f0c53a37744562a386a18207219c46e3f35bcf574d49798bd8d03"
+    },
+    {
+      "id": "owl-teacher",
+      "src": "/assets/studybuddy-w26/images/owl-teacher.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_19_26 PM-7.png",
+      "bytes": 395978,
+      "sha256": "f1d622a09bfaa1bb963bc7738009cee8c95f15335c22c977bc519c17cd3157ed"
+    },
+    {
+      "id": "star-achievement",
+      "src": "/assets/studybuddy-w26/images/star-achievement.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_19_27 PM-8.png",
+      "bytes": 207598,
+      "sha256": "6a33c26662cf8876f339ca18a9a5194f8b49d7f18978a33a52cfae1160f70f16"
+    },
+    {
+      "id": "dolphin-hello",
+      "src": "/assets/studybuddy-w26/images/dolphin-hello.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_17 PM-1.png",
+      "bytes": 307092,
+      "sha256": "5e4c122ff5be194f7d6155ab91b1412994314a87af733a1c228290eaa4228f48"
+    },
+    {
+      "id": "dolphin-math",
+      "src": "/assets/studybuddy-w26/images/dolphin-math.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_19 PM-2.png",
+      "bytes": 357540,
+      "sha256": "a4ae08afe82a79607c4da93d4388499005ac081567105c9db04df7edee33fa1e"
+    },
+    {
+      "id": "fox-alphabet",
+      "src": "/assets/studybuddy-w26/images/fox-alphabet.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_20 PM-3.png",
+      "bytes": 407440,
+      "sha256": "f4433907714d9a4955a4aa62c6fe64830399f193a178dd44fac8a1f42dab1d2b"
+    },
+    {
+      "id": "globe-worlds",
+      "src": "/assets/studybuddy-w26/images/globe-worlds.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_23 PM-4.png",
+      "bytes": 296548,
+      "sha256": "1c2df5c551130346b1ba57e269b6a26c5f6af1f1f2469c5049c3716da2616905"
+    },
+    {
+      "id": "family-heart",
+      "src": "/assets/studybuddy-w26/images/family-heart.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_25 PM-5.png",
+      "bytes": 217818,
+      "sha256": "7364b4b00d8e75d4c81aca00cabe325696d296ca8f6c45c113620d0dcbd204f8"
+    },
+    {
+      "id": "owl-lessons",
+      "src": "/assets/studybuddy-w26/images/owl-lessons.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_27 PM-6.png",
+      "bytes": 321616,
+      "sha256": "c2c0dda5accaaf472b386ea3fd334893d26fd95348355885124f598cb9a74001"
+    },
+    {
+      "id": "dolphin-portal",
+      "src": "/assets/studybuddy-w26/images/dolphin-portal.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_29 PM-7.png",
+      "bytes": 327620,
+      "sha256": "7bb5aba67c6151c49a01955f2570ae9841cf8131175807d1b7572fd5f9219b07"
+    },
+    {
+      "id": "star-celebration",
+      "src": "/assets/studybuddy-w26/images/star-celebration.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_31 PM-8.png",
+      "bytes": 383952,
+      "sha256": "74a3b20e49b27f96beb2ee24859080747612853460d180c8538b8883a2225267"
+    },
+    {
+      "id": "cosmic-planets",
+      "src": "/assets/studybuddy-w26/images/cosmic-planets.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_33 PM-9.png",
+      "bytes": 344630,
+      "sha256": "1e1862eb9e1fd05ab1d8765af705a1c27675f899176308bbb778dc3ade901f72"
+    },
+    {
+      "id": "cosmic-sticker-sheet",
+      "src": "/assets/studybuddy-w26/images/cosmic-sticker-sheet.webp",
+      "type": "mascot",
+      "original": "ChatGPT Image Nov 17, 2026, 01_29_35 PM-10.png",
+      "bytes": 740486,
+      "sha256": "7d5d3c1a9dc9174d8b6df8394f8673c88c7e594c6aafa8f72707ea751844cb67"
+    },
+    {
+      "id": "scene-galaxy-learning",
+      "src": "/assets/studybuddy-w26/images/scene-galaxy-learning.webp",
+      "type": "scene",
+      "original": "Cosmic Dolphin Learning Adventure-11.png",
+      "bytes": 644674,
+      "sha256": "428f510a687249ccade52eabf2f1e2699ee86bfdfba229fae4ac63b12bf4f5cb"
+    },
+    {
+      "id": "scene-enchanted-library",
+      "src": "/assets/studybuddy-w26/images/scene-enchanted-library.webp",
+      "type": "scene",
+      "original": "Cosmic Dolphin Study Adventure-1.png",
+      "bytes": 679224,
+      "sha256": "f8bb012504bd81388b709a760581537a451f691d83bc52282ba944a24c849c7b"
+    },
+    {
+      "id": "scene-dreamlike-classroom",
+      "src": "/assets/studybuddy-w26/images/scene-dreamlike-classroom.webp",
+      "type": "scene",
+      "original": "Cosmic Study Adventure with Dolphin Mascot-4.png",
+      "bytes": 961480,
+      "sha256": "c4bdedf667c4f2161a1abed5543a09d19485b15924c55a405e8a0db8d397457f"
+    },
+    {
+      "id": "scene-galaxy-dolphin",
+      "src": "/assets/studybuddy-w26/images/scene-galaxy-dolphin.webp",
+      "type": "scene",
+      "original": "Dolphin MascotΓÇÖs Cosmic Learning Adventure-16.png",
+      "bytes": 681358,
+      "sha256": "9e7bfc4e12c217d1cc7010286565b630b4e80ee5f702282568e50fb9098fc233"
+    },
+    {
+      "id": "scene-study-friends",
+      "src": "/assets/studybuddy-w26/images/scene-study-friends.webp",
+      "type": "scene",
+      "original": "Dreamy Galactic Learning Adventure-7.png",
+      "bytes": 561328,
+      "sha256": "d6ba3bba44aba20ddcc6a3abc9bc8a5032ed9defb8a529b4a18e65fab9497a97"
+    },
+    {
+      "id": "scene-neon-adventure",
+      "src": "/assets/studybuddy-w26/images/scene-neon-adventure.webp",
+      "type": "scene",
+      "original": "Neon Dolphin Cosmic Learning Adventure-6.png",
+      "bytes": 647050,
+      "sha256": "031bbeec61dbff2d9545f62c875ca8e2e891db02f0022d336b0e717c23fb76ce"
+    },
+    {
+      "id": "scene-book-galaxy",
+      "src": "/assets/studybuddy-w26/images/scene-book-galaxy.webp",
+      "type": "scene",
+      "original": "Neon DolphinΓÇÖs Cosmic Learning Adventure-15.png",
+      "bytes": 536982,
+      "sha256": "bf70ab1a2884998d44247c53f24419cbec23d067972c934860e650587328aa93"
+    },
+    {
+      "id": "scene-mascots-constellation",
+      "src": "/assets/studybuddy-w26/images/scene-mascots-constellation.webp",
+      "type": "scene",
+      "original": "StudyBuddy Cosmic Mascot Sticker Sheet-9.png",
+      "bytes": 587804,
+      "sha256": "a1c78689fcd65556b7b66dc9cc95a890b70105ae63233b6fd3c22d55e9657942"
+    },
+    {
+      "id": "scene-curiosity-universe",
+      "src": "/assets/studybuddy-w26/images/scene-curiosity-universe.webp",
+      "type": "scene",
+      "original": "StudyBuddyΓÇÖs Magical Learning Universe-12.png",
+      "bytes": 581820,
+      "sha256": "cfc3bf27760f141a19f6f42a51cbde12c5d163f9d44f1e5927eacddc2ddb6aa4"
+    },
+    {
+      "id": "scene-whimsical-library",
+      "src": "/assets/studybuddy-w26/images/scene-whimsical-library.webp",
+      "type": "scene",
+      "original": "Whimsical Cosmic StudyBuddy Library-2.png",
+      "bytes": 642086,
+      "sha256": "3f6c6326d8850a3aa3166f8a7b5adaa829d0c2251251df7ce131d2d7d1189302"
+    }
+  ]
+}

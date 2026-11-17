@@ -35,26 +35,23 @@
   function syncGuardian() {
     const role = roleSelect.value;
     const age = yearsOld(birth.value);
-    const isStudent = role === 'student';
-    const isIndependent = role === 'independent_learner';
-    const required = isStudent && age !== null && age >= 0 && age < 13;
-    if (guardian) guardian.hidden = !isStudent;
-    if (guardianInput) { guardianInput.disabled = !isStudent; guardianInput.required = required; }
-    if (guardianLabel) guardianLabel.textContent = required ? '(required)' : '(required if under 13)';
-
+    const learner = role === 'student' || role === 'independent_learner';
+    if (guardian) guardian.hidden = true;
+    if (guardianInput) { guardianInput.required = false; guardianInput.disabled = true; }
     birth.setCustomValidity('');
-    if (age !== null && age < 18 && (role === 'parent' || role === 'teacher')) {
+    if (age !== null && age < 13 && learner) {
+      birth.setCustomValidity('A parent first creates your family-managed learning space. Ask them to choose Parent / Family.');
+    } else if (age !== null && age < 18 && (role === 'parent' || role === 'teacher')) {
       birth.setCustomValidity('Parent and Teacher accounts require age 18 or older.');
-    } else if (age !== null && age < 13 && isIndependent) {
-      birth.setCustomValidity('Independent learning is available from age 13. Choose Student with a guardian if younger.');
     }
-
     if (notice) {
-      notice.textContent = isStudent
-        ? (required ? 'Because you are under 13, a distinct parent or guardian email is required.' : 'Students of all school ages can learn here. Under-13 students need a guardian email.')
-        : isIndependent
-          ? (age !== null && age < 13 ? 'Independent learning starts at 13. Under-13 learners can use Student with a guardian.' : 'Independent learning is open to teens 13–17 and adults. Teens have learner-only permissions.')
-          : 'Parent and Teacher accounts require age 18 or older and retain their verification safeguards.';
+      notice.textContent = age !== null && age < 13 && learner
+        ? 'You belong here! For now, a parent creates your private family-managed learner profile. No child email or independent login is needed.'
+        : age !== null && age < 18 && (role === 'parent' || role === 'teacher')
+          ? 'Adult account roles require age 18+. Choose Student or Independent Learner if you are a teenager.'
+          : learner
+            ? 'Your learning path and interests can change over time. Your age only controls safety permissions.'
+            : 'Parent and Teacher access requires adult verification; learning milestones cannot unlock these permissions.';
     }
   }
 
@@ -167,6 +164,10 @@
   });
   subjectInput?.addEventListener('input', syncSubjects);
 
+  // Help parents entering from the under-13 notice choose the right role.
+  const roleHint = new URLSearchParams(window.location.search).get('role');
+  if (roleHint === 'parent' && roleSelect.value === 'student') roleSelect.value = 'parent';
+
   // On server-side validation errors, open the step containing the actual error.
   const errored = steps.findIndex(step => step.querySelector('small:not(.sb22-description)'));
   form.classList.add('sb22-js');
@@ -174,5 +175,5 @@
   syncPassword();
   syncSubjects();
   setStep(errored >= 0 ? errored : 0, false);
-  window.StudyBuddySignup22 = { status: () => ({ version: 'W23-compatible', step: index + 1, role: roleSelect.value, guardianRequired: !!guardianInput?.required, teenIndependentAllowed: true }) };
+  window.StudyBuddySignup22 = { status: () => ({ version: 'W23-compatible', step: index + 1, role: roleSelect.value, guardianRequired: false, familyManagedUnder13: true, teenIndependentAllowed: true }) };
 })();

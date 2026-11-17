@@ -34,7 +34,7 @@ class StudyBuddyW22RegistrationTest extends TestCase
             ->assertSee('Learn your way.')
             ->assertSee('Parent / Family')
             ->assertSee('Independent Learner')
-            ->assertSee('guardian_email')
+            ->assertSee('family-managed')
             ->assertSee('studybuddy-w22/register.js');
     }
 
@@ -66,21 +66,13 @@ class StudyBuddyW22RegistrationTest extends TestCase
         $this->assertFalse((bool) $user->is_admin);
     }
 
-    public function test_under_13_student_requires_distinct_guardian_email(): void
+    public function test_under_13_direct_registration_requires_parent_managed_setup(): void
     {
         $payload = $this->validPayload();
         $payload['date_of_birth'] = now()->subYears(11)->toDateString();
-        $this->post(route('register.store'), $payload)->assertSessionHasErrors('guardian_email');
-        $this->assertSame(0, User::count());
-
-        $payload['guardian_email'] = $payload['email'];
-        $this->post(route('register.store'), $payload)->assertSessionHasErrors('guardian_email');
-        $this->assertSame(0, User::count());
-
-        Notification::fake();
         $payload['guardian_email'] = 'guardian@example.test';
-        $this->post(route('register.store'), $payload)->assertRedirect(route('verification.notice'));
-        $this->assertSame('guardian@example.test', User::where('email', $payload['email'])->firstOrFail()->guardian_email);
+        $this->post(route('register.store'), $payload)->assertSessionHasErrors('date_of_birth');
+        $this->assertDatabaseCount('users', 0);
     }
 
     public function test_minor_cannot_select_adult_role(): void

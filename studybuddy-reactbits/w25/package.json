@@ -1,0 +1,15 @@
+{
+  "name":"studybuddy-w25-visuals-private",
+  "version":"1.0.0",
+  "private":true,
+  "type":"module",
+  "dependencies":{
+    "react":"^19.1.0",
+    "react-dom":"^19.1.0",
+    "motion":"latest",
+    "gsap":"latest",
+    "@hugeicons/react":"latest",
+    "@hugeicons/core-free-icons":"latest"
+  },
+  "devDependencies":{"vite":"^6.3.5"}
+}

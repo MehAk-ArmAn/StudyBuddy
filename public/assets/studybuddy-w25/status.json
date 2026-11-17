@@ -1,0 +1,32 @@
+{
+  "version": "W25",
+  "components": [
+    "MagicBento",
+    "AccordionGallery",
+    "DepthCarousel",
+    "OptionWheel",
+    "AnimatedList",
+    "FlipCard",
+    "PulseHeart",
+    "HoldButton"
+  ],
+  "originalSource": "user provided",
+  "appRoutes": [
+    "/",
+    "/apps",
+    "/roles",
+    "/for-schools"
+  ],
+  "isolatedBundledReact": true,
+  "doNotChangeBackend": true,
+  "sourceHashes": {
+    "MagicBento": "2949bce9b4dd29d757f0410bc21cdf5f38c1fe858d12318da3a3bbced19d809b",
+    "AccordionGallery": "6acf6565d2de2943f2e8ca94900bf05f6c81c6e25c0f60ca579aabe0793bc182",
+    "DepthCarousel": "fac871e61670426fc4f23b90c12ffaeafcf031dabbe1cb760d2f18e65180480f",
+    "OptionWheel": "61d6a475cfa7a08c87579518780de726e8a04d8c09ce531370a4129ccd73e162",
+    "AnimatedList": "85be463db3f30eb24e041ae9f1e8260896c259b4e231e748cb3a799d8bdae5cb",
+    "FlipCard": "a5c798070ada7d6b6e8972dfaa21be54f9cba23eb398684d3c6ef59f0df396a2",
+    "PulseHeart": "b102c5dea6f6faad6dd1bdfce8548d5d3f302f27eaa94bd595932ebda40509ce",
+    "HoldButton": "c2ca93a948224e3684f8151fc5bb73b9be6eaac29379db52694942d5bdde8b16"
+  }
+}
