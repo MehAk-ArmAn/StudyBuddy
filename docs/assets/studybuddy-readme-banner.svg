@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="440" viewBox="0 0 1280 440" role="img" aria-labelledby="title desc">
+  <title id="title">StudyBuddy — Learn. Play. Grow. Your Way.</title>
+  <desc id="desc">Midnight-violet banner with StudyBuddy wordmark and colorful learning-game cards for language, geography and mathematics.</desc>
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#100e2a"/><stop offset="0.55" stop-color="#25164e"/><stop offset="1" stop-color="#0b3655"/></linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#71f2e7"/><stop offset="1" stop-color="#3cd4f6"/></linearGradient>
+    <linearGradient id="lav" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c2b7ff"/><stop offset="1" stop-color="#7e72ff"/></linearGradient>
+    <linearGradient id="pink" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd4ed"/><stop offset="1" stop-color="#ff9cd6"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#7660f7" stop-opacity="0.58"/><stop offset="1" stop-color="#7660f7" stop-opacity="0"/></radialGradient>
+    <filter id="shade" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="13" stdDeviation="17" flood-color="#0b0920" flood-opacity="0.48"/></filter>
+    <clipPath id="round"><rect width="1280" height="440" rx="26"/></clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="1280" height="440" fill="url(#base)"/>
+    <ellipse cx="930" cy="160" rx="440" ry="360" fill="url(#glow)"/>
+    <path d="M615 -30C730 80 738 287 610 470" fill="none" stroke="#af9dfa" stroke-width="2" stroke-opacity=".13"/>
+    <path d="M635 -30C762 80 769 304 641 470" fill="none" stroke="#71f2e7" stroke-width="2" stroke-opacity=".1"/>
+    <g fill="#fff" opacity=".52">
+      <circle cx="66" cy="60" r="2"/><circle cx="314" cy="46" r="2"/><circle cx="520" cy="87" r="1.5"/>
+      <circle cx="1150" cy="58" r="2.5"/><circle cx="1211" cy="184" r="1.3"/><circle cx="679" cy="344" r="2"/>
+      <circle cx="557" cy="377" r="2"/><circle cx="780" cy="48" r="1.5"/><circle cx="1219" cy="358" r="1.5"/>
+    </g>
+    <g opacity=".75" stroke="#9b86ec" fill="none" stroke-width="1.4">
+      <circle cx="1080" cy="203" r="188" stroke-dasharray="5 11"/><circle cx="1079" cy="205" r="146" stroke-opacity=".5"/>
+    </g>
+    <g font-family="Arial, Helvetica, sans-serif">
+      <rect x="67" y="65" width="288" height="32" rx="16" fill="#fff" fill-opacity=".09" stroke="#fff" stroke-opacity=".20"/>
+      <circle cx="86" cy="81" r="5" fill="#71f2e7"/><text x="102" y="86" fill="#d9d3ff" font-size="12" letter-spacing="2" font-weight="700">PIXEL CRAFTS LAB STUDIO</text>
+      <text x="63" y="197" fill="#fbfaff" font-size="82" letter-spacing="-4" font-weight="800">Study<tspan fill="#78ece7">Buddy</tspan></text>
+      <text x="67" y="244" fill="#f1eaff" font-size="23" letter-spacing=".3" font-weight="600">Learn. Play. Grow. Your Way.</text>
+      <rect x="66" y="273" width="52" height="4" rx="2" fill="url(#cyan)"/>
+      <rect x="130" y="273" width="25" height="4" rx="2" fill="#e4b7ff"/>
+      <text x="67" y="319" font-size="17" fill="#c2c5e7">Small games. Big curiosity. One connected platform.</text>
+      <g font-size="12" font-weight="700" letter-spacing="1.1">
+        <rect x="67" y="346" width="95" height="30" rx="15" fill="#f6c6f3" fill-opacity=".18" stroke="#e8a4ed" stroke-opacity=".38"/><text x="90" y="366" fill="#fbd2ff">GAMES</text>
+        <rect x="174" y="346" width="79" height="30" rx="15" fill="#a49afe" fill-opacity=".20" stroke="#b8b0ff" stroke-opacity=".42"/><text x="195" y="366" fill="#dbd5ff">CMS</text>
+        <rect x="265" y="346" width="114" height="30" rx="15" fill="#62f2df" fill-opacity=".16" stroke="#92fff0" stroke-opacity=".31"/><text x="284" y="366" fill="#a9faf0">LEARNING</text>
+      </g>
+    </g>
+    <!-- Side card: Mathematics -->
+    <g filter="url(#shade)" transform="translate(717 144) rotate(-12)">
+      <rect x="0" y="0" width="209" height="185" rx="22" fill="#b4a4ff"/>
+      <rect x="13" y="13" width="183" height="159" rx="16" fill="#ebe5ff"/>
+      <rect x="27" y="27" width="79" height="23" rx="11.5" fill="#5e45bd"/>
+      <text x="38" y="43" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#fff" letter-spacing="1">MATH</text>
+      <text x="34" y="109" font-family="Arial, sans-serif" font-size="42" font-weight="800" fill="#4d369e">7 + 5</text>
+      <rect x="34" y="123" width="99" height="24" rx="12" fill="#bdb2fb"/>
+      <text x="49" y="139" font-family="Arial, sans-serif" font-size="11" font-weight="700" fill="#422c8b">LET'S SOLVE</text>
+      <circle cx="163" cy="134" r="15" fill="#8d77f7"/><path d="m157 134 5 5 9-11" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <!-- Center card: Geography -->
+    <g filter="url(#shade)" transform="translate(905 58) rotate(8)">
+      <rect x="0" y="0" width="255" height="310" rx="26" fill="#aef7eb"/>
+      <rect x="15" y="15" width="225" height="280" rx="18" fill="#f4fffd"/>
+      <rect x="31" y="33" width="111" height="26" rx="13" fill="#056c7b"/>
+      <text x="45" y="50" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fff" letter-spacing=".7">GEOGRAPHY</text>
+      <circle cx="129" cy="151" r="79" fill="#8ae6f4" stroke="#37bdd3" stroke-width="5"/>
+      <ellipse cx="129" cy="151" rx="37" ry="77" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3"/>
+      <path d="M54 151h151M72 107h113M72 195h113" stroke="#fff" stroke-opacity=".78" stroke-width="3" fill="none"/>
+      <path d="M104 99l22 6 12-10 27 16-5 18-19 7-7 22-30-7-8-23z" fill="#2bb6a5"/>
+      <path d="M141 169l35 7 2 20-18 21-23-9-13-18z" fill="#2bb6a5"/>
+      <path d="M75 188l18-10 9 23-14 17-15-10z" fill="#2bb6a5"/>
+      <text x="40" y="253" font-family="Arial, sans-serif" font-size="21" font-weight="800" fill="#0c4958">Explore the world</text>
+      <rect x="40" y="268" width="90" height="5" rx="2.5" fill="#c8ebe6"/><rect x="40" y="268" width="57" height="5" rx="2.5" fill="#42cabc"/>
+    </g>
+    <!-- Top-right card: letters -->
+    <g filter="url(#shade)" transform="translate(1117 105) rotate(17)">
+      <rect x="0" y="0" width="121" height="136" rx="19" fill="url(#pink)"/>
+      <rect x="11" y="11" width="99" height="114" rx="13" fill="#fff4fb"/>
+      <text x="22" y="41" font-family="Arial, sans-serif" font-size="9" letter-spacing="1" font-weight="700" fill="#ad3979">LANGUAGE</text>
+      <text x="22" y="99" font-family="Arial, sans-serif" font-size="52" font-weight="800" fill="#dc63a9">Aa</text>
+    </g>
+    <g transform="translate(771 88)"><path d="M0-13 4-4 13 0 4 4 0 13-4 4-13 0-4-4z" fill="#fff5a8"/></g>
+    <g transform="translate(1166 361)"><path d="M0-18 5-5 18 0 5 5 0 18-5 5-18 0-5-5z" fill="#97e9ff"/></g>
+  </g>
+</svg>
