@@ -29,6 +29,8 @@
         </div>
     </article>
 
+    @include('dashboard.partials.studybuddy-class-progress', ['overview' => $teacherClassProgress])
+
     <article class="role-card teacher-control-panel" data-role-card>
         <p class="role-kicker">About you</p>
         <h2>Where you teach</h2>

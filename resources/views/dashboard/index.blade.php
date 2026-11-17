@@ -8,6 +8,7 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-learning-snapshot.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-learning-snapshot.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-class-progress.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-class-progress.css') }}">
 @endpush
 
 @section('content')

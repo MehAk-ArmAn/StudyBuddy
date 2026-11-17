@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StudyBuddyRoleDashboardActionController;
+use App\Http\Controllers\StudyBuddyAssignedWorkController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['web', 'auth'])->group(function () {
@@ -26,4 +27,8 @@ Route::middleware(['web', 'auth'])->group(function () {
 
     Route::post('/dashboard/teacher/assignments', [StudyBuddyRoleDashboardActionController::class, 'createAssignment'])
         ->name('studybuddy.teacher.assignments.store');
+
+    Route::post('/dashboard/tasks/{recipient}/complete', [StudyBuddyAssignedWorkController::class, 'complete'])
+        ->whereNumber('recipient')->middleware('throttle:20,1')
+        ->name('studybuddy.tasks.complete');
 });

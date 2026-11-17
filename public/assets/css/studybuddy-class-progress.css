@@ -1,0 +1,27 @@
+/* StudyBuddy Pack 04: Existing role dashboard additions, scoped; no new shell. */
+.sb-role-dashboard .sb-class-progress{background:linear-gradient(135deg,rgba(87,85,179,.16),rgba(35,151,191,.08));border-color:rgba(146,138,240,.3);}
+.sb-class-progress__heading{display:flex;justify-content:space-between;align-items:start;gap:18px;flex-wrap:wrap;}
+.sb-class-progress__heading h2{font-size:clamp(1.4rem,2.5vw,2rem);line-height:1.12;margin:5px 0;}
+.sb-class-progress__heading p:not(.role-kicker){margin:5px 0 0;max-width:52rem;opacity:.82;line-height:1.6;}
+.sb-class-progress__pill{font-size:.75rem;font-weight:700;border:1px solid rgba(161,156,235,.32);padding:8px 11px;border-radius:24px;white-space:normal;}
+.sb-class-progress__summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:20px 0;}
+.sb-class-progress__summary>div{min-width:0;padding:15px;border:1px solid rgba(155,154,233,.24);border-radius:15px;background:rgba(111,103,213,.09);}
+.sb-class-progress__summary strong{display:block;font-size:clamp(1.35rem,2vw,1.9rem);font-variant-numeric:tabular-nums;}
+.sb-class-progress__summary span{display:block;font-size:.78rem;opacity:.83;margin-top:4px;overflow-wrap:anywhere;}
+.sb-class-progress__classes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.sb-class-progress__class{min-width:0;border:1px solid rgba(160,152,235,.24);background:rgba(105,101,169,.07);border-radius:15px;padding:16px;}
+.sb-class-progress__class-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;}
+.sb-class-progress__class-top strong{font-size:1rem;overflow-wrap:anywhere;}
+.sb-class-progress__class-top span{font-size:.79rem;opacity:.88;font-variant-numeric:tabular-nums;}
+.sb-class-progress__bar{height:9px;overflow:hidden;margin-top:12px;border-radius:100px;background:rgba(121,119,175,.25);}
+.sb-class-progress__bar span{height:100%;display:block;border-radius:100px;background:linear-gradient(90deg,#7e6fe8,#5fb9e4);}
+.sb-class-progress__class p{margin:10px 0 0;font-size:.81rem;opacity:.82;line-height:1.5;}
+.sb-class-progress__empty{margin:19px 0;padding:18px;border-radius:14px;border:1px dashed rgba(149,146,216,.4);line-height:1.7;}
+.sb-class-progress__note{border-top:1px solid rgba(149,144,208,.25);padding-top:13px;margin:18px 0 0;font-size:.77rem;opacity:.8;line-height:1.6;}
+.sb-role-dashboard .sb-task-complete{margin:10px 0 0;}
+.sb-role-dashboard .sb-task-complete button{cursor:pointer;padding:8px 12px;border:1px solid rgba(125,125,215,.38);border-radius:12px;background:linear-gradient(95deg,#6e67dc,#508fd5);color:white;font-size:.78rem;font-weight:700;max-width:100%;white-space:normal;}
+.sb-role-dashboard .sb-task-complete button:hover,.sb-role-dashboard .sb-task-complete button:focus-visible{filter:brightness(1.12);outline-offset:3px;}
+.sb-role-dashboard .sb-task-done{display:inline-block;margin-top:8px;font-size:.78rem;font-weight:700;color:#64cfb3;}
+@media(max-width:800px){.sb-class-progress__classes{grid-template-columns:1fr}.sb-class-progress__summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:460px){.sb-class-progress__summary>div{padding:12px}.sb-class-progress__class{padding:13px}}
+@media(prefers-reduced-motion:reduce){.sb-class-progress *,.sb-task-complete *{transition:none!important;animation:none!important}}

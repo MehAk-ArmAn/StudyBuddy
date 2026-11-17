@@ -37,6 +37,14 @@
                     <div>
                         <strong>{{ $assignment->title }}</strong>
                         <small>{{ $assignment->due_at ? 'Due '.$humanDate($assignment->due_at) : 'No deadline' }}</small>
+                        @if($assignment->status === 'completed')
+                            <span class="sb-task-done" aria-label="Completed task">✓ Marked complete</span>
+                        @elseif($assignment->status === 'assigned' && (int) ($assignment->user_id ?? 0) === (int) $user->id && strcasecmp((string) ($assignment->email ?? ''), (string) $user->email) === 0 && $user->hasVerifiedEmail())
+                            <form method="POST" action="{{ route('studybuddy.tasks.complete', $assignment->id) }}" class="sb-task-complete">
+                                @csrf
+                                <button type="submit">I finished this task</button>
+                            </form>
+                        @endif
                     </div>
                 </article>
             @empty
