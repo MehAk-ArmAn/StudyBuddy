@@ -99,10 +99,6 @@
 <!-- W13 ASSETS END -->
 <!-- W14 PARITY CSS -->
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w14/parity.css') }}?v={{ filemtime(public_path('assets/studybuddy-w14/parity.css')) }}">
-
-<!-- STUDYBUDDY W19 START -->
-<link rel="stylesheet" href="{{ asset('assets/studybuddy-w19/w19-style.css') }}?v=19.1">
-<!-- STUDYBUDDY W19 END -->
     <!-- STUDYBUDDY W23 CONSISTENT PUBLIC SHELL -->
     <link rel="stylesheet" href="{{ asset('assets/studybuddy-w23/consistency.css') }}?v={{ filemtime(public_path('assets/studybuddy-w23/consistency.css')) }}">
 
@@ -124,6 +120,19 @@
 <!---- STUDYBUDDY W26 CSS START ---->
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w26/studybuddy-w26.css') }}?v=26.1">
 <!---- STUDYBUDDY W26 CSS END ---->
+
+<!-- STUDYBUDDY W27 CSS START -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w27/stable.css') }}?v=27.1">
+<!-- STUDYBUDDY W27 CSS END -->
+
+<!-- STUDYBUDDY W19 START -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w19/w19-style.css') }}?v=19.1">
+<!-- STUDYBUDDY W19 END -->
+{{-- STUDYBUDDY W29 HEADER START --}}
+@if(file_exists(public_path('assets/studybuddy-w29/header.css')))
+    <link rel="stylesheet" href="{{ asset('assets/studybuddy-w29/header.css') }}?v={{ filemtime(public_path('assets/studybuddy-w29/header.css')) }}">
+@endif
+{{-- STUDYBUDDY W29 HEADER END --}}
 </head>
 @php
   $sbUniverseZone = match (true) {
@@ -201,10 +210,6 @@
 <script type="module" src="{{ asset('assets/studybuddy-w13/w13-react.js') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-react.js')) }}"></script>
 <!-- W13 REACT END -->
 
-<!-- STUDYBUDDY W19 START -->
-<script type="module" src="{{ asset('assets/studybuddy-w19/w19-react.js') }}?v=20.0"></script>
-<!-- STUDYBUDDY W19 END -->
-
 <!-- STUDYBUDDY W24 GOOEYNAV JS START -->
 <script type="module" src="{{ asset('assets/studybuddy-w24/studybuddy-gooey.js') }}?v=24.0"></script>
 <!-- STUDYBUDDY W24 GOOEYNAV JS END -->
@@ -220,5 +225,13 @@
 <!---- STUDYBUDDY W26 JS START ---->
 <script defer src="{{ asset('assets/studybuddy-w26/studybuddy-w26.js') }}?v=26.1"></script>
 <!---- STUDYBUDDY W26 JS END ---->
+
+<!-- STUDYBUDDY W27 JS START -->
+<script defer src="{{ asset('assets/studybuddy-w27/stable.js') }}?v=27.1"></script>
+<!-- STUDYBUDDY W27 JS END -->
+
+<!-- STUDYBUDDY W19 START -->
+<script type="module" src="{{ asset('assets/studybuddy-w19/w19-react.js') }}?v=19.1"></script>
+<!-- STUDYBUDDY W19 END -->
 </body>
 </html>

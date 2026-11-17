@@ -1,0 +1,71 @@
+/* StudyBuddy W27 — recovery guard, scoped to existing branded header only.
+   Preserve the Base44 theme, genuine GooeyNav shaders and every Laravel page. */
+:root { --sb27-violet:#875cf7; --sb27-cyan:#4fd6ff; --sb27-lilac:#c69aff; }
+body .sb27-header {
+  position:sticky !important; top:0 !important; left:0 !important;
+  z-index:10020 !important; min-height:68px !important; width:100% !important;
+  background:linear-gradient(110deg,rgba(18,15,43,.97),rgba(9,20,37,.97)) !important;
+  border-bottom:1px solid rgba(175,145,248,.2) !important;
+  -webkit-backdrop-filter:blur(20px) saturate(145%);backdrop-filter:blur(20px) saturate(145%);
+  box-sizing:border-box !important;
+}
+body .sb27-header, body .sb27-header * { box-sizing:border-box; }
+body .sb27-header > :is(div,section) {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:clamp(10px,1.5vw,22px); flex-wrap:nowrap;
+  width:min(100%,1360px); margin-left:auto;margin-right:auto;
+  padding:10px clamp(14px,2.5vw,32px);
+  min-height:68px; max-width:100%;
+}
+body .sb27-header .sb27-brand {
+  display:inline-flex!important;align-items:center!important;flex:0 0 auto!important;
+  gap:10px!important;min-width:0!important;max-width:min(27vw,205px);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:#f9f6ff!important;text-decoration:none!important;
+  font-size:14px;line-height:1.15;
+}
+body .sb27-header .sb27-brand img,
+body .sb27-header .sb27-brand :is(svg,picture) {
+  width:38px!important;height:38px!important;max-width:38px!important;max-height:38px!important;
+  object-fit:contain!important;flex:none!important;
+}
+body .sb27-header .sb27-brand > :first-child { flex:0 0 38px; width:38px; height:38px; max-width:38px; }
+body .sb27-header .sb27-brand > :last-child {min-width:0;max-width:165px;}
+body .sb27-header .sb27-brand > :last-child * {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;}
+body .sb27-header .sb27-center { display:flex; align-items:center;justify-content:center;flex:1 1 auto;min-width:0;max-width:max-content; }
+body .sb27-header .gooey-nav {
+  --gn-frame:rgba(44,32,83,.62)!important;
+  --gn-frame-edge:rgba(191,162,255,.23)!important;
+  --gn-frame-highlight:rgba(245,228,255,.11)!important;
+  --gn-ink:#f8efff!important;
+  --gn-muted:rgba(238,229,255,.75)!important;
+  flex:0 1 auto;max-width:100%;
+}
+body .sb27-header .gooey-nav--framed {border:1px solid rgba(180,137,255,.19);box-shadow:0 12px 34px rgba(19,9,54,.26);}
+body .sb27-header .gooey-nav__fallback {background:linear-gradient(110deg,#864aff,#5d61ff,#36c6f5)!important;}
+body .sb27-header .gooey-nav__list {flex-wrap:nowrap;}
+body .sb27-header .gooey-nav__link {font-size:clamp(11px,.9vw,13px);padding:9px clamp(9px,1vw,15px);}
+body .sb27-header .sb27-actions {display:flex!important;flex:0 0 auto;align-items:center;gap:8px;min-width:0;max-width:40%;}
+body .sb27-header .sb27-actions :is(button,a) {white-space:nowrap;}
+body .sb27-header a:focus-visible, body .sb27-header button:focus-visible {outline:2px solid var(--sb27-cyan);outline-offset:3px;}
+/* Hide original desktop links ONLY after the original GooeyNav has actually mounted.
+   If React fails, plain Laravel links remain accessible. */
+@media(min-width:961px){body .sb27-header.sb27-gooey-ready .sb27-legacy-nav {display:none!important;}}
+/* On smaller devices, retain the existing native dropdown instead of squeezing animated nav. */
+@media(max-width:960px){
+ body .sb27-header > :is(div,section) {gap:12px;padding-inline:16px;}
+ body .sb27-header .sb27-center {display:none!important;}
+ body .sb27-header .sb27-actions {margin-left:auto;max-width:none;}
+ body .sb27-header .sb27-brand{max-width:60%;}
+ body .sb27-header .sb27-legacy-nav{display:none!important;}
+}
+@media(max-width:520px){
+ body .sb27-header > :is(div,section){min-height:62px;padding:8px 12px;}
+ body .sb27-header .sb27-brand img{width:34px!important;height:34px!important;}
+ body .sb27-header .sb27-brand > :first-child{flex-basis:34px;width:34px;height:34px;}
+ body .sb27-header .sb27-brand{max-width:48%;font-size:13px;gap:7px!important;}
+ body .sb27-header .sb27-actions{gap:5px;}
+}
+@media(prefers-reduced-motion:reduce){body .sb27-header *,body .sb27-header *::before,body .sb27-header *::after{animation:none!important;transition:none!important;}}
+/* The saved Base44 landing already reserves space for a fixed navigation. */
+html[data-studybuddy-exact] body .sb27-header {position:fixed!important;}

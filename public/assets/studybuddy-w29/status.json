@@ -1,0 +1,16 @@
+{
+  "version": "W29",
+  "home": "genuine user-supplied React Bits Galaxy",
+  "props": {
+    "density": 1,
+    "glowIntensity": 0.3,
+    "flareIntensity": 1,
+    "starSpeed": 0.5,
+    "mouseRepulsion": true,
+    "clickWarp": true
+  },
+  "newVisibleCanvasCount": 1,
+  "sharedHeader": "existing Laravel header; canonical logo and visual contrast",
+  "otherPagesGalaxy": false,
+  "noDbChanges": true
+}

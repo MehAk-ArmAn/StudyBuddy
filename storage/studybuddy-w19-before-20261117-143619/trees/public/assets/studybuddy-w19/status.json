@@ -1,0 +1,53 @@
+{
+  "version": "W19",
+  "originalGalaxy": true,
+  "originalStarBorder": true,
+  "exactOriginalSource": {
+    "Galaxy.jsx": "eeb11468ec095336ab700dfe356b418300392427a0cabfabf7e03ebc4114c6c8",
+    "Galaxy.css": "cf044acbe4e8ab9a315b972ef4d52dc4b7f2817970d2d90aef709267e3176d69",
+    "StarBorder.jsx": "ca3163e8cd4a25e90df31235e24c42ea6d3cff2b189d7430e7f73e0b0abd2186",
+    "StarBorder.css": "cdae7a2200295a328ca3b40ee1c8549cee18fd5b84aeb9435df52f468aa3831f"
+  },
+  "settings": {
+    "Galaxy": {
+      "density": 1,
+      "glowIntensity": 0.3,
+      "flareIntensity": 1,
+      "starSpeed": 0.5,
+      "mouseRepulsion": true,
+      "clickWarp": true
+    },
+    "StarBorder": {
+      "color": "#ffffff",
+      "trailColor": "#ffffff",
+      "duration": 4,
+      "direction": "clockwise",
+      "stars": 1,
+      "trailLength": 0.3,
+      "thickness": 1,
+      "radius": 12,
+      "glow": 0.6,
+      "hover": "lap",
+      "sparkle": false,
+      "clickPulse": true,
+      "theme": "dark; violet in light mode"
+    }
+  },
+  "preserved": [
+    "Laravel routes",
+    "authentication",
+    "database",
+    "permissions",
+    "W12 HTML structure",
+    "W16 My Quest",
+    "W13 React source"
+  ],
+  "rollback": "/Users/mehakarman/Desktop/StudyBuddy-main/storage/studybuddy-w19-before-20261117-114641/RESTORE.command",
+  "browserQARequired": true,
+  "runtimeRepair": {
+    "version": "W20",
+    "jsxRuntime": "automatic",
+    "bundleSha256": "4bfd183fa7265d2402d81db0a98c93262e02a280b5a4a35990e2c1ee81d09177",
+    "browserTestRequired": true
+  }
+}

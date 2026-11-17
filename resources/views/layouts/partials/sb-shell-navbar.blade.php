@@ -15,6 +15,7 @@
     // The canonical StudyBuddy mark leads the list. An admin override still
     // wins, but the generic control-room glyph is only ever a last resort.
     $logoCandidates = [
+        'assets/studybuddy-base44-exact/originals/5bf1ca197_studybuddy-icon-512.png', // W29: original StudyBuddy dolphin artwork
         $shellSettings['logo_image'] ?? null,
         config('studybuddy.icons.logo'),
         config('studybuddy.icons.mark'),

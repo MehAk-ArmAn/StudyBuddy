@@ -1,0 +1,24 @@
+{
+  "version": "W28",
+  "oneLanding": true,
+  "background": "preexisting React Bits Galaxy (no second canvas)",
+  "additionalEffects": "lightweight DOM/CSS floating orbs and ambient lights",
+  "homeOnly": true,
+  "savedOriginalHtmlPreserved": true,
+  "touchedFiles": [
+    "public/assets/studybuddy-base44-exact/home.html",
+    "public/assets/studybuddy-w28/cosmos.css",
+    "public/assets/studybuddy-w28/cosmos.js",
+    "public/assets/studybuddy-w28/status.json"
+  ],
+  "untouched": [
+    "Laravel routes",
+    "auth",
+    "CMS",
+    "database",
+    "admin",
+    "school permissions",
+    "other pages",
+    "React Bits source"
+  ]
+}

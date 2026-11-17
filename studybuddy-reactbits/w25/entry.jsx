@@ -23,8 +23,12 @@ if (mount) {
         initialActiveIndex={Number.isInteger(selected) ? selected : -1}
         animationTime={600}
         timeVariance={300}
-        colors={[1, 2, 3, 1, 2, 3, 1, 4]}
-      />
+        colors={['#5227FF','#FF9FFC','#B497CF','#50d6ff']}
+      
+    color="#875cf7"
+
+    activeTextColor="#ffffff"
+/>
     );
     window.StudyBuddyShell25React = { source: 'original-project-GooeyNav', items: items.map(item => item.label) };
   } catch (error) {

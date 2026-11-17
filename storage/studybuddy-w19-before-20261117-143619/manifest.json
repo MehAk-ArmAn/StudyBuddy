@@ -1,0 +1,12 @@
+{
+  "project": "/Users/mehakarman/Desktop/StudyBuddy-main",
+  "files": {
+    "public/assets/studybuddy-base44-exact/home.html": true,
+    "resources/views/layouts/app.blade.php": true,
+    "resources/views/layouts/admin.blade.php": true
+  },
+  "trees": {
+    "studybuddy-reactbits/w19": true,
+    "public/assets/studybuddy-w19": true
+  }
+}

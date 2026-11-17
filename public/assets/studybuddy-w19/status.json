@@ -42,12 +42,6 @@
     "W16 My Quest",
     "W13 React source"
   ],
-  "rollback": "/Users/mehakarman/Desktop/StudyBuddy-main/storage/studybuddy-w19-before-20261117-114641/RESTORE.command",
-  "browserQARequired": true,
-  "runtimeRepair": {
-    "version": "W20",
-    "jsxRuntime": "automatic",
-    "bundleSha256": "4bfd183fa7265d2402d81db0a98c93262e02a280b5a4a35990e2c1ee81d09177",
-    "browserTestRequired": true
-  }
+  "rollback": "/Users/mehakarman/Desktop/StudyBuddy-main/storage/studybuddy-w19-before-20261117-143619/RESTORE.command",
+  "browserQARequired": true
 }

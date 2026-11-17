@@ -1,0 +1,138 @@
+/* StudyBuddy W28 — ONE hero / ONE React Bits Galaxy background.
+   Decorative foreground uses CSS, not another canvas or another React root. */
+html[data-studybuddy-exact] .sb28-hero {
+  --sb28-pointer-x: 0px;
+  --sb28-pointer-y: 0px;
+  --sb28-depth: 0;
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: clip;
+}
+html[data-studybuddy-exact] .sb28-hero > .mx-auto.grid.max-w-7xl,
+html[data-studybuddy-exact] .sb28-hero > .mx-auto.mt-16 { position: relative; z-index: 3; width: 100%; }
+html[data-studybuddy-exact] .sb28-hero > .mx-auto.grid.max-w-7xl { flex: 0 0 auto; }
+/* If W19 and the saved page each mounted Galaxy, show only one canvas. */
+html[data-studybuddy-exact] .sb28-hero canvas[data-sb28-duplicate-galaxy="1"] { display: none !important; }
+/* Antigravity is reserved for other pages — the homepage has ONLY Galaxy as starfield. */
+html[data-studybuddy-exact] .sb28-hero #sb22-antigravity-host { display:none !important; }
+
+html[data-studybuddy-exact] .sb28-cosmos {
+  position: absolute; inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout style;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 88%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 88%,transparent 100%);
+}
+html[data-studybuddy-exact] .sb28-aurora {
+  position:absolute; pointer-events:none; border-radius:50%;
+  filter:blur(65px); mix-blend-mode:screen; opacity:.22;
+  transform:translate3d(var(--sb28-aura-x,0px),var(--sb28-aura-y,0px),0);
+  transition: transform .7s cubic-bezier(.16,1,.3,1);
+}
+html[data-studybuddy-exact] .sb28-aurora--l { width:38vw; height:32vw; left:-14vw; top:2%; background:radial-gradient(circle,#7642dc 0%,#5227ff 26%,transparent 68%); }
+html[data-studybuddy-exact] .sb28-aurora--r { width:46vw; height:38vw; right:-15vw; top:17%; background:radial-gradient(circle,#1dd4ec 0%,#4477ef 29%,transparent 68%); opacity:.15; }
+html[data-studybuddy-exact] .sb28-float {
+  position:absolute; left:var(--left);top:var(--top);
+  width:var(--size);height:var(--size);
+  transform:translate3d(var(--sb28-dx,0px),var(--sb28-dy,0px),0);
+  will-change:transform;
+  transition: transform .25s ease-out;
+}
+html[data-studybuddy-exact] .sb28-orb {
+  position:relative;display:block;width:100%;height:100%;border-radius:50%;
+  border:1px solid rgba(255,255,255,.4);
+  background:radial-gradient(circle at 31% 24%,#fff 0%,rgba(255,255,255,.85) 6%,var(--hi) 13%,var(--mid) 44%,var(--low) 75%,transparent 100%);
+  box-shadow:0 0 24px var(--glow), inset -4px -7px 15px rgba(8,5,56,.36), 0 4px 28px rgba(8,5,46,.24);
+  animation:sb28-float var(--duration) ease-in-out infinite alternate;
+}
+html[data-studybuddy-exact] .sb28-orb::after {
+  content:"";position:absolute;left:22%;top:16%;width:34%;height:14%;
+  background:rgba(255,255,255,.76);filter:blur(3px);border-radius:100%;transform:rotate(-30deg);
+}
+html[data-studybuddy-exact] .sb28-orb--cyan {--hi:#dbfbff;--mid:#4ee1f1;--low:#1256eb;--glow:rgba(44,210,246,.42)}
+html[data-studybuddy-exact] .sb28-orb--purple {--hi:#f5ceff;--mid:#a568fa;--low:#5530cd;--glow:rgba(157,88,248,.50)}
+html[data-studybuddy-exact] .sb28-orb--pink {--hi:#fff4ff;--mid:#fd8cca;--low:#8542cb;--glow:rgba(246,128,217,.40)}
+html[data-studybuddy-exact] .sb28-orb--gold {--hi:#fffce4;--mid:#ffd26f;--low:#ec8c24;--glow:rgba(255,187,71,.38)}
+html[data-studybuddy-exact] .sb28-orb--planet::before {
+  content:"";position:absolute;z-index:2;left:-30%;top:42%;width:160%;height:17%;
+  border:3px solid rgba(137,219,255,.84);border-left-color:#a66dfd;border-right-color:#fe9ce4;
+  border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 10px rgba(112,158,255,.55)
+}
+html[data-studybuddy-exact] .sb28-shimmer {
+  position:absolute;left:var(--left);top:var(--top);width:var(--size);height:var(--size);
+  opacity:var(--opacity,.75);animation:sb28-shimmer var(--duration) ease-in-out infinite alternate;
+}
+html[data-studybuddy-exact] .sb28-shimmer::before,
+html[data-studybuddy-exact] .sb28-shimmer::after {
+  content:"";position:absolute;inset:0;background:linear-gradient(155deg,#dbfaff,#9567f9 55%,#ffb8ec);
+  filter:drop-shadow(0 0 10px rgba(179,152,255,.5));
+  clip-path:polygon(50% 0%,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0% 50%,38% 38%);
+}
+html[data-studybuddy-exact] .sb28-shimmer::after { transform:rotate(45deg) scale(.35); opacity:.58; }
+html[data-studybuddy-exact] .sb28-mascot-stage { isolation:isolate; z-index: 2; }
+html[data-studybuddy-exact] .sb28-mascot-stage > .relative.aspect-square { position:relative;z-index:2; }
+html[data-studybuddy-exact] .sb28-mascot-stage > .t-reveal {z-index:4;}
+html[data-studybuddy-exact] .sb28-mascot-stage .sb28-satellites {
+  position:absolute;inset:-7%;z-index:1;pointer-events:none;
+  transform:translate3d(var(--sb28-sat-x,0px),var(--sb28-sat-y,0px),0) scale(var(--sb28-sat-scale,1));
+  transition:transform .35s cubic-bezier(.16,1,.3,1);
+}
+html[data-studybuddy-exact] .sb28-mascot-stage .sb28-orbit-ring {
+  position:absolute;border-radius:50%;inset:6%;border:1px dashed rgba(157,119,247,.22);
+  transform:rotate(-18deg) scaleX(1.16);
+  animation:sb28-spin 65s linear infinite;
+}
+html[data-studybuddy-exact] .sb28-mascot-stage .sb28-orbit-ring::after {
+  content:"";position:absolute;top:4%;left:21%;width:6px;height:6px;border-radius:50%;
+  background:#84eaff;box-shadow:0 0 15px 5px rgba(59,221,250,.30);
+}
+html[data-studybuddy-exact] .sb28-mascot-stage .sb28-satellite {
+  position:absolute;width:var(--d);height:var(--d);
+  left:var(--x);top:var(--y);
+  animation:sb28-satellite var(--speed) ease-in-out infinite alternate;
+}
+html[data-studybuddy-exact] .sb28-mascot-stage .sb28-satellite .sb28-orb { animation:none; }
+html[data-studybuddy-exact] .sb28-pop {
+  position:absolute;left:var(--pop-x);top:var(--pop-y);width:8px;height:8px;
+  border:1px solid rgba(144,220,255,.9);border-radius:50%;pointer-events:none;
+  transform:translate(-50%,-50%) scale(0);opacity:1;
+  animation:sb28-pop .75s ease-out both;
+}
+@keyframes sb28-float {from{transform:translate3d(-5px,10px,0) rotate(-8deg)}to{transform:translate3d(7px,-14px,0) rotate(7deg)}}
+@keyframes sb28-shimmer {from{transform:scale(.7) rotate(-12deg);opacity:.30}to{transform:scale(1.05) rotate(13deg);opacity:.88}}
+@keyframes sb28-satellite {from{transform:translate3d(-10px,11px,0)}to{transform:translate3d(10px,-13px,0)}}
+@keyframes sb28-spin {to{transform:rotate(342deg) scaleX(1.16)}}
+@keyframes sb28-pop {0%{opacity:.8;transform:translate(-50%,-50%) scale(.5)}100%{opacity:0;transform:translate(-50%,-50%) scale(17)}}
+/* Keep the hero 100% of the screen on desktop without squeezing the typography. */
+@media (min-width:1024px) and (min-height:730px) {
+  html[data-studybuddy-exact] .sb28-hero {padding-top:clamp(110px,13vh,175px);padding-bottom:clamp(36px,6vh,90px);}
+  html[data-studybuddy-exact] .sb28-hero > .mx-auto.mt-16 {margin-top:clamp(16px,3vh,42px)}
+}
+@media (max-width:1023px) {
+  html[data-studybuddy-exact] .sb28-hero {min-height:calc(100svh - 62px);}
+  html[data-studybuddy-exact] .sb28-float:nth-child(n+8) {display:none}
+  html[data-studybuddy-exact] .sb28-aurora {filter:blur(50px)}
+}
+@media (max-width:639px) {
+  html[data-studybuddy-exact] .sb28-hero {overflow:hidden;min-height:100svh;padding-top:105px;padding-bottom:50px;}
+  html[data-studybuddy-exact] .sb28-hero > .mx-auto.grid.max-w-7xl {gap:20px}
+  html[data-studybuddy-exact] .sb28-hero h1 {font-size:clamp(2.65rem,10.5vw,4.8rem);line-height:.98;}
+  html[data-studybuddy-exact] .sb28-cosmos .sb28-float:nth-of-type(n+6) {display:none}
+  html[data-studybuddy-exact] .sb28-satellites {opacity:.64}
+}
+@media(prefers-reduced-motion: reduce){
+  html[data-studybuddy-exact] .sb28-hero .sb28-orb,
+  html[data-studybuddy-exact] .sb28-hero .sb28-shimmer,
+  html[data-studybuddy-exact] .sb28-hero .sb28-orbit-ring,
+  html[data-studybuddy-exact] .sb28-hero .sb28-satellite,
+  html[data-studybuddy-exact] .sb28-hero .sb28-pop {animation:none!important;}
+  html[data-studybuddy-exact] .sb28-float,
+  html[data-studybuddy-exact] .sb28-satellites,
+  html[data-studybuddy-exact] .sb28-aurora {transition:none!important;transform:none!important}
+}

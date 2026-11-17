@@ -1,0 +1,17 @@
+{
+  "version": "W27",
+  "w25AliasRepairs": [],
+  "recoveredOriginalFiles": [],
+  "gooeySourceRebuilt": true,
+  "preserved": [
+    "Laravel auth",
+    "CMS",
+    "routes",
+    "models",
+    "database",
+    "family learners",
+    "Galaxy",
+    "Antigravity",
+    "W26 illustrations"
+  ]
+}

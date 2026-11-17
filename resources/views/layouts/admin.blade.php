@@ -59,12 +59,12 @@
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13.css') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13.css')) }}">
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w13/w13-style.css') }}?v={{ filemtime(public_path('assets/studybuddy-w13/w13-style.css')) }}">
 <!-- W13 ASSETS END -->
+<!-- STUDYBUDDY W25 ADMIN SHARED TOKENS -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w25/shell.css') }}?v={{ filemtime(public_path('assets/studybuddy-w25/shell.css')) }}">
 
 <!-- STUDYBUDDY W19 START -->
 <link rel="stylesheet" href="{{ asset('assets/studybuddy-w19/w19-style.css') }}?v=19.1">
 <!-- STUDYBUDDY W19 END -->
-<!-- STUDYBUDDY W25 ADMIN SHARED TOKENS -->
-<link rel="stylesheet" href="{{ asset('assets/studybuddy-w25/shell.css') }}?v={{ filemtime(public_path('assets/studybuddy-w25/shell.css')) }}">
 </head>
 
 @php
@@ -412,7 +412,7 @@
 <!-- W13 REACT END -->
 
 <!-- STUDYBUDDY W19 START -->
-<script type="module" src="{{ asset('assets/studybuddy-w19/w19-react.js') }}?v=20.0"></script>
+<script type="module" src="{{ asset('assets/studybuddy-w19/w19-react.js') }}?v=19.1"></script>
 <!-- STUDYBUDDY W19 END -->
 </body>
 </html>

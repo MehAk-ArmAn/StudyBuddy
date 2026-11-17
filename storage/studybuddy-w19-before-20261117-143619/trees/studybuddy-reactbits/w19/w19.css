@@ -1,0 +1,44 @@
+/* W19 scoped integration. Original React Bits component CSS is unchanged. */
+#sb19-galaxy-host {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -5 !important;
+  opacity: 1 !important;
+  overflow: hidden;
+  pointer-events: none !important;
+}
+#sb19-galaxy-host .galaxy-container,
+#sb19-galaxy-host .galaxy-canvas { width: 100%; height: 100%; }
+.sb19-star-target { position: relative !important; isolation: isolate; }
+.sb19-decoration, .sb19-decoration-inner {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  border-radius: inherit;
+  pointer-events: none !important;
+}
+.sb19-decoration { z-index: 1; overflow: visible; }
+.sb19-decoration-inner > .star-border.sb19-original-starborder {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  color: transparent !important;
+  border-radius: inherit !important;
+  pointer-events: none !important;
+}
+.sb19-original-starborder::before { box-shadow: none !important; }
+.sb19-original-starborder .star-border__light { pointer-events: none !important; }
+/* Suppress the W13 foreign floating Explore control on pages where it is loaded. */
+html[data-studybuddy-exact] .w13-quick { display: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .sb19-decoration { opacity: .35; }
+}
