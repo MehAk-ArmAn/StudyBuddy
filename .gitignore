@@ -113,3 +113,6 @@ studybuddy_structure_cleanup_final_patch.zip
 **/.env.local
 **/node_modules/
 **/.reactbits-pro-installed.txt
+
+# Local-only development fixtures
+/docs/LOCAL_DEV_ACCOUNTS.private.md

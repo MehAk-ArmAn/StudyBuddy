@@ -494,3 +494,9 @@ StudyBuddy is used in an education context and may be visited by children. Quali
 
 <p align="center"><strong>Build with care. Make learning feel like discovery. ✦</strong></p>
 <p align="center"><sub>StudyBuddy · A Pixel Crafts Lab Studio educational product · README edition: 17 November 2026</sub></p>
+
+<!-- SB_P11_DEV_ROSTER_GUIDE_START -->
+## Local development accounts (never production)
+
+After running the local-only fixture setup, open `docs/LOCAL_DEV_ACCOUNTS.private.md` for the complete role-by-role login table and local sandbox school. The credential file is intentionally ignored by Git; do not paste its passwords into this public README, commit it, or deploy the test identities. See `docs/STUDYBUDDY_P11_ADMIN_FOUNDATION.md` for production transition guidance.
+<!-- SB_P11_DEV_ROSTER_GUIDE_END -->
