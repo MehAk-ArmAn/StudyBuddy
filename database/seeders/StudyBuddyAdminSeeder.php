@@ -11,27 +11,34 @@ use Illuminate\Support\Facades\Schema;
  * Creates (or repairs) the StudyBuddy administrator account.
  *
  * Idempotent: running it repeatedly updates the same row instead of adding
- * another admin. If the account from an earlier build is still present under
- * its old address, that row is moved to the current address rather than
- * leaving two administrators behind.
+ * another admin. A legacy administrator may be adopted when the canonical
+ * account is missing; this seeder does not remove or merge two existing users.
  *
- * Both the address and the password can be overridden per environment with
- * STUDYBUDDY_ADMIN_EMAIL and STUDYBUDDY_ADMIN_PASSWORD.
+ * Head Admin email is fixed to admin@studybuddy.fun. Previous builds used
+ * STUDYBUDDY_ADMIN_EMAIL=admin@studybuddy.local; that legacy override is
+ * ignored so test seeding and production identity agree. Password can be
+ * provided using STUDYBUDDY_ADMIN_PASSWORD when creating an account.
  */
 class StudyBuddyAdminSeeder extends Seeder
 {
-    public const DEFAULT_EMAIL = 'admin@studybuddy.local';
+    public const DEFAULT_EMAIL = 'admin@studybuddy.fun';
 
     public const DEFAULT_PASSWORD = 'ChangeMe12345!';
 
     /** Addresses used by earlier builds, adopted instead of duplicated. */
     private const LEGACY_EMAILS = [
-        'admin@studybuddy.fun',
+        'admin@studybuddy.local',
     ];
 
     public function run(): void
     {
-        $email = (string) env('STUDYBUDDY_ADMIN_EMAIL', self::DEFAULT_EMAIL);
+        // Single canonical identity. The old .env value must not silently
+        // seed a different address or undermine tests and the protected grant.
+        $email = self::DEFAULT_EMAIL;
+        $configuredEmail = trim((string) env('STUDYBUDDY_ADMIN_EMAIL', ''));
+        if ($configuredEmail !== '' && strcasecmp($configuredEmail, $email) !== 0) {
+            $this->command?->warn('Ignoring legacy STUDYBUDDY_ADMIN_EMAIL; canonical Head Admin is '.self::DEFAULT_EMAIL.'.');
+        }
         $password = env('STUDYBUDDY_ADMIN_PASSWORD');
         // Never install a known public password on a production server.
         if (! $password && ! app()->environment(['local', 'testing'])) {

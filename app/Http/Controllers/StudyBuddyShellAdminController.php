@@ -62,8 +62,6 @@ class StudyBuddyShellAdminController extends Controller
 
         $isAdmin = $user && (
             ($user->is_admin ?? false)
-            || ($user->role ?? null) === 'admin'
-            || ($user->email ?? null) === 'admin@studybuddy.fun'
         );
 
         abort_unless($isAdmin, 403);

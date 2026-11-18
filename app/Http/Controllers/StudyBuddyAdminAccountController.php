@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\StudyBuddyAdminAuthority as Authority;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -32,6 +33,10 @@ class StudyBuddyAdminAccountController extends Controller
             'profile_photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,gif', 'max:2048'],
         ]);
 
+        if (Authority::isProtected($user) && strcasecmp($data['email'], Authority::HEAD_EMAIL) !== 0) {
+            throw ValidationException::withMessages(['email' => 'The Head Admin identity cannot be changed from account settings.']);
+        }
+
         foreach (['name', 'email', 'real_name'] as $column) {
             if (Schema::hasColumn('users', $column)) {
                 $user->{$column} = $data[$column] ?? null;
@@ -59,11 +64,11 @@ class StudyBuddyAdminAccountController extends Controller
 
         $data = $request->validate([
             'current_password' => ['required', 'string'],
-            'password' => ['required', 'string', 'min:8', 'confirmed', 'different:current_password'],
+            'password' => ['required', 'string', 'min:12', 'confirmed', 'different:current_password'],
         ], [
             'current_password.required' => 'Type your current admin password first.',
             'password.required' => 'Type your new admin password.',
-            'password.min' => 'Your new password must be at least 8 characters.',
+            'password.min' => 'Admin passwords must be at least 12 characters.',
             'password.confirmed' => 'The new password confirmation does not match.',
             'password.different' => 'Your new password must be different from the current password.',
         ]);

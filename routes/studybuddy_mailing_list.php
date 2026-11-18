@@ -11,7 +11,7 @@ Route::post(
     ->name('newsletter.subscribe');
 
 Route::prefix('admin/control-room/mailing-list')
-    ->middleware('auth')
+    ->middleware(['auth', 'admin'])
     ->name('admin.control-room.mailing-list.')
     ->group(function (): void {
         Route::get(

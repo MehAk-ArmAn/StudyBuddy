@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\SchoolOrganization;
 use App\Models\SchoolOrganizationMember;
 use App\Models\StudyBuddySecurityEvent;
+use App\Support\StudyBuddyAdminAuthority as Authority;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,9 @@ class SchoolOrganizationReviewController extends Controller
     {
         return view('admin.schools.index', [
             'organizations' => SchoolOrganization::with(['owner', 'reviewer'])->latest()->paginate(20),
-            'events' => StudyBuddySecurityEvent::latest('created_at')->limit(30)->get(),
+            'events' => Authority::can(auth()->user(), 'ops.view')
+                ? StudyBuddySecurityEvent::latest('created_at')->limit(30)->get()
+                : collect(),
         ]);
     }
 

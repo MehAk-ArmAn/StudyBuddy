@@ -119,6 +119,9 @@ require __DIR__ . '/studybuddy_p09_pulse.php';
 // P10 account-private documents and uploaded study resources.
 require __DIR__ . '/studybuddy_p10_resources.php';
 
+// P11 scoped PCL administration.
+require __DIR__ . '/studybuddy_p11_admin.php';
+
 // Final StudyBuddy search routes
 require __DIR__ . '/studybuddy_search_final.php';
 

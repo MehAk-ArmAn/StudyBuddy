@@ -11,6 +11,7 @@
             <p>Everyone with a StudyBuddy account: learners, parents, teachers and administrators.</p>
         </div>
 
+        <a class="sb-res__btn" href="{{ route('admin.control-room.team.index') }}">PCL Team</a>
         <a class="sb-res__btn sb-res__btn--primary" href="{{ route('admin.users.create') }}">
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
                 <path d="M12 5v14M5 12h14"></path>
@@ -67,9 +68,9 @@
 
                                 <td data-label="Access">
                                     @if($user->is_admin)
-                                        <span class="sb-res__badge is-on">Administrator</span>
+                                        <span class="sb-res__badge is-on">{{ \App\Support\StudyBuddyAdminAuthority::isProtected($user) ? 'Protected Head' : 'Administrator' }}</span>
                                     @else
-                                        <span class="sb-res__badge is-off">Standard</span>
+                                        <span class="sb-res__badge is-off">{{ $user->studybuddy_test_account ? 'TEST · Standard' : 'Standard' }}</span>
                                     @endif
                                 </td>
 
@@ -83,11 +84,11 @@
 
                                 <td data-label="Actions">
                                     <div class="sb-res__actions">
-                                        <a class="sb-res__btn sb-res__btn--small" href="{{ route('admin.users.edit', $user) }}">Edit</a>
+                                        @unless($user->is_admin)<a class="sb-res__btn sb-res__btn--small" href="{{ route('admin.users.edit', $user) }}">Edit</a>@endunless
 
-                                        @if($user->id === auth()->id())
+                                        @if($user->is_admin || $user->id === auth()->id())
                                             {{-- Deleting your own account would lock you out mid-session. --}}
-                                            <span class="sb-res__muted sb-res__self">This is you</span>
+                                            <span class="sb-res__muted sb-res__self">{{ $user->is_admin ? 'Protected admin workflow' : 'This is you' }}</span>
                                         @else
                                             <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
                                                   onsubmit="return confirm('Delete {{ $user->name }}? This cannot be undone.')">

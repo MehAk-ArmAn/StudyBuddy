@@ -65,7 +65,7 @@ class AdminAccountTest extends TestCase
     {
         User::forceCreate([
             'name' => 'Old Admin',
-            'email' => 'admin@studybuddy.fun',
+            'email' => 'admin@studybuddy.local',
             'password' => Hash::make('whatever-it-used-to-be'),
             'is_admin' => true,
             'role' => 'admin',
@@ -74,7 +74,7 @@ class AdminAccountTest extends TestCase
         $this->seedAdmin();
 
         $this->assertSame(1, User::where('is_admin', true)->count());
-        $this->assertNull(User::firstWhere('email', 'admin@studybuddy.fun'));
+        $this->assertNull(User::firstWhere('email', 'admin@studybuddy.local'));
         $this->assertNotNull(User::firstWhere('email', StudyBuddyAdminSeeder::DEFAULT_EMAIL));
     }
 

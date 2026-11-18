@@ -61,6 +61,7 @@ class StudyBuddyControlRoomController extends Controller
             ['title' => 'Content Studio', 'subtitle' => 'Public copy, cards, homepage blocks, CTAs, testimonials.', 'url' => url('/admin/control-room/content-studio'), 'icon' => asset('assets/studybuddy-control/content.svg'), 'class' => 'blue', 'cta' => 'Manage content'],
             ['title' => 'Learning Apps', 'subtitle' => 'App details, artwork, store links, browser versions and publishing.', 'url' => url('/admin/control-room/apps'), 'icon' => asset('assets/studybuddy-control/apps.svg'), 'class' => 'cyan', 'cta' => 'Manage apps'],
             ['title' => 'Role Tools', 'subtitle' => 'Parent children, teacher classes, assignments, role metrics.', 'url' => url('/admin/control-room/role-tools'), 'icon' => asset('assets/studybuddy-control/users.svg'), 'class' => 'purple', 'cta' => 'View role data'],
+            ['title' => 'PCL Team & Access', 'subtitle' => 'Protected Head Admin and scoped staff grants.', 'url' => url('/admin/control-room/team'), 'icon' => asset('assets/studybuddy-control/users.svg'), 'class' => 'purple', 'cta' => 'Manage team'],
             ['title' => 'Users & Roles', 'subtitle' => 'Students, parents, teachers, independent learners, admins.', 'url' => url('/admin/control-room/users'), 'icon' => asset('assets/studybuddy-control/users.svg'), 'class' => 'blue', 'cta' => 'Manage users'],
             ['title' => 'Safety Review', 'subtitle' => 'Role checks, verification, child/parent safety workflows.', 'url' => url('/admin/control-room/verifications'), 'icon' => asset('assets/studybuddy-control/safety.svg'), 'class' => 'cyan', 'cta' => 'Review safety'],
             ['title' => 'Site Settings', 'subtitle' => 'Site-wide details, links, labels and fallback values.', 'url' => url('/admin/control-room/site-settings'), 'icon' => asset('assets/studybuddy-control/settings.svg'), 'class' => 'pink', 'cta' => 'Open settings'],
@@ -74,8 +75,6 @@ class StudyBuddyControlRoomController extends Controller
 
         $isAdmin = $user && (
             ($user->is_admin ?? false)
-            || ($user->role ?? null) === 'admin'
-            || ($user->email ?? null) === 'admin@studybuddy.fun'
         );
 
         abort_unless($isAdmin, 403);

@@ -16,7 +16,7 @@
             <div>
                 <p class="sb-control-kicker">Users & Roles</p>
                 <h2>{{ $method === 'POST' ? 'Create user' : 'Edit user' }}</h2>
-                <p>Manage role, profile path, points, admin access, and optional password reset.</p>
+                <p>Manage standard learner, parent, teacher, and test accounts. Platform admins are managed separately in Team Access.</p>
             </div>
 
             <div class="sb-control-row-actions">
@@ -44,7 +44,7 @@
             <label>
                 <span>Role</span>
                 <select name="role">
-                    @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','independent_learner'=>'Independent Learner','admin'=>'Admin'] as $value => $label)
+                    @foreach(['student'=>'Student','parent'=>'Parent','teacher'=>'Teacher','independent_learner'=>'Independent Learner'] as $value => $label)
                         <option value="{{ $value }}" @selected(old('role', $user->role ?: 'student') === $value)>{{ $label }}</option>
                     @endforeach
                 </select>
@@ -72,12 +72,12 @@
 
             <label class="wide">
                 <span>{{ $method === 'POST' ? 'Temporary Access Key' : 'New password / leave blank to keep current' }}</span>
-                <input name="password" value="{{ $method === 'POST' ? 'ChangeMe12345!' : '' }}">
+                <input type="password" name="password" autocomplete="new-password" {{ $method === 'POST' ? 'required' : '' }} placeholder="12+ characters, letters and numbers">
             </label>
 
             <label class="wide pro-check-row">
-                <input type="checkbox" name="is_admin" value="1" @checked(old('is_admin', $user->is_admin))>
-                <span>Admin access</span>
+                <input type="checkbox" name="studybuddy_test_account" value="1" @checked(old('studybuddy_test_account', (bool)($user->studybuddy_test_account ?? false)))>
+                <span>Clearly marked test account (never use with real school or minor data)</span>
             </label>
         </div>
     </form>

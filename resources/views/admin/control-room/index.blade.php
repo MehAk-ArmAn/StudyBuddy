@@ -131,6 +131,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-adaptive-admin.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-adaptive-admin.css')) }}">
 
 <div class="sb-control-dashboard" data-admin-skip-unified>
+    <section class="p11-admin-inline" style="border:1px solid #485c91;background:#141c3b;padding:18px;border-radius:18px;margin:0 0 18px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap"><div><strong style="color:#9ec9ff">PCL PLATFORM ADMINISTRATION · PHASE 11</strong><p style="margin:6px 0 0;color:#cad5f4">Protected Head Admin, scoped team access and school governance. Access is checked in Laravel.</p></div><a href="{{ route('admin.control-room.team.index') }}" style="background:#7557f2;color:white;text-decoration:none;padding:12px 18px;border-radius:12px;font-weight:700">Team & permissions →</a></section>
     <section class="sb-control-welcome" aria-labelledby="control-room-title">
         <div class="sb-control-welcome__copy">
             <p class="sb-control-eyebrow">StudyBuddy Control Room</p>

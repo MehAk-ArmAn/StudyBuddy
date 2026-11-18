@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\StudyBuddySecurityEvent;
+use App\Support\StudyBuddyAdminAuthority as Authority;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -29,6 +30,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials + ['is_admin' => true], false)) {
             RateLimiter::clear($key);
             $userId = Auth::id();
+            if (!Authority::can(Auth::user(), 'platform.view')) {
+                Auth::logout();
+                return back()->withErrors(['email' => 'This administrator is not enabled for the new Control Room.'])->onlyInput('email');
+            }
             if (config('studybuddy.admin_mfa_enabled')) {
                 $code = (string) random_int(100000, 999999);
                 Auth::logout();
@@ -96,7 +101,7 @@ class LoginController extends Controller
             return back()->withErrors(['code' => 'That code was not accepted. Check your email or sign in again.']);
         }
         $user = User::findOrFail($challenge['user_id']);
-        abort_unless($user->is_admin, 403);
+        abort_unless(Authority::can($user, 'platform.view'), 403);
         $request->session()->forget('studybuddy_admin_mfa');
         Auth::login($user, (bool)$challenge['remember']);
         $request->session()->regenerate();
