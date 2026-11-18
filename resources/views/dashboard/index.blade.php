@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-class-progress.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-class-progress.css') }}">
 @endpush
 
+@push('styles')
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-p07/dashboard.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-p07/dashboard.css') }}">
+@endpush
+@push('scripts')
+<script defer src="{{ asset('assets/studybuddy-p07/dashboard.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-p07/dashboard.js') }}"></script>
+@endpush
 @section('content')
 <!-- SB_ADAPTIVE_DASHBOARD_V1 -->
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-adaptive-dashboard.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-adaptive-dashboard.css')) }}">
@@ -44,57 +50,7 @@
 <script src="{{ asset('assets/js/studybuddy-role-dashboards.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-role-dashboards.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-role-dashboards.js') : time() }}" defer></script>
 
 <div class="sb-role-dashboard role-{{ $role }}">
-    @include('dashboard.partials.studybuddy-wave10-quick-actions')
-    <link rel="stylesheet" href="{{ asset('assets/studybuddy-w36/dashboard-hub.css') }}?v=36">
-    @include('dashboard.partials.studybuddy-w36-hub')
-    @include('dashboard.partials.studybuddy-w24-journey')
-    <section class="role-dash-hero" data-role-card>
-        <div>
-            <p class="role-kicker">{{ $displayRole }} Dashboard</p>
-
-            @if($role === 'parent')
-                <h1>See how your child is getting on.</h1>
-                <p>Connect a child with their code, then follow their progress without taking over.</p>
-            @elseif($role === 'teacher')
-                <h1>Your classes in one place.</h1>
-                <p>Set up a class, add students with their code, and assign work from the apps.</p>
-            @elseif($role === 'independent_learner')
-                <h1>Learning at your own pace.</h1>
-                <p>Set a focus, pick an app, and keep everything you have done in one place.</p>
-            @else
-                <h1>Pick something to practise.</h1>
-                <p>Your apps, tasks and points are all here. Start with whatever looks good today.</p>
-            @endif
-
-            <div class="role-hero-actions">
-                <a href="{{ url('/apps') }}">Open apps</a>
-                <a class="soft" href="{{ url('/profile') }}">Profile Studio</a>
-                <a class="soft" href="{{ url('/roles') }}">How roles work</a>
-            </div>
-        </div>
-
-        <aside class="role-passport" data-role-card>
-            <div class="role-avatar">
-                @if($photoUrl)
-                    <img src="{{ $photoUrl }}" alt="{{ $user->name }} profile picture">
-                @else
-                    <span>{{ strtoupper(substr($user->name ?? 'S', 0, 1)) }}</span>
-                @endif
-            </div>
-
-            <strong>{{ $user->name }}</strong>
-            <p>{{ $profile['headline'] ?? $displayRole.' StudyBuddy account' }}</p>
-
-            <div class="role-passport-stats">
-                <article><span>Points</span><b>{{ number_format((int) ($user->cosmic_points ?? 0)) }}</b></article>
-                <article><span>Rank</span><b>{{ $rank ? '#'.$rank : 'New' }}</b></article>
-                <article><span>Profile</span><b>{{ $completion }}%</b></article>
-            </div>
-
-            <div class="role-progress"><i style="width: {{ $completion }}%"></i></div>
-        </aside>
-    </section>
-
+    @include('dashboard.partials.p07-adaptive-command')
     @if($learningSnapshot !== null)
         @include('dashboard.partials.studybuddy-learning-snapshot', ['snapshot' => $learningSnapshot])
     @endif
@@ -114,6 +70,10 @@
         </section>
     @endif
 
+    <div id="sbp07-workspace" class="sbp07-tools-head">
+        <div><p class="sbp07-eyebrow">WORKSPACE TOOLS</p><h2>Everything you can do, in one place.</h2><p>Your existing forms, class tools, and learning records are right here.</p></div>
+        <label data-sbp07-density>Display <select aria-label="Dashboard display density"><option value="comfortable">Comfortable</option><option value="compact">Compact</option></select></label>
+    </div>
     @if($role === 'parent')
         @include('dashboard.partials.parent-dashboard')
     @elseif($role === 'teacher')
@@ -123,6 +83,15 @@
     @else
         @include('dashboard.partials.student-dashboard')
     @endif
+    <details class="sbp07-extras" id="sbp07-explore">
+        <summary>Explore more learning shortcuts and your journey</summary>
+        <div class="sbp07-extras__inside">
+            @include('dashboard.partials.studybuddy-wave10-quick-actions')
+            @include('dashboard.partials.studybuddy-w36-hub')
+            @include('dashboard.partials.studybuddy-w24-journey')
+        </div>
+    </details>
+
 </div>
 
 @push('styles')

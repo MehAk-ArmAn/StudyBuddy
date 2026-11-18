@@ -126,6 +126,7 @@
 @endphp
 
 @section('content')
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-p07/admin-school.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-p07/admin-school.css') }}">
 <!-- SB_ADAPTIVE_DASHBOARD_V1 -->
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-adaptive-admin.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-adaptive-admin.css')) }}">
 

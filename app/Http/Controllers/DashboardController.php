@@ -168,6 +168,7 @@ class DashboardController extends Controller
             $children = collect(DB::table('studybuddy_group_members')
                 ->where('group_id', $familyGroup->id)
                 ->where('owner_id', $user->id)
+                ->where('status', 'connected_with_code')
                 ->orderBy('display_name')
                 ->get());
         }
@@ -233,6 +234,7 @@ class DashboardController extends Controller
             $members = collect(DB::table('studybuddy_group_members')
                 ->where('owner_id', $user->id)
                 ->whereIn('group_id', $groups->pluck('id'))
+                ->where('status', 'connected_with_code')
                 ->orderBy('display_name')
                 ->get());
         }
@@ -259,7 +261,10 @@ class DashboardController extends Controller
                 ->get());
         }
 
+        $totalAssignments = 0;
         if (Schema::hasTable('studybuddy_assignments')) {
+            $totalAssignments = (int) DB::table('studybuddy_assignments')
+                ->where('owner_id', $user->id)->count();
             $assignments = collect(DB::table('studybuddy_assignments')
                 ->where('owner_id', $user->id)
                 ->latest('id')
@@ -276,7 +281,7 @@ class DashboardController extends Controller
             'metrics' => [
                 'classes' => $groups->count(),
                 'students' => $members->count(),
-                'assignments' => $assignments->count(),
+                'assignments' => $totalAssignments,
                 'activity' => $studentActivity->count(),
             ],
         ];
@@ -285,12 +290,21 @@ class DashboardController extends Controller
     private function learnerData($user, array $profile, Collection $recentPoints, Collection $assignments): array
     {
         $connectCode = $this->ensureConnectCode($user, $profile);
+        $openAssignments = $assignments->where('status', 'assigned')->count();
+        if (Schema::hasTable('studybuddy_assignment_recipients')) {
+            $openAssignments = (int) DB::table('studybuddy_assignment_recipients')
+                ->where('status', 'assigned')
+                ->where(function ($query) use ($user) {
+                    $query->where('user_id', $user->id)
+                        ->orWhere('email', $user->email);
+                })->count();
+        }
 
         return [
             'connect_code' => $connectCode,
             'metrics' => [
                 'points' => (int) ($user->cosmic_points ?? 0),
-                'assignments' => $assignments->where('status', 'assigned')->count(),
+                'assignments' => $openAssignments,
                 'recent_events' => $recentPoints->count(),
             ],
             // Left null when nothing has been set, so the dashboard can say so

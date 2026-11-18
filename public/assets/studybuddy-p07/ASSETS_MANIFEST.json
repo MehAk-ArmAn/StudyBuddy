@@ -1,0 +1,390 @@
+{
+  "edition": "07",
+  "assets": [
+    {
+      "path": "banners/learner.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_50 PM-1.png",
+      "width": 1500,
+      "height": 844,
+      "bytes": 76208
+    },
+    {
+      "path": "banners/worlds.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_53 PM-2.png",
+      "width": 1500,
+      "height": 844,
+      "bytes": 116582
+    },
+    {
+      "path": "banners/family.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_55 PM-3.png",
+      "width": 1500,
+      "height": 844,
+      "bytes": 93572
+    },
+    {
+      "path": "banners/school.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_57 PM-4.png",
+      "width": 1500,
+      "height": 844,
+      "bytes": 112908
+    },
+    {
+      "path": "banners/progress.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_59 PM-5.png",
+      "width": 1500,
+      "height": 844,
+      "bytes": 106386
+    },
+    {
+      "path": "library/archive-00.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_19_15 PM-1.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 69368
+    },
+    {
+      "path": "library/archive-01.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_19_17 PM-2.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 88762
+    },
+    {
+      "path": "library/archive-02.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_19_18 PM-3.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 82750
+    },
+    {
+      "path": "library/archive-03.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_19_21 PM-4.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 91160
+    },
+    {
+      "path": "library/archive-04.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_19_22 PM-5.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 91166
+    },
+    {
+      "path": "library/archive-05.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_19_24 PM-6.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 73254
+    },
+    {
+      "path": "library/archive-06.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_19_26 PM-7.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 104742
+    },
+    {
+      "path": "library/archive-07.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_19_27 PM-8.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 56452
+    },
+    {
+      "path": "library/archive-08.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_17 PM-1.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 83576
+    },
+    {
+      "path": "library/archive-09.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_19 PM-2.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 99254
+    },
+    {
+      "path": "library/archive-10.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_20 PM-3.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 114640
+    },
+    {
+      "path": "library/archive-11.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_23 PM-4.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 84984
+    },
+    {
+      "path": "library/archive-12.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_25 PM-5.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 64668
+    },
+    {
+      "path": "library/archive-13.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_27 PM-6.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 90340
+    },
+    {
+      "path": "library/archive-14.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_29 PM-7.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 89810
+    },
+    {
+      "path": "library/archive-15.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_31 PM-8.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 95446
+    },
+    {
+      "path": "library/archive-16.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_33 PM-9.png",
+      "width": 560,
+      "height": 420,
+      "bytes": 70456
+    },
+    {
+      "path": "library/archive-17.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_29_35 PM-10.png",
+      "width": 560,
+      "height": 420,
+      "bytes": 109030
+    },
+    {
+      "path": "library/archive-18.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_09 PM-1.png",
+      "width": 560,
+      "height": 420,
+      "bytes": 90256
+    },
+    {
+      "path": "library/archive-19.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_12 PM-2.png",
+      "width": 560,
+      "height": 420,
+      "bytes": 103488
+    },
+    {
+      "path": "library/archive-20.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_14 PM-3.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 138434
+    },
+    {
+      "path": "library/archive-21.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_17 PM-4.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 101128
+    },
+    {
+      "path": "library/archive-22.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_21 PM-5.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 111326
+    },
+    {
+      "path": "library/archive-23.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_24 PM-6.png",
+      "width": 560,
+      "height": 560,
+      "bytes": 136970
+    },
+    {
+      "path": "library/archive-24.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_26 PM-7.png",
+      "width": 560,
+      "height": 420,
+      "bytes": 99162
+    },
+    {
+      "path": "library/archive-25.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_30 PM-8.png",
+      "width": 560,
+      "height": 420,
+      "bytes": 93140
+    },
+    {
+      "path": "library/archive-26.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_34 PM-9.png",
+      "width": 560,
+      "height": 420,
+      "bytes": 102702
+    },
+    {
+      "path": "library/archive-27.webp",
+      "source": "ChatGPT Image Nov 17, 2026, 01_43_38 PM-10.png",
+      "width": 560,
+      "height": 420,
+      "bytes": 159622
+    },
+    {
+      "path": "library/archive-28.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_50 PM-1.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 61520
+    },
+    {
+      "path": "library/archive-29.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_53 PM-2.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 94710
+    },
+    {
+      "path": "library/archive-30.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_55 PM-3.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 74620
+    },
+    {
+      "path": "library/archive-31.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_57 PM-4.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 91200
+    },
+    {
+      "path": "library/archive-32.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_35_59 PM-5.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 86126
+    },
+    {
+      "path": "library/archive-33.webp",
+      "source": "ChatGPT Image Nov 18, 2026, 12_36_02 PM-6.png",
+      "width": 1280,
+      "height": 427,
+      "bytes": 37720
+    },
+    {
+      "path": "library/archive-34.webp",
+      "source": "Cosmic Dolphin Learning Adventure-11.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 376620
+    },
+    {
+      "path": "library/archive-35.webp",
+      "source": "Cosmic Dolphin Study Adventure-1.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 390202
+    },
+    {
+      "path": "library/archive-36.webp",
+      "source": "Cosmic Study Adventure with Dolphin Mascot-4.png",
+      "width": 1279,
+      "height": 853,
+      "bytes": 588598
+    },
+    {
+      "path": "library/archive-37.webp",
+      "source": "Dolphin Mascot\u0393\u00c7\u00d6s Cosmic Learning Adventure-16.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 396992
+    },
+    {
+      "path": "library/archive-38.webp",
+      "source": "Dreamy Galactic Learning Adventure-7.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 337422
+    },
+    {
+      "path": "library/archive-39.webp",
+      "source": "Neon Dolphin Cosmic Learning Adventure-6.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 376156
+    },
+    {
+      "path": "library/archive-40.webp",
+      "source": "Neon Dolphin\u0393\u00c7\u00d6s Cosmic Learning Adventure-15.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 327868
+    },
+    {
+      "path": "library/archive-41.webp",
+      "source": "StudyBuddy Cosmic Mascot Sticker Sheet-9.png",
+      "width": 1279,
+      "height": 853,
+      "bytes": 409466
+    },
+    {
+      "path": "library/archive-42.webp",
+      "source": "StudyBuddy\u0393\u00c7\u00d6s Magical Learning Universe-12.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 308762
+    },
+    {
+      "path": "library/archive-43.webp",
+      "source": "Whimsical Cosmic StudyBuddy Library-2.png",
+      "width": 1279,
+      "height": 720,
+      "bytes": 409936
+    },
+    {
+      "path": "icons/math.webp",
+      "source": "archive-01.webp",
+      "role": "dashboard-shortcut",
+      "bytes": 88762
+    },
+    {
+      "path": "icons/reading.webp",
+      "source": "archive-02.webp",
+      "role": "dashboard-shortcut",
+      "bytes": 82750
+    },
+    {
+      "path": "icons/science.webp",
+      "source": "archive-22.webp",
+      "role": "dashboard-shortcut",
+      "bytes": 111326
+    },
+    {
+      "path": "icons/geography.webp",
+      "source": "archive-03.webp",
+      "role": "dashboard-shortcut",
+      "bytes": 91160
+    },
+    {
+      "path": "icons/creativity.webp",
+      "source": "archive-06.webp",
+      "role": "dashboard-shortcut",
+      "bytes": 104742
+    },
+    {
+      "path": "icons/achievements.webp",
+      "source": "archive-15.webp",
+      "role": "dashboard-shortcut",
+      "bytes": 95446
+    },
+    {
+      "path": "icons/mascot.webp",
+      "source": "archive-00.webp",
+      "role": "dashboard-shortcut",
+      "bytes": 69368
+    }
+  ]
+}

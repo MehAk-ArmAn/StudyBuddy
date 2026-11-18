@@ -2,10 +2,13 @@
 @section('title', 'School Workspace')
 @push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-next-chapter.css') }}">@endpush
 @section('content')
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-p07/admin-school.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-p07/admin-school.css') }}">
 <!-- SB_ADAPTIVE_DASHBOARD_V1 -->
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-adaptive-school.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-adaptive-school.css')) }}">
 
-<div class="sb-school-shell"><p class="sb-next-eyebrow">PRIVATE SCHOOL WORKSPACE</p><h1>{{ $organization->name }}</h1><p class="school-intro">An approved workspace for verified StudyBuddy members. The school content and classroom analytics modules are being built separately.</p>
+<div class="sb-school-shell">
+<header class="sbp07-school-banner"><img src="{{ asset('assets/studybuddy-p07/banners/school.webp') }}" alt="" aria-hidden="true" decoding="async"><div><p class="sb-next-eyebrow">YOUR PRIVATE SCHOOL WORKSPACE</p><h1>{{ $organization->name }}</h1><p>Invite trusted colleagues and manage school membership with explicit permissions.</p></div></header>
+<p class="school-intro">This workspace shows staff and invitations for your school only. Classroom tools stay available to approved teachers.</p>
 @if(session('status'))<div class="sb-school-notice success" role="status">{{ session('status') }}</div>@endif
 @if($errors->any())<div class="sb-school-notice error" role="alert">@foreach($errors->all() as $error)<p>{{ $error }}</p>@endforeach</div>@endif
 <div class="sb-school-stats"><div><b>{{ $organization->members->where('status','active')->count() }}</b><span>Active staff</span></div><div><b>{{ $organization->invitations->count() }}</b><span>Open invitations</span></div><div><b>Approved</b><span>Institution reviewed</span></div></div>
