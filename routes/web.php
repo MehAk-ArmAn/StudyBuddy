@@ -110,6 +110,9 @@ require __DIR__ . '/studybuddy_w34.php';
 // Final StudyBuddy dashboard/profile routes
 require __DIR__ . '/studybuddy_dashboard_profile_final.php';
 
+// P08 optional, private onboarding on existing role_profile (no new tables).
+require __DIR__ . '/studybuddy_p08_onboarding.php';
+
 // Final StudyBuddy search routes
 require __DIR__ . '/studybuddy_search_final.php';
 

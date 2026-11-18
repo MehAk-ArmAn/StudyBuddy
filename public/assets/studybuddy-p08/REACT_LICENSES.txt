@@ -1,0 +1,4 @@
+StudyBuddy P08 uses original project-specific UI code plus the MIT-licensed React runtime bundled from the previously installed Pack 06 build.
+React and React DOM: Copyright (c) Meta Platforms, Inc. and affiliates. MIT License.
+License text: https://github.com/facebook/react/blob/main/LICENSE
+No React Bits Pro proprietary source is included.

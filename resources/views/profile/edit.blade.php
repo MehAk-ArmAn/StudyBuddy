@@ -47,6 +47,7 @@
     <section class="sb-page-hero compact">
         <p class="sb-hub-kicker">Profile Studio</p>
         <h1>Customize your StudyBuddy showcase.</h1>
+        <p><a href="{{ route('studybuddy.onboarding.show') }}" class="sb08-profile-link">✦ Revisit your guided setup →</a></p>
         <p>Upload a profile picture, choose your colours, unlock frames with coins, and decide what your public profile shows.</p>
     </section>
 

@@ -1,5 +1,6 @@
 {{-- Pack 07: the first view is a functional command center, not an extra decorative hero. --}}
 @php
+    $p08Prefs = is_array($profile['sb_p08_setup'] ?? null) ? $profile['sb_p08_setup'] : [];
     $p07IsLearner = in_array($role, ['student', 'independent_learner'], true);
     $p07Role = match ($role) {
         'teacher' => 'teacher',
@@ -69,7 +70,7 @@
         ],
     };
 @endphp
-<section id="sbp07-dashboard" class="sbp07" data-role="{{ $p07Role }}" aria-labelledby="sbp07-title">
+<section id="sbp07-dashboard" class="sbp07" data-role="{{ $p07Role }}" data-p08-account="{{ $user->id }}" data-p08-density="{{ in_array($p08Prefs['dashboard_density'] ?? '', ['comfortable', 'compact'], true) ? $p08Prefs['dashboard_density'] : 'comfortable' }}" data-p08-accent="{{ in_array($p08Prefs['accent'] ?? '', ['violet', 'cyan', 'rose'], true) ? $p08Prefs['accent'] : 'violet' }}" aria-labelledby="sbp07-title">
     <header class="sbp07-hero">
         <img src="{{ asset('assets/studybuddy-p07/banners/'.$p07Hero.'.webp') }}" alt="" aria-hidden="true" fetchpriority="high" decoding="async" class="sbp07-hero-art">
         <div class="sbp07-hero-copy">

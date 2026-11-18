@@ -5,7 +5,7 @@
   const key = 'sbp07-density';
   const settings = document.querySelector('[data-sbp07-density]');
   let stored = 'comfortable';
-  try { stored = sessionStorage.getItem(key) || 'comfortable'; } catch (_) {}
+  try { stored = sessionStorage.getItem(key) || stored; } catch (_) {}
   const select = settings?.querySelector('select');
   function apply(v) {
     const density = v === 'compact' ? 'compact' : 'comfortable';
