@@ -125,6 +125,9 @@ require __DIR__ . '/studybuddy_p11_admin.php';
 // P11B private School OS tasks and scoped organization oversight.
 require __DIR__ . '/studybuddy_p11b_school_os.php';
 
+// P11C safeguarded school staff channels and direct conversations.
+require __DIR__ . '/studybuddy_p11c_messaging.php';
+
 // Final StudyBuddy search routes
 require __DIR__ . '/studybuddy_search_final.php';
 

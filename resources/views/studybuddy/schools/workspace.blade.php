@@ -10,6 +10,7 @@
 <div class="sb-school-shell">
 <header class="sbp07-school-banner"><img src="{{ asset('assets/studybuddy-p07/banners/school.webp') }}" alt="" aria-hidden="true" decoding="async"><div><p class="sb-next-eyebrow">YOUR PRIVATE SCHOOL WORKSPACE</p><h1>{{ $organization->name }}</h1><p>Invite trusted colleagues and manage school membership with explicit permissions.</p></div></header>
 <div class="sbp11b-workspace-jump"><a href="{{ route('schools.board', $organization) }}">📋 Open School Staff Board →</a><small>Private school-only coordination. No student records in board cards.</small></div>
+<div class="sbp11b-workspace-jump"><a href="{{ route('schools.connect.index', $organization) }}">💬 Open Staff Connect →</a><small>School-only staff channels and direct messages with report controls. Adult verified access only.</small></div>
 <p class="school-intro">This workspace shows staff and invitations for your school only. Classroom tools stay available to approved teachers.</p>
 @if(session('status'))<div class="sb-school-notice success" role="status">{{ session('status') }}</div>@endif
 @if($errors->any())<div class="sb-school-notice error" role="alert">@foreach($errors->all() as $error)<p>{{ $error }}</p>@endforeach</div>@endif
