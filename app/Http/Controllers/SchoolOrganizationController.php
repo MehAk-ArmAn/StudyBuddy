@@ -112,6 +112,28 @@ class SchoolOrganizationController extends Controller
         return back()->with('status', 'Invitation revoked. Its link cannot be used now.');
     }
 
+    public function changeStaffRole(Request $request, SchoolOrganization $organization, SchoolOrganizationMember $member): RedirectResponse
+    {
+        $actor = $this->ensureMembership($request, $organization);
+        // Only the actual institution owner manages school administrators.
+        abort_unless($actor->role === 'owner', 403);
+        abort_unless($member->organization_id === $organization->id && $member->status === 'active', 404);
+        abort_if($member->role === 'owner' || $member->user_id === $request->user()->id, 403);
+        $data = $request->validate(['role' => ['required', Rule::in(['teacher', 'school_admin'])]]);
+        $user = $member->user;
+        abort_unless($user && $user->normalizedRole() === 'teacher' && $user->hasVerifiedEmail()
+            && in_array($user->role_verification_status, ['verified','approved'], true), 403);
+        DB::transaction(function () use ($member, $organization, $request, $data): void {
+            $locked = SchoolOrganizationMember::whereKey($member->id)->lockForUpdate()->firstOrFail();
+            abort_unless($locked->organization_id === $organization->id && $locked->status === 'active', 404);
+            abort_if($locked->role === 'owner' || $locked->user_id === $request->user()->id, 403);
+            $locked->update(['role' => $data['role']]);
+        });
+        StudyBuddySecurityEvent::record('school_staff_role_changed', 'warning', $request->user()->id,
+            ['organization_id' => $organization->id, 'member_id' => $member->id, 'role' => $data['role']]);
+        return back()->with('status', 'School staff permission updated.');
+    }
+
     public function removeMember(Request $request, SchoolOrganization $organization, SchoolOrganizationMember $member): RedirectResponse
     {
         $this->ensureManager($request, $organization);
