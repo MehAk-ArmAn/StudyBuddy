@@ -18,13 +18,23 @@
   <img alt="Blade" src="https://img.shields.io/badge/Frontend-Blade-F7523F?style=flat-square">
   <img alt="Database" src="https://img.shields.io/badge/Database-SQLite%20%2F%20MySQL-0088CC?style=flat-square">
   <img alt="Tests" src="https://img.shields.io/badge/Tests-PHPUnit-3B6EBF?style=flat-square">
-  <img alt="Team workflow" src="https://img.shields.io/badge/Collaboration-Branches%20%2B%20PRs-10B981?style=flat-square">
+  <img alt="Team workflow" src="https://img.shields.io/badge/Collaboration-Guarded%20main%20commits-10B981?style=flat-square">
 </p>
 
 > [!NOTE]
-> **Read this first:** This README is the developer entry point for the shared repository. It distinguishes **existing documented behavior** from **proposed roadmap features**. It is not a claim that every planned feature is already live or that the current production release has passed fresh QA. The repository is a collaborative codebase: please use a feature branch and a pull request for substantial changes.
+> **Read this first:** This README is the developer entry point for the shared repository. It distinguishes **existing documented behavior** from **proposed roadmap features**. It is not a claim that every planned feature is already live or that the current production release has passed fresh QA. The repository is a collaborative codebase: the current user-selected workflow is reviewed, guarded changes directly on `main` (coordinate simultaneous contributors).
 
 ---
+
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+## 💜 StudyBuddy product blueprint — 18 November 2026 (current planning pointer)
+
+**Canonical project plans:** [Product Master](docs/STUDYBUDDY_MASTER_PLAN.md) · [All React Blocks & Placement](docs/REACT_COMPONENT_PLACEMENT_MATRIX.md) · [Delivery Phases](docs/PHASES_AND_RELEASE_GATES.md) · [Role & Child Safety](docs/ROLE_PERMISSIONS_AND_SAFEGUARDING.md) · [Source Map](docs/SOURCE_CODE_MAP.md) · [AI/Team Handoff](docs/AGENT_CONTEXT_AND_HANDOFF.md).
+
+**Real reported status:** Packs 05–09 passed Mac PHPUnit and were pushed to `main`; Pack 10 Resource Studio passed locally (252 tests / 3,689 assertions), **Git push not confirmed**. These results do **not** verify production release. **Upcoming:** P11 Head Admin + school RBAC, P12 monitoring, P13 communications and beyond. Requested React Bits Pro screens are planned references, not licensed installs.
+
+**Current delivery convention:** guarded, reviewed, source-backed changes directly to `main` as requested. Historical references later in this README to branch/PR workflows are older guidance and should not be mistaken for the current user-selected convention. Never force push; coordinate simultaneous work.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
 
 ## 🧭 Jump to
 
@@ -54,8 +64,8 @@
 | Laravel / Blade web app | **Current main application** | Standard Composer + Artisan local setup |
 | React Bits / Vite workspace | **Present in repo; verify integration** | `studybuddy-reactbits/` and `vite.studybuddy-react.config.mjs` |
 | 28-category educational taxonomy | **Defined content standard** | Rollout/coverage requires verification; don't show empty categories |
-| Student accounts, learning dashboards, progress histories | **Proposals only** | Design, privacy and approval needed before implementation |
-| Parent / teacher experience expansion | **Proposed enhancement** | Public parent and teacher pages already have documented routes |
+| Student accounts, learning dashboards, progress histories | **Implemented in locally tested phases** | Verify current route/data behavior and production readiness per new docs |
+| Parent / teacher experience expansion | **Role dashboards locally tested** | School-wide production release still requires tenant/safeguarding QA |
 
 ---
 
@@ -355,7 +365,7 @@ Before checking a roadmap box, link the **pull request**, note **who verified it
 
 StudyBuddy is now developed with **multiple contributors** working in the **same repository**. Every contribution should be reversible, reviewable, and easy for a teammate to understand.
 
-### One issue → one branch → one PR
+### Historical branch/PR guide (superseded by current guarded-main workflow)
 
 ```bash
 git switch main

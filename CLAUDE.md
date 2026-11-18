@@ -1,7 +1,13 @@
 # StudyBuddy — working notes
 
-Laravel 11 + Blade. No JS build step: CSS/JS are plain files in `public/assets`
-and are cache-busted with `filemtime()`. There is no `package.json`.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+## Current source of truth (18 November 2026)
+
+**Read [`docs/AGENT_CONTEXT_AND_HANDOFF.md`](docs/AGENT_CONTEXT_AND_HANDOFF.md), [`docs/STUDYBUDDY_MASTER_PLAN.md`](docs/STUDYBUDDY_MASTER_PLAN.md), and [`docs/PHASES_AND_RELEASE_GATES.md`](docs/PHASES_AND_RELEASE_GATES.md) before editing code.** This historical working-notes file predates Packs 05–10. StudyBuddy is Laravel/Blade **plus React islands** in `studybuddy-reactbits/pro-ui/` (its own `package.json`); the old line below saying "no package.json" applies only to Laravel-root startup. Current user's Git policy is reviewed guarded commits **straight to `main`**, no forced pushes. Admin credentials must come from private environment configuration with strong passwords and MFA. The seeded `admin@studybuddy.local` identity is **not** the desired canonical Head Admin; the planned canonical address is `admin@studybuddy.fun`, after audited DB reconciliation. No short/shared admin passwords. The requested Pro blocks are not installed without licensed source.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
+
+
+Laravel 11 + Blade at the root, with plain namespaced assets under `public/assets` **and React islands** under `studybuddy-reactbits/` (own package and Vite tooling). Check each module build strategy; the web server does not automatically rebuild React.
 
 ## Setup
 
@@ -14,7 +20,7 @@ php artisan storage:link           # required, or uploaded app artwork 404s
 php artisan serve
 ```
 
-Admin sign-in: `admin@studybuddy.local` / `ChangeMe12345!` (`/admin/login`).
+Admin sign-in: `/admin/login`. Use environment-managed private credentials; never publish demo/default passwords.
 Override per environment with `STUDYBUDDY_ADMIN_EMAIL` / `STUDYBUDDY_ADMIN_PASSWORD`.
 
 ## Tests

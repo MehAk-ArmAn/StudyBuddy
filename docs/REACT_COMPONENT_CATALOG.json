@@ -1,0 +1,1235 @@
+{
+  "updated_utc": "2026-11-18",
+  "status_rule": "Pro entries planned reference only until licensed code present; original alternatives separate",
+  "paid": [
+    {
+      "id": "@reactbits-starter/celebration-cursor-tw",
+      "title": "Celebration Cursor Tw",
+      "intent": "Optional learning-completion celebration; no global click confetti",
+      "phase": "P06/P21",
+      "surface": "public/learner pages; optional opt-in",
+      "guard": "reduced motion & touch safe",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-starter/smooth-cursor-tw",
+      "title": "Smooth Cursor Tw",
+      "intent": "Public desktop marketing only; disabled for reduced motion and touch",
+      "phase": "P06/P21",
+      "surface": "public/learner pages; optional opt-in",
+      "guard": "reduced motion & touch safe",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-starter/user-cursor-tw",
+      "title": "User Cursor Tw",
+      "intent": "Only future opted-in live collaboration; not enabled by default",
+      "phase": "P06/P21",
+      "surface": "public/learner pages; optional opt-in",
+      "guard": "reduced motion & touch safe",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/onboarding-1",
+      "title": "Onboarding 1",
+      "intent": "Profile personalization with live preview and private data boundaries",
+      "phase": "P08/P11",
+      "surface": "/getting-started; school setup",
+      "guard": "role safe, persisted progress",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/onboarding-2",
+      "title": "Onboarding 2",
+      "intent": "Six-step learner/guardian/school enrollment flow",
+      "phase": "P08/P11",
+      "surface": "/getting-started; school setup",
+      "guard": "role safe, persisted progress",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/onboarding-3",
+      "title": "Onboarding 3",
+      "intent": "Getting-started checklist driven by completed activities",
+      "phase": "P08/P11",
+      "surface": "/getting-started; school setup",
+      "guard": "role safe, persisted progress",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/onboarding-4",
+      "title": "Onboarding 4",
+      "intent": "Personalization use-case picker; age/role-aware",
+      "phase": "P08/P11",
+      "surface": "/getting-started; school setup",
+      "guard": "role safe, persisted progress",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/onboarding-5",
+      "title": "Onboarding 5",
+      "intent": "School invite colleagues, permission-checked",
+      "phase": "P08/P11",
+      "surface": "/getting-started; school setup",
+      "guard": "role safe, persisted progress",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/onboarding-6",
+      "title": "Onboarding 6",
+      "intent": "Only after verified actual setup completion",
+      "phase": "P08/P11",
+      "surface": "/getting-started; school setup",
+      "guard": "role safe, persisted progress",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/onboarding-7",
+      "title": "Onboarding 7",
+      "intent": "School/workspace creation steps using existing protected flows",
+      "phase": "P08/P11",
+      "surface": "/getting-started; school setup",
+      "guard": "role safe, persisted progress",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/wizard-7",
+      "title": "Wizard 7",
+      "intent": "Accessible single-question onboarding with server-side checks",
+      "phase": "P08/P11",
+      "surface": "/getting-started; school setup",
+      "guard": "role safe, persisted progress",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/notifications-2",
+      "title": "Notifications 2",
+      "intent": "Transient confirmation toasts, no fake event stream",
+      "phase": "P09/P13",
+      "surface": "/my-day; global notification bell",
+      "guard": "saved prefs, scoped events",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/notifications-3",
+      "title": "Notifications 3",
+      "intent": "Per-user delivery preferences; real settings persistence needed",
+      "phase": "P09/P13",
+      "surface": "/my-day; global notification bell",
+      "guard": "saved prefs, scoped events",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/notifications-4",
+      "title": "Notifications 4",
+      "intent": "Teacher/Admin notification inbox with server-authorized activity data",
+      "phase": "P09/P13",
+      "surface": "/my-day; global notification bell",
+      "guard": "saved prefs, scoped events",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/notifications-6",
+      "title": "Notifications 6",
+      "intent": "Role-aware bell popover; read from real notification feed only",
+      "phase": "P09/P13",
+      "surface": "/my-day; global notification bell",
+      "guard": "saved prefs, scoped events",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/editor-2",
+      "title": "Editor 2",
+      "intent": "Teacher/Admin Markdown editor with write/preview, sanitized server output",
+      "phase": "P10",
+      "surface": "/resources; /study-space",
+      "guard": "private storage and sanitization",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/editor-5",
+      "title": "Editor 5",
+      "intent": "Article/lesson reader and accessible outline",
+      "phase": "P10",
+      "surface": "/resources; /study-space",
+      "guard": "private storage and sanitization",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/file-manager-1",
+      "title": "File Manager 1",
+      "intent": "Admin assets explorer if protected storage access exists",
+      "phase": "P10",
+      "surface": "/resources; /study-space",
+      "guard": "private storage and sanitization",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/file-manager-2",
+      "title": "File Manager 2",
+      "intent": "Admin media grid with verified type filters",
+      "phase": "P10",
+      "surface": "/resources; /study-space",
+      "guard": "private storage and sanitization",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/file-manager-3",
+      "title": "File Manager 3",
+      "intent": "Admin resource detail panel; avoid leaking private files",
+      "phase": "P10",
+      "surface": "/resources; /study-space",
+      "guard": "private storage and sanitization",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/file-manager-4",
+      "title": "File Manager 4",
+      "intent": "Admin verified upload manager; existing storage backend",
+      "phase": "P10",
+      "surface": "/resources; /study-space",
+      "guard": "private storage and sanitization",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-starter/waveform-player-tw",
+      "title": "Waveform Player Tw",
+      "intent": "Audio learning/library resource with permission checks",
+      "phase": "P10",
+      "surface": "/resources; /study-space",
+      "guard": "private storage and sanitization",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/app-shell-4",
+      "title": "App Shell 4",
+      "intent": "Authorized admin/teacher resource workspace: three-column context panel",
+      "phase": "P11",
+      "surface": "/admin/control-room; school workspace",
+      "guard": "RBAC, Head Admin safe",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/app-sidebar-2",
+      "title": "App Sidebar 2",
+      "intent": "Desktop PCL/School nav",
+      "phase": "P11",
+      "surface": "/admin/control-room; school workspace",
+      "guard": "RBAC, Head Admin safe",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/app-sidebar-4",
+      "title": "App Sidebar 4",
+      "intent": "Admin and school contextual console",
+      "phase": "P11",
+      "surface": "/admin/control-room; school workspace",
+      "guard": "RBAC, Head Admin safe",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/authentication-1",
+      "title": "Authentication 1",
+      "intent": "Sign-in screen presentation, existing Laravel auth",
+      "phase": "P11",
+      "surface": "/login; /admin/login; /schools/invitations/{token}",
+      "guard": "current Laravel auth; no spoofed SSO",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/authentication-12",
+      "title": "Authentication 12",
+      "intent": "School invitation acceptance (existing token verifier)",
+      "phase": "P11",
+      "surface": "/login; /admin/login; /schools/invitations/{token}",
+      "guard": "current Laravel auth; no spoofed SSO",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/authentication-2",
+      "title": "Authentication 2",
+      "intent": "Only when real SSO provider is configured",
+      "phase": "P11",
+      "surface": "/login; /admin/login; /schools/invitations/{token}",
+      "guard": "current Laravel auth; no spoofed SSO",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/data-table-6",
+      "title": "Data Table 6",
+      "intent": "Users/schools/admin directory and queue",
+      "phase": "P11",
+      "surface": "/admin/control-room; school workspace",
+      "guard": "RBAC, Head Admin safe",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/forms-2",
+      "title": "Forms 2",
+      "intent": "Head Admin: create staff admins/test users/school account roles",
+      "phase": "P11",
+      "surface": "/admin/control-room; school workspace",
+      "guard": "RBAC, Head Admin safe",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/mobile-1",
+      "title": "Mobile 1",
+      "intent": "Phone-only contextual nav; do not duplicate existing global nav",
+      "phase": "P11",
+      "surface": "global / role-specific navigation",
+      "guard": "touch accessible",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/mobile-2",
+      "title": "Mobile 2",
+      "intent": "Teacher/admin quick action FAB, tap-target and role gated",
+      "phase": "P11",
+      "surface": "global / role-specific navigation",
+      "guard": "touch accessible",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/mobile-4",
+      "title": "Mobile 4",
+      "intent": "Mobile menu sheet; choose ONE nav pattern",
+      "phase": "P11",
+      "surface": "global / role-specific navigation",
+      "guard": "touch accessible",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/settings-form-1",
+      "title": "Settings page + sticky Save/Discard",
+      "intent": "Settings page + sticky Save/Discard",
+      "phase": "P11",
+      "surface": "/admin/control-room and /schools/{organization}/workspace",
+      "guard": "roles, settings, dirty form state",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/wizard-2",
+      "title": "Full-screen progress wizard",
+      "intent": "Full-screen progress wizard",
+      "phase": "P11",
+      "surface": "/getting-started; school setup",
+      "guard": "resumable role-safe onboarding",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/wizard-4",
+      "title": "Service picker + live summary",
+      "intent": "Service picker + live summary",
+      "phase": "P11",
+      "surface": "school onboarding / internal setup",
+      "guard": "valid selectable services only",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/wizard-5",
+      "title": "Review + confirm",
+      "intent": "Review + confirm",
+      "phase": "P11",
+      "surface": "/getting-started; school setup",
+      "guard": "server-validation and explicit confirmation",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/wizard-6",
+      "title": "Running step with task states",
+      "intent": "Running step with task states",
+      "phase": "P11",
+      "surface": "admin/school provisioning wizard",
+      "guard": "actual queued/success/error states; never fake",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/forms-12",
+      "title": "Forms 12",
+      "intent": "Optional procurement/billing only if real quotes exist",
+      "phase": "P11/P14",
+      "surface": "/admin/control-room; school setup",
+      "guard": "server authorization",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/forms-3",
+      "title": "Forms 3",
+      "intent": "Booking order breakdown only if checkout backend exists",
+      "phase": "P11/P14",
+      "surface": "/admin/control-room; school setup",
+      "guard": "server authorization",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/forms-4",
+      "title": "Forms 4",
+      "intent": "Admin CMS property editor with authenticated write actions",
+      "phase": "P11/P14",
+      "surface": "/admin/control-room; school setup",
+      "guard": "server authorization",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/forms-9",
+      "title": "Forms 9",
+      "intent": "Schools timetable settings only (not arbitrary opening hours)",
+      "phase": "P11/P14",
+      "surface": "/admin/control-room; school setup",
+      "guard": "server authorization",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/analytics-11",
+      "title": "Analytics 11",
+      "intent": "Platform-admin cohort retention, only with consented aggregates",
+      "phase": "P12",
+      "surface": "/dashboard; /admin/control-room; school workspace",
+      "guard": "real verified aggregates, role scoping",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/analytics-5",
+      "title": "Analytics 5",
+      "intent": "School/admin aggregate data",
+      "phase": "P12",
+      "surface": "/dashboard; /admin/control-room; school workspace",
+      "guard": "real verified aggregates, role scoping",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/analytics-9",
+      "title": "Analytics 9",
+      "intent": "School operational activity and platform admin",
+      "phase": "P12",
+      "surface": "/dashboard; /admin/control-room; school workspace",
+      "guard": "real verified aggregates, role scoping",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/dashboard-11",
+      "title": "Dashboard 11",
+      "intent": "School staffing/workload",
+      "phase": "P12",
+      "surface": "/dashboard; /admin/control-room; school workspace",
+      "guard": "real verified aggregates, role scoping",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/dashboard-3",
+      "title": "Dashboard 3",
+      "intent": "Student/independent dashboard mixed-card reference",
+      "phase": "P12",
+      "surface": "/dashboard; /admin/control-room; school workspace",
+      "guard": "real verified aggregates, role scoping",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/list-3",
+      "title": "List 3",
+      "intent": "Restricted security/audit center",
+      "phase": "P12",
+      "surface": "/admin/control-room/operations",
+      "guard": "instrumentation and redacted audit events",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/monitoring-5",
+      "title": "Monitoring 5",
+      "intent": "Head Admin / infra roles",
+      "phase": "P12",
+      "surface": "/admin/control-room/operations",
+      "guard": "instrumentation and redacted audit events",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/monitoring-6",
+      "title": "Monitoring 6",
+      "intent": "Platform health history",
+      "phase": "P12",
+      "surface": "/admin/control-room/operations",
+      "guard": "instrumentation and redacted audit events",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/monitoring-7",
+      "title": "Monitoring 7",
+      "intent": "Platform services/storage/queues",
+      "phase": "P12",
+      "surface": "/admin/control-room/operations",
+      "guard": "instrumentation and redacted audit events",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/monitoring-8",
+      "title": "Monitoring 8",
+      "intent": "Platform health/latency",
+      "phase": "P12",
+      "surface": "/admin/control-room/operations",
+      "guard": "instrumentation and redacted audit events",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/monitoring-9",
+      "title": "Monitoring 9",
+      "intent": "Queue operations",
+      "phase": "P12",
+      "surface": "/admin/control-room/operations",
+      "guard": "instrumentation and redacted audit events",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-starter/particle-chart-tw",
+      "title": "Particle Chart Tw",
+      "intent": "Optional performance chart for aggregate verified data",
+      "phase": "P12",
+      "surface": "/dashboard; /admin/control-room; school workspace",
+      "guard": "real verified aggregates, role scoping",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-starter/simple-graph-tw",
+      "title": "Simple Graph Tw",
+      "intent": "Learner progress or admin aggregate trends",
+      "phase": "P12",
+      "surface": "/dashboard; /admin/control-room; school workspace",
+      "guard": "real verified aggregates, role scoping",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/chat-2",
+      "title": "Chat 2",
+      "intent": "Approved staff and role-permitted user messaging",
+      "phase": "P13",
+      "surface": "/messages; school channels",
+      "guard": "consent and participant restrictions",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/chat-5",
+      "title": "Chat 5",
+      "intent": "School-managed classes, staff and organization channels",
+      "phase": "P13",
+      "surface": "/schools/{organization}/workspace/channels",
+      "guard": "verified school membership; disclosed audit",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/comments-4",
+      "title": "Comment composer with @mentions",
+      "intent": "Comment composer with @mentions",
+      "phase": "P13",
+      "surface": "/community; school classes and staff channels",
+      "guard": "only permitted mention targets",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/feedback-1",
+      "title": "In-app feedback with screenshots",
+      "intent": "In-app feedback with screenshots",
+      "phase": "P14",
+      "surface": "global feedback entry; /feedback",
+      "guard": "consent before screenshot, redact personal data",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/feedback-2",
+      "title": "0–10 recommendation survey",
+      "intent": "0–10 recommendation survey",
+      "phase": "P14",
+      "surface": "/feedback; school feedback",
+      "guard": "accessible 0–10 form and grouped aggregates",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/feedback-3",
+      "title": "Star rating + reason chips",
+      "intent": "Star rating + reason chips",
+      "phase": "P14",
+      "surface": "/feedback",
+      "guard": "real persisted reasons and scores",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/feedback-5",
+      "title": "Feedback triage inbox",
+      "intent": "Feedback triage inbox",
+      "phase": "P14",
+      "surface": "/admin/control-room/feedback",
+      "guard": "staff assignment, audit, status",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/feedback-6",
+      "title": "Theme and sentiment insights",
+      "intent": "Theme and sentiment insights",
+      "phase": "P14",
+      "surface": "/admin/control-room/feedback/insights",
+      "guard": "label estimated sentiment; source-backed aggregates",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/forms-10",
+      "title": "Forms 10",
+      "intent": "Public community feedback + school service/experience surveys",
+      "phase": "P14",
+      "surface": "/feedback; /help; /admin/control-room/feedback",
+      "guard": "real ticket/survey backend",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/list-11",
+      "title": "List 11",
+      "intent": "Platform support quality dashboard",
+      "phase": "P14",
+      "surface": "/admin/control-room/support",
+      "guard": "support cases only, never minors",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/support-1",
+      "title": "Help center with search",
+      "intent": "Help center with search",
+      "phase": "P14",
+      "surface": "/help",
+      "guard": "published support articles and search",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/support-2",
+      "title": "Ticket form with suggested articles",
+      "intent": "Ticket form with suggested articles",
+      "phase": "P14",
+      "surface": "/help/new; /contact",
+      "guard": "real ticket, privacy, authorization",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/comments-2",
+      "title": "Inline annotation comments rail",
+      "intent": "Inline annotation comments rail",
+      "phase": "P15",
+      "surface": "/resources/{id}/review; teacher lesson review",
+      "guard": "document version anchors, access checked",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/comments-6",
+      "title": "Canvas pins + notes rail",
+      "intent": "Canvas pins + notes rail",
+      "phase": "P15",
+      "surface": "school teacher review / visual lesson planning",
+      "guard": "normalized coordinates, private attachments",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/editor-4",
+      "title": "Editor 4",
+      "intent": "Teacher content suggestions review when workflow exists",
+      "phase": "P15",
+      "surface": "/resources; /community; school workspace",
+      "guard": "tenant ownership and review",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/kanban-2",
+      "title": "Collapsible swimlane board",
+      "intent": "Collapsible swimlane board",
+      "phase": "P15",
+      "surface": "school workspace tasks; support ops",
+      "guard": "role-scoped board and audit",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/kanban-4",
+      "title": "Board + synced detail panel",
+      "intent": "Board + synced detail panel",
+      "phase": "P15",
+      "surface": "school tasks; /admin/control-room/tasks",
+      "guard": "authorized changes, status and event history",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/scheduling-1",
+      "title": "Scheduling 1",
+      "intent": "Teacher/school calendar with real events",
+      "phase": "P16",
+      "surface": "/my-day; school calendar",
+      "guard": "true timeslots & conflict rules",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/scheduling-3",
+      "title": "New schedule form with attendees",
+      "intent": "New schedule form with attendees",
+      "phase": "P16",
+      "surface": "/schools/{organization}/calendar; /my-day",
+      "guard": "verified participants, conflict checks",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/scheduling-4",
+      "title": "Deadline presets",
+      "intent": "Deadline presets",
+      "phase": "P16",
+      "surface": "teacher assignments; /my-day",
+      "guard": "timezone-aware persisted deadlines",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/scheduling-7",
+      "title": "Scheduling 7",
+      "intent": "Only if bookable sessions/slot backend exists",
+      "phase": "P16",
+      "surface": "/my-day; school calendar",
+      "guard": "true timeslots & conflict rules",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/filtering-1",
+      "title": "Filtering 1",
+      "intent": "Apps library facets; adapt product swatches to subject tags",
+      "phase": "P17",
+      "surface": "/apps; subject discovery",
+      "guard": "real catalogue taxonomy",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-starter/arc-list-tw",
+      "title": "Arc List Tw",
+      "intent": "Website /apps discovery; academic topics",
+      "phase": "P17",
+      "surface": "/apps; subject discovery",
+      "guard": "real catalogue taxonomy",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/billing-1",
+      "title": "Billing overview + invoice ledger",
+      "intent": "Billing overview + invoice ledger",
+      "phase": "P18",
+      "surface": "/admin/control-room/billing; school billing",
+      "guard": "verified invoices, tenant ownership, payment provider",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/billing-2",
+      "title": "Plan manager + entitlement cards",
+      "intent": "Plan manager + entitlement cards",
+      "phase": "P18",
+      "surface": "/admin/control-room/billing; /schools/{organization}/billing",
+      "guard": "entitlements only from actual subscriptions",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/billing-4",
+      "title": "Failed-payment recovery queue",
+      "intent": "Failed-payment recovery queue",
+      "phase": "P18",
+      "surface": "/admin/control-room/billing/recovery",
+      "guard": "real gateway events, manual retry gating",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/billing-5",
+      "title": "Plan change + proration preview",
+      "intent": "Plan change + proration preview",
+      "phase": "P18",
+      "surface": "/schools/{organization}/billing/change",
+      "guard": "provider-priced immutable quote; no invented charges",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/paywall-4",
+      "title": "Paywall 4",
+      "intent": "Only when genuine user usage caps exist",
+      "phase": "P18",
+      "surface": "school billing",
+      "guard": "only with live entitlement service",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/paywall-5",
+      "title": "Paywall 5",
+      "intent": "Only when verified trial billing state exists",
+      "phase": "P18",
+      "surface": "school billing",
+      "guard": "only with live entitlement service",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/wizard-3",
+      "title": "Plan step + invoice preview",
+      "intent": "Plan step + invoice preview",
+      "phase": "P18",
+      "surface": "school subscription wizard",
+      "guard": "real invoice estimate, disabled until billing backend",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/integrations-1",
+      "title": "Integration marketplace grid",
+      "intent": "Integration marketplace grid",
+      "phase": "P19",
+      "surface": "/admin/control-room/integrations",
+      "guard": "show supported real connectors only",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/integrations-2",
+      "title": "Connection scopes + details",
+      "intent": "Connection scopes + details",
+      "phase": "P19",
+      "surface": "/admin/control-room/integrations/{id}",
+      "guard": "server-side scopes, revocation",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/integrations-3",
+      "title": "API key table + actions",
+      "intent": "API key table + actions",
+      "phase": "P19",
+      "surface": "/admin/control-room/api-keys",
+      "guard": "hashed keys, one-time display, rotate/revoke",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/integrations-4",
+      "title": "Webhook endpoints + deliveries",
+      "intent": "Webhook endpoints + deliveries",
+      "phase": "P19",
+      "surface": "/admin/control-room/webhooks",
+      "guard": "signed delivery, replay safety, redaction",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/integrations-5",
+      "title": "OAuth consent",
+      "intent": "OAuth consent",
+      "phase": "P19",
+      "surface": "/integrations/authorize",
+      "guard": "OAuth server only after verified real client & scopes",
+      "state": "Selected · not installed",
+      "source": "User follow-up Nov 18"
+    },
+    {
+      "id": "@reactbits-pro/ai-chat-8",
+      "title": "Ai Chat 8",
+      "intent": "Study Space accessibility and tutor input",
+      "phase": "P20",
+      "surface": "/study-space",
+      "guard": "mic consent and backend when configured",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/app-shell-9",
+      "title": "App Shell 9",
+      "intent": "Future private AI tutor chat with thread history; no fake conversations or backend",
+      "phase": "P20",
+      "surface": "/study-space",
+      "guard": "mic consent and backend when configured",
+      "state": "Selected; some analogous ORIGINAL functionality exists in prior packs (not this Pro block)",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-pro/editor-3",
+      "title": "Editor 3",
+      "intent": "Platform admin code preview, read-only by default",
+      "phase": "P21",
+      "surface": "context-specific UI",
+      "guard": "only when supported by real data",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    },
+    {
+      "id": "@reactbits-starter/device-tw",
+      "title": "Device Tw",
+      "intent": "Public feature showcase, decorative/accessible fallback",
+      "phase": "P21",
+      "surface": "public product showcase",
+      "guard": "static accessible fallback",
+      "state": "Selected · not official Pro installed",
+      "source": "Nov 18 master inventory"
+    }
+  ],
+  "free": [
+    {
+      "name": "Galaxy",
+      "family": "Ambient / backgrounds",
+      "placement": "Public landing hero, opt-in light effects",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "LiquidEther",
+      "family": "Ambient / backgrounds",
+      "placement": "Public /apps discovery only when performant",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "MagicRings",
+      "family": "Ambient / backgrounds",
+      "placement": "App launch transitions, low-motion fallback",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "WebThreads",
+      "family": "Ambient / backgrounds",
+      "placement": "Subject discovery backdrop",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "GradientWaves",
+      "family": "Ambient / backgrounds",
+      "placement": "Schools information pages",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Antigravity",
+      "family": "Ambient / backgrounds",
+      "placement": "Role marketing pages; never form background",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Glimmer Wrap",
+      "family": "Ambient / backgrounds",
+      "placement": "Optional callouts",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Fading Stars",
+      "family": "Ambient / backgrounds",
+      "placement": "Homepage limited area",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Glowing Wave",
+      "family": "Ambient / backgrounds",
+      "placement": "Homepage low-power mode",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Topographic Flow",
+      "family": "Ambient / backgrounds",
+      "placement": "Subject landing section",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Topographic Terrain",
+      "family": "Ambient / backgrounds",
+      "placement": "World explorer",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Fractal Glass",
+      "family": "Ambient / backgrounds",
+      "placement": "Editorial/public cards",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Fluid Typing Background",
+      "family": "Ambient / backgrounds",
+      "placement": "Public marketing only",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "FlexCarousel",
+      "family": "Navigation / showcases",
+      "placement": "Featured game cards /home",
+      "phase": "P17",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "CircularGallery",
+      "family": "Navigation / showcases",
+      "placement": "/apps/collections; only actual games",
+      "phase": "P17",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Fan Gallery",
+      "family": "Navigation / showcases",
+      "placement": "/apps and curriculum showcases",
+      "phase": "P17",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "DepthCarousel",
+      "family": "Navigation / showcases",
+      "placement": "Public showcase",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "AccordionGallery",
+      "family": "Navigation / showcases",
+      "placement": "Subject discovery",
+      "phase": "P17",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "MorphSlider",
+      "family": "Navigation / showcases",
+      "placement": "Public learning-world preview",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "CardSwap",
+      "family": "Navigation / showcases",
+      "placement": "Homepage real apps",
+      "phase": "P17",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "MagicBento",
+      "family": "Navigation / showcases",
+      "placement": "Public feature grid",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "AnimatedList",
+      "family": "Navigation / showcases",
+      "placement": "Upcoming notifications only if data exists",
+      "phase": "P09",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Folder",
+      "family": "Navigation / showcases",
+      "placement": "Resource studio collection icon",
+      "phase": "P10",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Dock",
+      "family": "Navigation / showcases",
+      "placement": "Optional learner desktop nav",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "CardNav",
+      "family": "Navigation / showcases",
+      "placement": "Public navbar if non-duplicate",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "PillNav",
+      "family": "Navigation / showcases",
+      "placement": "Public navbar if non-duplicate",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "BubbleMenu",
+      "family": "Navigation / showcases",
+      "placement": "Mobile contextual menu",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "StaggeredMenu",
+      "family": "Navigation / showcases",
+      "placement": "Public support menu",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "OptionWheel",
+      "family": "Navigation / showcases",
+      "placement": "Learning module selector",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Scroll Stack",
+      "family": "Navigation / showcases",
+      "placement": "My Quest journey / dashboard",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "SloshGauge",
+      "family": "Interactions / illustration",
+      "placement": "Curiosity meter only if metric is defined",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Shape Physics",
+      "family": "Interactions / illustration",
+      "placement": "Lesson interaction playground, non-essential",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Chromatic Button",
+      "family": "Interactions / illustration",
+      "placement": "Public actions and sign-up",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Liquid Glass Orb",
+      "family": "Interactions / illustration",
+      "placement": "Public brand display",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Liquid Glass Logo",
+      "family": "Interactions / illustration",
+      "placement": "Brand hero only",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Refracted Text",
+      "family": "Interactions / illustration",
+      "placement": "Public headings",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Showcase Pointer",
+      "family": "Interactions / illustration",
+      "placement": "Public portfolio interactions",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Bubble UI Button",
+      "family": "Interactions / illustration",
+      "placement": "Play/launch controls",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "SpringCheck",
+      "family": "Interactions / illustration",
+      "placement": "Saved completion feedback",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "Topographic Contours",
+      "family": "Interactions / illustration",
+      "placement": "Background only",
+      "phase": "P21",
+      "state": "Selected; verify actual repo integration and license"
+    },
+    {
+      "name": "PaperCrumple",
+      "family": "Interactions / illustration",
+      "placement": "DISABLED due to previous build issues",
+      "phase": "HOLD",
+      "state": "HOLD: previously caused build issues"
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 # StudyBuddy V5 · Atmosphere / Theme / Discovery
 
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+**Historical V5 patch readme.** For current StudyBuddy feature status, permissions, full UI wishlist and execution, read `docs/STUDYBUDDY_MASTER_PLAN.md`, `docs/REACT_COMPONENT_PLACEMENT_MATRIX.md` and `docs/PHASES_AND_RELEASE_GATES.md`. Do not replay this older installer over a newer checkout.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
+
+
 ## Fits
 Existing StudyBuddy-main source with Next Chapter, Sparkle Demo V2, Universe V4 installed. This is a **visual/UI patch only**. It does not update PHP controllers, routes, migrations, permissions, database contents, app statuses or seeder logic.
 

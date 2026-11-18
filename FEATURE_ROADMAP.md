@@ -1,5 +1,14 @@
 # StudyBuddy — Shared Feature Roadmap
 
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+## Current execution roadmap (November 2026)
+
+The original P0/P1 list below is **historical backlog** from 17 November; some items have since been implemented and tested locally. The current authoritative status, sequence and role-level acceptance checks are in [`docs/PHASES_AND_RELEASE_GATES.md`](docs/PHASES_AND_RELEASE_GATES.md), with the full product intentions in [`docs/STUDYBUDDY_MASTER_PLAN.md`](docs/STUDYBUDDY_MASTER_PLAN.md).
+
+As of the user-reported logs: Packs 05–09 passed tests and were pushed to `main` (last confirmed `dc3f3bd`), and Pack 10 Resource Studio passed 252/252 local tests but has no confirmed push. **No production release is claimed.** Next work: Head Admin/school RBAC, monitoring, safe community, help/feedback, collaborative teaching, scheduling, integrations, billing, optional voice AI. Direct guarded `main` commits are the current requested workflow; coordinate simultaneous contributors.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
+
+
 > **Status:** planning checklist · **Updated:** 17 November 2026  
 > **Repository:** `MehAk-ArmAn/StudyBuddy` · **Suggested location:** `docs/FEATURE_ROADMAP.md`
 

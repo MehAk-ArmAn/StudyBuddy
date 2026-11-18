@@ -1,5 +1,12 @@
 # StudyBuddy — rescue & QA record
 
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+## November 18 phase QA addendum
+
+User-shared Mac logs: P05 228/3,519; P06 231/3,528; P07 R3 234/3,545; P08 R2 240/3,593; P09 247/3,645; P10 252/3,689 tests/assertions. P05–P09 pushed through main `dc3f3bd`; P10 push unconfirmed. P10 installer terminal label incorrectly says "PACK 09 INSTALLED", although it lists `/resources` routes and saved P10 backup. The **full browser, tenant, privacy, operational and production gates remain pending**. Detailed acceptance gates are in [`PHASES_AND_RELEASE_GATES.md`](PHASES_AND_RELEASE_GATES.md).
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
+
+
 Written during the production rescue pass. It records what was actually broken,
 what changed, and what was verified.
 

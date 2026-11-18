@@ -1,5 +1,12 @@
 # StudyBuddy Final Access + UI Decision
 
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+## Current governance caveat
+
+This historical decision document is **not** sufficient security policy for a real school pilot. Later source introduced specific school invitation and verification workflows. Follow [`ROLE_PERMISSIONS_AND_SAFEGUARDING.md`](ROLE_PERMISSIONS_AND_SAFEGUARDING.md) and re-audit actual code before enabling school or minor messaging.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
+
+
 This patch intentionally removes email inbox verification from StudyBuddy.
 
 Instead, StudyBuddy uses:

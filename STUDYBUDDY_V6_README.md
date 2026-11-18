@@ -1,5 +1,10 @@
 # StudyBuddy V6 — ReCreative UI / Reactivity
 
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+**Historical V6 patch readme.** Current canonical delivery and visual placement: `docs/STUDYBUDDY_MASTER_PLAN.md` and `docs/REACT_COMPONENT_PLACEMENT_MATRIX.md`. Do not overwrite newer teammate code with these prior visual patch instructions.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
+
+
 **Scope:** local Laravel/Blade design patch for an existing V5 installation. No database migration, seeding, route, controller, authentication, school-permission, or reward changes. The original catalogue filter logic stays active.
 
 ## Features

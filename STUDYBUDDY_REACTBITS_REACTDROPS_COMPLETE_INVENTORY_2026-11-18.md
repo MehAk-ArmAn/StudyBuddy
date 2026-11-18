@@ -120,3 +120,70 @@ The test/push claims above are *from user-provided Terminal logs*. Real browser/
 To keep this inventory across new Mehak Project chats and agents, **attach this file to the Mehak Project Sources** and store a copy in the StudyBuddy repository under `docs/`. A generated download by itself is not a guarantee that every new chat or connected agent reads it.
 
 **Reminder:** Source priority is actual React Bits + ReactDrops components, not just their look; no unauthorized React Bits Pro copying; original free implementations are explicitly labeled. **Keep this inventory complete as the user keeps adding components.**
+
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+## 7. Requests after the earlier inventory — consolidated without duplicates
+
+**Status: ALL selections planned.** Existing functionality from Packs 06–10 is original and **not** licensed React Bits Pro source. Use `docs/REACT_COMPONENT_PLACEMENT_MATRIX.md` for the complete exact route/role/data contract.
+
+| Newly selected ID | Feature | Roadmap phase |
+|---|---|---|
+| `@reactbits-pro/billing-1` | Billing overview + invoice ledger | P18 |
+| `@reactbits-pro/billing-2` | Plan manager + entitlement cards | P18 |
+| `@reactbits-pro/billing-4` | Failed-payment recovery queue | P18 |
+| `@reactbits-pro/billing-5` | Plan change + proration preview | P18 |
+| `@reactbits-pro/comments-2` | Inline annotation comments rail | P15 |
+| `@reactbits-pro/comments-4` | Comment composer with @mentions | P13 |
+| `@reactbits-pro/comments-6` | Canvas pins + notes rail | P15 |
+| `@reactbits-pro/feedback-1` | In-app feedback with screenshots | P14 |
+| `@reactbits-pro/feedback-2` | 0–10 recommendation survey | P14 |
+| `@reactbits-pro/feedback-3` | Star rating + reason chips | P14 |
+| `@reactbits-pro/feedback-5` | Feedback triage inbox | P14 |
+| `@reactbits-pro/feedback-6` | Theme and sentiment insights | P14 |
+| `@reactbits-pro/integrations-1` | Integration marketplace grid | P19 |
+| `@reactbits-pro/integrations-2` | Connection scopes + details | P19 |
+| `@reactbits-pro/integrations-3` | API key table + actions | P19 |
+| `@reactbits-pro/integrations-4` | Webhook endpoints + deliveries | P19 |
+| `@reactbits-pro/integrations-5` | OAuth consent | P19 |
+| `@reactbits-pro/kanban-2` | Collapsible swimlane board | P15 |
+| `@reactbits-pro/kanban-4` | Board + synced detail panel | P15 |
+| `@reactbits-pro/scheduling-3` | New schedule form with attendees | P16 |
+| `@reactbits-pro/scheduling-4` | Deadline presets | P16 |
+| `@reactbits-pro/settings-form-1` | Settings page + sticky Save/Discard | P11 |
+| `@reactbits-pro/support-1` | Help center with search | P14 |
+| `@reactbits-pro/support-2` | Ticket form with suggested articles | P14 |
+| `@reactbits-pro/wizard-2` | Full-screen progress wizard | P11 |
+| `@reactbits-pro/wizard-3` | Plan step + invoice preview | P18 |
+| `@reactbits-pro/wizard-4` | Service picker + live summary | P11 |
+| `@reactbits-pro/wizard-5` | Review + confirm | P11 |
+| `@reactbits-pro/wizard-6` | Running step with task states | P11 |
+
+### Newly requested Admin, School, Community blocks previously stored outside the repository
+
+These initial 18 selections were captured in the newer project inventory but may be **missing from the last committed Pack 06 inventory** in GitHub. We preserve them here too.
+
+| Block | Registry identifier | Primary placement | Safety requirement |
+|---|---|---|---|
+| Chat 5 — group messages + attachments | `@reactbits-pro/chat-5` | School-managed classes, staff and organization channels | Membership-authorized channels; private file storage; transparent safeguarding escalation/audit |
+| Chat 2 — DMs + read receipts | `@reactbits-pro/chat-2` | Approved staff and role-permitted user messaging | No arbitrary adult-minor contact; recipients authorized; receipts only for authorized participants |
+| AI Chat 8 — voice + transcript | `@reactbits-pro/ai-chat-8` | Study Space accessibility and tutor input | Local mic permission, review-before-send, no pretend transcript or AI backend |
+| App Sidebar 2 — icon flyouts | `@reactbits-pro/app-sidebar-2` | Desktop PCL/School nav | Responsive, keyboard accessible, label-visible fallback |
+| App Sidebar 4 — rail + secondary panel | `@reactbits-pro/app-sidebar-4` | Admin and school contextual console | Only permitted actions in menu; route protection on backend |
+| Data Table 6 — detail panel | `@reactbits-pro/data-table-6` | Users/schools/admin directory and queue | Authorized filters, actions and server pagination; prevent data leakage |
+| Dashboard 11 — staffing board | `@reactbits-pro/dashboard-11` | School staffing/workload | Real staff permissions, opt-in workload measures; no invented demand |
+| Analytics 5 — donut center total | `@reactbits-pro/analytics-5` | School/admin aggregate data | DB-backed totals; never expose individual children's analytics without authorization |
+| Analytics 9 — activity heatmap | `@reactbits-pro/analytics-9` | School operational activity and platform admin | Real dated events; clear empty states, non-tracking baseline |
+| List 11 — support leaderboard | `@reactbits-pro/list-11` | Platform support quality dashboard | Real support resolution data; no student rankings or competitive surveillance |
+| List 3 — security event feed | `@reactbits-pro/list-3` | Restricted security/audit center | Logged events with actor/action/timestamp; limits and redaction |
+| Monitoring 8 — response-time histogram | `@reactbits-pro/monitoring-8` | Platform health/latency | Only instrumented real request timings; no fabricated histogram |
+| Monitoring 5 — live log tail | `@reactbits-pro/monitoring-5` | Head Admin / infra roles | Scrub tokens/PII, paginate/filter, no raw public app logs |
+| Monitoring 9 — live run queue | `@reactbits-pro/monitoring-9` | Queue operations | Only actual queue driver/jobs; truthful status and bounded refresh |
+| Monitoring 7 — utilization table | `@reactbits-pro/monitoring-7` | Platform services/storage/queues | Grounded metrics only, unavailable rather than estimated percentages |
+| Monitoring 6 — uptime grid | `@reactbits-pro/monitoring-6` | Platform health history | Date-stamped probe records; don't infer uptime from missing data |
+| Forms 2 — two-column radio cards | `@reactbits-pro/forms-2` | Head Admin: create staff admins/test users/school account roles | Server-side RBAC; never create a test-user privilege escalation |
+| Forms 10 — 0–10 guest survey | `@reactbits-pro/forms-10` | Public community feedback + school service/experience surveys | **0–10** keyboard-accessible scale, optional comments, spam throttling, privacy notice, no unnecessary child PII, role/organization scoping, aggregate results for authorized school/PCL staff |
+
+**Also reaffirmed (already present in this inventory):** `@reactbits-pro/editor-4`, `@reactbits-pro/scheduling-7` and `@reactbits-pro/forms-10`.
+
+**Latest log facts:** Pack 07 `927136b` · Pack 08 `f4d324a` · Pack 09 `dc3f3bd` pushed to `main` after full Mac PHPUnit. Pack 10 installed locally, 252/252 tests, 3,689 assertions, not yet confirmed pushed. Head Admin `admin@studybuddy.fun` and multi-admin RBAC remain **planned**, not installed.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->

@@ -1,3 +1,8 @@
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+HISTORICAL V7 PATCH NOTICE (18 Nov 2026)
+Current source of truth: docs/STUDYBUDDY_MASTER_PLAN.md + docs/PHASES_AND_RELEASE_GATES.md. This V7 patch description is not the current main release status. Do not rerun old ZIP installers over newer files.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
+
 STUDYBUDDY V7 CLARITY - FOCUSED LANDING REBUILD
 
 Scope:

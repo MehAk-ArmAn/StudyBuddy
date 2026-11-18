@@ -1,5 +1,12 @@
 # StudyBuddy — Next Chapter upgrade, school pilot and security release gates
 
+<!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->
+## Follow-up planning status — 18 Nov 2026
+
+This remains a **historical candidate** record. See [`STUDYBUDDY_MASTER_PLAN.md`](STUDYBUDDY_MASTER_PLAN.md) and [`PHASES_AND_RELEASE_GATES.md`](PHASES_AND_RELEASE_GATES.md) for newer code evidence and unfinished school/privacy tasks. Do not infer that candidate school messaging, MFA or compliance has passed production QA.
+<!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
+
+
 **Prepared 13 November 2026.** This is a source-code *candidate*, not proof of a deployed, tested, certified or secure production platform. The original uploaded repository was not modified in place.
 
 ## Scope of this additive release
