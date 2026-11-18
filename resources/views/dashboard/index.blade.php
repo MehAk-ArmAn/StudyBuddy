@@ -52,6 +52,7 @@
 <div class="sb-role-dashboard role-{{ $role }}">
     @include('dashboard.partials.p07-adaptive-command')
     @include('dashboard.partials.p08-onboarding-card')
+    @include('dashboard.partials.p09-pulse-card')
     @if($learningSnapshot !== null)
         @include('dashboard.partials.studybuddy-learning-snapshot', ['snapshot' => $learningSnapshot])
     @endif

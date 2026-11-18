@@ -49,6 +49,9 @@
     @if(file_exists(public_path('assets/css/studybuddy-home-vibe-upgrade.css')))
         <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-home-vibe-upgrade.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-home-vibe-upgrade.css') }}">
     @endif
+    @if(file_exists(public_path('assets/studybuddy-p09/pulse.css')))
+        <link rel="stylesheet" href="{{ asset('assets/studybuddy-p09/pulse.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-p09/pulse.css') }}">
+    @endif
     @stack('styles')
     @if(file_exists(public_path('assets/css/studybuddy-welcome-confetti.css')))
         <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-welcome-confetti.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-welcome-confetti.css') }}">
@@ -149,6 +152,7 @@
 <body data-sb-universe-zone="{{ $sbUniverseZone }}" id="top" class="studybuddy-site {{ $studyBuddyThemeClass }} route-{{ \Illuminate\Support\Str::slug($currentRouteName) }}" data-studybuddy-theme="{{ $studyBuddyTheme }}" data-sb-auth="{{ auth()->check() ? '1' : '0' }}" data-sb-theme="{{ auth()->check() ? (auth()->user()->avatar_style ?? 'cosmic-dolphin') : 'cosmic-dolphin' }}">
     <a class="sb-skip-link" href="#main-content">Skip to content</a>
     @include('partials.studybuddy-w25-header')
+    @include('partials.p09-notification-bell')
     <main id="main-content" tabindex="-1">
         @include('partials.studybuddy-universe-atmosphere')
         @yield('content')
@@ -167,6 +171,9 @@
     ] as $jsPath)
         @if($url = $safeAsset($jsPath))<script defer src="{{ $url }}"></script>@endif
     @endforeach
+    @if(file_exists(public_path('assets/studybuddy-p09/pulse.js')))
+        <script src="{{ asset('assets/studybuddy-p09/pulse.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/studybuddy-p09/pulse.js') }}" defer></script>
+    @endif
     @stack('scripts')
     @if(file_exists(public_path('assets/js/sb-auth-role-ui.js')))<script src="{{ asset('assets/js/sb-auth-role-ui.js') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/js/sb-auth-role-ui.js') }}" defer></script>@endif
     @if(file_exists(public_path('assets/js/studybuddy-advanced-shell.js')))
