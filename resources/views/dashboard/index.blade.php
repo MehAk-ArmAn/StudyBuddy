@@ -45,6 +45,8 @@
 
 <div class="sb-role-dashboard role-{{ $role }}">
     @include('dashboard.partials.studybuddy-wave10-quick-actions')
+    <link rel="stylesheet" href="{{ asset('assets/studybuddy-w36/dashboard-hub.css') }}?v=36">
+    @include('dashboard.partials.studybuddy-w36-hub')
     @include('dashboard.partials.studybuddy-w24-journey')
     <section class="role-dash-hero" data-role-card>
         <div>

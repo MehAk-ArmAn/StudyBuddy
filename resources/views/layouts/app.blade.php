@@ -235,5 +235,9 @@
 <!-- STUDYBUDDY W19 START -->
 <script type="module" src="{{ asset('assets/studybuddy-w19/w19-react.js') }}?v=19.1"></script>
 <!-- STUDYBUDDY W19 END -->
+
+<!-- SB_W36_CURSOR_EFFECTS -->
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-w36/effects.css') }}?v=36">
+<script src="{{ asset('assets/studybuddy-w36/effects.js') }}?v=36" defer></script>
 </body>
 </html>

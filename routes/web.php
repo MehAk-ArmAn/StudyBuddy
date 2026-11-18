@@ -145,3 +145,6 @@ require __DIR__.'/studybuddy_connected_progress.php';
 
 /* STUDYBUDDY_W32_MATH_SPRINT */
 require __DIR__.'/studybuddy_w32_math_sprint.php';
+
+/* STUDYBUDDY_W36_REACT_STUDY_SPACE */
+require __DIR__.'/studybuddy_w36.php';

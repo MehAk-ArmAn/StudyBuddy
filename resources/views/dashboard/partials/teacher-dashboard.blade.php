@@ -46,7 +46,7 @@
 
     <article class="role-card teacher-control-panel" data-role-card>
         <p class="role-kicker">Add a class</p>
-        <h2>New class</h2>
+        <h2 id="sb36-teacher-actions">New class</h2>
 
         <form method="POST" action="{{ route('studybuddy.teacher.classes.store') }}" class="role-form">
             @csrf
