@@ -169,3 +169,6 @@ require __DIR__.'/studybuddy_w36.php';
 
 // STUDYBUDDY_P11D_SCHOOL_SAFETY
 require __DIR__ . '/studybuddy_p11d_safety.php';
+
+// STUDYBUDDY_P11F_VERIFIED_REWARDS
+require __DIR__ . '/studybuddy_p11f_rewards.php';

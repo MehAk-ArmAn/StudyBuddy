@@ -13,10 +13,10 @@
 <div
     class="sb-launcher-v3"
     data-studybuddy-launcher
-    data-complete-url="{{ auth()->check() && ! ($adminPreview ?? false) ? route('studybuddy.final.session.complete') : '' }}"
+    data-complete-url=""
     data-app-slug="{{ $app->slug }}"
     data-app-name="{{ $app->name }}"
-    data-points="{{ max(0, (int) $app->points_reward) }}"
+    data-points="0"
 >
     <header class="sb-launcher-v3__header">
         <div class="sb-launcher-v3__title">
@@ -220,8 +220,8 @@
                 <strong>Session controls</strong>
 
                 <p data-launcher-message>
-                    Complete the activity inside the app, then save your
-                    StudyBuddy points.
+                    This app records practice but cannot yet issue verified rewards.
+                    Earn points in server-graded Math Sprint instead.
                 </p>
             </div>
 
@@ -233,7 +233,7 @@
                 >
                     Save {{ max(0, (int) $app->points_reward) }} points
                 </button>
-            @elseif(! ($adminPreview ?? false))
+            @elseif(! auth()->check() && ! ($adminPreview ?? false))
                 <a
                     class="sb-launcher-v3__complete"
                     href="{{ route('login') }}"

@@ -28,6 +28,7 @@
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-dashboard-system.css') : time() }}">
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-profile-customizer.css') : time() }}">
 
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-p11f/rewards.css') }}?v=1">
 <div class="sb-public-profile theme-{{ $theme }} frame-{{ $frame }} color-{{ $color }} shape-{{ $shape }}">
     <section class="public-profile-hero custom-public-hero">
         <div class="public-avatar showcase-avatar">

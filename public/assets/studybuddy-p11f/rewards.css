@@ -1,0 +1,12 @@
+/* StudyBuddy original profile earned-unlock polish. No paid assets. */
+.sb-public-profile.frame-math-orbit .showcase-avatar,.sb-profile-studio.frame-math-orbit .showcase-avatar{
+  border:4px solid #58dcff!important;
+  box-shadow:0 0 0 6px rgba(106,82,242,.31),0 0 26px 6px rgba(81,229,247,.36)!important;
+}
+.sb-public-profile .showcase-badge{transition:filter .3s ease,transform .3s ease}
+.sb-public-profile .showcase-badge:hover{filter:brightness(1.08)}
+.custom-shop-grid .custom-option.is-locked:has(input[value="math-star"]),
+.custom-shop-grid .custom-option.is-locked:has(input[value="math-orbit"]){
+  background:linear-gradient(135deg,rgba(39,48,84,.82),rgba(77,50,110,.65));
+}
+@media (prefers-reduced-motion:reduce){.sb-public-profile .showcase-badge{transition:none}}

@@ -113,7 +113,7 @@
 
                 <div>
                     <dt>Reward</dt>
-                    <dd>{{ max(0, (int) $app->points_reward) }} points</dd>
+                    <dd>Points available after verified game integration</dd>
                 </div>
 
                 <div>

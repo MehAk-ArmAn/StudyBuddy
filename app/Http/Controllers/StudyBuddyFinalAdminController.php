@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudyBuddyLaunchChecklistItem;
+use App\Support\StudyBuddyRewardIntegrity;
 use App\Models\StudyBuddyMiniAppPlatform;
 use App\Models\StudyBuddyPlatformSetting;
 use App\Models\StudyBuddyPointTransaction;
@@ -79,14 +80,15 @@ class StudyBuddyFinalAdminController extends Controller
             'points' => ['required', 'integer', 'min:-9999', 'max:9999'],
         ]);
 
-        StudyBuddyPointTransaction::create([
-            'user_id' => $data['user_id'],
-            'source_type' => 'admin_adjustment',
-            'source_slug' => 'admin-final-cockpit',
-            'title' => $data['title'],
-            'points' => $data['points'],
-            'status' => $data['points'] >= 0 ? 'earned' : 'adjusted',
-        ]);
+        // This legacy adjustment action is now Head-only and updates BOTH
+        // the existing ledger and spendable balance, atomically.
+        abort_unless(StudyBuddyRewardIntegrity::isHead((int)$request->user()->id), 403);
+        app(StudyBuddyRewardIntegrity::class)->headAdjustment(
+            (int)$request->user()->id,
+            (int)$data['user_id'],
+            $data['title'],
+            (int)$data['points']
+        );
 
         return back()->with('status', 'Points adjustment saved.');
     }

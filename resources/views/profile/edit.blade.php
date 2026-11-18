@@ -39,6 +39,7 @@
     ];
 @endphp
 
+<link rel="stylesheet" href="{{ asset('assets/studybuddy-p11f/rewards.css') }}?v=1">
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-dashboard-system.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-dashboard-system.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-dashboard-system.css') : time() }}">
 <link rel="stylesheet" href="{{ asset('assets/css/studybuddy-profile-customizer.css') }}?v={{ file_exists(public_path('assets/css/studybuddy-profile-customizer.css')) ? \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-profile-customizer.css') : time() }}">
 <script src="{{ asset('assets/js/studybuddy-profile-customizer.js') }}?v={{ file_exists(public_path('assets/js/studybuddy-profile-customizer.js')) ? \App\Support\StudyBuddyAssetVersion::for('assets/js/studybuddy-profile-customizer.js') : time() }}" defer></script>
@@ -230,8 +231,9 @@
                             <?php
                                 $unlockKey = $field . ':' . $value;
                                 $cost = (int) ($item['cost'] ?? 0);
-                                $isUnlocked = $cost === 0 || $unlocked->contains($unlockKey);
-                                $itemLabel = $item['label'] ?? ucfirst(str_replace('-', ' ', $value));
+                                $requiresBadge = isset($item['requires_badge']);
+                                $isUnlocked = $requiresBadge ? $unlocked->contains($unlockKey) : ($cost === 0 || $unlocked->contains($unlockKey));
+                                $itemLabel = $requiresBadge && !$isUnlocked ? 'Mystery unlock' : ($item['label'] ?? ucfirst(str_replace('-', ' ', $value)));
                             ?>
 
                             <label class="custom-option {{ $isUnlocked ? 'is-unlocked' : 'is-locked' }}">
@@ -245,7 +247,7 @@
                                     data-custom-label="{{ $itemLabel }}"
                                 >
                                 <span>{{ $itemLabel }}</span>
-                                <small>{{ $isUnlocked ? 'Unlocked' : '⭐ '.$cost.' coins' }}</small>
+                                <small>{{ $isUnlocked ? 'Unlocked' : ($requiresBadge ? 'Earn through an achievement' : '⭐ '.$cost.' coins') }}</small>
                             </label>
                         <?php endforeach; ?>
                     </div>

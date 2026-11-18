@@ -9,6 +9,9 @@ use App\Models\StudyBuddyPointTransaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use App\Support\StudyBuddyRewardIntegrity;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -220,11 +223,9 @@ class StudyBuddyFinalPlatformController extends Controller
 
         $canLaunch = $app->hasPublishedWebApp();
 
-        $canEarnPoints =
-            ! $adminPreview
-            &&
-            Auth::check()
-            && $canLaunch;
+        // A browser iframe or "Save points" click is not verifiable completion.
+        // Only trusted server-graded game adapters may mint new points.
+        $canEarnPoints = false;
 
         $embedUrl = null;
         $externalUrl = null;
@@ -278,9 +279,9 @@ class StudyBuddyFinalPlatformController extends Controller
             ->take(50)
             ->get();
 
-        $total = (int) StudyBuddyPointTransaction::query()
-            ->where('user_id', $user?->id)
-            ->sum('points');
+        // The spendable balance is the canonical users.cosmic_points field.
+        // Legacy journal records may not include signup credits or old cosmetics.
+        $total = (int) ($user?->cosmic_points ?? 0);
 
         $earned = (int) StudyBuddyPointTransaction::query()
             ->where('user_id', $user?->id)
@@ -295,16 +296,16 @@ class StudyBuddyFinalPlatformController extends Controller
         );
 
         $settings = StudyBuddyPlatformSetting::publicMap();
+        $earnedBadges = StudyBuddyRewardIntegrity::installed()
+            ? DB::table('studybuddy_user_reward_badges')->where('user_id',$user->id)
+                ->orderBy('earned_at')->get()
+            : collect();
+        $badgeNames = StudyBuddyRewardIntegrity::badgeNames();
+        $hiddenBadgeCount = max(0,count($badgeNames)-$earnedBadges->count());
 
         return view(
             'studybuddy.final.points-wallet',
-            compact(
-                'transactions',
-                'total',
-                'earned',
-                'spent',
-                'settings'
-            )
+            compact('transactions','total','earned','spent','settings','earnedBadges','badgeNames','hiddenBadgeCount')
         );
     }
 
@@ -364,106 +365,13 @@ class StudyBuddyFinalPlatformController extends Controller
         );
     }
 
-    public function completeSession(
-        Request $request
-    ) {
-        $data = $request->validate([
-            'app_slug' => [
-                'required',
-                'string',
-                'max:120',
-            ],
-        ]);
-
-        $app = StudyBuddyMiniAppPlatform::query()
-            ->active()
-            ->where('slug', $data['app_slug'])
-            ->firstOrFail();
-
-        if (! $app->hasPublishedWebApp()) {
-            throw ValidationException::withMessages([
-                'app_slug' =>
-                    'This web app is not published yet.',
-            ]);
-        }
-
-        $alreadyEarnedToday =
-            StudyBuddyPointTransaction::query()
-                ->where(
-                    'user_id',
-                    $request->user()->id
-                )
-                ->where(
-                    'source_type',
-                    'mini_app_session'
-                )
-                ->where(
-                    'source_slug',
-                    $app->slug
-                )
-                ->whereDate(
-                    'created_at',
-                    today()
-                )
-                ->exists();
-
-        if ($alreadyEarnedToday) {
-            $message =
-                'You already saved today’s points for this app.';
-
-            return $request->expectsJson()
-                ? response()->json(
-                    [
-                        'ok' => false,
-                        'message' => $message,
-                    ],
-                    429
-                )
-                : back()->with(
-                    'status',
-                    $message
-                );
-        }
-
-        $points = max(
-            0,
-            min(
-                (int) $app->points_reward,
-                500
-            )
-        );
-
-        $transaction =
-            StudyBuddyPointTransaction::create([
-                'user_id' => $request->user()->id,
-                'source_type' => 'mini_app_session',
-                'source_slug' => $app->slug,
-                'title' =>
-                    'Completed '.$app->name.' session',
-                'points' => $points,
-                'status' => 'earned',
-                'meta' => [
-                    'app_name' => $app->name,
-                    'completed_from' =>
-                        'studybuddy_web_launcher',
-                    'session_key' =>
-                        Str::uuid()->toString(),
-                ],
-            ]);
-
-        if ($request->expectsJson()) {
-            return response()->json([
-                'ok' => true,
-                'points' => $points,
-                'transaction_id' => $transaction->id,
-                'message' =>
-                    "{$points} points added to your StudyBuddy wallet.",
-            ]);
-        }
-
-        return back()->with(
-            'status',
-            "{$points} points added to your StudyBuddy wallet."
-        );
+    public function completeSession(Request $request)
+    {
+        // Fail closed: the old app-launcher Save button awarded unverified points.
+        // Do not revive it; connect each game to an approved server-side result.
+        $message = 'Points now require a verified game result. Complete a Math Sprint to earn.';
+        return $request->expectsJson()
+            ? response()->json(['ok'=>false,'message'=>$message], 409)
+            : back()->withErrors(['session'=>$message]);
     }
 }

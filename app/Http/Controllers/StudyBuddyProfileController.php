@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\StudyBuddyPointTransaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,10 @@ class StudyBuddyProfileController extends Controller
             'show_favorite_apps' => ['nullable'],
         ]);
 
+        // Serialize purchases for the same user. Two requests cannot spend
+        // the same coins or overwrite each other's cosmetic unlocks.
+        return DB::transaction(function () use ($request, $data, $user): RedirectResponse {
+        $user = User::query()->whereKey($user->id)->lockForUpdate()->firstOrFail();
         $catalog = $this->customizationCatalog();
         $profile = $this->profileArray($user->role_profile ?? null);
 
@@ -77,6 +82,11 @@ class StudyBuddyProfileController extends Controller
         foreach ($selected as $field => $value) {
             if (!isset($catalog[$field][$value])) {
                 throw ValidationException::withMessages([$field => 'That profile style is not available yet.']);
+            }
+            $neededBadge = $catalog[$field][$value]['requires_badge'] ?? null;
+            if ($neededBadge && (!Schema::hasTable('studybuddy_user_reward_badges') || !DB::table('studybuddy_user_reward_badges')
+                ->where('user_id',$user->id)->where('code',$neededBadge)->exists())) {
+                throw ValidationException::withMessages([$field => 'Complete the achievement to unlock this style.']);
             }
         }
 
@@ -162,11 +172,17 @@ class StudyBuddyProfileController extends Controller
         }
 
         $user->save();
-
+        if ($totalCost > 0) {
+            StudyBuddyPointTransaction::create([
+                'user_id'=>$user->id,'source_type'=>'cosmetic_purchase','source_slug'=>'profile-studio',
+                'title'=>'Unlocked profile styles','points'=>-$totalCost,'status'=>'spent',
+                'meta'=>['items'=>$newUnlocks],
+            ]);
+        }
         return back()->with('status', $totalCost > 0
             ? "Profile updated. {$totalCost} coins spent on new showcase styles."
-            : 'Profile updated. Your showcase looks fresh.'
-        );
+            : 'Profile updated. Your showcase looks fresh.');
+        });
     }
 
     public function show(User $user): View
@@ -257,6 +273,7 @@ class StudyBuddyProfileController extends Controller
                 'crystal' => ['label' => 'Crystal Frame', 'cost' => 180],
                 'royal' => ['label' => 'Royal Frame', 'cost' => 300],
                 'galaxy' => ['label' => 'Galaxy Ring', 'cost' => 450],
+                'math-orbit' => ['label' => 'Math Orbit Frame', 'cost' => 0, 'requires_badge'=>'five-finished'],
             ],
             'profile_badge' => [
                 'learning-spark' => ['label' => 'Learning Spark', 'cost' => 0],
@@ -264,6 +281,7 @@ class StudyBuddyProfileController extends Controller
                 'quiz-star' => ['label' => 'Quiz Star', 'cost' => 120],
                 'reading-bloom' => ['label' => 'Reading Bloom', 'cost' => 150],
                 'cosmic-legend' => ['label' => 'Cosmic Legend', 'cost' => 500],
+                'math-star' => ['label' => 'Math Star', 'cost' => 0, 'requires_badge'=>'math-perfect'],
             ],
             'profile_color' => [
                 'purple' => ['label' => 'Purple', 'cost' => 0],

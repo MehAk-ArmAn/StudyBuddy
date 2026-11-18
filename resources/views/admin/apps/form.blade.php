@@ -329,7 +329,7 @@
                 <label class="sb-field">
                     <span>Points per session <em>required</em></span>
                     <input type="number" name="points_reward" min="0" max="500" required value="{{ old('points_reward', $app->points_reward ?? 25) }}" @error('points_reward') aria-invalid="true" @enderror>
-                    <small>Use 0 when the app does not award points.</small>
+                    <small>Configured future reward only. Public points are disabled until the game has server-verified completion. Use the Head Admin Rewards console for live Math Sprint rates.</small>
                     @error('points_reward')<strong class="sb-error">{{ $message }}</strong>@enderror
                 </label>
                 </div>

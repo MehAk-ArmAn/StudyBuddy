@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\StudyBuddyRewardIntegrity;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -161,6 +162,13 @@ class StudyBuddyMathSprintController extends Controller
             }
             if ($score >= 4) $this->award($userId, $run, 'math-first-pass', $now);
             if ($score === 5) $this->award($userId, $run, 'math-perfect-five', $now);
+            // First-party questions are checked above against server-held answers.
+            // Never trust client score/points fields. Fast-finished rounds earn no points.
+            app(StudyBuddyRewardIntegrity::class)->verifiedMathRun(
+                $userId, $run, $score,
+                max(0, min(1800, (int) Carbon::parse($record->started_at)->diffInSeconds($now))),
+                $record->level
+            );
             return 'completed';
         });
         if ($outcome !== 'completed') return redirect()->route('studybuddy.w32.index')

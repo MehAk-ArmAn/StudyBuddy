@@ -8,7 +8,7 @@
             <h1>My Points Wallet</h1>
             <p>{{ $settings['points_policy'] ?? 'Earn points from quests, apps, and learning sessions.' }}</p>
         </div>
-        <div class="sb-final-orb-card"><span>⭐</span><strong>{{ $total }}</strong><p>current points</p></div>
+        <div class="sb-final-orb-card"><span>⭐</span><strong>{{ $total }}</strong><p>available points</p></div>
     </section>
 
     <section class="sb-final-stats">
@@ -18,7 +18,7 @@
     </section>
 
     <section class="sb-final-panel">
-        <h2>Recent point activity</h2>
+        <h2>Recent point activity</h2><p>Historical ledger records may not include starting credits or earlier cosmetic purchases. Available points above reflect your actual account balance.</p>
         @forelse($transactions as $transaction)
             <div class="sb-final-row">
                 <div><strong>{{ $transaction->title }}</strong><span>{{ $transaction->created_at->diffForHumans() }}</span></div>
@@ -28,5 +28,6 @@
             <p>No points yet. Start a web session or complete a quest to begin.</p>
         @endforelse
     </section>
+    @include('studybuddy.p11f.badges')
 </div>
 @endsection
