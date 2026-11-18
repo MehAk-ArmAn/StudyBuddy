@@ -1,0 +1,39 @@
+/* StudyBuddy organization workspace — CSS only: permissions and original actions unchanged. */
+.sb-school-shell{
+  --school-card:#ffffff; --school-ink:#1c2a47; --school-muted:#5b6b86;
+  --school-line:#e0e8f6; --school-soft:#f5f8ff; --school-accent:#6455d7;
+  width:min(100% - clamp(24px,5vw,66px),1280px); margin:24px auto 72px;
+  color:var(--school-ink); min-width:0; overflow-wrap:anywhere;
+}
+html.dark .sb-school-shell,.dark .sb-school-shell{
+  --school-card:#161e34;--school-ink:#f5f7ff;--school-muted:#b9c5dd;
+  --school-line:rgba(183,198,239,.19);--school-soft:#202b47;--school-accent:#b8abff;
+}
+.sb-school-shell>h1{font-size:clamp(1.8rem,4vw,3rem);line-height:1.12;letter-spacing:-.045em;color:var(--school-ink)}
+.sb-school-shell .school-intro{color:var(--school-muted);max-width:65ch;line-height:1.55}
+.sb-school-shell .sb-school-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-block:24px}
+.sb-school-shell .sb-school-stats>div,
+.sb-school-shell .sb-school-panel{
+  background:var(--school-card);color:var(--school-ink);border:1px solid var(--school-line);
+  box-shadow:0 10px 26px rgba(24,45,95,.07);border-radius:20px;padding:clamp(18px,2vw,28px);min-width:0;
+}
+.sb-school-shell .sb-school-stats b{font-size:clamp(1.35rem,2.3vw,2.2rem);color:var(--school-ink)}
+.sb-school-shell .sb-school-stats span,.sb-school-shell .sb-school-panel p,.sb-school-shell .school-member small{color:var(--school-muted)}
+.sb-school-shell .sb-school-work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.sb-school-shell .sb-school-panel h2{color:var(--school-ink);letter-spacing:-.025em;font-size:clamp(1.15rem,2vw,1.5rem)}
+.sb-school-shell .school-member{display:flex;flex-wrap:wrap;gap:10px;align-items:center;min-width:0;background:var(--school-soft);border:1px solid var(--school-line);border-radius:13px;padding:11px;margin-top:10px}
+.sb-school-shell .school-member>span:nth-child(2){flex:1;min-width:100px}
+.sb-school-shell .school-member strong{color:var(--school-ink)}
+.sb-school-shell .sb-school-form input,.sb-school-shell .sb-school-form select{
+  min-height:44px;max-width:100%;width:100%;background:var(--school-card);border:1px solid var(--school-line);
+  border-radius:11px;color:var(--school-ink);padding:10px 12px;
+}
+.sb-school-shell :is(button,a,input,select):focus-visible{outline:3px solid var(--school-accent);outline-offset:3px}
+.sb-school-shell :is(button,.sb-next-button){min-height:44px}
+@media(max-width:850px){.sb-school-shell .sb-school-work-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:520px){
+ .sb-school-shell .sb-school-stats{grid-template-columns:minmax(0,1fr);gap:10px}
+ .sb-school-shell .sb-school-panel{padding:17px}
+ .sb-school-shell .school-member form{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){.sb-school-shell *{animation:none!important;transition:none!important}}

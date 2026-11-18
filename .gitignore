@@ -108,3 +108,8 @@ studybuddy_missing_route_aliases_hotfix_patch.zip
 studybuddy_structure_cleanup_final_patch/
 studybuddy_structure_cleanup_final_patch.zip
 /storage/studybuddy-local-php.ini
+
+# Private licensed ReactBits Pro credentials and local dependencies
+**/.env.local
+**/node_modules/
+**/.reactbits-pro-installed.txt

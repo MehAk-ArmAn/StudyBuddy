@@ -1,0 +1,54 @@
+/* StudyBuddy admin workspace polish: existing admin actions and live metrics preserved. */
+.sb-control-dashboard{
+  --sb-ac-card:#fff;--sb-ac-ink:#1a2544;--sb-ac-muted:#63718a;
+  --sb-ac-line:#e5eaf5;--sb-ac-soft:#f5f7fd;--sb-ac-accent:#6559d4;
+  max-width:1440px;margin:0 auto;color:var(--sb-ac-ink);
+  font-feature-settings:'tnum';
+}
+html.dark .sb-control-dashboard{
+  --sb-ac-card:#151c32;--sb-ac-ink:#f4f7ff;--sb-ac-muted:#b9c5e1;
+  --sb-ac-line:rgba(174,194,238,.18);--sb-ac-soft:#1c2743;--sb-ac-accent:#b1a6ff;
+}
+.sb-control-dashboard :is(.sb-control-welcome,.sb-control-metric,.sb-control-bridge-panel){
+  border:1px solid var(--sb-ac-line)!important;
+  background:var(--sb-ac-card)!important;
+  color:var(--sb-ac-ink);
+  box-shadow:0 9px 30px rgba(39,55,102,.07)!important;
+  border-radius:20px!important;
+}
+.sb-control-dashboard .sb-control-welcome{
+  padding:clamp(22px,3vw,38px)!important;min-height:0;
+  background:radial-gradient(ellipse at 95% 15%,rgba(129,145,244,.12),transparent 42%),var(--sb-ac-card)!important;
+}
+.sb-control-dashboard .sb-control-welcome h1{
+  color:var(--sb-ac-ink)!important;font-size:clamp(1.9rem,3vw,3rem)!important;
+  letter-spacing:-.045em!important;line-height:1.1!important;
+}
+.sb-control-dashboard .sb-control-eyebrow{color:var(--sb-ac-accent)!important;font-weight:800;letter-spacing:.08em}
+.sb-control-dashboard :is(.sb-control-welcome p,.sb-control-metric small,.sb-control-bridge-panel p){color:var(--sb-ac-muted)}
+.sb-control-dashboard .sb-control-metrics{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(10px,1.5vw,19px);align-items:stretch;
+}
+.sb-control-dashboard .sb-control-metric{padding:19px!important;min-width:0}
+.sb-control-dashboard .sb-control-metric strong{color:var(--sb-ac-ink)!important;font-size:clamp(1.55rem,2vw,2.35rem);line-height:1.2}
+.sb-control-dashboard .sb-control-metric span:not(.sb-control-metric__icon){color:var(--sb-ac-ink)}
+.sb-control-dashboard .sb-control-bridge-panel{padding:clamp(20px,2.8vw,32px)!important}
+.sb-control-dashboard .sb-control-button{min-height:44px;border-radius:12px!important;font-weight:750}
+.sb-control-dashboard .sb-control-button.is-primary{background:#6156d8!important;color:#fff!important}
+.sb-control-dashboard .sb-control-button.is-secondary{background:var(--sb-ac-soft)!important;color:var(--sb-ac-ink)!important;border-color:var(--sb-ac-line)!important}
+.sb-control-dashboard a:focus-visible,.sb-control-dashboard button:focus-visible{outline:3px solid var(--sb-ac-accent);outline-offset:3px}
+.sb-control-dashboard :is(a,button){overflow-wrap:anywhere}
+@media(max-width:1080px){.sb-control-dashboard .sb-control-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+ .sb-control-dashboard{min-width:0;width:100%}
+ .sb-control-dashboard .sb-control-welcome{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:16px}
+ .sb-control-dashboard .sb-control-welcome__actions{display:flex;flex-wrap:wrap;gap:10px}
+ .sb-control-dashboard .sb-control-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sb-control-dashboard .sb-control-bridge-panel{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:14px}
+}
+@media(max-width:420px){
+ .sb-control-dashboard .sb-control-metrics{grid-template-columns:1fr}
+ .sb-control-dashboard .sb-control-welcome__actions :is(a,button){width:100%}
+}
+@media(prefers-reduced-motion:reduce){.sb-control-dashboard *{animation:none!important;transition:none!important}}

@@ -126,6 +126,9 @@
 @endphp
 
 @section('content')
+<!-- SB_ADAPTIVE_DASHBOARD_V1 -->
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-adaptive-admin.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-adaptive-admin.css')) }}">
+
 <div class="sb-control-dashboard" data-admin-skip-unified>
     <section class="sb-control-welcome" aria-labelledby="control-room-title">
         <div class="sb-control-welcome__copy">

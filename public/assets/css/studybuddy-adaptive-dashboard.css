@@ -1,0 +1,203 @@
+/* StudyBuddy Adaptive Dashboard V1 | existing Laravel data, no decorative fake stats. */
+.sb-role-dashboard {
+  --sb-dash-bg:#f3f6ff;
+  --sb-dash-card:#ffffff;
+  --sb-dash-ink:#18233f;
+  --sb-dash-muted:#5d6880;
+  --sb-dash-line:#e4eaf5;
+  --sb-dash-accent:#6d56d9;
+  --sb-dash-secondary:#3379c9;
+  --sb-dash-shadow:0 10px 35px rgba(28,47,102,.07);
+  color:var(--sb-dash-ink);
+  background:radial-gradient(ellipse at 8% 0%,rgba(133,168,255,.16),transparent 42%),linear-gradient(170deg,#f8faff,var(--sb-dash-bg) 75%);
+  padding:clamp(16px,2.2vw,28px) 0 84px;
+  overflow:clip;
+  font-feature-settings:'tnum';
+}
+html.dark .sb-role-dashboard, [data-theme="dark"] .sb-role-dashboard {
+  --sb-dash-bg:#0b1021;
+  --sb-dash-card:#141d31;
+  --sb-dash-ink:#f5f7ff;
+  --sb-dash-muted:#b5c2dc;
+  --sb-dash-line:rgba(170,190,236,.17);
+  --sb-dash-accent:#a69aff;
+  --sb-dash-secondary:#86c7ff;
+  --sb-dash-shadow:0 12px 35px rgba(1,4,15,.27);
+  background:radial-gradient(ellipse at 10% 0%,rgba(95,85,223,.11),transparent 42%),#0b1021;
+}
+.sb-role-dashboard.role-parent{--sb-dash-accent:#168883;--sb-dash-secondary:#407ac5}
+.sb-role-dashboard.role-teacher{--sb-dash-accent:#6652d8;--sb-dash-secondary:#347ad3}
+.sb-role-dashboard.role-independent_learner{--sb-dash-accent:#8260cf;--sb-dash-secondary:#368eaa}
+.sb-role-dashboard .role-dash-hero,
+.sb-role-dashboard .role-grid,
+.sb-role-dashboard .role-status-good,
+.sb-role-dashboard .role-status-error {width:min(calc(100% - clamp(24px,4vw,64px)),1380px)}
+.sb-role-dashboard .role-dash-hero{
+  margin-top:0;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(245px,320px);
+  gap:clamp(18px,3vw,36px);
+  align-items:center;
+  background:var(--sb-dash-card);
+  color:var(--sb-dash-ink);
+  border:1px solid var(--sb-dash-line);
+  box-shadow:var(--sb-dash-shadow);
+  border-radius:24px;
+  padding:clamp(22px,3.4vw,43px);
+  min-height:0;
+}
+.sb-role-dashboard .role-kicker{color:var(--sb-dash-accent);font-size:.73rem;letter-spacing:.09em;font-weight:800}
+.sb-role-dashboard .role-dash-hero h1{
+  color:var(--sb-dash-ink);font-size:clamp(1.8rem,3.4vw,3.4rem);
+  line-height:1.08;letter-spacing:-.052em;max-width:700px;
+}
+.sb-role-dashboard .role-dash-hero p,
+.sb-role-dashboard .role-card p,
+.sb-role-dashboard .empty-role-panel {color:var(--sb-dash-muted);line-height:1.55}
+.sb-role-dashboard .role-dash-hero > div > p:not(.role-kicker) {max-width:58ch;font-size:clamp(.9rem,1.1vw,1rem)}
+.sb-role-dashboard .role-hero-actions{gap:10px;margin-top:18px}
+.sb-role-dashboard .role-hero-actions a,
+.sb-role-dashboard .role-card-head a,
+.sb-role-dashboard .role-control-grid a,
+.sb-role-dashboard .role-list.buttons a,
+.sb-role-dashboard .role-form button,
+.sb-role-dashboard .assignment-form button,
+.sb-role-dashboard .mini-inline-form button,
+.sb-role-dashboard .child-grid button{
+  min-height:44px;border-radius:12px;
+  background:linear-gradient(125deg,#6555d9,#4b78d6);
+  color:#fff;border:1px solid transparent;
+  box-shadow:none;padding:10px 16px;font-weight:750;
+  transition:background-color .16s ease,box-shadow .16s ease,transform .16s ease;
+}
+.sb-role-dashboard .role-hero-actions a.soft{
+  background:transparent;color:var(--sb-dash-ink);border-color:var(--sb-dash-line);
+}
+.sb-role-dashboard .role-hero-actions a:focus-visible,
+.sb-role-dashboard .role-card a:focus-visible,
+.sb-role-dashboard .role-card button:focus-visible{
+  outline:3px solid var(--sb-dash-accent);outline-offset:3px;
+}
+.sb-role-dashboard .role-passport,
+.sb-role-dashboard .role-card{
+  background:var(--sb-dash-card)!important;
+  color:var(--sb-dash-ink);
+  border:1px solid var(--sb-dash-line)!important;
+  border-radius:20px;
+  box-shadow:var(--sb-dash-shadow)!important;
+  backdrop-filter:none;
+}
+.sb-role-dashboard .role-passport{min-height:0;padding:19px;align-content:center;gap:6px}
+.sb-role-dashboard .role-avatar{
+  width:60px;height:60px;border-radius:16px;
+  font-size:1.4rem;box-shadow:none;
+  background:linear-gradient(130deg,#6b68c8,#77a9e9);
+}
+.sb-role-dashboard .role-passport strong{font-size:1.12rem;margin-top:5px;color:var(--sb-dash-ink)}
+.sb-role-dashboard .role-passport > p{margin:0;font-size:.82rem}
+.sb-role-dashboard .role-passport-stats{gap:7px;margin-top:10px}
+.sb-role-dashboard .role-passport-stats article,
+.sb-role-dashboard .metric-grid article{
+  background:color-mix(in srgb,var(--sb-dash-accent) 4%,var(--sb-dash-card));
+  border:1px solid var(--sb-dash-line);padding:12px;border-radius:13px;
+}
+.sb-role-dashboard .role-passport-stats span,
+.sb-role-dashboard .metric-grid span{color:var(--sb-dash-muted);font-size:.66rem;letter-spacing:.045em}
+.sb-role-dashboard .role-passport-stats b,
+.sb-role-dashboard .metric-grid strong{color:var(--sb-dash-ink);font-size:clamp(1.12rem,1.8vw,1.65rem)}
+.sb-role-dashboard .role-progress{height:7px;margin-top:8px;background:var(--sb-dash-line)}
+.sb-role-dashboard .role-progress i{background:linear-gradient(90deg,#6d68d8,#85afe7)}
+.sb-role-dashboard .role-grid{
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  gap:clamp(13px,1.6vw,21px);margin-top:clamp(15px,2vw,23px);align-items:stretch;
+}
+.sb-role-dashboard .role-grid > .role-card {grid-column:span 4;min-width:0;padding:clamp(17px,2vw,26px)}
+.sb-role-dashboard .role-grid > .role-card.wide {grid-column:span 8}
+.sb-role-dashboard .role-card h2,
+.sb-role-dashboard .role-card-head h2{color:var(--sb-dash-ink);font-size:clamp(1.17rem,1.85vw,1.65rem);line-height:1.2;letter-spacing:-.032em}
+.sb-role-dashboard .role-card-head{gap:12px;align-items:center}
+.sb-role-dashboard .role-card-head a{
+  color:var(--sb-dash-accent);background:transparent;border-color:var(--sb-dash-line);
+  font-size:.82rem;min-height:38px;padding:7px 12px;
+}
+.sb-role-dashboard .role-app-grid,
+.sb-role-dashboard .role-control-grid,
+.sb-role-dashboard .child-grid,
+.sb-role-dashboard .class-grid{gap:10px}
+.sb-role-dashboard .role-app-grid a,
+.sb-role-dashboard .role-control-grid a,
+.sb-role-dashboard .independent-track article,
+.sb-role-dashboard .child-grid article,
+.sb-role-dashboard .class-grid article,
+.sb-role-dashboard .role-list article,
+.sb-role-dashboard .assignment-list article{
+  color:var(--sb-dash-ink);
+  background:color-mix(in srgb,var(--sb-dash-accent) 3%,var(--sb-dash-card));
+  border-color:var(--sb-dash-line);border-radius:14px;box-shadow:none;
+}
+.sb-role-dashboard .role-app-grid a,
+.sb-role-dashboard .role-control-grid a{padding:15px;min-width:0;overflow-wrap:anywhere}
+.sb-role-dashboard .role-app-grid span,
+.sb-role-dashboard .role-control-grid span,
+.sb-role-dashboard .independent-track span,
+.sb-role-dashboard .child-grid span,
+.sb-role-dashboard .assignment-list span,
+.sb-role-dashboard .role-list article > span{background:#e9e7ff;color:#5344af;border-radius:11px}
+html.dark .sb-role-dashboard .role-app-grid span,
+html.dark .sb-role-dashboard .role-control-grid span,
+html.dark .sb-role-dashboard .independent-track span,
+html.dark .sb-role-dashboard .child-grid span,
+html.dark .sb-role-dashboard .assignment-list span,
+html.dark .sb-role-dashboard .role-list article > span {background:#29244d;color:#e3ddff}
+.sb-role-dashboard .role-app-grid small,
+.sb-role-dashboard .role-control-grid small,
+.sb-role-dashboard .child-grid small,
+.sb-role-dashboard .class-grid small,
+.sb-role-dashboard .assignment-list small {color:var(--sb-dash-muted)}
+.sb-role-dashboard .role-form input,
+.sb-role-dashboard .role-form textarea,
+.sb-role-dashboard .assignment-form input,
+.sb-role-dashboard .assignment-form textarea,
+.sb-role-dashboard .assignment-form select,
+.sb-role-dashboard .mini-inline-form input{
+  background:var(--sb-dash-card);color:var(--sb-dash-ink);
+  border:1px solid var(--sb-dash-line);border-radius:12px;min-height:44px;
+}
+.sb-role-dashboard .role-form label,
+.sb-role-dashboard .assignment-form label{color:var(--sb-dash-ink);font-weight:680}
+.sb-role-dashboard .empty-role-panel{background:transparent;border-color:var(--sb-dash-line);border-radius:13px}
+.sb-role-dashboard [data-role-card]{transition:box-shadow .18s ease,border-color .18s ease}
+.sb-role-dashboard [data-role-card]:hover{transform:none;box-shadow:0 14px 44px rgba(47,65,121,.13)!important}
+.sb-role-dashboard :is(.role-card,.role-passport,.role-app-grid a,.child-grid article) {overflow-wrap:anywhere}
+.sb-role-dashboard :is(.role-card,.role-passport) img{max-width:100%;height:auto}
+@media(max-width:1040px){
+ .sb-role-dashboard .role-grid > .role-card,
+ .sb-role-dashboard .role-grid > .role-card.wide{grid-column:span 6}
+ .sb-role-dashboard .role-dash-hero{grid-template-columns:minmax(0,1fr) minmax(200px,260px)}
+ .sb-role-dashboard .role-app-grid,.sb-role-dashboard .role-control-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ .sb-role-dashboard .role-dash-hero{grid-template-columns:minmax(0,1fr);padding:22px}
+ .sb-role-dashboard .role-passport{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px}
+ .sb-role-dashboard .role-passport-stats{max-width:500px}
+ .sb-role-dashboard .role-grid > .role-card,
+ .sb-role-dashboard .role-grid > .role-card.wide{grid-column:1/-1}
+ .sb-role-dashboard .metric-grid,.sb-role-dashboard .child-grid,.sb-role-dashboard .class-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .sb-role-dashboard .role-card-head{display:flex;flex-wrap:wrap}
+ .sb-role-dashboard .role-hero-actions{display:flex;flex-wrap:wrap}
+ .sb-role-dashboard .role-hero-actions a{width:auto}
+ .sb-role-dashboard .role-grid{grid-template-columns:minmax(0,1fr)}
+ .sb-role-dashboard .role-grid > .role-card{grid-column:1/-1}
+}
+@media(max-width:480px){
+ .sb-role-dashboard .role-dash-hero,.sb-role-dashboard .role-grid,.sb-role-dashboard .role-status-good,.sb-role-dashboard .role-status-error{width:calc(100% - 24px)}
+ .sb-role-dashboard .role-dash-hero{padding:20px;border-radius:18px}
+ .sb-role-dashboard .role-hero-actions a{width:100%;min-width:0}
+ .sb-role-dashboard .role-grid > .role-card{padding:17px;border-radius:17px}
+ .sb-role-dashboard .role-passport-stats,.sb-role-dashboard .metric-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .sb-role-dashboard .metric-grid article{padding:9px}
+ .sb-role-dashboard .metric-grid strong{font-size:1.05rem}
+ .sb-role-dashboard .role-app-grid,.sb-role-dashboard .role-control-grid,.sb-role-dashboard .independent-track,.sb-role-dashboard .child-grid,.sb-role-dashboard .class-grid,.sb-role-dashboard .assignment-form,.sb-role-dashboard .mini-inline-form{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:350px){.sb-role-dashboard .role-passport-stats,.sb-role-dashboard .metric-grid{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){.sb-role-dashboard *, .sb-role-dashboard *::before,.sb-role-dashboard *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

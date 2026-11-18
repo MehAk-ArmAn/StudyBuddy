@@ -2,6 +2,9 @@
 @section('title', 'School Workspace')
 @push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-next-chapter.css') }}">@endpush
 @section('content')
+<!-- SB_ADAPTIVE_DASHBOARD_V1 -->
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-adaptive-school.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-adaptive-school.css')) }}">
+
 <div class="sb-school-shell"><p class="sb-next-eyebrow">PRIVATE SCHOOL WORKSPACE</p><h1>{{ $organization->name }}</h1><p class="school-intro">An approved workspace for verified StudyBuddy members. The school content and classroom analytics modules are being built separately.</p>
 @if(session('status'))<div class="sb-school-notice success" role="status">{{ session('status') }}</div>@endif
 @if($errors->any())<div class="sb-school-notice error" role="alert">@foreach($errors->all() as $error)<p>{{ $error }}</p>@endforeach</div>@endif

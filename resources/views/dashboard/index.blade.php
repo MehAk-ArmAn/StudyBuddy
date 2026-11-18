@@ -12,6 +12,9 @@
 @endpush
 
 @section('content')
+<!-- SB_ADAPTIVE_DASHBOARD_V1 -->
+<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-adaptive-dashboard.css') }}?v={{ filemtime(public_path('assets/css/studybuddy-adaptive-dashboard.css')) }}">
+
 @php
     $photoUrl = null;
     if (!empty($user->profile_photo_path)) {
