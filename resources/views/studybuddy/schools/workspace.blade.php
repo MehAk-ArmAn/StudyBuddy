@@ -20,5 +20,12 @@
 <section class="sb-school-panel"><h2>Invite a colleague</h2>@if($manager)<p>Invitations are restricted to one email address, expire in 3 days, and require verified StudyBuddy access.</p><form method="POST" action="{{ route('schools.invitations.store', $organization) }}" class="sb-school-form">@csrf<label>Colleague's account email <input type="email" name="email" required maxlength="190" placeholder="teacher@school.edu.ae"></label><label>Permission level <select name="role"><option value="teacher">Teacher</option><option value="school_admin">School administrator</option></select></label><button type="submit" class="sb-next-button primary">Send invite →</button></form>@else<p>Only the school owner or an approved school administrator can issue invitations.</p>@endif
 @if($organization->invitations->isNotEmpty())<h3>Pending invitations</h3>@foreach($organization->invitations as $invite)<div class="school-member"><span class="member-avatar">✉</span><span><strong>{{ $invite->email }}</strong><small>Expires {{ $invite->expires_at->format('j M Y') }}</small></span>@if($manager)<form method="POST" action="{{ route('schools.invitations.revoke', [$organization, $invite]) }}">@csrf @method('DELETE')<button type="submit" class="school-remove">Revoke</button></form>@endif</div>@endforeach@endif</section></div>
 <a class="sb-next-button secondary" href="{{ url('/apps') }}">Explore learning apps →</a>
+
+<!-- STUDYBUDDY_P11D_SAFETY_CENTER_LINK -->
+<div class="sb-school-panel" style="margin-top:18px">
+  <h2>School Safety Center</h2>
+  <p>Staff notices, private concerns, and school-managed case reviews.</p>
+  <a class="sb-next-button secondary" href="{{ route('schools.safety.index', $organization) }}">Open Safety Center →</a>
+</div>
 </div>
 @endsection

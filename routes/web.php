@@ -166,3 +166,6 @@ require __DIR__.'/studybuddy_w32_math_sprint.php';
 
 /* STUDYBUDDY_W36_REACT_STUDY_SPACE */
 require __DIR__.'/studybuddy_w36.php';
+
+// STUDYBUDDY_P11D_SCHOOL_SAFETY
+require __DIR__ . '/studybuddy_p11d_safety.php';
