@@ -1,3 +1,4 @@
+{{-- STUDYBUDDY-TEAM-HANDOVER-2026: P11F Rewards UI: use scoped assets and Head-only navigation; point policies must still be validated and audited by the controller. --}}
 @extends('layouts.admin')
 @section('title', 'Rewards & Achievements Governance')
 @push('styles-late')

@@ -1,3 +1,4 @@
+{{-- STUDYBUDDY-TEAM-HANDOVER-2026: Shared public layout: preserve accessibility and screen-size behavior; public CSS layers need controlled visual QA before consolidation. --}}
 <!doctype html>
 @php
     $safeAsset = function (string $path): ?string {

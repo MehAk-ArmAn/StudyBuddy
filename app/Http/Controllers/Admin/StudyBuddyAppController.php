@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: Apps CMS is an admin publisher entrypoint. Review ZIP validation, private asset storage and publish/preview permissions before changes.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;

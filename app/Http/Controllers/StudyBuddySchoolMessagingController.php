@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: P11C Connect: conversations, messages, reports and attachment downloads are school-private. Preserve tenant/participant checks and private file handling.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Http\Controllers;
 
 use App\Models\SchoolOrganization;

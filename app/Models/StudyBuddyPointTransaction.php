@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: Reward journal: never adjust spendable points without corresponding authorized transaction/audit semantics. See docs/handbook/REWARDS.md.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;

@@ -1,3 +1,6 @@
+<!-- STUDYBUDDY-TEAM-HANDOVER-2026-AGENT-POINTER -->
+> **Current teammate/AI guidance:** read [AGENTS.md](AGENTS.md) and [Developer Start Here](DEVELOPERS_START_HERE.md) first. The notes below may describe earlier versions; verify all claims against the current checkout and generated route/data maps.
+
 # StudyBuddy — working notes
 
 <!-- STUDYBUDDY_2026_MASTER_PLAN_BEGIN -->

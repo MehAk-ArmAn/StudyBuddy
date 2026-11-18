@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: W32/P11F rewards: server-graded results are the verified event source. Keep run ownership, expiry, submitted status and reward idempotency; raw browser time is not proof of active learning.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Http\Controllers;
 
 use App\Support\StudyBuddyRewardIntegrity;

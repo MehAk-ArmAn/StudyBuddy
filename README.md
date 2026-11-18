@@ -36,6 +36,10 @@
 **Current delivery convention:** guarded, reviewed, source-backed changes directly to `main` as requested. Historical references later in this README to branch/PR workflows are older guidance and should not be mistaken for the current user-selected convention. Never force push; coordinate simultaneous work.
 <!-- STUDYBUDDY_2026_MASTER_PLAN_END -->
 
+
+<!-- STUDYBUDDY-TEAM-HANDOVER-2026-README -->
+> **New teammate?** Use [Developer Start Here](DEVELOPERS_START_HERE.md) and the [Developer Handbook](docs/handbook/INDEX.md) for current module, security, testing and release guidance. Older phase notes can be historical.
+
 ## 🧭 Jump to
 
 [Overview](#-what-is-studybuddy) · [Experience](#-the-experience) · [Architecture](#-system-at-a-glance) · [Structure](#-repository-map) · [Stack & tools](#-technology-and-team-toolkit) · [Run locally](#-run-studybuddy-locally) · [Admin CMS](#-admin-and-content-workflow) · [Roadmap](#-feature-roadmap) · [Contributing](#-working-together-one-repo) · [QA](#-testing-and-quality) · [Deployment](#-deployment-notes) · [Security](#-privacy-security-and-trust) · [Docs](#-documentation-directory)

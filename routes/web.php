@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: Routing entrypoint: this file also registers StudyBuddy phase route modules. When adding an endpoint, update its controller-level authorization, named navigation link, Feature test, and docs/handbook/generated/ROUTE_INVENTORY.md.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\FooterItemController;
 use App\Http\Controllers\Admin\HomepageSectionController;

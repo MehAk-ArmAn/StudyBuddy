@@ -1,3 +1,4 @@
+{{-- STUDYBUDDY-TEAM-HANDOVER-2026: Admin shared layout: keep navigation consistent, and never confuse Head-only link visibility with controller authorization; see docs/handbook/PERMISSIONS.md. --}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

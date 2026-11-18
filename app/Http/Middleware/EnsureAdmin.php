@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: Auth boundary: this middleware does not replace per-action Head Admin grants or school organization checks. Review permission tests before extending staff access.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Http\Middleware;
 
 use App\Support\StudyBuddyAdminAuthority as Authority;

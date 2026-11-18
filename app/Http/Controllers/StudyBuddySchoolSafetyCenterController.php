@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: P11D Safety: notices and confidential school concerns are role- and organization-scoped; do not expose private reports or assume this sends push/email notifications.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Http\Controllers;
 
 use App\Models\SchoolOrganization;

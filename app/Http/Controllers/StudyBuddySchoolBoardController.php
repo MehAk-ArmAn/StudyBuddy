@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: P11B School Board: check active school membership and organization scope before every task mutation. Navigation visibility is not authorization.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Http\Controllers;
 
 use App\Models\SchoolOrganization;

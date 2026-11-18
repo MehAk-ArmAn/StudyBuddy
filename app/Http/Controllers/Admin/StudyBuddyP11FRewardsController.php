@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: Head Admin-only reward policy: validate both read/write authority on the server, audit any rule changes, and keep feature flags and caps enforced in the reward service.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;

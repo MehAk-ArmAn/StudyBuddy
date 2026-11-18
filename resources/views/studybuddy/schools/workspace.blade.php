@@ -1,3 +1,4 @@
+{{-- STUDYBUDDY-TEAM-HANDOVER-2026: School OS workspace: link Board, Connect, Safety only where routes exist and the current member may access them; test with Owner and limited Teacher. --}}
 @extends('layouts.app')
 @section('title', 'School Workspace')
 @push('styles')<link rel="stylesheet" href="{{ asset('assets/css/studybuddy-next-chapter.css') }}?v={{ \App\Support\StudyBuddyAssetVersion::for('assets/css/studybuddy-next-chapter.css') }}">@endpush

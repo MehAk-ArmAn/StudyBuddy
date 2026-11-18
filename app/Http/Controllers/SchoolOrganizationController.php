@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: School access boundary: invitations, membership and staff role changes must remain organization scoped. Test revoked members and cross-organization IDs.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Http\Controllers;
 
 use App\Models\SchoolOrganization;

@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * STUDYBUDDY-TEAM-HANDOVER-2026
+ * Developer orientation: P11F ledger invariant: keep reward event deduplication, per-user row locks, caps, wallet balance and transaction journal in the same atomic operation. No direct client-side point mint API.
+ *
+ * Documentation-only annotation; no runtime behavior is changed here.
+ */
+
+
 namespace App\Support;
 
 use App\Models\StudyBuddyPointTransaction;
