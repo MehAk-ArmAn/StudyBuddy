@@ -96,6 +96,8 @@
     $healthUrl = $routeUrl(['admin.control-room.health']);
     $verificationUrl = $routeUrl(['admin.control-room.verifications.index']);
     $roleToolsUrl = $routeUrl(['admin.control-room.role-tools.index']);
+    $rewardsUrl = $routeUrl(['admin.control-room.rewards.index']);
+    $canManageRewards = $rewardsUrl && \App\Support\StudyBuddyRewardIntegrity::isHead((int) (auth()->id() ?? 0));
     $accountUrl = $routeUrl(['admin.control-room.account.edit']);
     $logoutUrl = $routeUrl(['admin.logout']) ?: url('/logout');
 
@@ -128,6 +130,7 @@
             'admin.control-room.health*',
             'admin.control-room.verifications.*',
             'admin.control-room.role-tools.*',
+            'admin.control-room.rewards.*',
             'admin.control-room.account.*',
         ]) => 'System',
         default => 'Overview',
@@ -275,6 +278,15 @@
 
                 <div class="sb-admin-nav__group">
                     <p class="sb-admin-nav__label">System</p>
+                    {{-- SB_UIUX_REWARDS_NAV_V1: Head-only discovery; controller remains authoritative. --}}
+                    @if($canManageRewards)
+                        <a href="{{ $rewardsUrl }}"
+                           class="sb-admin-nav__item {{ $routeActive(['admin.control-room.rewards.*']) ? 'is-active' : '' }}"
+                           @if($routeActive(['admin.control-room.rewards.*'])) aria-current="page" @endif>
+                            <svg aria-hidden="true"><use href="#sb-admin-icon-reports"></use></svg>
+                            <span>Rewards &amp; Achievements</span>
+                        </a>
+                    @endif
                     @if($platformUrl)
                         <a href="{{ $platformUrl }}" class="sb-admin-nav__item {{ $routeActive(['admin.control-room.final-*', 'admin.control-room.final.*', 'studybuddy.admin.final.*']) ? 'is-active' : '' }}" @if($routeActive(['admin.control-room.final-*', 'admin.control-room.final.*', 'studybuddy.admin.final.*'])) aria-current="page" @endif>
                             <svg aria-hidden="true"><use href="#sb-admin-icon-reports"></use></svg>

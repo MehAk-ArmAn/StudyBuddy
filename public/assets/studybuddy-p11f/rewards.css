@@ -10,3 +10,51 @@
   background:linear-gradient(135deg,rgba(39,48,84,.82),rgba(77,50,110,.65));
 }
 @media (prefers-reduced-motion:reduce){.sb-public-profile .showcase-badge{transition:none}}
+
+/* SB_UIUX_GOVERNANCE_V1_START */
+/* P11F Rewards governance: local design tokens, shared form rhythm, responsive table.
+   Scoped under .sb-p11f-admin so public profile / school styling is untouched. */
+.sb-p11f-admin {
+  --sb-rw-surface:#1a2340;
+  --sb-rw-panel:#252f55;
+  --sb-rw-text:#e8edff;
+  --sb-rw-subtle:#c4cbe2;
+  --sb-rw-border:#6886a8;
+  --sb-rw-accent:#8661f8;
+  --sb-rw-focus:#84d7fc;
+  box-sizing:border-box;
+  max-width:1140px;
+  margin:28px auto;
+  padding:clamp(16px,3vw,34px);
+  color:var(--sb-rw-text);
+  background:var(--sb-rw-surface);
+  border-radius:22px;
+}
+.sb-p11f-admin *, .sb-p11f-admin *::before, .sb-p11f-admin *::after {box-sizing:border-box}
+.sb-p11f-admin__eyebrow {letter-spacing:.14em;color:var(--sb-rw-focus);font-size:12px;font-weight:800}
+.sb-p11f-admin__status {padding:12px;background:#244e51;border-radius:10px}
+.sb-p11f-admin__metrics {display:flex;gap:16px;flex-wrap:wrap;margin:25px 0}
+.sb-p11f-admin__metric {flex:1 1 180px;padding:16px;border:1px solid var(--sb-rw-border);border-radius:12px}
+.sb-p11f-admin__metric strong {display:block;font-size:clamp(1.35rem,3vw,1.8rem)}
+.sb-p11f-admin__settings, .sb-p11f-admin__fields {display:flex;flex-wrap:wrap;gap:12px;align-items:end}
+.sb-p11f-admin__section-title {margin-top:30px}
+.sb-p11f-admin__rule {padding:16px;margin:14px 0;background:var(--sb-rw-panel);border-radius:14px}
+.sb-p11f-admin input, .sb-p11f-admin select {display:block;background:#0e1734;color:#fff;border:1px solid #7784bd;padding:9px;border-radius:8px;width:145px;max-width:100%;font:inherit}
+.sb-p11f-admin label {display:grid;gap:4px;font-size:12px;max-width:100%}
+.sb-p11f-admin button {background:var(--sb-rw-accent);border:0;color:#fff;border-radius:9px;padding:12px;font:inherit;font-weight:700;cursor:pointer;min-height:44px}
+.sb-p11f-admin button:hover {filter:brightness(1.12)}
+.sb-p11f-admin button:focus-visible, .sb-p11f-admin input:focus-visible, .sb-p11f-admin select:focus-visible, .sb-p11f-admin a:focus-visible {outline:3px solid var(--sb-rw-focus);outline-offset:3px}
+.sb-p11f-admin__table-scroll {max-width:100%;overflow-x:auto}
+.sb-p11f-admin__table {width:100%;border-collapse:collapse;min-width:430px}
+.sb-p11f-admin th,.sb-p11f-admin td {border-bottom:1px solid #465173;padding:8px;text-align:left}
+.sb-p11f-admin a {color:#8cddff}
+.sb-p11f-admin__footnote {font-size:13px;color:var(--sb-rw-subtle);margin-top:24px}
+@media(max-width:600px) {
+  .sb-p11f-admin{margin:12px auto;padding:16px;border-radius:16px}
+  .sb-p11f-admin__settings,.sb-p11f-admin__fields{align-items:stretch}
+  .sb-p11f-admin label{flex:1 1 132px}
+  .sb-p11f-admin input,.sb-p11f-admin select{width:100%}
+  .sb-p11f-admin__settings>button,.sb-p11f-admin__fields>button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.sb-p11f-admin button{transition:none}}
+/* SB_UIUX_GOVERNANCE_V1_END */
