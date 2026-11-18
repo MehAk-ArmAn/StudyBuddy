@@ -6,7 +6,7 @@
 @endpush
 @section('content')
 <section class="sb36-page" aria-label="StudyBuddy personal study space">
- <div class="sb36-page-title"><div><p>STUDYBUDDY • YOUR WORKSPACE</p><h2>Study Space <span aria-hidden="true">✦</span></h2></div><a href="{{ route('dashboard') }}">← Back to dashboard</a></div>
+ <div class="sb36-page-title"><div><p>STUDYBUDDY • YOUR WORKSPACE</p><h2>Study Space <span aria-hidden="true">✦</span></h2></div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="{{ route('studybuddy.p10.index') }}">Resource Studio ↗</a><a href="{{ route('dashboard') }}">← Back to dashboard</a></div></div>
  <div id="sb36-react-root" data-account-key="{{ hash_hmac('sha256', (string) auth()->id(), (string) config('app.key')) }}" aria-label="Private study notes and thread history"><div class="sb36-noscript">Loading your study workspace…</div></div>
  <noscript><p class="sb36-noscript">Enable JavaScript to use your session-only study notes.</p></noscript>
 </section>

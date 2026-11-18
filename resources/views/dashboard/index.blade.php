@@ -53,6 +53,7 @@
     @include('dashboard.partials.p07-adaptive-command')
     @include('dashboard.partials.p08-onboarding-card')
     @include('dashboard.partials.p09-pulse-card')
+    @include('dashboard.partials.p10-resource-card')
     @if($learningSnapshot !== null)
         @include('dashboard.partials.studybuddy-learning-snapshot', ['snapshot' => $learningSnapshot])
     @endif

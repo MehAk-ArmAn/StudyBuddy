@@ -1,0 +1,4 @@
+<section class="sbp10-dash-entry" aria-label="Your private Resource Studio" style="margin:18px 0;padding:clamp(18px,3vw,28px);border:1px solid #8374d955;border-radius:20px;background:linear-gradient(110deg,#191b4b,#0f244b);color:#fff;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px">
+  <div><span style="font:700 11px system-ui;letter-spacing:.13em;color:#a8eaff">✦ YOUR RESOURCE STUDIO</span><h2 style="color:#fff;margin:8px 0;font-size:clamp(19px,2.3vw,27px)">Ideas, notes and resources—together.</h2><p style="color:#e4e6ff;margin:0">Write Markdown, save documents and replay your own audio lessons.</p></div>
+  <a href="{{ route('studybuddy.p10.index') }}" style="color:#07183c;background:linear-gradient(95deg,#65edff,#dc93ff);padding:12px 18px;border-radius:999px;font-weight:800;text-decoration:none">Open Resource Studio ↗</a>
+</section>
